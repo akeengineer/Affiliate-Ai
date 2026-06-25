@@ -1,0 +1,11 @@
+body:
+  - type: textarea
+    attributes:
+      label: Idea
+      description: Describe the idea or product hypothesis.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Expected value
+      description: Why would this help affiliate revenue or project quality?

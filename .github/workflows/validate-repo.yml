@@ -1,0 +1,39 @@
+name: Validate Repository
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate required files
+        run: |
+          test -f README.md
+          test -f CONTEXT.md
+          test -f AGENTS.md
+          test -f docs/SCORING_SPEC.md
+          test -f docs/OBSIDIAN_CONTRACT.md
+          test -f docs/GITHUB_WORKFLOW.md
+
+      - name: Ensure private files are not committed
+        run: |
+          test ! -f .env
+          test ! -f .env.local
+          test ! -f .env.production
+
+      - name: Ensure vault private directories are not tracked
+        run: |
+          forbidden='^vault/(products|trends|marketplace-signals|commissions|meetings|decisions|contents|compliance|reports)/'
+          if git ls-files | grep -E "$forbidden"; then
+            echo "Private Obsidian vault data must not be committed."
+            exit 1
+          fi

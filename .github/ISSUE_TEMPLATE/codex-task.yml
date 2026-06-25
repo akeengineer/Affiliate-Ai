@@ -1,0 +1,38 @@
+name: Codex Task
+description: Implementation task for Codex CLI
+title: "[Codex] "
+labels: ["codex-task"]
+body:
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: What should Codex implement?
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: Files/modules in scope.
+    validations:
+      required: true
+  - type: textarea
+    id: out_of_scope
+    attributes:
+      label: Out of scope
+      description: What must Codex not change?
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+    validations:
+      required: true
+  - type: textarea
+    id: tests
+    attributes:
+      label: Tests required
+    validations:
+      required: true

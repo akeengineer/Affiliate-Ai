@@ -1,0 +1,9 @@
+# Default owner. Replace with your GitHub username or team.
+* @your-github-username
+
+# Project control files
+/AGENTS.md @your-github-username
+/docs/ @your-github-username
+/.github/ @your-github-username
+/hermes/ @your-github-username
+/vault/templates/ @your-github-username

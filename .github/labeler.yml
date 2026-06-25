@@ -1,0 +1,21 @@
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'docs/**'
+          - '*.md'
+
+github-actions:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '.github/**'
+
+obsidian:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'vault/templates/**'
+          - 'vault/samples/**'
+
+codex-task:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'codex/tasks/**'
