@@ -1,5 +1,12 @@
 ---
 type: decision
+decision_id:
+product_id:
+final_decision:
+vote_count:
+compliance_status:
+required_actions:
+decision_summary:
 status: draft
 created_at:
 updated_at:
@@ -9,6 +16,6 @@ updated_at:
 
 ## Summary
 
-## Details
+## Required Actions
 
 ## Notes
