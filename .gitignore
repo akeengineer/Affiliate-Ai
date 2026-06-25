@@ -49,3 +49,6 @@ vault/.trash/
 
 # Vendor local clones are optional and can be large
 vendor/affiliate-skills/
+
+# Generated smoke-test outputs
+tmp/phase1-smoke/
