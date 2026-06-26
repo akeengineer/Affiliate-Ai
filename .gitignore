@@ -52,3 +52,4 @@ vendor/affiliate-skills/
 
 # Generated smoke-test outputs
 tmp/phase1-smoke/
+tmp/phase2b-hermes/
