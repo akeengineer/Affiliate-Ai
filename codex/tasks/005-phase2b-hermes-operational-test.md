@@ -57,6 +57,17 @@ Update:
 - Prompt file gives Hermes a bounded operational dry run with sanitized output only.
 - Output target is `tmp/phase2b-hermes/hermes-operational-summary.md`.
 
+## Known limitations (acceptable for Phase 2B)
+
+1. `check_hermes_runtime.sh` accepts `git@<alias>:akeengineer/Affiliate-Ai.git` without
+   resolving that the SSH alias actually points to `github.com`.
+2. `ENABLE_AUTOPUBLISH` is checked from the current shell environment only.
+   If the variable is not exported, the script assumes safe (autopublish disabled).
+
+These are intentional simplifications — adding strict alias resolution or config-source
+validation would increase complexity with no practical benefit at this phase.
+See `codex/tasks/006-phase2c-tmux-warroom-proof.md` for future hardening notes.
+
 ## Verification required
 ```bash
 bash -n scripts/dev/check_hermes_runtime.sh
