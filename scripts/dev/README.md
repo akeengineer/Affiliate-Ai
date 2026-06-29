@@ -8,3 +8,4 @@
 - `bash scripts/dev/run_phase3d_acceptance.sh [<csv_path> <week> <product_id>]`
 - `bash scripts/dev/show_release_snapshot.sh`
 - `bash scripts/dev/run_phase4a_ui_mock.sh 2026-W26`
+- `bash scripts/dev/run_phase4b_ui_snapshot.sh 2026-W26`
