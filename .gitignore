@@ -57,3 +57,5 @@ tmp/phase2c-warroom/
 tmp/phase2d-import/
 tmp/phase2e-import-score-report/
 tmp/phase2f-hermes/
+tmp/phase2g-approval-promote/
+tmp/pytest-phase2g-source/
