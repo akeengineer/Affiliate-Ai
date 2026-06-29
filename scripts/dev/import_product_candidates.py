@@ -14,7 +14,10 @@ import yaml
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_OUTPUT_DIR = REPO_ROOT / "tmp/phase2d-import/products"
-SAFE_OUTPUT_ROOT = REPO_ROOT / "tmp/phase2d-import"
+SAFE_OUTPUT_ROOTS = (
+    REPO_ROOT / "tmp/phase2d-import",
+    REPO_ROOT / "tmp/phase2e-import-score-report",
+)
 SAFE_INPUT_ROOTS = (
     REPO_ROOT / "vault/samples/import",
     REPO_ROOT / "tmp/phase2d-import/input",
@@ -86,7 +89,7 @@ def _require_safe_input_path(input_path: Path) -> Path:
 
 def _require_safe_output_path(output_dir: Path) -> Path:
     resolved = _resolve_safe_path(output_dir)
-    if not _is_relative_to(resolved, SAFE_OUTPUT_ROOT.resolve()):
+    if not any(_is_relative_to(resolved, root.resolve()) for root in SAFE_OUTPUT_ROOTS):
         raise ValueError(f"Unsafe output_dir path: {output_dir}")
     return resolved
 

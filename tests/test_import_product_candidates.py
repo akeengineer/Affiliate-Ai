@@ -15,6 +15,8 @@ TASK_FILE = REPO_ROOT / "codex/tasks/007-phase2d-manual-import.md"
 SAMPLE_CSV = REPO_ROOT / "vault/samples/import/product-candidates.csv"
 OUTPUT_ROOT = REPO_ROOT / "tmp/phase2d-import"
 PRODUCTS_DIR = OUTPUT_ROOT / "products"
+PHASE2E_OUTPUT_ROOT = REPO_ROOT / "tmp/phase2e-import-score-report"
+PHASE2E_PRODUCTS_DIR = PHASE2E_OUTPUT_ROOT / "products"
 SCORE_SCRIPT = REPO_ROOT / "scripts/dev/score_product.py"
 REPORT_SCRIPT = REPO_ROOT / "scripts/dev/generate_weekly_report.py"
 
@@ -108,6 +110,21 @@ def test_import_product_candidates_writes_markdown_notes() -> None:
     assert frontmatter["status"] == "draft"
     assert frontmatter["demand_score"] == 83
     assert frontmatter["product_url"] == "https://example.com/products/laptop-stand"
+
+
+def test_import_product_candidates_allows_phase2e_output_root() -> None:
+    shutil.rmtree(PHASE2E_OUTPUT_ROOT, ignore_errors=True)
+
+    completed = run_import(
+        "--input-csv",
+        str(SAMPLE_CSV),
+        "--output-dir",
+        str(PHASE2E_PRODUCTS_DIR),
+    )
+
+    assert completed.returncode == 0, completed.stderr
+    assert "phase2d_import: success" in completed.stdout
+    assert (PHASE2E_PRODUCTS_DIR / "prod-laptop-stand.md").is_file()
 
 
 def test_import_product_candidates_rejects_missing_required_columns() -> None:
@@ -333,6 +350,18 @@ def test_import_product_candidates_rejects_unsafe_output_path(tmp_path: Path) ->
         str(SAMPLE_CSV),
         "--output-dir",
         str(tmp_path / "outside-products"),
+    )
+
+    assert completed.returncode != 0
+    assert "Unsafe output_dir path" in completed.stderr
+
+
+def test_import_product_candidates_rejects_vault_products_output_path() -> None:
+    completed = run_import(
+        "--input-csv",
+        str(SAMPLE_CSV),
+        "--output-dir",
+        str(REPO_ROOT / "vault/products"),
     )
 
     assert completed.returncode != 0
