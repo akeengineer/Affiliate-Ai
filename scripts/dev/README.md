@@ -7,3 +7,4 @@
 - `bash scripts/dev/command_center.sh <help|status|doctor|dry-run|product|portfolio> [args...]`
 - `bash scripts/dev/run_phase3d_acceptance.sh [<csv_path> <week> <product_id>]`
 - `bash scripts/dev/show_release_snapshot.sh`
+- `bash scripts/dev/run_phase4a_ui_mock.sh 2026-W26`
