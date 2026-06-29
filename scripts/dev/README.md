@@ -6,3 +6,4 @@
 - `bash scripts/dev/run_phase3b_portfolio_dashboard.sh 2026-W26 [--top N] [--write]`
 - `bash scripts/dev/command_center.sh <help|status|doctor|dry-run|product|portfolio> [args...]`
 - `bash scripts/dev/run_phase3d_acceptance.sh [<csv_path> <week> <product_id>]`
+- `bash scripts/dev/show_release_snapshot.sh`
