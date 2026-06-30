@@ -203,6 +203,39 @@ def test_idempotent() -> None:
     assert _out_files() == EXPECTED_FILES
 
 
+def test_runs_from_outside_repo_root(tmp_path: Path) -> None:
+    # Regression: the chain must rebuild Phase 2E artifacts even when invoked
+    # from a CWD outside the repo root, using an absolute script path.
+    score_artifact = (
+        REPO_ROOT / "tmp/phase2e-import-score-report/scores/prod-laptop-stand.json"
+    )
+    score_artifact.unlink(missing_ok=True)
+
+    env = os.environ.copy()
+    env.pop("AFFILIATE_REQUIRE_OPERATOR_RUNTIME", None)
+
+    completed = subprocess.run(
+        ["bash", str(WRAPPER), WEEK],
+        cwd=tmp_path,
+        capture_output=True,
+        text=True,
+        env=env,
+    )
+
+    assert completed.returncode == 0, completed.stderr
+    for token in (
+        "demo_step: acceptance -> PASS",
+        "demo_step: snapshot -> PASS",
+        "demo_step: catalog -> PASS",
+        "demo_step: verifier -> PASS",
+        "demo_bundle_status: ready",
+        "phase4e_status: success",
+    ):
+        assert token in completed.stdout, f"missing token: {token}"
+
+    assert score_artifact.is_file(), "Phase 2E score artifact was not rebuilt"
+
+
 # ── 25-28. static safety ──────────────────────────────────────────────────────
 
 @pytest.mark.parametrize(
