@@ -32,6 +32,21 @@ All of the above remain **read-only** and **manual-approved** only; a marketplac
 connector and any write-capable surface stay deferred to a future, separately
 approved phase. See `docs/RELEASE_SNAPSHOT_PHASE5.md`.
 
+## 1c. Phase 6 — manual-approved workflow boundary
+
+- Phase 6A — manual-approved workflow boundary plan — **complete / done**
+  (docs/tests/task-only; defines the contract, executes nothing). See
+  `docs/MANUAL_APPROVED_WORKFLOW_BOUNDARY.md`.
+- Phase 6B — dry-run approval review packet — **future**
+- Phase 6C — manual approval command (wraps existing primitives only after
+  explicit approval) — **future**
+- Phase 6D — audit verifier — **future**
+- Phase 6E — release snapshot update — **future**
+
+Phase 6 stays **read-only** until a human gate is explicitly invoked; all vault
+writes remain **manual-approved** behind the existing approval flags. No
+approval mutation is added in Phase 6A.
+
 ## 2. Phase 4A — local read-only UI mock
 
 - A static or local-only view rendered over existing tmp/vault artifacts.

@@ -97,6 +97,14 @@ flag). The default read-only operator path writes none of them.
 - `docs/PHASE2_OPERATING_MANUAL.md`, `docs/PHASE2_GOVERNANCE_FLOW.md`
 - `docs/SCORING_SPEC.md`, `docs/WORKFLOW_SPEC.md`, `docs/OBSIDIAN_CONTRACT.md`
 - `docs/SECURITY.md`, `docs/GITHUB_WORKFLOW.md`, `docs/RUNBOOK.md`
+- `docs/UI_SHELL.md`, `docs/UI_SHELL_BOUNDARY.md`
+- `docs/MANUAL_APPROVED_WORKFLOW_BOUNDARY.md`
+
+Phase 6A defines the **manual-approved workflow boundary** in
+`docs/MANUAL_APPROVED_WORKFLOW_BOUNDARY.md`: no approval mutation exists in
+Phase 6A, no new vault writes are introduced, and no backend/API/database is
+introduced. The existing manual-approved primitives remain unchanged; future
+Phase 6B+ are separate implementation phases.
 
 ### scripts
 
