@@ -41,14 +41,16 @@ approved phase. See `docs/RELEASE_SNAPSHOT_PHASE5.md`.
 - Phase 6D — manual approval execution boundary plan — **complete / done**
   (boundary-only; defines the contract, executes nothing). See
   `docs/MANUAL_APPROVAL_EXECUTION_BOUNDARY.md`.
-- Phase 6E — dry-run execution planner — **future**.
-- Phase 6F — single-gate manual approval wrapper — **future**.
+- Phase 6E — dry-run approval execution planner — **complete / done**.
+- Phase 6F — single-gate manual approval wrapper boundary plan — **complete /
+  done** (boundary-only; defines the contract, executes nothing). See
+  `docs/SINGLE_GATE_MANUAL_APPROVAL_WRAPPER_BOUNDARY.md`.
 - Phase 6G — audit verifier — **future**.
 - Phase 6H — release snapshot update — **future**.
 
 Phase 6 stays **read-only** until a human gate is explicitly invoked; all vault
 writes remain **manual-approved** behind the existing approval flags. No
-approval mutation is added in Phase 6A-6D.
+approval mutation is added in Phase 6A-6F.
 
 ## 2. Phase 4A — local read-only UI mock
 
