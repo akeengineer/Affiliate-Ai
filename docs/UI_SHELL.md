@@ -99,6 +99,36 @@ references, and no backend/API/database. The verifier reads only the shell body
 and the four Phase 4 JSON summaries, checks link targets by existence only, and
 writes only under `tmp/phase5c-ui-shell-verifier/`.
 
+## Demo bundle command (Phase 5D)
+
+One operator command runs the complete local static UI shell demo chain:
+
+```
+bash scripts/dev/run_phase5d_ui_shell_demo.sh 2026-W26
+```
+
+Chain:
+
+- Phase 4E demo bundle
+- Phase 5B UI shell generation
+- Phase 5C UI shell verifier (always run; never bypassed)
+- Phase 5D summary/report writer
+
+Outputs:
+
+- `tmp/phase5d-ui-shell-demo/ui-shell-demo-summary.json`
+- `tmp/phase5d-ui-shell-demo/UI_SHELL_DEMO.md`
+
+Verdict policy:
+
+- `ready` = success (exit 0)
+- `warning` = success (exit 0) — degraded/missing-source notice, not a failure
+- `failed` = non-zero (exit 1) — a hard check failed or a step exited non-zero
+
+Guardrails: no backend, no API, no database, no vault writes, no external URLs,
+no approved workflow. The verdict-to-status decision is owned by
+`build_ui_shell_demo_summary.py`.
+
 ## Known limitations
 
 - Static snapshot; reflects the Phase 4 JSON at build time and is stale until

@@ -14,3 +14,4 @@
 - `bash scripts/dev/run_phase4e_demo_bundle.sh 2026-W26`
 - `bash scripts/dev/run_phase5b_ui_shell.sh 2026-W26`
 - `bash scripts/dev/run_phase5c_ui_shell_verifier.sh`
+- `bash scripts/dev/run_phase5d_ui_shell_demo.sh 2026-W26`
