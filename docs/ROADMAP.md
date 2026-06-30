@@ -13,6 +13,25 @@
   stays human-gated; automation is not added ahead of an approved design.
 - **No autopublish.** Publishing and campaign launch remain out of scope.
 
+## 1b. Completed phases (Phase 4-5 UI shell line)
+
+The static, read-only UI shell line is **complete**. The sections below capture
+the original direction; the as-built phases are:
+
+- Phase 4A — local static read-only UI mock — **complete / done**
+- Phase 4B — UI snapshot pack — **complete / done**
+- Phase 4C — static snapshot catalog — **complete / done**
+- Phase 4D — static demo bundle verifier — **complete / done**
+- Phase 4E — demo bundle operator command — **complete / done**
+- Phase 5A — UI shell boundary plan — **complete / done**
+- Phase 5B — local static read-only UI shell prototype — **complete / done**
+- Phase 5C — UI shell verifier / acceptance gate — **complete / done**
+- Phase 5D — UI shell demo bundle command — **complete / done**
+
+All of the above remain **read-only** and **manual-approved** only; a marketplace
+connector and any write-capable surface stay deferred to a future, separately
+approved phase. See `docs/RELEASE_SNAPSHOT_PHASE5.md`.
+
 ## 2. Phase 4A — local read-only UI mock
 
 - A static or local-only view rendered over existing tmp/vault artifacts.

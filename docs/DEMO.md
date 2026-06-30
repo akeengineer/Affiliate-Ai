@@ -85,6 +85,25 @@ bash scripts/dev/command_center.sh portfolio 2026-W26 --top 5
 - It does not call external APIs, a database, or any UI/API service.
 - It does not validate real marketplace data; it uses the sanitized sample CSV.
 
+## 6b. Static read-only UI shell demo (Phase 5D)
+
+For a visual, local demo of the product intelligence output, run the UI shell
+demo chain (Phase 4E build, Phase 5B shell, Phase 5C verifier, Phase 5D summary):
+
+```bash
+bash scripts/dev/run_phase5d_ui_shell_demo.sh 2026-W26
+```
+
+Expected outputs:
+
+- `tmp/phase5d-ui-shell-demo/ui-shell-demo-summary.json`
+- `tmp/phase5d-ui-shell-demo/UI_SHELL_DEMO.md`
+- `tmp/phase5b-ui-shell/index.html`
+
+Open `tmp/phase5b-ui-shell/index.html` in a local browser. The shell is a
+**read-only static** page, **verifier-backed** by Phase 5C, with **no backend**,
+**no API**, **no vault writes**, and **no external URLs**.
+
 ## 7. Next phase recommendation
 
 After acceptance passes, the next operator-facing step is to exercise the
