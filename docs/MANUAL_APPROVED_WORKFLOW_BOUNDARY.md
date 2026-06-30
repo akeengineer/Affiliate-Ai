@@ -195,3 +195,12 @@ Verdict policy:
 The verifier is **read-only**: no vault reads or writes, no approval mutation, no
 primitive execution, and no approval flag use (the wrapper rejects approval
 flags).
+
+## Phase 6D manual approval execution boundary
+
+Phase 6D is **boundary-only**: it defines the contract for a future manual
+approval execution command in
+[`MANUAL_APPROVAL_EXECUTION_BOUNDARY.md`](MANUAL_APPROVAL_EXECUTION_BOUNDARY.md).
+No runtime approval command exists yet. A future manual execution requires the
+Phase 6B packet and a Phase 6C `ready` verifier verdict as evidence
+preconditions before any gate may run.
