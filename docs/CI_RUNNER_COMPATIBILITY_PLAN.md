@@ -115,3 +115,19 @@ Phase CI-B implements the fixes documented above:
 
 Phase CI-C will add regression guards against reintroduced hardcoded paths in
 executable scripts and confirm the runner is green.
+
+## 11. CI-C guard policy
+
+Phase CI-C adds regression guards for the CI-B fixes:
+
+- Hardcoded operator paths are checked only in executable scripts under
+  `scripts/`.
+- Docs and tests are excluded because they may contain root-cause documentation
+  or negative fixtures.
+- `test_phase1_smoke.py` may contain `-k "not phase1_smoke"` as a
+  self-recursion guard, and that selector is allowed only in that file.
+- The workflow pip `cache` must not return without a real dependency file.
+- Operator-runtime checks must remain gated by
+  `AFFILIATE_REQUIRE_OPERATOR_RUNTIME`, with a CI-safe default.
+- Operator mode must still require the Hermes skills.
+- CI-C adds guards only and changes no runtime behavior.
