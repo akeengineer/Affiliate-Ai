@@ -152,8 +152,36 @@ The following are forbidden behaviors, not commands to run:
 Any backend, API, database, or marketplace implementation must be a separate
 approved phase, outside this boundary.
 
+## Phase 6E dry-run execution planner
+
+Phase 6E implements a read-only dry-run planner over the Phase 6B packet and
+Phase 6C verifier, using this boundary as a contract reference
+(existence/size/hash only). It shows what a future manual approval command would
+require; it executes nothing.
+
+```bash
+bash scripts/dev/run_phase6e_approval_execution_plan.sh prod-laptop-stand 2026-W26
+```
+
+Outputs:
+
+- `tmp/phase6e-approval-execution-plan/execution-plan-prod-laptop-stand-2026-W26.json`
+- `tmp/phase6e-approval-execution-plan/execution-plan-prod-laptop-stand-2026-W26.md`
+
+Verdict policy:
+
+- `ready` = all gates plan-ready
+- `blocked` = hard preconditions pass but one or more gates are blocked
+- `failed` = invalid evidence or guardrail failure
+
+The normal current verdict is expected to be `blocked` while `compliance_status`
+is not approved (the finalization gate stays blocked). The planner is
+**read-only**: no vault reads or writes, no approval mutation, no primitive
+execution, no approval flag use, and no command form for the Phase 2G/2H/2I
+primitives.
+
 ## Known limitations
 
 - Boundary documentation only; no execution command, gate, or mutation exists.
 - Operator identity is a placeholder; no authentication exists.
-- Future Phase 6E+ are separate implementation phases under their own approval.
+- Future Phase 6F+ are separate implementation phases under their own approval.
