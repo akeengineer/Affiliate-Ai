@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+
 SESSION="${WARROOM_SESSION:-affiliate-warroom}"
-PROJECT_DIR="${PROJECT_DIR:-/home/ubuntu/Affiliate-Ai}"
+PROJECT_DIR="${PROJECT_DIR:-$REPO_ROOT}"
 VAULT_DIR="${OBSIDIAN_VAULT_PATH:-$PROJECT_DIR/vault}"
 WORKFLOW_PROMPT="${WARROOM_WORKFLOW_PROMPT:-$PROJECT_DIR/prompts/workflows/weekly-product-scan.md}"
 TASK_FILE="${WARROOM_TASK_FILE:-$PROJECT_DIR/codex/tasks/001-bootstrap-scoring.md}"
