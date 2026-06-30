@@ -16,3 +16,4 @@
 - `bash scripts/dev/run_phase5c_ui_shell_verifier.sh`
 - `bash scripts/dev/run_phase5d_ui_shell_demo.sh 2026-W26`
 - `bash scripts/dev/run_phase6b_approval_review_packet.sh prod-laptop-stand 2026-W26`
+- `bash scripts/dev/run_phase6c_approval_review_verifier.sh prod-laptop-stand 2026-W26`
