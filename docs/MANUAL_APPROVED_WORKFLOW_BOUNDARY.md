@@ -148,3 +148,24 @@ those primitives are ever called.
 - Boundary documentation only; there is no review packet, gate, or mutation yet.
 - The operator identity is a placeholder; no authentication exists.
 - Future Phase 6B+ are separate implementation phases under their own approval.
+
+## Phase 6B dry-run review packet
+
+Phase 6B implements the first read-only step inside this boundary: a dry-run
+evidence packet builder. It reads only whitelisted scalar fields from existing
+`tmp/` artifacts and writes a packet for future manual review.
+
+```bash
+bash scripts/dev/run_phase6b_approval_review_packet.sh prod-laptop-stand 2026-W26
+```
+
+Outputs:
+
+- `tmp/phase6b-approval-review/review-prod-laptop-stand-2026-W26.json`
+- `tmp/phase6b-approval-review/review-prod-laptop-stand-2026-W26.md`
+
+The packet is **dry-run only and evidence only**: it does not approve, promote,
+decide, finalize, or write the vault. It performs no vault reads or writes, no
+approval mutation, and no primitive execution, and it makes no use of any
+approval flag (the wrapper rejects approval flags). Gate readiness in the packet
+is an evidence assessment, not permission to mutate.
