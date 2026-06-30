@@ -169,3 +169,29 @@ decide, finalize, or write the vault. It performs no vault reads or writes, no
 approval mutation, and no primitive execution, and it makes no use of any
 approval flag (the wrapper rejects approval flags). Gate readiness in the packet
 is an evidence assessment, not permission to mutate.
+
+## Phase 6C verifier
+
+Phase 6C is a read-only acceptance gate over the Phase 6B packet. It validates
+the packet's structure and safety and checks each listed source by
+existence/size/hash only (never body ingestion).
+
+```bash
+bash scripts/dev/run_phase6c_approval_review_verifier.sh prod-laptop-stand 2026-W26
+```
+
+Outputs:
+
+- `tmp/phase6c-approval-review-verifier/verification-review-prod-laptop-stand-2026-W26.json`
+- `tmp/phase6c-approval-review-verifier/verification-review-prod-laptop-stand-2026-W26.md`
+
+Verdict policy:
+
+- `ready` = success (exit 0)
+- `warning` = success (exit 0) — a source is missing or has changed since the
+  packet snapshot
+- `failed` = non-zero (exit 1) — a hard structural or safety check failed
+
+The verifier is **read-only**: no vault reads or writes, no approval mutation, no
+primitive execution, and no approval flag use (the wrapper rejects approval
+flags).
