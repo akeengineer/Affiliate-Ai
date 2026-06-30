@@ -99,12 +99,19 @@ flag). The default read-only operator path writes none of them.
 - `docs/SECURITY.md`, `docs/GITHUB_WORKFLOW.md`, `docs/RUNBOOK.md`
 - `docs/UI_SHELL.md`, `docs/UI_SHELL_BOUNDARY.md`
 - `docs/MANUAL_APPROVED_WORKFLOW_BOUNDARY.md`
+- `docs/MANUAL_APPROVAL_EXECUTION_BOUNDARY.md`
 
 Phase 6A defines the **manual-approved workflow boundary** in
 `docs/MANUAL_APPROVED_WORKFLOW_BOUNDARY.md`: no approval mutation exists in
 Phase 6A, no new vault writes are introduced, and no backend/API/database is
 introduced. The existing manual-approved primitives remain unchanged; future
 Phase 6B+ are separate implementation phases.
+
+Phase 6D defines the **manual approval execution boundary** in
+`docs/MANUAL_APPROVAL_EXECUTION_BOUNDARY.md`: no runtime approval command exists
+yet, no vault read/write is introduced, and no approval mutation is introduced.
+The Phase 2G/2H/2I primitives remain unchanged; a future approval execution
+requires the Phase 6B packet and a Phase 6C `ready` verifier verdict.
 
 ### scripts
 
