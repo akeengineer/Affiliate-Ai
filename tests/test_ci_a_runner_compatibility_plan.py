@@ -84,11 +84,15 @@ def test_docs_state_plan_only() -> None:
     assert "no script change" in combined
 
 
-def test_warroom_script_still_hardcoded_in_this_phase() -> None:
-    # Phase CI-A is plan-only; the portability fix is deferred to CI-B.
-    # This guard fails if someone applies the fix in the plan PR by mistake.
+def test_warroom_script_is_portable_after_ci_b() -> None:
+    # CI-B applies the portability fix: the war-room script now derives the
+    # repo root from its own location and defaults PROJECT_DIR to it. This
+    # guard fails if the hardcoded operator path is ever reintroduced.
     warroom = REPO_ROOT / "scripts/tmux/start-affiliate-warroom.sh"
-    assert 'PROJECT_DIR="${PROJECT_DIR:-/home/ubuntu/Affiliate-Ai}"' in _text(warroom)
+    text = _text(warroom)
+    assert 'SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"' in text
+    assert 'PROJECT_DIR="${PROJECT_DIR:-$REPO_ROOT}"' in text
+    assert '/home/ubuntu/Affiliate-Ai' not in text
 
 
 # ── final status target ───────────────────────────────────────────────────────

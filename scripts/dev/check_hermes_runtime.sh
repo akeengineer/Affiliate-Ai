@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-EXPECTED_REPO_ROOT="/home/ubuntu/Affiliate-Ai"
-EXPECTED_REMOTE="git@github.com:akeengineer/Affiliate-Ai.git"
-SMOKE_SCRIPT="scripts/dev/run_phase1_smoke.sh"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+
+SMOKE_SCRIPT="$REPO_ROOT/scripts/dev/run_phase1_smoke.sh"
+REQUIRE_OPERATOR_RUNTIME="${AFFILIATE_REQUIRE_OPERATOR_RUNTIME:-false}"
 
 fail() {
   echo "$1" >&2
@@ -19,32 +21,51 @@ require_skill() {
   fi
 }
 
-current_dir="$(pwd -P)"
-[ "$current_dir" = "$EXPECTED_REPO_ROOT" ] || fail "Must run from $EXPECTED_REPO_ROOT"
+# Portable repository identity check: accept any SSH or HTTPS remote that
+# identifies akeengineer/Affiliate-Ai, with or without a .git suffix. This is
+# not bound to one machine-specific remote alias.
+remote_identifies_repo() {
+  local url="$1"
+  case "$url" in
+    *akeengineer/Affiliate-Ai|*akeengineer/Affiliate-Ai.git)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
 
+# Static contract checks run in every mode.
+[ -d "$REPO_ROOT" ] || fail "Derived repo root is not a directory: $REPO_ROOT"
+[ -f "$SMOKE_SCRIPT" ] || fail "Missing smoke script: $SMOKE_SCRIPT"
+[ -x "$SMOKE_SCRIPT" ] || fail "Smoke script is not executable: $SMOKE_SCRIPT"
+
+# Security guardrail: enforced in all modes before returning success.
+[ "${ENABLE_AUTOPUBLISH:-false}" != "true" ] || fail "ENABLE_AUTOPUBLISH must not be true"
+
+if [ "$REQUIRE_OPERATOR_RUNTIME" != "true" ]; then
+  echo "repo_root: $REPO_ROOT"
+  echo "smoke_script: $SMOKE_SCRIPT"
+  echo "autopublish: ${ENABLE_AUTOPUBLISH:-unset}"
+  echo "operator_runtime: skipped"
+  echo "phase2b_runtime_check: ci-static"
+  exit 0
+fi
+
+# Operator mode: enforce repository identity and live Hermes runtime checks.
 remote_url="$(git remote get-url origin 2>/dev/null || true)"
 [ -n "$remote_url" ] || fail "Missing git remote: origin"
-
-case "$remote_url" in
-  "$EXPECTED_REMOTE"|git@*:akeengineer/Affiliate-Ai.git)
-    ;;
-  *)
-    fail "Unexpected git remote: $remote_url"
-    ;;
-esac
+remote_identifies_repo "$remote_url" || fail "Unexpected git remote: $remote_url"
 
 skills_output="$(sudo hermes skills list)"
 require_skill "$skills_output" "affiliate-growth-os"
 require_skill "$skills_output" "obsidian"
 require_skill "$skills_output" "codex"
 
-[ -f "$SMOKE_SCRIPT" ] || fail "Missing smoke script: $SMOKE_SCRIPT"
-[ -x "$SMOKE_SCRIPT" ] || fail "Smoke script is not executable: $SMOKE_SCRIPT"
-
-[ "${ENABLE_AUTOPUBLISH:-false}" != "true" ] || fail "ENABLE_AUTOPUBLISH must not be true"
-
-echo "repo_root: $current_dir"
+echo "repo_root: $REPO_ROOT"
 echo "git_remote: $remote_url"
 echo "smoke_script: $SMOKE_SCRIPT"
 echo "autopublish: ${ENABLE_AUTOPUBLISH:-unset}"
+echo "operator_runtime: enforced"
 echo "phase2b_runtime_check: success"

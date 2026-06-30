@@ -100,3 +100,18 @@ smoke test fails too.
 ## 9. Known limitations
 
 - Plan only; `Python Tests` stays red until Phase CI-B lands.
+
+## 10. CI-B status
+
+Phase CI-B implements the fixes documented above:
+
+- removes the unusable `cache: "pip"` from the `Python Tests` workflow,
+- derives the repo root from script location in
+  `scripts/dev/check_hermes_runtime.sh` and
+  `scripts/tmux/start-affiliate-warroom.sh`,
+- gates operator-only runtime checks behind
+  `AFFILIATE_REQUIRE_OPERATOR_RUNTIME` (CI-safe default), and
+- validates portable git remote identity instead of a machine-specific alias.
+
+Phase CI-C will add regression guards against reintroduced hardcoded paths in
+executable scripts and confirm the runner is green.
