@@ -36,6 +36,18 @@ The command center (`help`, `status`, `doctor`, `dry-run`, `product`,
 `portfolio`) is the single operator entrypoint. The acceptance pack
 (`run_phase3d_acceptance.sh`) drives the safe path end to end.
 
+### Static read-only UI shell demo commands (Phase 4E / 5B-5D)
+
+```
+bash scripts/dev/run_phase4e_demo_bundle.sh 2026-W26
+bash scripts/dev/run_phase5b_ui_shell.sh 2026-W26
+bash scripts/dev/run_phase5c_ui_shell_verifier.sh
+bash scripts/dev/run_phase5d_ui_shell_demo.sh 2026-W26
+```
+
+These are local, read-only static demo commands; they never write the vault,
+call external services, or trigger approved workflows.
+
 ## 3. Artifact map
 
 ### tmp outputs
@@ -52,6 +64,10 @@ Generated, gitignored working outputs:
 - `tmp/phase2j-hermes-governance/`
 - `tmp/phase3a-dashboard/`
 - `tmp/phase3b-portfolio-dashboard/`
+- `tmp/phase4e-demo-bundle/`
+- `tmp/phase5b-ui-shell/`
+- `tmp/phase5c-ui-shell-verifier/`
+- `tmp/phase5d-ui-shell-demo/`
 
 ### vault memory outputs
 
@@ -94,6 +110,9 @@ flag). The default read-only operator path writes none of them.
   `run_phase3a_dashboard_summary.sh`, `run_phase3b_portfolio_dashboard.sh`
 - Operator: `command_center.sh`, `run_phase3d_acceptance.sh`,
   `show_release_snapshot.sh`
+- Static read-only UI shell demo: `run_phase4e_demo_bundle.sh`,
+  `run_phase5b_ui_shell.sh`, `run_phase5c_ui_shell_verifier.sh`,
+  `run_phase5d_ui_shell_demo.sh`
 
 ## 4. Guardrails
 
@@ -105,6 +124,9 @@ flag). The default read-only operator path writes none of them.
 - no autopublish
 - no campaign launch
 - no vault writes by default
+
+Note: `no UI` here means no UI framework or interactive server UI; Phase 5
+provides a static read-only UI shell only (inline CSS, zero JavaScript).
 
 ## 5. What the system can do now
 
@@ -118,10 +140,14 @@ flag). The default read-only operator path writes none of them.
 - portfolio dashboard
 - command center
 - acceptance demo pack
+- Phase 4E static demo bundle command
+- **static read-only UI shell** (Phase 5B)
+- **UI shell verifier** / acceptance gate (Phase 5C)
+- **UI shell demo bundle** command (Phase 5D)
 
 ## 6. What the system cannot do yet
 
-- no UI
+- no interactive/server UI or frontend framework (a static read-only UI shell exists)
 - no API
 - no database
 - no real marketplace connector

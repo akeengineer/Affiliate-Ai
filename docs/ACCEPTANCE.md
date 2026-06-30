@@ -93,6 +93,27 @@ Vault paths are never printed; only `vault_products_writes` and
 - no vault writes
 - no approved Phase 2G/2H/2I routing
 
+## 8b. Phase 5 UI shell acceptance
+
+The static read-only UI shell line has its own acceptance gate, run via:
+
+```bash
+bash scripts/dev/run_phase5d_ui_shell_demo.sh 2026-W26
+```
+
+Phase 5 acceptance criteria:
+
+- Phase 5B shell is generated (`tmp/phase5b-ui-shell/index.html`).
+- Phase 5C verifier verdict is `ready` or `warning`.
+- Phase 5D demo status is `ready` or `warning`.
+- A `failed` verdict/status exits non-zero.
+- no backend, no API, no database.
+- no vault writes, no external URLs.
+- no approved workflow triggering.
+
+`warning` is an accepted (degraded/missing-source notice) outcome, not a
+failure; only `failed` is non-zero.
+
 ## 9. Troubleshooting
 
 - **doctor gate fails**: an unsafe env flag is set
