@@ -48,11 +48,16 @@ approved phase. See `docs/RELEASE_SNAPSHOT_PHASE5.md`.
 - Phase 6G — manual approval audit verifier boundary plan — **complete / done**
   (boundary-only; defines the contract, executes nothing). See
   `docs/MANUAL_APPROVAL_AUDIT_VERIFIER_BOUNDARY.md`.
-- Phase 6H — release snapshot update — **future**.
+- Phase 6H — release snapshot update — **complete / done**
+  (docs/tests/task-only). See `docs/RELEASE_SNAPSHOT_PHASE6.md`.
+- A future single-gate wrapper implementation remains **separate and explicitly
+  approved**.
+- A future audit verifier implementation remains **separate and explicitly
+  approved**.
 
 Phase 6 stays **read-only** until a human gate is explicitly invoked; all vault
 writes remain **manual-approved** behind the existing approval flags. No
-approval mutation is added in Phase 6A-6G.
+approval mutation is added in Phase 6A-6H.
 
 ## 2. Phase 4A — local read-only UI mock
 

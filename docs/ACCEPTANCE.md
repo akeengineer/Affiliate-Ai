@@ -114,6 +114,23 @@ Phase 5 acceptance criteria:
 `warning` is an accepted (degraded/missing-source notice) outcome, not a
 failure; only `failed` is non-zero.
 
+## Phase 6 read-only approval chain acceptance
+
+The Phase 6 evidence chain (`5D -> 6B -> 6C -> 6E`) is read-only. Acceptance:
+
+- the safe read-only chain can be run
+- the Phase 6B packet is generated
+- the Phase 6C verifier returns `ready` when inputs are fresh
+- the Phase 6E planner returns `blocked` in the normal current case where
+  `compliance_status` is not approved
+- no vault write occurs
+- no approval mutation occurs
+- no runtime approval wrapper exists
+- no Phase 2G/2H/2I execution occurs
+- no backend/API/database is introduced
+
+See `docs/RELEASE_SNAPSHOT_PHASE6.md`.
+
 ## 9. Troubleshooting
 
 - **doctor gate fails**: an unsafe env flag is set

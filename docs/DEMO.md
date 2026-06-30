@@ -104,6 +104,26 @@ Open `tmp/phase5b-ui-shell/index.html` in a local browser. The shell is a
 **read-only static** page, **verifier-backed** by Phase 5C, with **no backend**,
 **no API**, **no vault writes**, and **no external URLs**.
 
+## Phase 6 read-only approval chain
+
+The Phase 6 evidence chain prepares and verifies approval evidence without
+mutating anything. Safe chain:
+
+```text
+5D -> 6B -> 6C -> 6E
+```
+
+```bash
+bash scripts/dev/run_phase5d_ui_shell_demo.sh 2026-W26
+bash scripts/dev/run_phase6b_approval_review_packet.sh prod-laptop-stand 2026-W26
+bash scripts/dev/run_phase6c_approval_review_verifier.sh prod-laptop-stand 2026-W26
+bash scripts/dev/run_phase6e_approval_execution_plan.sh prod-laptop-stand 2026-W26
+```
+
+This chain is **read-only**: **no vault write**, **no approval mutation**, **no
+runtime approval wrapper**, and **no Phase 2G/2H/2I execution**. See
+`docs/RELEASE_SNAPSHOT_PHASE6.md`.
+
 ## 7. Next phase recommendation
 
 After acceptance passes, the next operator-facing step is to exercise the
