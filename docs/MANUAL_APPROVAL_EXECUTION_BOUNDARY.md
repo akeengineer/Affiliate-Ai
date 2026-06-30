@@ -180,6 +180,15 @@ is not approved (the finalization gate stays blocked). The planner is
 execution, no approval flag use, and no command form for the Phase 2G/2H/2I
 primitives.
 
+## Phase 6F single-gate wrapper boundary
+
+Phase 6F is **boundary-only**: it defines the contract for a future single-gate
+manual approval wrapper in
+[`SINGLE_GATE_MANUAL_APPROVAL_WRAPPER_BOUNDARY.md`](SINGLE_GATE_MANUAL_APPROVAL_WRAPPER_BOUNDARY.md).
+No runtime single-gate wrapper exists yet. A future wrapper requires the Phase 6B
+packet, a Phase 6C `ready` verifier verdict, and a Phase 6E execution plan as
+evidence preconditions, and may execute exactly one gate per invocation.
+
 ## Known limitations
 
 - Boundary documentation only; no execution command, gate, or mutation exists.

@@ -100,6 +100,7 @@ flag). The default read-only operator path writes none of them.
 - `docs/UI_SHELL.md`, `docs/UI_SHELL_BOUNDARY.md`
 - `docs/MANUAL_APPROVED_WORKFLOW_BOUNDARY.md`
 - `docs/MANUAL_APPROVAL_EXECUTION_BOUNDARY.md`
+- `docs/SINGLE_GATE_MANUAL_APPROVAL_WRAPPER_BOUNDARY.md`
 
 Phase 6A defines the **manual-approved workflow boundary** in
 `docs/MANUAL_APPROVED_WORKFLOW_BOUNDARY.md`: no approval mutation exists in
@@ -112,6 +113,13 @@ Phase 6D defines the **manual approval execution boundary** in
 yet, no vault read/write is introduced, and no approval mutation is introduced.
 The Phase 2G/2H/2I primitives remain unchanged; a future approval execution
 requires the Phase 6B packet and a Phase 6C `ready` verifier verdict.
+
+Phase 6F defines the future **single-gate manual approval wrapper boundary** in
+`docs/SINGLE_GATE_MANUAL_APPROVAL_WRAPPER_BOUNDARY.md`: no runtime wrapper exists
+yet, no vault read/write is introduced, and no approval mutation is introduced.
+The Phase 2G/2H/2I primitives remain unchanged; a future wrapper execution
+requires the Phase 6B packet, a Phase 6C `ready` verifier verdict, and a Phase 6E
+execution plan, and must be single-gate only.
 
 ### scripts
 
