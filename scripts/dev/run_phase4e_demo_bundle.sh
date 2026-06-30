@@ -71,6 +71,10 @@ run_step() {
   fi
 }
 
+# Run the chain from the repo root so relative sample paths resolve identically
+# regardless of caller CWD (mirrors run_phase4a_ui_mock.sh).
+cd "$REPO_ROOT"
+
 run_step "acceptance" "acceptance_status: success" bash "$ACCEPTANCE_WRAPPER"
 run_step "snapshot" "phase4b_status: success" bash "$SNAPSHOT_WRAPPER" "$WEEK"
 run_step "catalog" "phase4c_status: success" bash "$CATALOG_WRAPPER"

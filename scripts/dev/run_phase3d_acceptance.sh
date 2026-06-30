@@ -71,6 +71,10 @@ printf '%s' "$PRODUCT_ID" | grep -Eq "$PRODUCT_ID_RE" \
 
 [ -x "$COMMAND_CENTER" ] || { echo "Missing or non-executable command center: $COMMAND_CENTER" >&2; exit 1; }
 
+# Resolve all relative sample/artifact paths against the repo root, not the
+# caller CWD, so the chain rebuilds Phase 2E identically from any directory.
+cd "$REPO_ROOT"
+
 TMP_OUT="$(mktemp)"
 
 # ── 2. Before snapshot (count only; never emit vault paths) ──────────────────
