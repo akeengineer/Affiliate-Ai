@@ -169,6 +169,16 @@ The following are forbidden behaviors, not commands to run:
 - Any backend, API, database, or marketplace implementation must be a separate
   approved phase.
 
+## Phase 6G audit verifier boundary
+
+Phase 6G is **boundary-only**: it defines the contract for a future audit
+verifier in
+[`MANUAL_APPROVAL_AUDIT_VERIFIER_BOUNDARY.md`](MANUAL_APPROVAL_AUDIT_VERIFIER_BOUNDARY.md).
+No runtime audit verifier exists yet. Phase 6G defines the future audit
+verification expectations for audit artifacts produced by a future single-gate
+wrapper; its audit verifier schema is a verifier-level superset of the Phase 6F
+audit model.
+
 ## Known limitations
 
 - Boundary documentation only; no wrapper, gate execution, or mutation exists.

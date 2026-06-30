@@ -101,6 +101,7 @@ flag). The default read-only operator path writes none of them.
 - `docs/MANUAL_APPROVED_WORKFLOW_BOUNDARY.md`
 - `docs/MANUAL_APPROVAL_EXECUTION_BOUNDARY.md`
 - `docs/SINGLE_GATE_MANUAL_APPROVAL_WRAPPER_BOUNDARY.md`
+- `docs/MANUAL_APPROVAL_AUDIT_VERIFIER_BOUNDARY.md`
 
 Phase 6A defines the **manual-approved workflow boundary** in
 `docs/MANUAL_APPROVED_WORKFLOW_BOUNDARY.md`: no approval mutation exists in
@@ -120,6 +121,14 @@ yet, no vault read/write is introduced, and no approval mutation is introduced.
 The Phase 2G/2H/2I primitives remain unchanged; a future wrapper execution
 requires the Phase 6B packet, a Phase 6C `ready` verifier verdict, and a Phase 6E
 execution plan, and must be single-gate only.
+
+Phase 6G defines the future **manual approval audit verifier boundary** in
+`docs/MANUAL_APPROVAL_AUDIT_VERIFIER_BOUNDARY.md`: no runtime audit verifier
+exists yet, no vault read/write is introduced, and no approval mutation is
+introduced. The Phase 2G/2H/2I primitives remain unchanged; Phase 6G expects
+future audit artifacts to reference the Phase 6B packet, Phase 6C verifier, and
+Phase 6E execution plan, and the future audit verifier must be read-only and
+evidence-only.
 
 ### scripts
 
