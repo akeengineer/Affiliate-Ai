@@ -73,6 +73,32 @@ This Phase 5B prototype implements the allowed subset only: display snapshot,
 catalog, verification, and demo-readiness status, link to local static files
 with relative links, and show guardrail status.
 
+## Verifier (Phase 5C)
+
+A read-only acceptance gate verifies the generated shell (it never regenerates
+it):
+
+```
+bash scripts/dev/run_phase5c_ui_shell_verifier.sh
+```
+
+Outputs:
+
+- `tmp/phase5c-ui-shell-verifier/verification-report.md`
+- `tmp/phase5c-ui-shell-verifier/verification-summary.json`
+
+Verdict policy:
+
+- `ready` = success (exit 0); all checks pass, no warnings
+- `warning` = success (exit 0); checks pass but a degraded/missing-source notice
+  or staleness notice is present
+- `failed` = non-zero (exit 1); a hard safety or structure check failed
+
+Guardrails: no JS, no external URLs, no vault paths, no approved-workflow
+references, and no backend/API/database. The verifier reads only the shell body
+and the four Phase 4 JSON summaries, checks link targets by existence only, and
+writes only under `tmp/phase5c-ui-shell-verifier/`.
+
 ## Known limitations
 
 - Static snapshot; reflects the Phase 4 JSON at build time and is stale until
