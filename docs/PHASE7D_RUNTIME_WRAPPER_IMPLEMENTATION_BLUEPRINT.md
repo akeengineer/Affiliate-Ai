@@ -371,3 +371,9 @@ is evidence review, never a mutation trigger.
 Phase 7E records the runtime blocked release state. See
 `docs/RELEASE_SNAPSHOT_PHASE7.md`. That historical blocked-state record is now
 superseded by the implemented manual gate runtime snapshot.
+
+### Phase 7F live-state pointer
+
+Phase 7F records the post-Phase-7D runtime wrapper live state. See
+`docs/RELEASE_SNAPSHOT_PHASE7_RUNTIME_LIVE.md`. That live-state report is
+docs/tests/task-only and does not modify the Phase 7D wrapper behavior.

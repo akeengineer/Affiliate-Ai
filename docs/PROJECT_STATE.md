@@ -107,6 +107,7 @@ flag). The default read-only operator path writes none of them.
 - `docs/HIGH_RISK_SINGLE_GATE_WRAPPER_READINESS_REVIEW.md`
 - `docs/PHASE7D_RUNTIME_WRAPPER_IMPLEMENTATION_BLUEPRINT.md`
 - `docs/RELEASE_SNAPSHOT_PHASE7.md`
+- `docs/RELEASE_SNAPSHOT_PHASE7_RUNTIME_LIVE.md`
 - `docs/RELEASE_SNAPSHOT_PHASE6.md`
 
 Phase 6A defines the **manual-approved workflow boundary** in
@@ -179,6 +180,10 @@ audit verifier remains read-only/evidence-only.
 
 Phase 7E records the release snapshot and historical blocked-state context in
 `docs/RELEASE_SNAPSHOT_PHASE7.md`.
+
+Phase 7F records the post-Phase-7D runtime live state in
+`docs/RELEASE_SNAPSHOT_PHASE7_RUNTIME_LIVE.md`. It is docs/tests/task-only and
+does not change runtime behavior, wrapper logic, or approval logic.
 
 Phase 7D runtime implementation is now intentionally present as a manual-gated
 single-wrapper boundary:
