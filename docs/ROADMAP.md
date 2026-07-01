@@ -76,6 +76,11 @@ approval mutation is added in Phase 6A-6H.
   (docs/tests/task-only; the final review gate before Phase 7D). See
   `docs/HIGH_RISK_SINGLE_GATE_WRAPPER_READINESS_REVIEW.md`. Runtime readiness
   remains `blocked` until explicit user approval.
+- Phase 7D-P — implementation plan finalization — **complete / done**
+  (docs/tests/task-only; finalizes the implementation blueprint and implements
+  nothing). See
+  `docs/PHASE7D_RUNTIME_WRAPPER_IMPLEMENTATION_BLUEPRINT.md`. Runtime readiness
+  remains `blocked`.
 - Phase 7D — high-risk single-gate manual approval wrapper implementation —
   **future**; the first mutation-capable phase; separate and explicitly
   approved; must remain **manual-approved**.
@@ -84,6 +89,10 @@ Phase 7A/7B/7C/7D-R stay **read-only** and **manual-approved**: no approval
 wrapper, vault read/write, primitive execution, or approval mutation is added.
 The mutation-capable wrapper work is deferred to Phase 7D, a future, separately
 approved phase.
+
+Phase 7D-P is also **read-only** and **manual-approved**. The runtime wrapper
+remains high-risk; mutation-capable Phase 7D work is future, blocked, and
+requires separate explicit manual approval.
 
 ## 2. Phase 4A — local read-only UI mock
 

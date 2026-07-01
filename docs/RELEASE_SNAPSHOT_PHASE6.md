@@ -119,3 +119,11 @@ requirement and is intentionally not asserted.
 - Phase 7D runtime readiness remains blocked.
 - No runtime wrapper exists in Phase 7D-R.
 - No approval mutation is introduced by Phase 7D-R.
+
+## Phase 7D-P pointer
+
+- Phase 7D-P finalizes the runtime wrapper implementation blueprint.
+- See `docs/PHASE7D_RUNTIME_WRAPPER_IMPLEMENTATION_BLUEPRINT.md`.
+- Phase 7D runtime readiness remains blocked.
+- No runtime wrapper exists in Phase 7D-P.
+- No approval mutation is introduced by Phase 7D-P.
