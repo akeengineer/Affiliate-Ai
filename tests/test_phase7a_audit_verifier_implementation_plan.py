@@ -43,9 +43,14 @@ def test_no_phase7a_runtime_script() -> None:
     assert glob.glob(str(REPO_ROOT / "scripts/dev/*phase7a*")) == []
 
 
-def test_no_runtime_verifier_or_wrapper_files() -> None:
-    assert not (REPO_ROOT / "scripts/dev/verify_manual_approval_audit.py").exists()
-    assert not (REPO_ROOT / "scripts/dev/run_phase7b_audit_verifier.sh").exists()
+def test_runtime_verifier_and_wrapper_are_phase7b_scope() -> None:
+    # Phase 7A is plan-only; the runtime verifier/wrapper are Phase 7B artifacts.
+    # Before Phase 7B these did not exist; Phase 7B implements them. Either state
+    # is consistent with Phase 7A remaining docs/tests/task-only.
+    verifier = REPO_ROOT / "scripts/dev/verify_manual_approval_audit.py"
+    wrapper = REPO_ROOT / "scripts/dev/run_phase7b_audit_verifier.sh"
+    assert not glob.glob(str(REPO_ROOT / "scripts/dev/*phase7a*"))
+    assert verifier.exists() == wrapper.exists()
 
 
 # ── 6. no runtime command in Phase 7A ─────────────────────────────────────────

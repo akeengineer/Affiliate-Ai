@@ -140,11 +140,17 @@ introduced. The Phase 2G/2H/2I primitives remain unchanged. The safe read-only
 chain is `5D -> 6B -> 6C -> 6E`.
 
 Phase 7A plans the future read-only audit verifier implementation in
-`docs/MANUAL_APPROVAL_AUDIT_VERIFIER_IMPLEMENTATION_PLAN.md`. No runtime verifier
-exists yet, no runtime approval wrapper exists yet, no vault read/write is
-introduced, and no approval mutation is introduced. The Phase 2G/2H/2I
-primitives remain unchanged, and the future verifier must be read-only and
+`docs/MANUAL_APPROVAL_AUDIT_VERIFIER_IMPLEMENTATION_PLAN.md`. The Phase 2G/2H/2I
+primitives remain unchanged, and the verifier must be read-only and
 evidence-only.
+
+Phase 7B implements that plan as a runtime read-only audit verifier
+(`scripts/dev/verify_manual_approval_audit.py`, wrapped by
+`scripts/dev/run_phase7b_audit_verifier.sh`). It validates one JSON audit
+artifact and writes reports only under `tmp/phase7b-audit-verifier/`. No approval
+wrapper exists yet, no approval mutation exists, no vault read/write is
+introduced, and no primitive execution occurs; the Phase 2G/2H/2I primitives
+remain unchanged.
 
 ### scripts
 
@@ -161,6 +167,9 @@ evidence-only.
 - Static read-only UI shell demo: `run_phase4e_demo_bundle.sh`,
   `run_phase5b_ui_shell.sh`, `run_phase5c_ui_shell_verifier.sh`,
   `run_phase5d_ui_shell_demo.sh`
+- Runtime read-only audit verifier: `verify_manual_approval_audit.py`, wrapped by
+  `run_phase7b_audit_verifier.sh` (reads one audit artifact; writes only under
+  `tmp/phase7b-audit-verifier/`; no vault write, no primitive execution)
 
 ## 4. Guardrails
 
@@ -192,6 +201,7 @@ provides a static read-only UI shell only (inline CSS, zero JavaScript).
 - **static read-only UI shell** (Phase 5B)
 - **UI shell verifier** / acceptance gate (Phase 5C)
 - **UI shell demo bundle** command (Phase 5D)
+- **runtime read-only manual approval audit verifier** (Phase 7B)
 
 ## 6. What the system cannot do yet
 
