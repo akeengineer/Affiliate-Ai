@@ -102,6 +102,7 @@ flag). The default read-only operator path writes none of them.
 - `docs/MANUAL_APPROVAL_EXECUTION_BOUNDARY.md`
 - `docs/SINGLE_GATE_MANUAL_APPROVAL_WRAPPER_BOUNDARY.md`
 - `docs/MANUAL_APPROVAL_AUDIT_VERIFIER_BOUNDARY.md`
+- `docs/MANUAL_APPROVAL_AUDIT_VERIFIER_IMPLEMENTATION_PLAN.md`
 - `docs/RELEASE_SNAPSHOT_PHASE6.md`
 
 Phase 6A defines the **manual-approved workflow boundary** in
@@ -137,6 +138,13 @@ runtime approval wrapper exists yet, no runtime audit verifier exists yet, no
 vault read/write is introduced by Phase 6H, and no approval mutation is
 introduced. The Phase 2G/2H/2I primitives remain unchanged. The safe read-only
 chain is `5D -> 6B -> 6C -> 6E`.
+
+Phase 7A plans the future read-only audit verifier implementation in
+`docs/MANUAL_APPROVAL_AUDIT_VERIFIER_IMPLEMENTATION_PLAN.md`. No runtime verifier
+exists yet, no runtime approval wrapper exists yet, no vault read/write is
+introduced, and no approval mutation is introduced. The Phase 2G/2H/2I
+primitives remain unchanged, and the future verifier must be read-only and
+evidence-only.
 
 ### scripts
 

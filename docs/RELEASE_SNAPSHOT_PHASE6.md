@@ -97,3 +97,10 @@ requirement and is intentionally not asserted.
 - A future audit verifier implementation must be explicitly approved as a
   separate phase.
 - Any backend/API/database/marketplace work must be a separate approved phase.
+
+## Phase 7A pointer
+
+- Phase 7A plans the runtime audit verifier implementation.
+- See `docs/MANUAL_APPROVAL_AUDIT_VERIFIER_IMPLEMENTATION_PLAN.md`.
+- No runtime verifier exists in Phase 7A.
+- No approval mutation is introduced by Phase 7A.
