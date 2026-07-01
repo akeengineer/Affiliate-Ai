@@ -177,12 +177,32 @@ work. No runtime wrapper exists yet. No approval mutation or vault read/write is
 introduced. The Phase 2G/2H/2I primitives remain unchanged, and the Phase 7B
 audit verifier remains read-only/evidence-only.
 
-Phase 7E records the release snapshot and runtime blocked state in
-`docs/RELEASE_SNAPSHOT_PHASE7.md`. Phase 7D runtime readiness remains blocked.
-No runtime wrapper exists yet. No approval mutation is introduced. No vault
-read/write is introduced. The Phase 2G/2H/2I primitives remain unchanged, the
-Phase 7B audit verifier remains read-only/evidence-only, and Phase 7D runtime
-implementation is still future high-risk work.
+Phase 7E records the release snapshot and historical blocked-state context in
+`docs/RELEASE_SNAPSHOT_PHASE7.md`.
+
+Phase 7D runtime implementation is now intentionally present as a manual-gated
+single-wrapper boundary:
+
+- shell entrypoint: `scripts/dev/run_phase7d_single_gate_wrapper.sh`
+- Python core: `scripts/dev/execute_single_gate_approval.py`
+- focused runtime tests: `tests/test_phase7d_single_gate_wrapper.py`
+- task record: `codex/tasks/048-phase7d-single-gate-runtime-wrapper.md`
+
+The current runtime status is:
+
+- `phase7d_runtime_readiness: implemented_manual_gate`
+- exactly one selected gate per invocation
+- evidence-first decision derivation
+- safe vault-read supplements only for product/decision note state checks
+- wrapper writes audits directly under `tmp/phase7d-single-gate-wrapper/`
+- wrapper does not write vault state directly
+- selected primitive is the only allowed mutation surface after preconditions pass
+
+The Phase 2G/2H/2I primitives remain unchanged, the Phase 7B audit verifier
+remains read-only/evidence-only, and the runtime boundary still forbids
+approve-all, global approval, multi-gate execution, next-gate automation, chain
+execution, autopublish, backend/API/database behavior, and production
+deployment.
 
 ### scripts
 
@@ -202,6 +222,11 @@ implementation is still future high-risk work.
 - Runtime read-only audit verifier: `verify_manual_approval_audit.py`, wrapped by
   `run_phase7b_audit_verifier.sh` (reads one audit artifact; writes only under
   `tmp/phase7b-audit-verifier/`; no vault write, no primitive execution)
+- Runtime single-gate manual approval wrapper:
+  `run_phase7d_single_gate_wrapper.sh` -> `execute_single_gate_approval.py`
+  (selected-gate-only; evidence-first; safe vault-read supplements; audit writes
+  under `tmp/phase7d-single-gate-wrapper/`; wrapper performs no direct vault
+  write)
 
 ## 4. Guardrails
 

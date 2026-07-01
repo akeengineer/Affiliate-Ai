@@ -132,6 +132,6 @@ requirement and is intentionally not asserted.
 
 - Phase 7E records the Phase 7 release snapshot and runtime blocked state.
 - See `docs/RELEASE_SNAPSHOT_PHASE7.md`.
-- Phase 7D runtime readiness remains blocked.
-- No runtime wrapper exists in Phase 7E.
-- No approval mutation is introduced by Phase 7E.
+- The historical blocked-state snapshot is preserved there.
+- Current Phase 7D runtime readiness is now `implemented_manual_gate`.
+- The runtime wrapper is now intentionally present in Phase 7D.

@@ -38,10 +38,10 @@ def test_review_scope_docs_only() -> None:
     assert "docs/tests/task-only" in low or "readiness review only" in low
 
 
-def test_no_phase7d_wrapper_scripts() -> None:
-    assert not (REPO_ROOT / "scripts/dev/run_phase7d_single_gate_wrapper.sh").exists()
+def test_phase7d_wrapper_scripts_now_exist_but_review_remains_historical() -> None:
+    assert (REPO_ROOT / "scripts/dev/run_phase7d_single_gate_wrapper.sh").is_file()
     assert not (REPO_ROOT / "scripts/dev/run_manual_approval_wrapper.sh").exists()
-    assert not (REPO_ROOT / "scripts/dev/execute_single_gate_approval.py").exists()
+    assert (REPO_ROOT / "scripts/dev/execute_single_gate_approval.py").is_file()
 
 
 # ── 6-7. readiness status model ───────────────────────────────────────────────

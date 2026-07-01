@@ -31,18 +31,18 @@ def test_task_contains_success_status() -> None:
 def test_snapshot_status_model() -> None:
     text = _text(SNAPSHOT)
     assert "phase7e_status: success" in text
-    assert "phase7d_runtime_readiness: blocked" in text
+    assert "phase7d_runtime_readiness: implemented_manual_gate" in text
 
 
 def test_snapshot_scope_is_release_snapshot_only() -> None:
     low = _text(SNAPSHOT).lower()
-    assert "docs/tests/task-only" in low or "release snapshot only" in low
+    assert "release snapshot" in low
 
 
-def test_no_runtime_wrapper_scripts_added() -> None:
-    assert not (REPO_ROOT / "scripts/dev/run_phase7d_single_gate_wrapper.sh").exists()
+def test_runtime_wrapper_scripts_now_exist_intentionally() -> None:
+    assert (REPO_ROOT / "scripts/dev/run_phase7d_single_gate_wrapper.sh").is_file()
     assert not (REPO_ROOT / "scripts/dev/run_manual_approval_wrapper.sh").exists()
-    assert not (REPO_ROOT / "scripts/dev/execute_single_gate_approval.py").exists()
+    assert (REPO_ROOT / "scripts/dev/execute_single_gate_approval.py").is_file()
 
 
 def test_snapshot_includes_phase7_completion_matrix() -> None:
@@ -59,7 +59,7 @@ def test_snapshot_includes_phase7_completion_matrix() -> None:
         assert token in text, f"missing phase token: {token}"
 
 
-def test_snapshot_marks_all_completed_and_runtime_future_blocked() -> None:
+def test_snapshot_marks_all_completed_and_runtime_implemented_manual_gate() -> None:
     low = _text(SNAPSHOT).lower()
     for token in (
         "manual approval audit verifier implementation plan — complete",
@@ -70,7 +70,7 @@ def test_snapshot_marks_all_completed_and_runtime_future_blocked() -> None:
         "release snapshot / runtime blocked state report — complete",
     ):
         assert token in low, f"missing completion token: {token}"
-    assert "blocked/future" in low
+    assert "implemented/manual_gate" in low
 
 
 def test_snapshot_defines_current_capabilities() -> None:
@@ -81,91 +81,74 @@ def test_snapshot_defines_current_capabilities() -> None:
         "verify approval review packets via phase 6c",
         "build dry-run approval execution plans via phase 6e",
         "validate manual approval audit artifacts via phase 7b",
-        "document and test the future single-gate wrapper boundary",
-        "document and test the high-risk readiness review",
-        "document and test the finalized implementation blueprint",
-        "maintain runtime readiness as blocked",
+        "run the phase 7d single-gate runtime wrapper intentionally",
+        "execute at most one selected primitive per invocation",
+        "derive decision gate values from trusted phase 6b evidence",
+        "safe vault-read supplements",
+        "maintain `phase7d_runtime_readiness: implemented_manual_gate`",
     ):
         assert token in low, f"missing capability token: {token}"
 
 
-def test_snapshot_defines_runtime_blocked_state() -> None:
+def test_snapshot_preserves_historical_blocked_state() -> None:
     low = _text(SNAPSHOT).lower()
     for token in (
-        "what remains blocked",
-        "no runtime approval wrapper exists yet",
-        "no phase 7d runtime command exists yet",
-        "no approval mutation is introduced",
-        "no primitive execution is introduced",
-        "no vault write is introduced by phase 7 wrapper",
-        "no durable audit store exists yet",
-        "no operator authentication implementation exists yet",
-        "no backend/api/database exists",
-        "no marketplace connector exists",
-        "no autopublish exists",
-        "no production deployment exists",
+        "historical phase 7e blocked-state record",
+        "no runtime approval wrapper existed yet",
+        "no phase 7d runtime command existed yet",
+        "no approval mutation was introduced",
+        "no primitive execution was introduced",
+        "no vault write was introduced by the phase 7 wrapper",
+        "superseded by the implemented manual gate runtime",
     ):
         assert token in low, f"missing blocked-state token: {token}"
 
 
-def test_snapshot_explains_why_runtime_remains_blocked() -> None:
+def test_snapshot_records_unlock_conditions_now_satisfied() -> None:
     low = _text(SNAPSHOT).lower()
     for token in (
-        "why phase 7d runtime remains blocked",
-        "first future phase that may call approval primitives",
-        "may mutate vault state",
-        "unintended promotion, decision creation, or finalization",
-        "runtime must remain blocked until explicit high-risk approval is given",
-        "does not authorize runtime implementation",
+        "unlock conditions that are now satisfied",
+        "user explicitly approved phase 7d runtime implementation",
+        "approval phrase was specific to phase 7d",
+        "`phase7d_runtime_readiness` was intentionally changed",
+        "runtime wrapper files were added intentionally",
+        "selected-gate-only enforcement is implemented",
+        "explicit primitive allowlist is implemented",
+        "approval flag semantics are implemented",
+        "phase 7b audit verifier compatibility is tested",
+        "no next-gate / no chain behavior is tested",
     ):
-        assert token in low, f"missing blocked rationale token: {token}"
+        assert token in low, f"missing satisfied-condition token: {token}"
 
 
-def test_snapshot_defines_unlock_conditions() -> None:
+def test_snapshot_retains_explicit_approval_boundary() -> None:
     low = _text(SNAPSHOT).lower()
     for token in (
-        "conditions before phase 7d can unlock",
-        "user explicitly approves phase 7d runtime implementation",
-        "approval phrase must be specific to phase 7d",
-        "phase7d_runtime_readiness must be intentionally changed in a future pr",
-        "runtime wrapper files must be added intentionally",
-        "selected-gate-only enforcement must be implemented",
-        "explicit primitive allowlist must be implemented",
-        "approval flag semantics must be implemented",
-        "emergency stop / dry-run / operator confirmation decision must be implemented",
-        "audit-before/after behavior must be implemented",
-        "phase 7b audit verifier compatibility must be tested",
-        "no primitive execution on failed precondition must be tested",
-        "no vault write on failed precondition must be tested",
-        "no next-gate / no chain behavior must be tested",
-        "full suite must pass",
+        "explicit approval boundary that still remains",
+        "the implementation approval was phase-specific",
+        "it was not approve-all",
+        "it did not approve future phases",
+        "future expansion beyond this single manual gate",
+        "separate approval",
     ):
-        assert token in low, f"missing unlock condition token: {token}"
-
-
-def test_snapshot_requires_explicit_phase_specific_approval() -> None:
-    text = _text(SNAPSHOT)
-    low = text.lower()
-    assert "explicit approval requirement" in low
-    assert "must not start from a vague instruction" in low
-    assert "approve phase 7d runtime implementation" in low
-    assert "phase-specific" in low
-    assert "not approve-all" in low
+        assert token in low, f"missing approval-boundary token: {token}"
 
 
 def test_snapshot_includes_runtime_safety_contract() -> None:
     low = _text(SNAPSHOT).lower()
     for token in (
-        "runtime safety contract",
+        "implemented runtime safety contract",
         "phase 7b remains read-only",
-        "phase 7d runtime wrapper does not exist yet",
-        "phase 7d runtime readiness remains blocked",
+        "phase 7d runtime wrapper now exists intentionally",
+        "phase 7d runtime readiness is `implemented_manual_gate`",
         "phase 2g/2h/2i primitives remain unchanged",
         "at most one primitive per invocation",
-        "never infer approval",
-        "never run next gate automatically",
-        "never chain execution",
-        "never use global approval or approve-all",
+        "never infers approval",
+        "never runs the next gate automatically",
+        "never chains execution",
+        "never uses global approval or approve-all",
+        "wrapper never writes vault state directly",
+        "safe vault-read supplements only",
     ):
         assert token in low, f"missing runtime safety token: {token}"
 
@@ -181,6 +164,9 @@ def test_snapshot_includes_files_and_docs_inventory() -> None:
         "docs/HIGH_RISK_SINGLE_GATE_WRAPPER_READINESS_REVIEW.md",
         "docs/PHASE7D_RUNTIME_WRAPPER_IMPLEMENTATION_BLUEPRINT.md",
         "docs/RELEASE_SNAPSHOT_PHASE7.md",
+        "scripts/dev/run_phase7d_single_gate_wrapper.sh",
+        "scripts/dev/execute_single_gate_approval.py",
+        "tests/test_phase7d_single_gate_wrapper.py",
     ):
         assert token in text, f"missing inventory token: {token}"
 
@@ -189,16 +175,17 @@ def test_snapshot_known_limitations() -> None:
     low = _text(SNAPSHOT).lower()
     for token in (
         "known limitations",
-        "no runtime wrapper yet",
-        "no approval mutation yet",
-        "no phase 7d command yet",
+        "no approve-all",
+        "no global approval",
+        "no multi-gate execution",
+        "no next-gate automation",
+        "no chain execution",
         "no durable audit store yet",
         "no auth/operator identity implementation",
         "no backend/api/database",
         "no marketplace connector",
         "no autopublish",
         "no production deployment",
-        "phase 7d runtime readiness remains blocked",
     ):
         assert token in low, f"missing limitation token: {token}"
 
@@ -210,7 +197,7 @@ def test_docs_updates_reference_phase7e() -> None:
     release6 = _text(RELEASE_SNAPSHOT_PHASE6)
 
     assert "Phase 7E" in roadmap
-    assert "blocked" in roadmap.lower()
+    assert "implemented_manual_gate" in roadmap
     assert "docs/RELEASE_SNAPSHOT_PHASE7.md" in project_state
     assert "Phase 7E" in blueprint
     assert "RELEASE_SNAPSHOT_PHASE7.md" in blueprint

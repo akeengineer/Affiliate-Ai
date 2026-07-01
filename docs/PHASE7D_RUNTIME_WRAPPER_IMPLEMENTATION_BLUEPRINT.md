@@ -12,6 +12,17 @@ implementation blueprint for the future runtime single-gate manual approval
 wrapper. It finalizes implementation intent only. Runtime implementation remains
 blocked and requires separate explicit acceptance.
 
+Implementation follow-through note:
+
+- Phase 7D-P itself remained docs/tests/task-only when this blueprint was
+  created.
+- Phase 7D runtime implementation was approved later and is now present in
+  `scripts/dev/run_phase7d_single_gate_wrapper.sh` and
+  `scripts/dev/execute_single_gate_approval.py`.
+- The current runtime status is recorded in
+  `codex/tasks/048-phase7d-single-gate-runtime-wrapper.md` and
+  `docs/RELEASE_SNAPSHOT_PHASE7.md`.
+
 ### Scope
 
 - implementation blueprint only
@@ -358,5 +369,5 @@ is evidence review, never a mutation trigger.
 ### Phase 7E release-state pointer
 
 Phase 7E records the runtime blocked release state. See
-`docs/RELEASE_SNAPSHOT_PHASE7.md`. Runtime readiness remains blocked, and no
-runtime wrapper exists in Phase 7E.
+`docs/RELEASE_SNAPSHOT_PHASE7.md`. That historical blocked-state record is now
+superseded by the implemented manual gate runtime snapshot.

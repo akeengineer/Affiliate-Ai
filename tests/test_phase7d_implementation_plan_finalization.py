@@ -40,10 +40,10 @@ def test_blueprint_scope_is_plan_only() -> None:
     assert "docs/tests/task-only" in low or "implementation blueprint only" in low
 
 
-def test_no_runtime_wrapper_scripts() -> None:
-    assert not (REPO_ROOT / "scripts/dev/run_phase7d_single_gate_wrapper.sh").exists()
+def test_runtime_wrapper_scripts_now_exist_but_blueprint_remains_historical() -> None:
+    assert (REPO_ROOT / "scripts/dev/run_phase7d_single_gate_wrapper.sh").is_file()
     assert not (REPO_ROOT / "scripts/dev/run_manual_approval_wrapper.sh").exists()
-    assert not (REPO_ROOT / "scripts/dev/execute_single_gate_approval.py").exists()
+    assert (REPO_ROOT / "scripts/dev/execute_single_gate_approval.py").is_file()
 
 
 def test_future_runtime_files_are_proposed_only() -> None:

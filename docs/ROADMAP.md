@@ -86,8 +86,12 @@ approval mutation is added in Phase 6A-6H.
   what remains blocked, and the explicit approval requirement before any future
   Phase 7D runtime implementation). See `docs/RELEASE_SNAPSHOT_PHASE7.md`.
 - Phase 7D — high-risk single-gate manual approval wrapper implementation —
-  **future**; the first mutation-capable phase; separate and explicitly
-  approved; must remain **manual-approved**.
+  **complete / done** (runtime manual-gated; adds
+  `scripts/dev/run_phase7d_single_gate_wrapper.sh`,
+  `scripts/dev/execute_single_gate_approval.py`, and
+  `tests/test_phase7d_single_gate_wrapper.py`; selected-gate-only, evidence-first,
+  safe vault-read supplements, no approve-all, no chain, no next-gate
+  automation). Runtime readiness is now `implemented_manual_gate`.
 
 Phase 7A/7B/7C/7D-R stay **read-only** and **manual-approved**: no approval
 wrapper, vault read/write, primitive execution, or approval mutation is added.
@@ -98,9 +102,11 @@ Phase 7D-P is also **read-only** and **manual-approved**. The runtime wrapper
 remains high-risk; mutation-capable Phase 7D work is future, blocked, and
 requires separate explicit manual approval.
 
-Phase 7E is also **read-only** and **manual-approved**. The runtime wrapper
-remains high-risk and blocked; no runtime wrapper exists yet, and a future Phase
-7D runtime implementation still requires separate explicit manual approval.
+Phase 7E remains the historical blocked-state release snapshot. Phase 7D runtime
+implementation was later approved explicitly and is now present as a
+single-gate manual-approved wrapper. The implementation remains intentionally
+narrow: no approve-all, no global approval, no multi-gate execution, no next-gate
+automation, and no chain execution.
 
 ## 2. Phase 4A — local read-only UI mock
 
