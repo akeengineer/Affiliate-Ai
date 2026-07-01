@@ -36,10 +36,10 @@ def test_plan_scope_is_docs_only() -> None:
 
 # ── 4-6. no runtime wrapper / 7C-only / 7D future ─────────────────────────────
 
-def test_no_phase7d_wrapper_scripts() -> None:
-    assert not (REPO_ROOT / "scripts/dev/run_phase7d_single_gate_wrapper.sh").exists()
+def test_phase7d_wrapper_scripts_now_exist_but_7c_plan_remains_historical() -> None:
+    assert (REPO_ROOT / "scripts/dev/run_phase7d_single_gate_wrapper.sh").is_file()
     assert not (REPO_ROOT / "scripts/dev/run_manual_approval_wrapper.sh").exists()
-    assert not (REPO_ROOT / "scripts/dev/execute_single_gate_approval.py").exists()
+    assert (REPO_ROOT / "scripts/dev/execute_single_gate_approval.py").is_file()
 
 
 def test_plan_states_no_runtime_wrapper() -> None:
