@@ -148,3 +148,10 @@ The blocked-state unlock checklist has now been satisfied:
 - no marketplace connector
 - no autopublish
 - no production deployment
+
+### Phase 7F live-state pointer
+
+- Phase 7F records the post-Phase-7D runtime wrapper live state.
+- See `docs/RELEASE_SNAPSHOT_PHASE7_RUNTIME_LIVE.md`.
+- Phase 7E remains the historical blocked-state release snapshot.
+- Phase 7F is docs/tests/task-only and does not change runtime behavior.

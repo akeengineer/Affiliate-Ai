@@ -92,6 +92,10 @@ approval mutation is added in Phase 6A-6H.
   `tests/test_phase7d_single_gate_wrapper.py`; selected-gate-only, evidence-first,
   safe vault-read supplements, no approve-all, no chain, no next-gate
   automation). Runtime readiness is now `implemented_manual_gate`.
+- Phase 7F — runtime wrapper live state report — **complete / done**
+  (docs/tests/task-only; documents the live post-Phase-7D state after the
+  manual-gated wrapper exists, adds no runtime behavior, and records the safe
+  demo posture). See `docs/RELEASE_SNAPSHOT_PHASE7_RUNTIME_LIVE.md`.
 
 Phase 7A/7B/7C/7D-R stay **read-only** and **manual-approved**: no approval
 wrapper, vault read/write, primitive execution, or approval mutation is added.
@@ -107,6 +111,9 @@ implementation was later approved explicitly and is now present as a
 single-gate manual-approved wrapper. The implementation remains intentionally
 narrow: no approve-all, no global approval, no multi-gate execution, no next-gate
 automation, and no chain execution.
+
+Phase 7F records that live post-Phase-7D state as a separate docs-only release
+snapshot. It does not add new runtime commands, approval paths, or automation.
 
 ## 2. Phase 4A — local read-only UI mock
 
