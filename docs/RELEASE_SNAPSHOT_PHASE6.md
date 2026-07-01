@@ -127,3 +127,11 @@ requirement and is intentionally not asserted.
 - Phase 7D runtime readiness remains blocked.
 - No runtime wrapper exists in Phase 7D-P.
 - No approval mutation is introduced by Phase 7D-P.
+
+## Phase 7E pointer
+
+- Phase 7E records the Phase 7 release snapshot and runtime blocked state.
+- See `docs/RELEASE_SNAPSHOT_PHASE7.md`.
+- Phase 7D runtime readiness remains blocked.
+- No runtime wrapper exists in Phase 7E.
+- No approval mutation is introduced by Phase 7E.

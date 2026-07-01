@@ -81,6 +81,10 @@ approval mutation is added in Phase 6A-6H.
   nothing). See
   `docs/PHASE7D_RUNTIME_WRAPPER_IMPLEMENTATION_BLUEPRINT.md`. Runtime readiness
   remains `blocked`.
+- Phase 7E — release snapshot / runtime blocked state report —
+  **complete / done** (docs/tests/task-only; records what is available now,
+  what remains blocked, and the explicit approval requirement before any future
+  Phase 7D runtime implementation). See `docs/RELEASE_SNAPSHOT_PHASE7.md`.
 - Phase 7D — high-risk single-gate manual approval wrapper implementation —
   **future**; the first mutation-capable phase; separate and explicitly
   approved; must remain **manual-approved**.
@@ -93,6 +97,10 @@ approved phase.
 Phase 7D-P is also **read-only** and **manual-approved**. The runtime wrapper
 remains high-risk; mutation-capable Phase 7D work is future, blocked, and
 requires separate explicit manual approval.
+
+Phase 7E is also **read-only** and **manual-approved**. The runtime wrapper
+remains high-risk and blocked; no runtime wrapper exists yet, and a future Phase
+7D runtime implementation still requires separate explicit manual approval.
 
 ## 2. Phase 4A — local read-only UI mock
 
