@@ -68,15 +68,18 @@ approval mutation is added in Phase 6A-6H.
   (runtime read-only; `scripts/dev/verify_manual_approval_audit.py` wrapped by
   `scripts/dev/run_phase7b_audit_verifier.sh`; writes only under
   `tmp/phase7b-audit-verifier/`).
-- A future single-gate wrapper implementation remains **separate and explicitly
-  approved**.
-- A future mutation wrapper remains **high-risk** and must remain
-  **manual-approved**.
+- Phase 7C — single-gate manual approval wrapper implementation plan —
+  **complete / done** (docs/tests/task-only; plans the runtime wrapper,
+  implements nothing). See
+  `docs/SINGLE_GATE_MANUAL_APPROVAL_WRAPPER_IMPLEMENTATION_PLAN.md`.
+- Phase 7D — high-risk single-gate manual approval wrapper implementation —
+  **future**; the first mutation-capable phase; separate and explicitly
+  approved; must remain **manual-approved**.
 
-Phase 7A/7B stay **read-only** and **manual-approved**: no approval wrapper,
+Phase 7A/7B/7C stay **read-only** and **manual-approved**: no approval wrapper,
 vault read/write, primitive execution, or approval mutation is added. The
-mutation-capable wrapper work is deferred to a future, separately approved
-phase.
+mutation-capable wrapper work is deferred to Phase 7D, a future, separately
+approved phase.
 
 ## 2. Phase 4A — local read-only UI mock
 
