@@ -111,3 +111,11 @@ requirement and is intentionally not asserted.
 - See `docs/SINGLE_GATE_MANUAL_APPROVAL_WRAPPER_IMPLEMENTATION_PLAN.md`.
 - No runtime wrapper exists in Phase 7C.
 - No approval mutation is introduced by Phase 7C.
+
+## Phase 7D-R pointer
+
+- Phase 7D-R completes the high-risk readiness review.
+- See `docs/HIGH_RISK_SINGLE_GATE_WRAPPER_READINESS_REVIEW.md`.
+- Phase 7D runtime readiness remains blocked.
+- No runtime wrapper exists in Phase 7D-R.
+- No approval mutation is introduced by Phase 7D-R.

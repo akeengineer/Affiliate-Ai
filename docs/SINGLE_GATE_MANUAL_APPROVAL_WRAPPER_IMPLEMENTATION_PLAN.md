@@ -275,6 +275,13 @@ Phase 7C updates docs additively only:
 - RELEASE_SNAPSHOT_PHASE6 may include a future pointer only.
 - No Phase 6 release matrix rewrite occurs.
 
+## Phase 7D-R readiness review
+
+Phase 7D-R completes the high-risk readiness review for this plan. See
+[`HIGH_RISK_SINGLE_GATE_WRAPPER_READINESS_REVIEW.md`](HIGH_RISK_SINGLE_GATE_WRAPPER_READINESS_REVIEW.md).
+No runtime wrapper exists in Phase 7D-R. Phase 7D remains blocked until explicit
+user approval.
+
 ## Known limitations
 
 - No runtime wrapper yet.
