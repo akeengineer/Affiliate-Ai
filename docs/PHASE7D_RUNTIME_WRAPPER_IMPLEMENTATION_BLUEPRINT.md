@@ -354,3 +354,9 @@ is evidence review, never a mutation trigger.
 - no autopublish
 - no production deployment
 - Phase 7D runtime readiness remains blocked
+
+### Phase 7E release-state pointer
+
+Phase 7E records the runtime blocked release state. See
+`docs/RELEASE_SNAPSHOT_PHASE7.md`. Runtime readiness remains blocked, and no
+runtime wrapper exists in Phase 7E.
