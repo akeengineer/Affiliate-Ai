@@ -103,6 +103,7 @@ flag). The default read-only operator path writes none of them.
 - `docs/SINGLE_GATE_MANUAL_APPROVAL_WRAPPER_BOUNDARY.md`
 - `docs/MANUAL_APPROVAL_AUDIT_VERIFIER_BOUNDARY.md`
 - `docs/MANUAL_APPROVAL_AUDIT_VERIFIER_IMPLEMENTATION_PLAN.md`
+- `docs/SINGLE_GATE_MANUAL_APPROVAL_WRAPPER_IMPLEMENTATION_PLAN.md`
 - `docs/RELEASE_SNAPSHOT_PHASE6.md`
 
 Phase 6A defines the **manual-approved workflow boundary** in
@@ -151,6 +152,13 @@ artifact and writes reports only under `tmp/phase7b-audit-verifier/`. No approva
 wrapper exists yet, no approval mutation exists, no vault read/write is
 introduced, and no primitive execution occurs; the Phase 2G/2H/2I primitives
 remain unchanged.
+
+Phase 7C plans the future runtime single-gate manual approval wrapper in
+`docs/SINGLE_GATE_MANUAL_APPROVAL_WRAPPER_IMPLEMENTATION_PLAN.md`. No runtime
+wrapper exists yet, no approval mutation is introduced, and no vault read/write
+is introduced. The Phase 2G/2H/2I primitives remain unchanged, the Phase 7B
+audit verifier remains read-only/evidence-only, and Phase 7D is the future
+high-risk runtime implementation phase.
 
 ### scripts
 

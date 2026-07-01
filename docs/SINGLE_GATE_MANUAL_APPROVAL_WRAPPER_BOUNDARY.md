@@ -179,6 +179,13 @@ verification expectations for audit artifacts produced by a future single-gate
 wrapper; its audit verifier schema is a verifier-level superset of the Phase 6F
 audit model.
 
+## Phase 7C implementation plan
+
+Phase 7C plans the future wrapper implementation against this boundary. See
+[`SINGLE_GATE_MANUAL_APPROVAL_WRAPPER_IMPLEMENTATION_PLAN.md`](SINGLE_GATE_MANUAL_APPROVAL_WRAPPER_IMPLEMENTATION_PLAN.md).
+No runtime wrapper exists in Phase 7C. Phase 7D must be explicitly approved and
+is high-risk (the first mutation-capable phase).
+
 ## Known limitations
 
 - Boundary documentation only; no wrapper, gate execution, or mutation exists.

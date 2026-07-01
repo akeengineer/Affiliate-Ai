@@ -104,3 +104,10 @@ requirement and is intentionally not asserted.
 - See `docs/MANUAL_APPROVAL_AUDIT_VERIFIER_IMPLEMENTATION_PLAN.md`.
 - No runtime verifier exists in Phase 7A.
 - No approval mutation is introduced by Phase 7A.
+
+## Phase 7C pointer
+
+- Phase 7C plans the future single-gate wrapper implementation.
+- See `docs/SINGLE_GATE_MANUAL_APPROVAL_WRAPPER_IMPLEMENTATION_PLAN.md`.
+- No runtime wrapper exists in Phase 7C.
+- No approval mutation is introduced by Phase 7C.
