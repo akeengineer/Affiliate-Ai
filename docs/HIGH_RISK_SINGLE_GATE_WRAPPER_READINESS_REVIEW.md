@@ -342,6 +342,13 @@ Phase 7D-R updates docs additively only:
 - RELEASE_SNAPSHOT_PHASE6 may include a future pointer only.
 - No Phase 6 release matrix rewrite occurs.
 
+## Phase 7D-P implementation blueprint
+
+Phase 7D-P finalizes the implementation blueprint derived from this review. See
+[`PHASE7D_RUNTIME_WRAPPER_IMPLEMENTATION_BLUEPRINT.md`](PHASE7D_RUNTIME_WRAPPER_IMPLEMENTATION_BLUEPRINT.md).
+Runtime readiness remains blocked, and no runtime wrapper exists in Phase 7D-P.
+This additive pointer does not change or authorize any readiness decision above.
+
 ## Known limitations
 
 - No runtime wrapper yet.

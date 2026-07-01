@@ -282,6 +282,13 @@ Phase 7D-R completes the high-risk readiness review for this plan. See
 No runtime wrapper exists in Phase 7D-R. Phase 7D remains blocked until explicit
 user approval.
 
+## Phase 7D-P implementation blueprint
+
+Phase 7D-P finalizes the implementation blueprint for this future wrapper. See
+[`PHASE7D_RUNTIME_WRAPPER_IMPLEMENTATION_BLUEPRINT.md`](PHASE7D_RUNTIME_WRAPPER_IMPLEMENTATION_BLUEPRINT.md).
+No runtime wrapper exists in Phase 7D-P. Phase 7D remains blocked until explicit
+user approval.
+
 ## Known limitations
 
 - No runtime wrapper yet.
