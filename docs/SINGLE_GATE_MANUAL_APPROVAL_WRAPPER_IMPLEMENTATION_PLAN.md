@@ -289,6 +289,14 @@ Phase 7D-P finalizes the implementation blueprint for this future wrapper. See
 No runtime wrapper exists in Phase 7D-P. Phase 7D remains blocked until explicit
 user approval.
 
+## Phase 7D implementation follow-through
+
+Phase 7D runtime implementation was later approved explicitly and implemented as
+the live single-gate manual approval wrapper. This plan remains the historical
+design artifact; current runtime state is recorded in
+`codex/tasks/048-phase7d-single-gate-runtime-wrapper.md` and
+`docs/RELEASE_SNAPSHOT_PHASE7.md`.
+
 ## Known limitations
 
 - No runtime wrapper yet.

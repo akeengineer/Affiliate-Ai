@@ -2,24 +2,29 @@
 
 ```text
 phase7e_status: success
-phase7d_runtime_readiness: blocked
+phase7d_runtime_readiness: implemented_manual_gate
 ```
 
 ### Purpose
 
-This snapshot summarizes Phase 7A through Phase 7D-P and records the runtime
-blocked state before any Phase 7D runtime wrapper implementation.
+This snapshot now serves two roles:
+
+- preserve the historical Phase 7E blocked-state release context
+- record that Phase 7D runtime implementation is now intentionally present as a
+  manual-gated single-wrapper runtime boundary
 
 ### Scope
 
-- release snapshot only
-- docs/tests/task-only
-- no runtime wrapper
-- no runtime command
-- no approval mutation
-- no primitive execution
-- no vault reads/writes
+- release snapshot and current-state update
 - no backend/API/database/network
+- no approve-all
+- no global approval
+- no multi-gate execution
+- no next-gate automation
+- no chain execution
+- no autopublish
+- no marketplace submission
+- no production deployment
 
 ### Phase 7 completion matrix
 
@@ -31,7 +36,7 @@ blocked state before any Phase 7D runtime wrapper implementation.
 | Phase 7D-R | High-risk Implementation Readiness Review | complete |
 | Phase 7D-P | Runtime Wrapper Implementation Blueprint | complete |
 | Phase 7E | Release Snapshot / Runtime Blocked State Report | complete |
-| Phase 7D Runtime Implementation | blocked/future | blocked/future |
+| Phase 7D Runtime Implementation | implemented/manual_gate | complete |
 
 Concise completion summary:
 
@@ -41,7 +46,7 @@ Concise completion summary:
 - Phase 7D-R: High-risk Implementation Readiness Review — complete
 - Phase 7D-P: Runtime Wrapper Implementation Blueprint — complete
 - Phase 7E: Release Snapshot / Runtime Blocked State Report — complete
-- Phase 7D Runtime Implementation — blocked/future
+- Phase 7D Runtime Implementation — implemented/manual_gate
 
 ### What the system can do now
 
@@ -51,74 +56,70 @@ The system can now:
 - verify approval review packets via Phase 6C
 - build dry-run approval execution plans via Phase 6E
 - validate manual approval audit artifacts via Phase 7B
-- document and test the future single-gate wrapper boundary
-- document and test the high-risk readiness review
-- document and test the finalized implementation blueprint
-- maintain runtime readiness as blocked
+- run the Phase 7D single-gate runtime wrapper intentionally
+- execute at most one selected primitive per invocation
+- derive decision gate values from trusted Phase 6B evidence
+- perform safe vault-read supplements for product and decision note state checks
+- write intent/result audits under `tmp/phase7d-single-gate-wrapper/`
+- maintain `phase7d_runtime_readiness: implemented_manual_gate`
 
-### What remains blocked
-
-The blocked state is unchanged:
-
-- no runtime approval wrapper exists yet
-- no Phase 7D runtime command exists yet
-- no approval mutation is introduced
-- no primitive execution is introduced
-- no vault write is introduced by Phase 7 wrapper
-- no durable audit store exists yet
-- no operator authentication implementation exists yet
-- no backend/API/database exists
-- no marketplace connector exists
-- no autopublish exists
-- no production deployment exists
-
-### Why Phase 7D runtime remains blocked
-
-- Phase 7D is the first future phase that may call approval primitives.
-- Approval primitives may mutate vault state.
-- A wrapper bug could cause unintended promotion, decision creation, or finalization.
-- Runtime must remain blocked until explicit high-risk approval is given.
-- Completion of 7D-R, 7D-P, and 7E does not authorize runtime implementation.
-
-### Conditions before Phase 7D can unlock
-
-- user explicitly approves Phase 7D runtime implementation
-- approval phrase must be specific to Phase 7D
-- phase7d_runtime_readiness must be intentionally changed in a future PR
-- runtime wrapper files must be added intentionally
-- selected-gate-only enforcement must be implemented
-- explicit primitive allowlist must be implemented
-- approval flag semantics must be implemented
-- emergency stop / dry-run / operator confirmation decision must be implemented
-- audit-before/after behavior must be implemented
-- Phase 7B audit verifier compatibility must be tested
-- no primitive execution on failed precondition must be tested
-- no vault write on failed precondition must be tested
-- no next-gate / no chain behavior must be tested
-- full suite must pass
-
-### Explicit approval requirement
-
-- A future Phase 7D runtime implementation must not start from a vague instruction.
-- It requires a specific user instruction such as:
-  - approve Phase 7D runtime implementation
-- That approval is phase-specific.
-- It is not approve-all.
-- It does not approve future phases.
-- It does not approve autopublish, marketplace submission, backend/API/
-  database, or production deployment.
-
-### Runtime safety contract
+### Implemented runtime safety contract
 
 - Phase 7B remains read-only.
-- Phase 7D runtime wrapper does not exist yet.
-- Phase 7D runtime readiness remains blocked.
+- Phase 7D runtime wrapper now exists intentionally.
+- Phase 7D runtime readiness is `implemented_manual_gate`.
 - Phase 2G/2H/2I primitives remain unchanged.
-- Future Phase 7D must execute at most one primitive per invocation.
-- Future Phase 7D must never infer approval.
-- Future Phase 7D must never run next gate automatically.
-- Future Phase 7D must never chain execution.
-- Future Phase 7D must never use global approval or approve-all.
+- The wrapper executes at most one primitive per invocation.
+- The wrapper never infers approval.
+- The wrapper never runs the next gate automatically.
+- The wrapper never chains execution.
+- The wrapper never uses global approval or approve-all.
+- The wrapper never writes vault state directly; only the selected primitive may
+  mutate after preconditions pass.
+- The wrapper uses safe vault-read supplements only:
+  - `vault/products/<product_id>.md`
+  - `vault/decisions/dec-<product_id>-<report_week>.md`
+
+### Historical Phase 7E blocked-state record
+
+Before this implementation landed, the blocked state was:
+
+- no runtime approval wrapper existed yet
+- no Phase 7D runtime command existed yet
+- no approval mutation was introduced
+- no primitive execution was introduced
+- no vault write was introduced by the Phase 7 wrapper
+
+That historical blocked state is preserved here for release-trace continuity,
+but it is now superseded by the implemented manual gate runtime.
+
+### Unlock conditions that are now satisfied
+
+The blocked-state unlock checklist has now been satisfied:
+
+- user explicitly approved Phase 7D runtime implementation
+- approval phrase was specific to Phase 7D
+- `phase7d_runtime_readiness` was intentionally changed
+- runtime wrapper files were added intentionally
+- selected-gate-only enforcement is implemented
+- explicit primitive allowlist is implemented
+- approval flag semantics are implemented
+- emergency stop / dry-run / operator confirmation policy is implemented
+- audit-before/after behavior is implemented
+- Phase 7B audit verifier compatibility is tested
+- no primitive execution on failed precondition is tested
+- no vault write on failed precondition is tested
+- no next-gate / no chain behavior is tested
+- full suite must pass before merge
+
+### Explicit approval boundary that still remains
+
+- The implementation approval was phase-specific.
+- It was not approve-all.
+- It did not approve future phases.
+- It did not approve autopublish, marketplace submission, backend/API/database,
+  or production deployment.
+- Future expansion beyond this single manual gate still requires separate approval.
 
 ### Files and docs inventory
 
@@ -130,16 +131,20 @@ The blocked state is unchanged:
 - `docs/HIGH_RISK_SINGLE_GATE_WRAPPER_READINESS_REVIEW.md`
 - `docs/PHASE7D_RUNTIME_WRAPPER_IMPLEMENTATION_BLUEPRINT.md`
 - `docs/RELEASE_SNAPSHOT_PHASE7.md`
+- `scripts/dev/run_phase7d_single_gate_wrapper.sh`
+- `scripts/dev/execute_single_gate_approval.py`
+- `tests/test_phase7d_single_gate_wrapper.py`
 
 ### Known limitations
 
-- no runtime wrapper yet
-- no approval mutation yet
-- no Phase 7D command yet
+- no approve-all
+- no global approval
+- no multi-gate execution
+- no next-gate automation
+- no chain execution
 - no durable audit store yet
 - no auth/operator identity implementation
 - no backend/API/database
 - no marketplace connector
 - no autopublish
 - no production deployment
-- Phase 7D runtime readiness remains blocked

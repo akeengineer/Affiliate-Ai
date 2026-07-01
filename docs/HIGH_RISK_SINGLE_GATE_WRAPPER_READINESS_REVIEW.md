@@ -19,6 +19,14 @@ phase7d_runtime_readiness: blocked
 The review artifact is complete, but runtime implementation remains blocked
 until the user explicitly approves proceeding to Phase 7D separately.
 
+Historical follow-through note:
+
+- this document remains the Phase 7D-R review artifact
+- later Phase 7D runtime implementation approval was granted separately
+- the implemented runtime state now lives in
+  `codex/tasks/048-phase7d-single-gate-runtime-wrapper.md` and
+  `docs/RELEASE_SNAPSHOT_PHASE7.md`
+
 ## Naming decision
 
 This document uses the name
@@ -348,6 +356,12 @@ Phase 7D-P finalizes the implementation blueprint derived from this review. See
 [`PHASE7D_RUNTIME_WRAPPER_IMPLEMENTATION_BLUEPRINT.md`](PHASE7D_RUNTIME_WRAPPER_IMPLEMENTATION_BLUEPRINT.md).
 Runtime readiness remains blocked, and no runtime wrapper exists in Phase 7D-P.
 This additive pointer does not change or authorize any readiness decision above.
+
+## Phase 7D implementation follow-through
+
+Phase 7D runtime implementation was later approved explicitly and carried this
+review forward as the live single-gate manual approval wrapper boundary. That
+later implementation does not change the historical scope of Phase 7D-R itself.
 
 ## Known limitations
 
