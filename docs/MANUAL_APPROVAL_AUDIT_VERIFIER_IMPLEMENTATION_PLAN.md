@@ -240,11 +240,23 @@ Phase 7A updates docs additively only:
 - RELEASE_SNAPSHOT_PHASE6 may include a future pointer only.
 - No Phase 6 release matrix rewrite occurs.
 
+## Phase 7B implementation status
+
+Phase 7B implements this plan as a runtime **read-only** audit verifier:
+
+- `scripts/dev/verify_manual_approval_audit.py` — the verifier core
+- `scripts/dev/run_phase7b_audit_verifier.sh` — the guardrail wrapper
+
+The Phase 7A plan above is retained as historical intent. Phase 7B remains
+read-only and evidence-only: it reads one audit artifact, writes reports only
+under `tmp/phase7b-audit-verifier/`, and never reads/writes the vault, executes
+an approval primitive, mutates the input, or uses an approval flag. A future
+single-gate manual approval wrapper (which would produce real audit artifacts)
+remains a separate, explicitly approved phase.
+
 ## Known limitations
 
-- No runtime verifier yet.
-- No wrapper yet.
-- No audit artifact exists until a wrapper implementation exists.
+- No wrapper implementation yet (no real audit artifact exists until one does).
 - No auth/operator identity implementation.
 - No backend/API/database.
 - No marketplace connector.
