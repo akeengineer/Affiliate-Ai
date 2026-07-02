@@ -11,8 +11,15 @@ no private key material, and implements no encryption. It never mutates the
 export pack or source evidence, never executes an approval primitive, never
 calls the Phase 7D wrapper or the Phase 8B/8C/8D/8E scripts, never reads or
 writes the vault, and never makes a network, backend, API, or database
-call. A verified/hash-valid export is not approval. Python standard library
-only.
+call. A verified/hash-valid export is not approval.
+
+Phase 8H hardens this verifier with a stable report schema version, an
+issue taxonomy with severity and incident classification, a reviewer action
+mapping, a Phase 8E manifest compatibility matrix, and a deterministic
+output contract (stable sorting of issues/evidence, canonical JSON). Every
+Phase 8G CLI flag, output file path, and exit-code contract is unchanged; a
+hardened verification result is still not approval. Python standard
+library only.
 """
 from __future__ import annotations
 
@@ -33,9 +40,79 @@ DEFAULT_EVIDENCE_DIR = (REPO_ROOT / "tmp/phase8e-audit-export/evidence").resolve
 REJECTED_ROOTS = ("vault", "docs", "scripts", "tests", "codex")
 
 PHASE8G_STATUS = "success"
-DURABLE_AUDIT_STORE_STATUS = "export_integrity_verifier"
+PHASE8H_STATUS = "success"
+DURABLE_AUDIT_STORE_STATUS = "export_integrity_verifier_hardened"
 PHASE7D_RUNTIME_READINESS = "implemented_manual_gate"
 SIGNING_IMPLEMENTATION_STATUS = "not_implemented"
+VERIFIER_HARDENING_STATUS = "enabled"
+
+REPORT_SCHEMA_VERSION = "phase8g.integrity_report.v2"
+ISSUE_TAXONOMY_VERSION = "phase8h.issue_taxonomy.v1"
+COMPATIBILITY_MATRIX_VERSION = "phase8h.compatibility_matrix.v1"
+
+# issue_type -> (severity, incident_classification). Existing Phase 8G issue_type
+# strings are preserved verbatim (regression contract); this table only adds
+# taxonomy metadata on top of them, it never renames them.
+ISSUE_TAXONOMY: dict[str, tuple[str, str]] = {
+    "manifest_missing": ("info", "missing_manifest"),
+    "manifest_invalid_json": ("critical", "malformed_manifest"),
+    "manifest_not_object": ("critical", "malformed_manifest"),
+    "manifest_path_disallowed": ("critical", "path_safety_violation"),
+    "manifest_symlink": ("critical", "path_safety_violation"),
+    "manifest_outside_repo": ("critical", "path_safety_violation"),
+    "report_dir_disallowed": ("critical", "path_safety_violation"),
+    "missing_evidence_file": ("warning", "tamper_evidence_warning"),
+    "hash_mismatch": ("warning", "tamper_evidence_warning"),
+    "size_mismatch": ("warning", "tamper_evidence_warning"),
+    "disallowed_evidence_path": ("warning", "tamper_evidence_warning"),
+    "missing_copied_evidence_file": ("warning", "tamper_evidence_warning"),
+    "copied_evidence_hash_mismatch": ("warning", "tamper_evidence_warning"),
+    "disallowed_copied_evidence_path": ("warning", "tamper_evidence_warning"),
+    "manifest_hash_mismatch": ("warning", "tamper_evidence_warning"),
+    "bundle_hash_mismatch": ("warning", "tamper_evidence_warning"),
+    "compatibility_warning": ("warning", "compatibility_review_required"),
+    "unknown": ("warning", "tamper_evidence_warning"),
+}
+DEFAULT_TAXONOMY: tuple[str, str] = ("warning", "tamper_evidence_warning")
+
+# IntegrityPathError.category (raise-site name) -> hardened manifest-path issue_type.
+CATEGORY_TO_ISSUE_TYPE: dict[str, str] = {
+    "empty_path": "manifest_path_disallowed",
+    "path_traversal": "manifest_path_disallowed",
+    "symlink_rejected": "manifest_symlink",
+    "outside_repo": "manifest_outside_repo",
+    "rejected_source_root": "manifest_path_disallowed",
+    "not_a_file": "manifest_path_disallowed",
+    "report_dir_rejected": "report_dir_disallowed",
+}
+
+SEVERITY_REVIEWER_ACTION = {
+    "info": "no_action_required",
+    "warning": "manual_review_required",
+    "critical": "reject_export_until_resolved",
+}
+SEVERITY_SORT_PRIORITY = {"critical": 0, "warning": 1, "info": 2}
+
+TOP_LEVEL_REVIEWER_ACTION = {
+    "valid": "no_action_required",
+    "empty": "no_action_required",
+    "warning": "manual_review_required",
+    "invalid": "reject_export_until_resolved",
+}
+
+# Highest to lowest priority, matching the Phase 8H design.
+INCIDENT_PRIORITY = (
+    "path_safety_violation",
+    "malformed_manifest",
+    "tamper_evidence_warning",
+    "compatibility_review_required",
+)
+
+EXPECTED_MANIFEST_COMPATIBILITY = {
+    "phase8e_status": "success",
+    "durable_audit_store_status": "export_pack",
+    "phase7d_runtime_readiness": "implemented_manual_gate",
+}
 
 
 class IntegrityPathError(Exception):
@@ -372,6 +449,101 @@ def _build_bundle_descriptor(manifest: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _evaluate_compatibility(manifest: dict[str, Any], issues: list[dict[str, Any]]) -> str:
+    """Compare manifest status fields to the expected Phase 8E compatibility matrix."""
+    states: dict[str, str] = {}
+    for field, expected in EXPECTED_MANIFEST_COMPATIBILITY.items():
+        value = manifest.get(field)
+        if value is None:
+            states[field] = "missing"
+        elif value == expected:
+            states[field] = "match"
+        else:
+            states[field] = "conflict"
+
+    if any(state == "conflict" for state in states.values()):
+        result = "incompatible"
+    elif any(state == "missing" for state in states.values()):
+        result = "review_required"
+    else:
+        result = "compatible"
+
+    if result != "compatible":
+        issues.append(
+            {
+                "issue_type": "compatibility_warning",
+                "message": f"Phase 8E manifest compatibility {result}: {_canonical_json(states)}",
+                "path": None,
+                "label": None,
+            }
+        )
+    return result
+
+
+def _taxonomy_for(issue_type: str) -> tuple[str, str]:
+    return ISSUE_TAXONOMY.get(issue_type, DEFAULT_TAXONOMY)
+
+
+def _enrich_issues(issues: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    for issue in issues:
+        severity, incident_classification = _taxonomy_for(issue["issue_type"])
+        issue["severity"] = severity
+        issue["incident_classification"] = incident_classification
+        issue["reviewer_action"] = SEVERITY_REVIEWER_ACTION[severity]
+    issues.sort(
+        key=lambda i: (
+            SEVERITY_SORT_PRIORITY.get(i.get("severity"), 99),
+            i.get("issue_type") or "",
+            i.get("label") or "",
+            i.get("path") or "",
+            i.get("message") or "",
+        )
+    )
+    return issues
+
+
+def _severity_counts(issues: list[dict[str, Any]]) -> dict[str, int]:
+    counts = {"info": 0, "warning": 0, "critical": 0}
+    for issue in issues:
+        severity = issue.get("severity")
+        if severity in counts:
+            counts[severity] += 1
+    return counts
+
+
+def _incident_classification_from_issues(issues: list[dict[str, Any]]) -> str:
+    present = {issue.get("incident_classification") for issue in issues}
+    for candidate in INCIDENT_PRIORITY:
+        if candidate in present:
+            return candidate
+    return "none"
+
+
+def _sort_evidence_results(results: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return sorted(results, key=lambda r: (r.get("label") or "", r.get("path") or ""))
+
+
+def _deterministic_output_contract() -> dict[str, Any]:
+    return {
+        "canonical_json_sort_keys": True,
+        "canonical_json_separators": [",", ":"],
+        "stable_report_schema": True,
+        "stable_issue_taxonomy": True,
+        "report_schema_version": REPORT_SCHEMA_VERSION,
+        "issue_taxonomy_version": ISSUE_TAXONOMY_VERSION,
+    }
+
+
+def _approval_boundary_statement() -> str:
+    return (
+        "Verified export is not approval. Hash-valid export is not approval. "
+        "Hardened verification is not approval. Reviewer action is review "
+        "guidance only, not approval. Verification must not trigger the "
+        "Phase 7D wrapper, primitive execution, or the next gate, and must "
+        "never set or imply an approval flag."
+    )
+
+
 def _safety_statement() -> str:
     return (
         "Phase 8G verification is a local hash-only prototype, read-only "
@@ -380,7 +552,10 @@ def _safety_statement() -> str:
         "implements no encryption. It executes no primitive, calls no "
         "Phase 7D wrapper, calls no Phase 8B/8C/8D/8E script, performs no "
         "vault read/write, and makes no network, backend, API, or database "
-        "call. A verified or hash-valid export is not approval."
+        "call. A verified or hash-valid export is not approval. Phase 8H "
+        "hardening adds a stable schema, issue taxonomy, severity, incident "
+        "classification, reviewer action mapping, and a compatibility "
+        "matrix; it changes no runtime behavior beyond that reporting layer."
     )
 
 
@@ -399,8 +574,31 @@ def _limitations() -> list[str]:
     ]
 
 
-def _empty_report(manifest_path_ref: str, report_dir: Path) -> dict[str, Any]:
+def _hardening_fields(
+    *,
+    compatibility_result: str,
+    severity_counts: dict[str, int],
+    incident_classification: str,
+    verification_status: str,
+) -> dict[str, Any]:
     return {
+        "phase8h_status": PHASE8H_STATUS,
+        "report_schema_version": REPORT_SCHEMA_VERSION,
+        "issue_taxonomy_version": ISSUE_TAXONOMY_VERSION,
+        "compatibility_matrix_version": COMPATIBILITY_MATRIX_VERSION,
+        "verifier_hardening_status": VERIFIER_HARDENING_STATUS,
+        "deterministic_output_contract": _deterministic_output_contract(),
+        "compatibility_result": compatibility_result,
+        "severity_counts": severity_counts,
+        "incident_classification": incident_classification,
+        "reviewer_action": TOP_LEVEL_REVIEWER_ACTION[verification_status],
+        "reviewer_action_required": verification_status in ("warning", "invalid"),
+        "approval_boundary_statement": _approval_boundary_statement(),
+    }
+
+
+def _empty_report(manifest_path_ref: str, report_dir: Path) -> dict[str, Any]:
+    report = {
         "phase8g_status": PHASE8G_STATUS,
         "durable_audit_store_status": DURABLE_AUDIT_STORE_STATUS,
         "phase7d_runtime_readiness": PHASE7D_RUNTIME_READINESS,
@@ -424,10 +622,23 @@ def _empty_report(manifest_path_ref: str, report_dir: Path) -> dict[str, Any]:
         "safety_statement": _safety_statement(),
         "limitations": _limitations(),
     }
+    report.update(
+        _hardening_fields(
+            compatibility_result="review_required",
+            severity_counts={"info": 0, "warning": 0, "critical": 0},
+            incident_classification="missing_manifest",
+            verification_status="empty",
+        )
+    )
+    return report
 
 
 def _invalid_report(manifest_path_ref: str, report_dir: Path, category: str, message: str) -> dict[str, Any]:
-    return {
+    issue_type = CATEGORY_TO_ISSUE_TYPE.get(category, category)
+    issue = {"issue_type": issue_type, "message": message, "path": manifest_path_ref, "label": None}
+    _enrich_issues([issue])
+
+    report = {
         "phase8g_status": PHASE8G_STATUS,
         "durable_audit_store_status": DURABLE_AUDIT_STORE_STATUS,
         "phase7d_runtime_readiness": PHASE7D_RUNTIME_READINESS,
@@ -447,10 +658,19 @@ def _invalid_report(manifest_path_ref: str, report_dir: Path, category: str, mes
         "manifest_bundle_hash": None,
         "evidence_results": [],
         "copied_evidence_results": [],
-        "issues": [{"issue_type": category, "message": message, "path": manifest_path_ref, "label": None}],
+        "issues": [issue],
         "safety_statement": _safety_statement(),
         "limitations": _limitations(),
     }
+    report.update(
+        _hardening_fields(
+            compatibility_result="review_required",
+            severity_counts=_severity_counts([issue]),
+            incident_classification=issue["incident_classification"],
+            verification_status="invalid",
+        )
+    )
+    return report
 
 
 def _build_report(
@@ -466,10 +686,15 @@ def _build_report(
     manifest_manifest_hash: str | None,
     computed_bundle_hash: str,
     manifest_bundle_hash: str | None,
+    compatibility_result: str,
 ) -> dict[str, Any]:
+    _enrich_issues(issues)
     issue_count = len(issues)
     verification_status = "valid" if issue_count == 0 else "warning"
-    return {
+    evidence_results = _sort_evidence_results(evidence_results)
+    copied_evidence_results = _sort_evidence_results(copied_evidence_results)
+
+    report = {
         "phase8g_status": PHASE8G_STATUS,
         "durable_audit_store_status": DURABLE_AUDIT_STORE_STATUS,
         "phase7d_runtime_readiness": PHASE7D_RUNTIME_READINESS,
@@ -493,6 +718,15 @@ def _build_report(
         "safety_statement": _safety_statement(),
         "limitations": _limitations(),
     }
+    report.update(
+        _hardening_fields(
+            compatibility_result=compatibility_result,
+            severity_counts=_severity_counts(issues),
+            incident_classification=_incident_classification_from_issues(issues),
+            verification_status=verification_status,
+        )
+    )
+    return report
 
 
 def _render_evidence_table(title: str, rows: list[dict[str, Any]]) -> list[str]:
@@ -511,12 +745,17 @@ def _render_evidence_table(title: str, rows: list[dict[str, Any]]) -> list[str]:
 
 def _render_md(report: dict[str, Any]) -> str:
     lines = [
-        "# Phase 8G Export Integrity Verification",
+        "# Phase 8G Export Integrity Verification (Phase 8H Hardened)",
         "",
         f"phase8g_status: {report['phase8g_status']}",
+        f"phase8h_status: {report['phase8h_status']}",
         f"durable_audit_store_status: {report['durable_audit_store_status']}",
         f"phase7d_runtime_readiness: {report['phase7d_runtime_readiness']}",
         f"signing_implementation_status: {report['signing_implementation_status']}",
+        f"verifier_hardening_status: {report['verifier_hardening_status']}",
+        f"report_schema_version: {report['report_schema_version']}",
+        f"issue_taxonomy_version: {report['issue_taxonomy_version']}",
+        f"compatibility_matrix_version: {report['compatibility_matrix_version']}",
         "",
         "This is a local hash-only verification. No signature is checked or "
         "produced in this phase.",
@@ -528,29 +767,53 @@ def _render_md(report: dict[str, Any]) -> str:
         f"- issue count: {report['issue_count']}",
         f"- manifest hash status: {report['manifest_hash_status']}",
         f"- bundle hash status: {report['bundle_hash_status']}",
+        f"- compatibility result: {report['compatibility_result']}",
+        f"- incident classification: {report['incident_classification']}",
+        f"- reviewer action: {report['reviewer_action']}",
+        f"- reviewer action required: {report['reviewer_action_required']}",
+        "",
+        "## Severity counts",
+        "",
+        f"- info: {report['severity_counts']['info']}",
+        f"- warning: {report['severity_counts']['warning']}",
+        f"- critical: {report['severity_counts']['critical']}",
         "",
     ]
     lines += _render_evidence_table("Evidence results", report["evidence_results"])
     lines += _render_evidence_table("Copied evidence results", report["copied_evidence_results"])
 
-    lines.append("## Issues")
+    lines.append("## Issues (taxonomy)")
     lines.append("")
     if report["issues"]:
-        lines.append("| type | label | path | message |")
-        lines.append("| --- | --- | --- | --- |")
+        lines.append("| type | severity | incident_classification | reviewer_action | label | path | message |")
+        lines.append("| --- | --- | --- | --- | --- | --- | --- |")
         for issue in report["issues"]:
-            lines.append(f"| {issue.get('issue_type')} | {issue.get('label')} | {issue.get('path')} | {issue.get('message')} |")
+            lines.append(
+                f"| {issue.get('issue_type')} | {issue.get('severity')} | {issue.get('incident_classification')} | "
+                f"{issue.get('reviewer_action')} | {issue.get('label')} | {issue.get('path')} | {issue.get('message')} |"
+            )
     else:
         lines.append("No issues")
     lines.append("")
 
+    contract = report["deterministic_output_contract"]
     lines += [
+        "## Deterministic output contract",
+        "",
+        f"- canonical_json_sort_keys: {contract['canonical_json_sort_keys']}",
+        f"- canonical_json_separators: {contract['canonical_json_separators']}",
+        f"- stable_report_schema: {contract['stable_report_schema']}",
+        f"- stable_issue_taxonomy: {contract['stable_issue_taxonomy']}",
+        "",
         "## Safety statement",
         "",
         report["safety_statement"],
         "",
+        report["approval_boundary_statement"],
+        "",
         "Verified export is not approval. A hash-valid export result does not "
-        "authorize, trigger, or imply approval of any Phase 7D gate.",
+        "authorize, trigger, or imply approval of any Phase 7D gate. Reviewer "
+        "action is review guidance only, not approval.",
         "",
         "## Known limitations",
         "",
@@ -589,11 +852,11 @@ def run(args: argparse.Namespace) -> tuple[dict[str, Any], bool]:
     try:
         manifest = json.loads(raw_text)
     except json.JSONDecodeError:
-        report = _invalid_report(manifest_path_ref, report_dir, "invalid_json", "manifest is not valid JSON")
+        report = _invalid_report(manifest_path_ref, report_dir, "manifest_invalid_json", "manifest is not valid JSON")
         _write_report(report_dir, report)
         return report, False
     if not isinstance(manifest, dict):
-        report = _invalid_report(manifest_path_ref, report_dir, "invalid_json", "manifest is not a JSON object")
+        report = _invalid_report(manifest_path_ref, report_dir, "manifest_not_object", "manifest is not a JSON object")
         _write_report(report_dir, report)
         return report, False
 
@@ -625,6 +888,8 @@ def run(args: argparse.Namespace) -> tuple[dict[str, Any], bool]:
     else:
         bundle_hash_status = "computed_only"
 
+    compatibility_result = _evaluate_compatibility(manifest, issues)
+
     report = _build_report(
         manifest_path_ref=manifest_path_ref,
         report_dir=report_dir,
@@ -637,6 +902,7 @@ def run(args: argparse.Namespace) -> tuple[dict[str, Any], bool]:
         manifest_manifest_hash=manifest_manifest_hash,
         computed_bundle_hash=computed_bundle_hash,
         manifest_bundle_hash=manifest_bundle_hash,
+        compatibility_result=compatibility_result,
     )
     _write_report(report_dir, report)
     return report, True
@@ -664,7 +930,10 @@ def main(argv: list[str]) -> int:
     print(f"issue_count: {report['issue_count']}")
     print(f"manifest_hash_status: {report['manifest_hash_status']}")
     print(f"bundle_hash_status: {report['bundle_hash_status']}")
+    print(f"compatibility_result: {report['compatibility_result']}")
+    print(f"reviewer_action: {report['reviewer_action']}")
     print(f"phase8g_status: {report['phase8g_status']}")
+    print(f"phase8h_status: {report['phase8h_status']}")
     return 0 if ok else 1
 
 

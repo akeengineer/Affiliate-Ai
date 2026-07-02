@@ -408,3 +408,20 @@ change; it performs no primitive execution and no vault read/write.
 `phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 8H
 (Detached Signature Design Finalization, or Export Integrity Verifier
 Hardening) is the next recommended phase.
+
+## 16. Phase 8H export integrity verifier hardening
+
+Phase 8H hardens the export integrity verifier documented in
+`docs/PHASE8H_EXPORT_INTEGRITY_VERIFIER_HARDENING.md`. The export integrity
+verifier is now hardened: `scripts/dev/verify_phase8g_export_integrity.py`
+adds a stable report schema, an issue taxonomy, severity, incident
+classification, reviewer action mapping, and a Phase 8E manifest
+compatibility matrix, while keeping its existing CLI shape and output paths
+under `tmp/phase8g-export-integrity/`. `durable_audit_store_status` is now
+`export_integrity_verifier_hardened`, and `signing_implementation_status`
+remains `not_implemented`. Phase 8H adds no signing implementation, no key
+generation, and no database/backend/API; it makes no Phase 8E export
+behavior change and no Phase 7D wrapper behavior change; it performs no
+primitive execution and no vault read/write.
+`phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 8I
+(Detached Signature Design Finalization) is the next recommended phase.

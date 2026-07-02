@@ -336,6 +336,15 @@ recommended, in
 or key management; it verifies evidence and bundle hashes only. A verified
 export is not approval.
 
+### Phase 8H verifier hardening
+
+Phase 8H hardens the Phase 8G hash-only verifier before any detached
+signature implementation, in
+`docs/PHASE8H_EXPORT_INTEGRITY_VERIFIER_HARDENING.md`: a stable report
+schema, an issue taxonomy, severity, incident classification, a reviewer
+action mapping, and a compatibility matrix. Phase 8H implements no signing
+and no keys.
+
 ### Known limitations
 
 - design only

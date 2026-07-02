@@ -129,6 +129,15 @@ The bundle descriptor is a canonical JSON object (`sort_keys=True`,
 - a Phase 8G verification result is evidence integrity only, not approval.
 - a `warning` or `invalid` status requires manual review.
 
+### Phase 8H hardening
+
+Phase 8H hardens this verifier in place in
+[`PHASE8H_EXPORT_INTEGRITY_VERIFIER_HARDENING.md`](PHASE8H_EXPORT_INTEGRITY_VERIFIER_HARDENING.md).
+Phase 8H preserves this verifier's CLI shape and output paths exactly, and
+adds a stable report schema, an issue taxonomy, severity, incident
+classification, a reviewer action mapping, and a Phase 8E manifest
+compatibility matrix. A verified export remains not approval.
+
 ### Known limitations
 
 - local tmp verifier only
@@ -141,3 +150,4 @@ The bundle descriptor is a canonical JSON object (`sort_keys=True`,
 - no authenticated identity
 - no production deployment
 - no automatic remediation
+- a hardened schema/taxonomy/reviewer-action layer now exists in Phase 8H
