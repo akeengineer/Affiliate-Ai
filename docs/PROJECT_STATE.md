@@ -109,6 +109,7 @@ flag). The default read-only operator path writes none of them.
 - `docs/RELEASE_SNAPSHOT_PHASE7.md`
 - `docs/RELEASE_SNAPSHOT_PHASE7_RUNTIME_LIVE.md`
 - `docs/PHASE7G_OPERATOR_ACCEPTANCE_DEMO_PACK.md`
+- `docs/PHASE7H_OPERATOR_RUNBOOK.md`
 - `docs/RELEASE_SNAPSHOT_PHASE6.md`
 
 Phase 6A defines the **manual-approved workflow boundary** in
@@ -190,6 +191,11 @@ Phase 7G provides the safe operator acceptance/demo pack documented in
 `docs/PHASE7G_OPERATOR_ACCEPTANCE_DEMO_PACK.md`. The safe demo pack exists for
 prevented, blocked, invalid, and static guard observations only. It adds no new
 mutation path, and Phase 7D wrapper behavior is unchanged.
+
+Phase 7H provides the hardened operator runbook in
+`docs/PHASE7H_OPERATOR_RUNBOOK.md`. The operator runbook exists, adds no new mutation path,
+and keeps Phase 7D wrapper behavior unchanged. It is
+docs/tests/task-only and introduces no backend/API/database behavior.
 
 Phase 7D runtime implementation is now intentionally present as a manual-gated
 single-wrapper boundary:

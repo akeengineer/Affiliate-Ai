@@ -82,6 +82,13 @@ Phase 7G records this handoff as an inventory note. It does not automatically
 run verification as part of an approval flow and includes no executable example
 with an approval flag set truthy.
 
+### Phase 7H runbook handoff
+
+Phase 7H hardens the real-use procedure with
+`docs/PHASE7H_OPERATOR_RUNBOOK.md`.
+The runbook is operator-facing only, adds no runtime behavior change, and does
+not alter Phase 7D wrapper behavior or approval logic.
+
 ### No-mutation guarantee
 
 The pack supplies no runtime execution intent, invokes no primitive, does not

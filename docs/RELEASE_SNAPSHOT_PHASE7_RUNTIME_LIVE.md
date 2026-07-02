@@ -34,6 +34,7 @@ This is a release snapshot only and does not change runtime behavior.
 - Phase 7D: Single-gate Runtime Wrapper — complete
 - Phase 7F: Runtime Wrapper Live State Report — complete
 - Phase 7G: Operator Acceptance / Safe Demo Pack — complete
+- Phase 7H: Operator Runbook Hardening — complete
 
 ### Runtime readiness state
 
@@ -109,6 +110,14 @@ Safe demo pack does not change runtime behavior.
 no primitive execution is introduced by Phase 7G, and the Phase 7D wrapper and
 approval logic remain unchanged.
 
+### Phase 7H operator runbook
+
+The hardened operator runbook is documented in
+`docs/PHASE7H_OPERATOR_RUNBOOK.md`.
+The runbook does not change runtime behavior.
+no primitive execution is introduced by Phase 7H, and no new mutation path is
+introduced by Phase 7H.
+
 ### What remains out of scope
 
 - no backend/API/database
@@ -125,5 +134,4 @@ approval logic remain unchanged.
 
 ### Next recommended phase
 
-- Phase 7H: manual operator runbook hardening, or Phase 8A: durable audit store
-  design
+- Phase 8A: Durable Audit Store Design

@@ -100,6 +100,10 @@ approval mutation is added in Phase 6A-6H.
   (safe local acceptance only; runs prevented, blocked, invalid, and static
   guard checks without primitive execution or a new mutation path). See
   `docs/PHASE7G_OPERATOR_ACCEPTANCE_DEMO_PACK.md`.
+- Phase 7H — Operator Runbook Hardening — **complete / done**
+  (docs/tests/task-only; hardens live operator procedure without changing Phase
+  7D wrapper behavior, approval logic, or the mutation boundary). See
+  `docs/PHASE7H_OPERATOR_RUNBOOK.md`.
 
 Phase 7A/7B/7C/7D-R stay **read-only** and **manual-approved**: no approval
 wrapper, vault read/write, primitive execution, or approval mutation is added.
@@ -120,9 +124,13 @@ Phase 7F records that live post-Phase-7D state as a separate docs-only release
 snapshot. It does not add new runtime commands, approval paths, or automation.
 
 Phase 7G adds the safe operator acceptance command and deterministic summaries.
-It leaves Phase 7D wrapper behavior unchanged. A future Phase 7H may harden the
-manual operator runbook, or Phase 8A may design a durable audit store; either
-requires separate review and approval.
+It leaves Phase 7D wrapper behavior unchanged.
+
+Phase 7H hardens the manual operator runbook for real-world use of the live
+selected-gate wrapper. It is docs/tests/task-only, adds no new mutation path,
+and leaves Phase 7D wrapper behavior unchanged.
+
+Phase 8A Durable Audit Store Design is the next recommended phase.
 
 ## 2. Phase 4A — local read-only UI mock
 
