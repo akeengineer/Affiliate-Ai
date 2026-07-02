@@ -381,3 +381,14 @@ no primitive execution and no vault read/write.
 `phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 8F
 (export integrity/signing design or an optional SQLite index design) is the
 next recommended phase.
+
+## 14. Phase 8F export integrity / signing design
+
+Phase 8F adds the export integrity/signing design documented in
+`docs/PHASE8F_EXPORT_INTEGRITY_SIGNING_DESIGN.md`. The export integrity/
+signing design exists; `signing_implementation_status` is `design_only`.
+Phase 8F adds no signing implementation and no database/backend/API. Phase
+7D wrapper behavior is unchanged, `phase7d_runtime_readiness` remains
+`implemented_manual_gate`, and `durable_audit_store_status` is now
+`export_integrity_signing_design`. Phase 8G (Export Integrity Verifier
+Prototype) is the next recommended phase.

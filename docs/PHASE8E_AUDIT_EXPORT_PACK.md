@@ -127,6 +127,14 @@ never modified.
 - a Phase 8E export is evidence packaging, not approval.
 - a Phase 8E `warning` result requires manual review.
 
+### Phase 8F export integrity / signing design
+
+Phase 8F designs the future signing/integrity governance layer for this
+export pack in
+[`PHASE8F_EXPORT_INTEGRITY_SIGNING_DESIGN.md`](PHASE8F_EXPORT_INTEGRITY_SIGNING_DESIGN.md).
+Phase 8F does not modify Phase 8E export behavior; it is design only. A
+signature, once implemented in a future phase, is not approval.
+
 ### Known limitations
 
 - local tmp export only
@@ -139,4 +147,5 @@ never modified.
 - no production deployment
 - no retention enforcement
 - no automated distribution
+- an integrity/signing design now exists in Phase 8F
 - no automatic remediation
