@@ -80,3 +80,5 @@ tmp/phase7d-single-gate-wrapper/
 tmp/phase7g-operator-acceptance/
 tmp/phase8b-audit-store/
 tmp/phase8b-test-input/
+tmp/phase8c-audit-report/
+tmp/phase8c-test-input/

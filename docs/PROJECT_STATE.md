@@ -337,3 +337,16 @@ adds no backend/API/database and makes no Phase 7D wrapper behavior change;
 it performs no primitive execution and no vault read/write.
 `phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 8C
 (verifier/reporting over JSONL) is the next recommended phase.
+
+## 11. Phase 8C audit store verifier / reporting over JSONL
+
+Phase 8C adds the read-only JSONL verifier/reporting documented in
+`docs/PHASE8C_AUDIT_STORE_VERIFIER_REPORTING.md`. The JSONL verifier/reporting
+exists: `scripts/dev/verify_phase8c_audit_store.py` reads the Phase 8B
+`audit-records.jsonl` store read-only and `scripts/dev/run_phase8c_audit_report.sh`
+wraps it; both write only under `tmp/phase8c-audit-report/`.
+`durable_audit_store_status` is now `jsonl_verifier_reporting`. Phase 8C adds
+no backend/API/database and makes no Phase 7D wrapper behavior change; it
+performs no primitive execution and no vault read/write.
+`phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 8D
+(query CLI or optional SQLite index design) is the next recommended phase.

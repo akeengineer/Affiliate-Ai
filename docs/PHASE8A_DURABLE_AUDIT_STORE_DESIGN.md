@@ -356,6 +356,15 @@ API, or database; it is an ingest-only local runtime prototype that reads one
 existing audit artifact and appends a normalized, hash-chained record to a
 local ignored JSONL store.
 
+## Phase 8C verifier / reporting
+
+Phase 8C implements read-only verifier/reporting over the Phase 8B JSONL
+store in
+`docs/PHASE8C_AUDIT_STORE_VERIFIER_REPORTING.md`. Phase 8C is still
+local-first and adds no backend, API, or database; it recomputes hashes,
+validates hash-chain continuity, detects duplicates, and reports summaries,
+all read-only against the JSONL store.
+
 ## Known limitations
 
 - Phase 8A is design only; no storage, writer, or reader exists.

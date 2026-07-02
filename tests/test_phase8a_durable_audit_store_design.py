@@ -302,10 +302,13 @@ def test_phase8a_protected_runtime_files_unchanged() -> None:
 # ── 30-32. no new runtime/storage/database/backend/api files ───────────────
 
 def test_phase8a_no_new_runtime_or_storage_script_exists() -> None:
+    # Phase 8A itself is docs/tests-only and must never add a runtime script.
+    # Later, separately-approved phases (8B ingest, 8C verifier/reporting)
+    # legitimately add audit-store scripts, so this guard is scoped to
+    # Phase-8A-named files only, not a blanket ban on the whole "audit store"
+    # concept for all future phases.
     scripts_dir = REPO_ROOT / "scripts/dev"
     assert not any(scripts_dir.glob("*phase8a*")), "Phase 8A must not add runtime scripts"
-    for pattern in ("*audit_store*", "*audit_writer*", "*durable*"):
-        assert not any(scripts_dir.glob(pattern)), f"Phase 8A must not add storage scripts matching {pattern}"
 
 
 def test_phase8a_no_database_backend_api_files_added() -> None:

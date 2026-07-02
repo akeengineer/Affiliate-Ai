@@ -144,6 +144,13 @@ Phase 8A Durable Audit Store Design is the next recommended phase.
   JSONL store; adds `scripts/dev/ingest_phase8b_audit_record.py` and
   `scripts/dev/run_phase8b_audit_ingest.sh`; no backend/API/database). See
   `docs/PHASE8B_LOCAL_APPEND_ONLY_AUDIT_STORE.md`.
+- Phase 8C — Audit Store Verifier / Reporting over JSONL — **complete / done**
+  (read-only verifier/reporting over the Phase 8B JSONL store; recomputes
+  hashes, validates hash-chain continuity, detects duplicates and malformed
+  lines, and reports by product/week/gate/operator/outcome/review status;
+  adds `scripts/dev/verify_phase8c_audit_store.py` and
+  `scripts/dev/run_phase8c_audit_report.sh`; no backend/API/database). See
+  `docs/PHASE8C_AUDIT_STORE_VERIFIER_REPORTING.md`.
 
 Phase 8A is docs/tests-task only. It changes no Phase 7D wrapper behavior,
 executes no primitive, performs no vault read/write, and adds no
@@ -155,7 +162,14 @@ primitive, performs no vault read/write, and adds no backend/API/database.
 `durable_audit_store_status` is now `local_append_only_prototype`, and
 `phase7d_runtime_readiness` remains `implemented_manual_gate`.
 
-Phase 8C Verifier/Reporting over JSONL is the next recommended phase.
+Phase 8C is read-only against the JSONL store. It changes no Phase 7D wrapper
+behavior, changes no Phase 8B ingest behavior, executes no primitive, performs
+no vault read/write, and adds no backend/API/database.
+`durable_audit_store_status` is now `jsonl_verifier_reporting`, and
+`phase7d_runtime_readiness` remains `implemented_manual_gate`.
+
+Phase 8D (query CLI or optional SQLite index design) is the next recommended
+phase; it is not implemented in Phase 8C.
 
 ## 2. Phase 4A — local read-only UI mock
 
