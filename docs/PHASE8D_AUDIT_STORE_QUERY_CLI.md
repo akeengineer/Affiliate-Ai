@@ -102,6 +102,14 @@ match, and `unknown` if the record has no `record_hash` to verify against.
 - Phase 8D query results are evidence lookup, not approval.
 - a Phase 8D `warning` result requires manual review.
 
+### Phase 8E export pack
+
+Phase 8E adds a read-only export pack that packages this query CLI's output
+alongside Phase 8B/8C evidence in
+[`PHASE8E_AUDIT_EXPORT_PACK.md`](PHASE8E_AUDIT_EXPORT_PACK.md). Phase 8E
+packages query results and evidence read-only; it does not modify Phase 8D
+query behavior.
+
 ### Known limitations
 
 - local tmp query report only
@@ -113,4 +121,5 @@ match, and `unknown` if the record has no `record_hash` to verify against.
 - no retention enforcement
 - no full-text search
 - no pagination cursor
+- an export pack now exists in Phase 8E
 - no automatic remediation
