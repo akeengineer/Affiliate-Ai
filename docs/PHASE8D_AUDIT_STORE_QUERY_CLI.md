@@ -110,6 +110,13 @@ alongside Phase 8B/8C evidence in
 packages query results and evidence read-only; it does not modify Phase 8D
 query behavior.
 
+### Phase 8F export integrity / signing design
+
+Phase 8F designs future integrity/signing governance for Phase 8E export
+packs built from this query CLI's output in
+[`PHASE8F_EXPORT_INTEGRITY_SIGNING_DESIGN.md`](PHASE8F_EXPORT_INTEGRITY_SIGNING_DESIGN.md).
+Phase 8F does not modify Phase 8D query behavior.
+
 ### Known limitations
 
 - local tmp query report only
@@ -122,4 +129,5 @@ query behavior.
 - no full-text search
 - no pagination cursor
 - an export pack now exists in Phase 8E
+- an integrity/signing design now exists in Phase 8F
 - no automatic remediation
