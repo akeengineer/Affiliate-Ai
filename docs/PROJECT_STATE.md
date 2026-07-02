@@ -350,3 +350,18 @@ no backend/API/database and makes no Phase 7D wrapper behavior change; it
 performs no primitive execution and no vault read/write.
 `phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 8D
 (query CLI or optional SQLite index design) is the next recommended phase.
+
+## 12. Phase 8D audit store query CLI over JSONL
+
+Phase 8D adds the read-only JSONL query CLI documented in
+`docs/PHASE8D_AUDIT_STORE_QUERY_CLI.md`. The JSONL query CLI exists:
+`scripts/dev/query_phase8d_audit_store.py` reads the Phase 8B
+`audit-records.jsonl` store read-only and
+`scripts/dev/run_phase8d_audit_query.sh` wraps it; both write only under
+`tmp/phase8d-audit-query/`. `durable_audit_store_status` is now
+`jsonl_query_cli`. Phase 8D adds no backend/API/database and makes no Phase
+7D wrapper behavior change, no Phase 8B ingest behavior change, and no Phase
+8C verifier behavior change; it performs no primitive execution and no vault
+read/write. `phase7d_runtime_readiness` remains `implemented_manual_gate`.
+Phase 8E (optional SQLite index design or an audit export pack) is the next
+recommended phase.
