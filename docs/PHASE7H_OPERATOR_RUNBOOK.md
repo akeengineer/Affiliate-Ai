@@ -207,6 +207,13 @@ Avoid executable command examples with approval flags set truthy.
 - never use backend/API/database/autopublish/marketplace/production behavior in
   Phase 7H
 
+### Phase 8A durable audit store design
+
+Phase 8A durable audit store design exists in
+`docs/PHASE8A_DURABLE_AUDIT_STORE_DESIGN.md`. The durable audit store is not
+implemented yet; Phase 8A is design only. This runbook is unchanged by Phase
+8A beyond this pointer.
+
 ### Known limitations
 
 - CLI/local runbook only

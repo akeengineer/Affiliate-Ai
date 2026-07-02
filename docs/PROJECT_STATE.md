@@ -314,3 +314,13 @@ provides a static read-only UI shell only (inline CSS, zero JavaScript).
   only safe read-only / dry-run paths are reachable from it.
 
 See `docs/SECURITY.md` and `docs/OBSIDIAN_CONTRACT.md` for the full policy.
+
+## 9. Phase 8A durable audit store design
+
+Phase 8A adds the durable audit store design in
+`docs/PHASE8A_DURABLE_AUDIT_STORE_DESIGN.md`. The durable audit store design
+exists; `durable_audit_store_status` is `design_only`. Phase 8A adds no
+storage implementation and no database/backend/API. Phase 7D wrapper behavior
+is unchanged, `phase7d_runtime_readiness` remains `implemented_manual_gate`,
+and audit artifacts remain tmp-local. Phase 8B (local append-only audit store
+prototype) is the next recommended phase.
