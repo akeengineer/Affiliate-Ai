@@ -214,6 +214,16 @@ Phase 8A durable audit store design exists in
 implemented yet; Phase 8A is design only. This runbook is unchanged by Phase
 8A beyond this pointer.
 
+### Phase 8B local append-only audit store ingest
+
+Phase 8B adds a local append-only ingest command in
+`docs/PHASE8B_LOCAL_APPEND_ONLY_AUDIT_STORE.md`
+(`bash scripts/dev/run_phase8b_audit_ingest.sh <audit_artifact_path>
+[operator_note]`). Phase 8B is post-audit manual ingestion only: an operator
+runs it after Step 12 (Phase 7B audit verification) in the safe execution
+ceremony above. It does not change the execution ceremony or approval
+boundary defined in this runbook.
+
 ### Known limitations
 
 - CLI/local runbook only

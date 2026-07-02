@@ -138,14 +138,24 @@ Phase 8A Durable Audit Store Design is the next recommended phase.
   only; proposes an audit record schema, a storage abstraction, backend
   options, and a migration path from tmp-local audit output; implements no
   storage). See `docs/PHASE8A_DURABLE_AUDIT_STORE_DESIGN.md`.
+- Phase 8B — Local Append-only Audit Store Prototype — **complete / done**
+  (local-first runtime prototype; ingest-only; reads one existing audit
+  artifact and appends a normalized, hash-chained record to a local ignored
+  JSONL store; adds `scripts/dev/ingest_phase8b_audit_record.py` and
+  `scripts/dev/run_phase8b_audit_ingest.sh`; no backend/API/database). See
+  `docs/PHASE8B_LOCAL_APPEND_ONLY_AUDIT_STORE.md`.
 
 Phase 8A is docs/tests-task only. It changes no Phase 7D wrapper behavior,
 executes no primitive, performs no vault read/write, and adds no
 backend/API/database. `durable_audit_store_status` is `design_only`, and
 `phase7d_runtime_readiness` remains `implemented_manual_gate`.
 
-Phase 8B Local Append-only Audit Store Prototype is the next recommended
-phase.
+Phase 8B is ingest-only. It changes no Phase 7D wrapper behavior, executes no
+primitive, performs no vault read/write, and adds no backend/API/database.
+`durable_audit_store_status` is now `local_append_only_prototype`, and
+`phase7d_runtime_readiness` remains `implemented_manual_gate`.
+
+Phase 8C Verifier/Reporting over JSONL is the next recommended phase.
 
 ## 2. Phase 4A — local read-only UI mock
 
