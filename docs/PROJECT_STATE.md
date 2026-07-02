@@ -108,6 +108,7 @@ flag). The default read-only operator path writes none of them.
 - `docs/PHASE7D_RUNTIME_WRAPPER_IMPLEMENTATION_BLUEPRINT.md`
 - `docs/RELEASE_SNAPSHOT_PHASE7.md`
 - `docs/RELEASE_SNAPSHOT_PHASE7_RUNTIME_LIVE.md`
+- `docs/PHASE7G_OPERATOR_ACCEPTANCE_DEMO_PACK.md`
 - `docs/RELEASE_SNAPSHOT_PHASE6.md`
 
 Phase 6A defines the **manual-approved workflow boundary** in
@@ -185,6 +186,11 @@ Phase 7F records the post-Phase-7D runtime live state in
 `docs/RELEASE_SNAPSHOT_PHASE7_RUNTIME_LIVE.md`. It is docs/tests/task-only and
 does not change runtime behavior, wrapper logic, or approval logic.
 
+Phase 7G provides the safe operator acceptance/demo pack documented in
+`docs/PHASE7G_OPERATOR_ACCEPTANCE_DEMO_PACK.md`. The safe demo pack exists for
+prevented, blocked, invalid, and static guard observations only. It adds no new
+mutation path, and Phase 7D wrapper behavior is unchanged.
+
 Phase 7D runtime implementation is now intentionally present as a manual-gated
 single-wrapper boundary:
 
@@ -232,6 +238,10 @@ deployment.
   (selected-gate-only; evidence-first; safe vault-read supplements; audit writes
   under `tmp/phase7d-single-gate-wrapper/`; wrapper performs no direct vault
   write)
+- Safe operator acceptance/demo pack:
+  `run_phase7g_safe_demo_pack.sh` -> `build_phase7g_operator_acceptance_summary.py`
+  (non-production tmp inputs; no primitive execution; summaries under
+  `tmp/phase7g-operator-acceptance/`)
 
 ## 4. Guardrails
 
@@ -264,6 +274,7 @@ provides a static read-only UI shell only (inline CSS, zero JavaScript).
 - **UI shell verifier** / acceptance gate (Phase 5C)
 - **UI shell demo bundle** command (Phase 5D)
 - **runtime read-only manual approval audit verifier** (Phase 7B)
+- **safe operator acceptance/demo pack** (Phase 7G)
 
 ## 6. What the system cannot do yet
 
