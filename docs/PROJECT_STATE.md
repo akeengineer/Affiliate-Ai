@@ -365,3 +365,19 @@ Phase 8D adds the read-only JSONL query CLI documented in
 read/write. `phase7d_runtime_readiness` remains `implemented_manual_gate`.
 Phase 8E (optional SQLite index design or an audit export pack) is the next
 recommended phase.
+
+## 13. Phase 8E audit export pack
+
+Phase 8E adds the read-only audit export pack documented in
+`docs/PHASE8E_AUDIT_EXPORT_PACK.md`. The audit export pack exists:
+`scripts/dev/build_phase8e_audit_export_pack.py` reads the Phase 8B JSONL
+store and the optional Phase 8C/8D reports read-only and
+`scripts/dev/run_phase8e_audit_export.sh` wraps it; both write only under
+`tmp/phase8e-audit-export/`. `durable_audit_store_status` is now
+`export_pack`. Phase 8E adds no backend/API/database and makes no Phase 7D
+wrapper behavior change, no Phase 8B ingest behavior change, no Phase 8C
+verifier behavior change, and no Phase 8D query behavior change; it performs
+no primitive execution and no vault read/write.
+`phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 8F
+(export integrity/signing design or an optional SQLite index design) is the
+next recommended phase.

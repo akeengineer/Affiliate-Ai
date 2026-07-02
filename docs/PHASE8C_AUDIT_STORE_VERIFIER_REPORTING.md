@@ -123,6 +123,14 @@ Phase 8D adds a read-only query CLI over this JSONL store in
 verifier/reporting and should be paired with Phase 8C for hash-chain
 verification of the whole store.
 
+### Phase 8E export pack
+
+Phase 8E adds a read-only export pack that packages this verification report
+alongside Phase 8B/8D evidence in
+[`PHASE8E_AUDIT_EXPORT_PACK.md`](PHASE8E_AUDIT_EXPORT_PACK.md). Phase 8E
+packages the verification report and evidence read-only; it does not modify
+Phase 8C verifier behavior.
+
 ### Known limitations
 
 - local tmp report only
@@ -133,4 +141,5 @@ verification of the whole store.
 - no production deployment
 - no retention enforcement
 - a query CLI now exists in Phase 8D
+- an export pack now exists in Phase 8E
 - no automatic remediation

@@ -157,6 +157,12 @@ Phase 8A Durable Audit Store Design is the next recommended phase.
   results; adds `scripts/dev/query_phase8d_audit_store.py` and
   `scripts/dev/run_phase8d_audit_query.sh`; no backend/API/database). See
   `docs/PHASE8D_AUDIT_STORE_QUERY_CLI.md`.
+- Phase 8E — Audit Export Pack — **complete / done** (read-only export pack
+  bundling/summarizing Phase 8B/8C/8D local evidence into a reviewable
+  manifest and Markdown summary, with optional byte-identical evidence
+  copies; adds `scripts/dev/build_phase8e_audit_export_pack.py` and
+  `scripts/dev/run_phase8e_audit_export.sh`; no backend/API/database). See
+  `docs/PHASE8E_AUDIT_EXPORT_PACK.md`.
 
 Phase 8A is docs/tests-task only. It changes no Phase 7D wrapper behavior,
 executes no primitive, performs no vault read/write, and adds no
@@ -180,8 +186,15 @@ behavior, executes no primitive, performs no vault read/write, and adds no
 backend/API/database. `durable_audit_store_status` is now `jsonl_query_cli`,
 and `phase7d_runtime_readiness` remains `implemented_manual_gate`.
 
-Phase 8E (optional SQLite index design or an audit export pack) is the next
-recommended phase; it is not implemented in Phase 8D.
+Phase 8E is read-only against all source evidence. It changes no Phase 7D
+wrapper behavior, changes no Phase 8B ingest behavior, changes no Phase 8C
+verifier behavior, changes no Phase 8D query behavior, executes no
+primitive, performs no vault read/write, and adds no backend/API/database.
+`durable_audit_store_status` is now `export_pack`, and
+`phase7d_runtime_readiness` remains `implemented_manual_gate`.
+
+Phase 8F (export integrity/signing design or an optional SQLite index
+design) is the next recommended phase; it is not implemented in Phase 8E.
 
 ## 2. Phase 4A — local read-only UI mock
 
