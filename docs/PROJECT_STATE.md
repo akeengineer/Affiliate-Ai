@@ -392,3 +392,19 @@ Phase 8F adds no signing implementation and no database/backend/API. Phase
 `implemented_manual_gate`, and `durable_audit_store_status` is now
 `export_integrity_signing_design`. Phase 8G (Export Integrity Verifier
 Prototype) is the next recommended phase.
+
+## 15. Phase 8G export integrity verifier
+
+Phase 8G adds the local hash-only export integrity verifier documented in
+`docs/PHASE8G_EXPORT_INTEGRITY_VERIFIER.md`. The export integrity verifier
+exists: `scripts/dev/verify_phase8g_export_integrity.py` reads a Phase 8E
+export manifest read-only and `scripts/dev/run_phase8g_export_integrity.sh`
+wraps it; both write only under `tmp/phase8g-export-integrity/`.
+`durable_audit_store_status` is now `export_integrity_verifier`, and
+`signing_implementation_status` remains `not_implemented`. Phase 8G adds no
+signing implementation, no key generation, and no database/backend/API; it
+makes no Phase 8E export behavior change and no Phase 7D wrapper behavior
+change; it performs no primitive execution and no vault read/write.
+`phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 8H
+(Detached Signature Design Finalization, or Export Integrity Verifier
+Hardening) is the next recommended phase.

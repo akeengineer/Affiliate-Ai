@@ -328,6 +328,14 @@ Phase 8F does not:
 
 None of the above are implemented in Phase 8F.
 
+### Phase 8G verifier
+
+Phase 8G implements the hash-only export integrity verifier this design
+recommended, in
+`docs/PHASE8G_EXPORT_INTEGRITY_VERIFIER.md`. Phase 8G implements no signing
+or key management; it verifies evidence and bundle hashes only. A verified
+export is not approval.
+
 ### Known limitations
 
 - design only
@@ -339,3 +347,4 @@ None of the above are implemented in Phase 8F.
 - no non-repudiation
 - no backend/API/database
 - no production deployment
+- a hash-only verifier now exists in Phase 8G
