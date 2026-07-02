@@ -132,6 +132,21 @@ and leaves Phase 7D wrapper behavior unchanged.
 
 Phase 8A Durable Audit Store Design is the next recommended phase.
 
+## 1e. Phase 8 — durable audit store
+
+- Phase 8A — Durable Audit Store Design — **complete / done** (docs/tests-task
+  only; proposes an audit record schema, a storage abstraction, backend
+  options, and a migration path from tmp-local audit output; implements no
+  storage). See `docs/PHASE8A_DURABLE_AUDIT_STORE_DESIGN.md`.
+
+Phase 8A is docs/tests-task only. It changes no Phase 7D wrapper behavior,
+executes no primitive, performs no vault read/write, and adds no
+backend/API/database. `durable_audit_store_status` is `design_only`, and
+`phase7d_runtime_readiness` remains `implemented_manual_gate`.
+
+Phase 8B Local Append-only Audit Store Prototype is the next recommended
+phase.
+
 ## 2. Phase 4A — local read-only UI mock
 
 - A static or local-only view rendered over existing tmp/vault artifacts.

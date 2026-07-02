@@ -132,6 +132,14 @@ introduced by Phase 7H.
 - no automatic finalization
 - no external API integration
 
+### Phase 8A durable audit store design
+
+Phase 8A adds the durable audit store design in
+`docs/PHASE8A_DURABLE_AUDIT_STORE_DESIGN.md`. Phase 8A does not change Phase 7
+runtime behavior; it is docs/tests-task only, `durable_audit_store_status` is
+`design_only`, and `phase7d_runtime_readiness` remains
+`implemented_manual_gate`.
+
 ### Next recommended phase
 
-- Phase 8A: Durable Audit Store Design
+- Phase 8B: Local Append-only Audit Store Prototype
