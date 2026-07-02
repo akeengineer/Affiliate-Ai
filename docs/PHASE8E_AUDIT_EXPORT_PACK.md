@@ -143,6 +143,13 @@ manifest in
 Phase 8G verifies export integrity read-only; it does not modify Phase 8E
 export behavior. A verified export is not approval.
 
+### Phase 8H export integrity verifier hardening
+
+Phase 8H hardens the Phase 8G verifier's report over this export pack's
+manifest in
+[`PHASE8H_EXPORT_INTEGRITY_VERIFIER_HARDENING.md`](PHASE8H_EXPORT_INTEGRITY_VERIFIER_HARDENING.md).
+Phase 8H does not modify Phase 8E export behavior.
+
 ### Known limitations
 
 - local tmp export only

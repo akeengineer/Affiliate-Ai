@@ -176,6 +176,13 @@ Phase 8A Durable Audit Store Design is the next recommended phase.
   `scripts/dev/verify_phase8g_export_integrity.py` and
   `scripts/dev/run_phase8g_export_integrity.sh`; no signing, no keys, no
   backend/API/database). See `docs/PHASE8G_EXPORT_INTEGRITY_VERIFIER.md`.
+- Phase 8H — Export Integrity Verifier Hardening — **complete / done**
+  (hardens the Phase 8G verifier in place with a stable report schema
+  version, an issue taxonomy, a severity model, tamper-evidence incident
+  classification, a reviewer action mapping, a Phase 8E manifest
+  compatibility matrix, and a deterministic output contract; no new shell
+  runner, no signing, no keys). See
+  `docs/PHASE8H_EXPORT_INTEGRITY_VERIFIER_HARDENING.md`.
 
 Phase 8A is docs/tests-task only. It changes no Phase 7D wrapper behavior,
 executes no primitive, performs no vault read/write, and adds no
@@ -222,9 +229,16 @@ performs no vault read/write, and adds no backend/API/database.
 `signing_implementation_status` remains `not_implemented`, and
 `phase7d_runtime_readiness` remains `implemented_manual_gate`.
 
-Phase 8H (Detached Signature Design Finalization, or Export Integrity
-Verifier Hardening) is the next recommended phase; it is not implemented in
-Phase 8G.
+Phase 8H hardens the Phase 8G verifier in place. It implements no signing,
+no key generation, no private key handling, and no encryption; it changes
+no Phase 8E export behavior and no Phase 7D wrapper behavior, executes no
+primitive, performs no vault read/write, and adds no backend/API/database.
+`durable_audit_store_status` is now `export_integrity_verifier_hardened`,
+`signing_implementation_status` remains `not_implemented`, and
+`phase7d_runtime_readiness` remains `implemented_manual_gate`.
+
+Phase 8I (Detached Signature Design Finalization) is the next recommended
+phase; it is not implemented in Phase 8H.
 
 ## 2. Phase 4A — local read-only UI mock
 
