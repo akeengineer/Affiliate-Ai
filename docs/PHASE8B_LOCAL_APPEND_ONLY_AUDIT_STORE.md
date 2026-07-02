@@ -146,6 +146,13 @@ Ingest exits non-zero and appends nothing on:
 5. record the ingest summary output manually until a query/reporting command
    exists.
 
+### Phase 8C verifier / reporting
+
+Phase 8C adds a read-only verifier/reporting command over this JSONL store in
+[`PHASE8C_AUDIT_STORE_VERIFIER_REPORTING.md`](PHASE8C_AUDIT_STORE_VERIFIER_REPORTING.md).
+Phase 8C verifies and reports the JSONL store read-only; it does not modify
+Phase 8B ingest behavior and does not replace this writer.
+
 ### Known limitations
 
 - local tmp prototype only
@@ -156,4 +163,4 @@ Ingest exits non-zero and appends nothing on:
 - no production deployment
 - no automatic migration
 - no retention enforcement
-- no query/reporting command yet
+- a query/reporting command now exists in Phase 8C
