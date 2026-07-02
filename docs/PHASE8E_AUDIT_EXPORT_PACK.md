@@ -135,6 +135,14 @@ export pack in
 Phase 8F does not modify Phase 8E export behavior; it is design only. A
 signature, once implemented in a future phase, is not approval.
 
+### Phase 8G export integrity verifier
+
+Phase 8G implements a local hash-only verifier over this export pack's
+manifest in
+[`PHASE8G_EXPORT_INTEGRITY_VERIFIER.md`](PHASE8G_EXPORT_INTEGRITY_VERIFIER.md).
+Phase 8G verifies export integrity read-only; it does not modify Phase 8E
+export behavior. A verified export is not approval.
+
 ### Known limitations
 
 - local tmp export only
