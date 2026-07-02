@@ -138,6 +138,13 @@ adds a stable report schema, an issue taxonomy, severity, incident
 classification, a reviewer action mapping, and a Phase 8E manifest
 compatibility matrix. A verified export remains not approval.
 
+### Phase 8I detached signature design
+
+Phase 8I finalizes the detached signature design for future signing over
+this verifier's output in
+[`PHASE8I_DETACHED_SIGNATURE_DESIGN_FINALIZATION.md`](PHASE8I_DETACHED_SIGNATURE_DESIGN_FINALIZATION.md).
+Phase 8I does not modify this verifier's behavior.
+
 ### Known limitations
 
 - local tmp verifier only
@@ -151,3 +158,4 @@ compatibility matrix. A verified export remains not approval.
 - no production deployment
 - no automatic remediation
 - a hardened schema/taxonomy/reviewer-action layer now exists in Phase 8H
+- a finalized detached signature design now exists in Phase 8I
