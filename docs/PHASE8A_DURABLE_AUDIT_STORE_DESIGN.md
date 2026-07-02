@@ -348,6 +348,14 @@ Proposed query/reporting surface for a future implementation:
 - Phase 8B: local append-only JSONL prototype, as the first durable-audit
   implementation phase, separately scoped and separately approved
 
+## Phase 8B prototype
+
+Phase 8B implements the local append-only JSONL prototype recommended above
+in `docs/PHASE8B_LOCAL_APPEND_ONLY_AUDIT_STORE.md`. Phase 8B adds no backend,
+API, or database; it is an ingest-only local runtime prototype that reads one
+existing audit artifact and appends a normalized, hash-chained record to a
+local ignored JSONL store.
+
 ## Known limitations
 
 - Phase 8A is design only; no storage, writer, or reader exists.

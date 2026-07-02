@@ -78,3 +78,5 @@ tmp/phase6e-approval-execution-plan/
 tmp/phase7b-audit-verifier/
 tmp/phase7d-single-gate-wrapper/
 tmp/phase7g-operator-acceptance/
+tmp/phase8b-audit-store/
+tmp/phase8b-test-input/

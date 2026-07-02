@@ -324,3 +324,16 @@ storage implementation and no database/backend/API. Phase 7D wrapper behavior
 is unchanged, `phase7d_runtime_readiness` remains `implemented_manual_gate`,
 and audit artifacts remain tmp-local. Phase 8B (local append-only audit store
 prototype) is the next recommended phase.
+
+## 10. Phase 8B local append-only audit store prototype
+
+Phase 8B adds the local append-only audit store prototype documented in
+`docs/PHASE8B_LOCAL_APPEND_ONLY_AUDIT_STORE.md`. The local append-only audit
+store prototype exists: `scripts/dev/ingest_phase8b_audit_record.py` reads one
+existing audit artifact and `scripts/dev/run_phase8b_audit_ingest.sh` wraps
+it; both write only under `tmp/phase8b-audit-store/`.
+`durable_audit_store_status` is now `local_append_only_prototype`. Phase 8B
+adds no backend/API/database and makes no Phase 7D wrapper behavior change;
+it performs no primitive execution and no vault read/write.
+`phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 8C
+(verifier/reporting over JSONL) is the next recommended phase.
