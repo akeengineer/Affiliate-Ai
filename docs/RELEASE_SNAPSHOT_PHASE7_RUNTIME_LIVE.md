@@ -2,6 +2,7 @@
 
 ```text
 phase7f_status: success
+phase7g_status: success
 phase7d_runtime_readiness: implemented_manual_gate
 ```
 
@@ -32,6 +33,7 @@ This is a release snapshot only and does not change runtime behavior.
 - Phase 7E: Runtime Blocked Release Snapshot — complete
 - Phase 7D: Single-gate Runtime Wrapper — complete
 - Phase 7F: Runtime Wrapper Live State Report — complete
+- Phase 7G: Operator Acceptance / Safe Demo Pack — complete
 
 ### Runtime readiness state
 
@@ -101,6 +103,12 @@ Existing audit verifier:
 - use tmp fixtures or sample data
 - emergency stop should be tested before any live mutation demo
 
+The Phase 7G pack is documented in
+`docs/PHASE7G_OPERATOR_ACCEPTANCE_DEMO_PACK.md`.
+Safe demo pack does not change runtime behavior.
+no primitive execution is introduced by Phase 7G, and the Phase 7D wrapper and
+approval logic remain unchanged.
+
 ### What remains out of scope
 
 - no backend/API/database
@@ -117,4 +125,5 @@ Existing audit verifier:
 
 ### Next recommended phase
 
-- Phase 7G: Operator Acceptance / Safe Demo Pack
+- Phase 7H: manual operator runbook hardening, or Phase 8A: durable audit store
+  design
