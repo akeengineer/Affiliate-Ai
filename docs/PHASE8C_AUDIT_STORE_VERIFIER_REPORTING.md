@@ -115,6 +115,14 @@ Reporting summaries group parsed records by:
 - Phase 8C valid is not approval.
 - Phase 8C warning/invalid requires manual review.
 
+### Phase 8D query CLI
+
+Phase 8D adds a read-only query CLI over this JSONL store in
+[`PHASE8D_AUDIT_STORE_QUERY_CLI.md`](PHASE8D_AUDIT_STORE_QUERY_CLI.md). Phase
+8D queries the JSONL store read-only; it does not replace Phase 8C
+verifier/reporting and should be paired with Phase 8C for hash-chain
+verification of the whole store.
+
 ### Known limitations
 
 - local tmp report only
@@ -124,5 +132,5 @@ Reporting summaries group parsed records by:
 - no authenticated identity
 - no production deployment
 - no retention enforcement
-- no advanced query CLI
+- a query CLI now exists in Phase 8D
 - no automatic remediation

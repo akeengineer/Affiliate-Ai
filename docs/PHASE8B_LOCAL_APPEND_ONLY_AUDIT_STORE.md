@@ -153,6 +153,13 @@ Phase 8C adds a read-only verifier/reporting command over this JSONL store in
 Phase 8C verifies and reports the JSONL store read-only; it does not modify
 Phase 8B ingest behavior and does not replace this writer.
 
+### Phase 8D query CLI
+
+Phase 8D adds a read-only query CLI over this JSONL store in
+[`PHASE8D_AUDIT_STORE_QUERY_CLI.md`](PHASE8D_AUDIT_STORE_QUERY_CLI.md). Phase
+8D does not modify Phase 8B ingest behavior; it only reads the JSONL output
+this writer produces.
+
 ### Known limitations
 
 - local tmp prototype only
