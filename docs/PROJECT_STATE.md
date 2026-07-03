@@ -709,3 +709,25 @@ attribution/RBAC artifacts remain unchanged. Governed runtime integration
 readiness is not runtime integration, integration design is not approval, and
 approval remains the Phase 7D selected-gate manual boundary. Phase 10B (Actor
 Attribution Integration Plan for Audit Store) is the next recommended phase.
+
+## 32. Phase 10B actor attribution audit store integration plan
+
+Phase 10B adds the actor attribution audit store integration plan documented in
+`docs/PHASE10B_ACTOR_ATTRIBUTION_AUDIT_STORE_INTEGRATION_PLAN.md`.
+`phase10b_status` is `success`,
+`audit_actor_attribution_integration_status` is `design_only`,
+`governed_runtime_integration_status` remains `design_only`,
+`integration_runtime_status` remains `not_implemented`,
+`rbac_enforcement_status` remains `not_implemented`,
+`authentication_runtime_status` remains `not_implemented`,
+`backend_api_database_status` remains `not_implemented`,
+`key_management_runtime_status` remains `not_implemented`, and
+`phase10_branch_workflow` remains `enabled`. Phase 10B is docs/tests
+design-only: it adds no audit store runtime changes, no wrapper behavior
+change, no primitive execution, and no vault read/write. The existing Phase 8
+audit/export/signature artifacts, Phase 9 identity/registry/attribution/RBAC
+artifacts, and the Phase 7D wrapper remain unchanged. Actor attribution
+integration plan is not runtime integration, audit actor attribution is not
+authentication, audit actor attribution is not approval, and approval remains
+the Phase 7D selected-gate manual boundary. Phase 10C (Local Evidence Bundle
+with Actor/RBAC Context) is the next recommended phase.

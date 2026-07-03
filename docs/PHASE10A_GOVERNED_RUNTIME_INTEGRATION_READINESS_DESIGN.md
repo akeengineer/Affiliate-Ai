@@ -588,3 +588,10 @@ Phase 10A does not:
 - no backend/API/database
 - no production deployment
 - local prototype context only
+
+### Phase 10B actor attribution audit store integration plan
+
+Phase 10B actor attribution audit store integration plan now exists at
+`docs/PHASE10B_ACTOR_ATTRIBUTION_AUDIT_STORE_INTEGRATION_PLAN.md`. Phase 10B
+narrows governed integration readiness toward audit actor attribution and does
+not implement runtime integration.

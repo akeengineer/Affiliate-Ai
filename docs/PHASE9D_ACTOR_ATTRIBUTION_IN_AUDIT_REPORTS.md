@@ -304,3 +304,10 @@ Phase 10A governed runtime integration readiness design now exists at
 `docs/PHASE10A_GOVERNED_RUNTIME_INTEGRATION_READINESS_DESIGN.md`. Phase 10A may
 reference actor attribution outputs conceptually but does not modify Phase 9D
 runtime.
+
+### Phase 10B actor attribution audit store integration plan
+
+Phase 10B actor attribution audit store integration plan now exists at
+`docs/PHASE10B_ACTOR_ATTRIBUTION_AUDIT_STORE_INTEGRATION_PLAN.md`. Phase 10B
+plans future audit store integration of actor attribution but does not modify
+Phase 9D runtime.

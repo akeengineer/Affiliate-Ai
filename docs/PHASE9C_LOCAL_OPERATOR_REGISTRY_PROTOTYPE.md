@@ -355,3 +355,10 @@ presence remains not authentication or approval.
 Phase 10A governed runtime integration readiness design now exists at
 `docs/PHASE10A_GOVERNED_RUNTIME_INTEGRATION_READINESS_DESIGN.md`. Phase 10A may
 reference registry outputs conceptually but does not modify Phase 9C runtime.
+
+### Phase 10B actor attribution audit store integration plan
+
+Phase 10B actor attribution audit store integration plan now exists at
+`docs/PHASE10B_ACTOR_ATTRIBUTION_AUDIT_STORE_INTEGRATION_PLAN.md`. Phase 10B
+may reference registry context conceptually, but registry presence remains not
+authentication or approval.

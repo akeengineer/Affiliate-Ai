@@ -570,10 +570,34 @@ remains `implemented_manual_gate`. Governed integration readiness is not
 runtime integration, integration design is not approval, and approval remains
 the Phase 7D selected-gate manual boundary.
 
-Phase 10B — Actor Attribution Integration Plan for Audit Store is the next
-recommended phase. It should remain docs/tests design-only, preserve the
-read-only and manual-approved guardrails already established through Phase 5
-and Phase 7D, and continue to avoid production auth/RBAC/key/backend runtime.
+- Phase 10B — Actor Attribution Integration Plan for Audit Store — **complete / current**
+  (docs/tests design-only; narrows Phase 10A toward future audit-store actor
+  attribution by defining an audit actor context model, future audit actor field
+  model, source binding models, append-only and hash-chain compatibility rules,
+  future audit report/export contracts, migration and privacy rules, and an
+  audit actor integration failure taxonomy; implements no audit store runtime
+  change, no integration runtime, no authentication, no RBAC enforcement, and
+  no backend/API/database). See
+  `docs/PHASE10B_ACTOR_ATTRIBUTION_AUDIT_STORE_INTEGRATION_PLAN.md`.
+
+Phase 10B is docs/tests design-only. It changes no Phase 8B/8C/8D/8E/8G/8M
+runtime, no Phase 9C/9D/9F runtime, and no Phase 7D wrapper behavior, executes
+no primitive, performs no vault read/write, and adds no backend/API/database.
+`audit_actor_attribution_integration_status` is `design_only`,
+`governed_runtime_integration_status` remains `design_only`,
+`integration_runtime_status`, `rbac_enforcement_status`,
+`authentication_runtime_status`, `backend_api_database_status`, and
+`key_management_runtime_status` remain `not_implemented`, and
+`phase10_branch_workflow` remains `enabled`. Actor attribution integration plan
+is not runtime integration, audit actor attribution is not authentication,
+audit actor attribution is not approval, and approval remains the Phase 7D
+selected-gate manual boundary.
+
+Phase 10C — Local Evidence Bundle with Actor/RBAC Context is the next
+recommended phase. It should remain docs/tests design-only or explicitly
+local-only, preserve the read-only and manual-approved guardrails already
+established through Phase 5 and Phase 7D, and continue to avoid production
+auth/RBAC/key/backend runtime.
 
 ## 2. Phase 4A — local read-only UI mock
 
