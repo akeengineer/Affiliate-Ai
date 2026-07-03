@@ -425,3 +425,18 @@ behavior change and no Phase 7D wrapper behavior change; it performs no
 primitive execution and no vault read/write.
 `phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 8I
 (Detached Signature Design Finalization) is the next recommended phase.
+
+## 17. Phase 8I detached signature design finalization
+
+Phase 8I finalizes the detached signature design documented in
+`docs/PHASE8I_DETACHED_SIGNATURE_DESIGN_FINALIZATION.md`. The detached
+signature design is finalized: `durable_audit_store_status` is now
+`detached_signature_design_finalized`, `signing_implementation_status`
+remains `design_only`, and `signature_runtime_status` is
+`not_implemented`. Phase 8I adds no signing implementation, no signature
+verifier, no key generation, and no database/backend/API; it makes no
+Phase 8G/8H verifier behavior change, no Phase 8E export behavior change,
+and no Phase 7D wrapper behavior change; it performs no primitive
+execution and no vault read/write. `phase7d_runtime_readiness` remains
+`implemented_manual_gate`. Phase 8J (Detached Signature Verifier Design) is
+the next recommended phase.

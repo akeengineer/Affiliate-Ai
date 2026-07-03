@@ -183,6 +183,14 @@ Phase 8A Durable Audit Store Design is the next recommended phase.
   compatibility matrix, and a deterministic output contract; no new shell
   runner, no signing, no keys). See
   `docs/PHASE8H_EXPORT_INTEGRITY_VERIFIER_HARDENING.md`.
+- Phase 8I — Detached Signature Design Finalization — **complete / done**
+  (docs/tests design-only; finalizes a signed payload descriptor, a
+  detached signature envelope schema, signer/key metadata models, a
+  signature algorithm policy, a signing policy version model, key
+  lifecycle/rotation/revocation policy, a verification ceremony, a
+  signature failure taxonomy, and a signing event audit trail model;
+  implements no signing, no verification, and no key management). See
+  `docs/PHASE8I_DETACHED_SIGNATURE_DESIGN_FINALIZATION.md`.
 
 Phase 8A is docs/tests-task only. It changes no Phase 7D wrapper behavior,
 executes no primitive, performs no vault read/write, and adds no
@@ -237,8 +245,18 @@ primitive, performs no vault read/write, and adds no backend/API/database.
 `signing_implementation_status` remains `not_implemented`, and
 `phase7d_runtime_readiness` remains `implemented_manual_gate`.
 
-Phase 8I (Detached Signature Design Finalization) is the next recommended
-phase; it is not implemented in Phase 8H.
+Phase 8I is docs/tests design-only. It implements no signing, no signature
+verification, no key generation, no private key handling, and no
+encryption; it changes no Phase 8G/8H verifier runtime behavior, no Phase
+8E export behavior, and no Phase 7D wrapper behavior, executes no
+primitive, performs no vault read/write, and adds no backend/API/database.
+`durable_audit_store_status` is now `detached_signature_design_finalized`,
+`signing_implementation_status` remains `design_only`,
+`signature_runtime_status` is `not_implemented`, and
+`phase7d_runtime_readiness` remains `implemented_manual_gate`.
+
+Phase 8J (Detached Signature Verifier Design) is the next recommended
+phase; it is not implemented in Phase 8I.
 
 ## 2. Phase 4A — local read-only UI mock
 

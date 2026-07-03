@@ -345,6 +345,16 @@ schema, an issue taxonomy, severity, incident classification, a reviewer
 action mapping, and a compatibility matrix. Phase 8H implements no signing
 and no keys.
 
+### Phase 8I finalized detached signature design
+
+Phase 8I finalizes this design's detached signature governance in
+`docs/PHASE8I_DETACHED_SIGNATURE_DESIGN_FINALIZATION.md`: a signed payload
+descriptor, a detached signature envelope schema, signer/key metadata
+models, a signature algorithm policy, key lifecycle/rotation/revocation
+policy, and a signature failure taxonomy. Phase 8I refines the signature
+envelope/payload/key-lifecycle/failure-taxonomy shape this design
+introduced; it remains design-only and implements no signing or keys.
+
 ### Known limitations
 
 - design only
@@ -357,3 +367,4 @@ and no keys.
 - no backend/API/database
 - no production deployment
 - a hash-only verifier now exists in Phase 8G
+- a finalized detached signature design now exists in Phase 8I

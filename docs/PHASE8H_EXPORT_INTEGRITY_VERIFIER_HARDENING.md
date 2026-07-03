@@ -205,6 +205,14 @@ failure, so it never forces `verification_status` to `invalid`.
 9. Do not treat a verified export as approval.
 10. Do not trigger the wrapper based on verifier output.
 
+### Phase 8I detached signature design
+
+Phase 8I finalizes detached signature governance for future export-pack
+signing in
+[`PHASE8I_DETACHED_SIGNATURE_DESIGN_FINALIZATION.md`](PHASE8I_DETACHED_SIGNATURE_DESIGN_FINALIZATION.md).
+Phase 8I does not modify this hardened verifier's runtime. A verified
+signature, once implemented in a future phase, remains not approval.
+
 ### Known limitations
 
 - local tmp verifier only
@@ -217,3 +225,4 @@ failure, so it never forces `verification_status` to `invalid`.
 - no authenticated identity
 - no production deployment
 - no automatic remediation
+- a finalized detached signature design now exists in Phase 8I
