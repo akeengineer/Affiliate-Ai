@@ -526,3 +526,22 @@ existing Phase 8L signing prototype and Phase 8M verifier prototype stay
 unchanged. `phase7d_runtime_readiness` remains
 `implemented_manual_gate`. Phase 8O (Phase 8 Final Acceptance Pack) is
 the next recommended phase.
+
+## 23. Phase 8O Phase 8 final acceptance pack
+
+Phase 8O adds the final acceptance pack documented in
+`docs/PHASE8O_FINAL_ACCEPTANCE_PACK.md`. The Phase 8 final acceptance
+pack now exists: `durable_audit_store_status` is now
+`phase8_final_acceptance_pack`,
+`signing_implementation_status` remains `prototype_local_only`,
+`signature_runtime_status` remains `local_prototype`,
+`signature_verifier_runtime_status` remains `local_prototype`,
+`key_management_runtime_status` remains `not_implemented`,
+`runbook_runtime_status` remains `docs_only`,
+`phase8_major_branch_status` is `ready_for_pr_after_full_suite`, and
+`major_phase_branch_workflow` is `enabled`. Phase 8O adds no
+backend/API/database, no wrapper behavior change, and no primitive
+execution; it performs no vault write and introduces no new runtime. The
+existing Phase 8L signing prototype, Phase 8M verifier prototype, and
+Phase 8N runbook remain unchanged. `phase7d_runtime_readiness` remains
+`implemented_manual_gate`.

@@ -191,6 +191,10 @@ Phase 8N Signature Runbook / Incident Review Pack now exists at
 documents procedures for verifier outcomes, does not modify verifier
 runtime, and incident review remains not approval.
 
+Phase 8O Final Acceptance Pack now exists at
+`docs/PHASE8O_FINAL_ACCEPTANCE_PACK.md`. Phase 8O validates verifier
+scenarios without modifying verifier runtime.
+
 ### Major-phase checkpoint policy
 
 Phase 8M is part of `feature/phase8-signature-governance-completion`.

@@ -133,6 +133,10 @@ Phase 8N Signature Runbook / Incident Review Pack now exists at
 documents procedures for signing output states and safe-demo review, and
 does not modify signing runtime.
 
+Phase 8O Final Acceptance Pack now exists at
+`docs/PHASE8O_FINAL_ACCEPTANCE_PACK.md`. Phase 8O validates signing
+scenarios without modifying signing runtime.
+
 ### Phase 8E export boundary
 
 Phase 8L consumes the Phase 8E export manifest. Phase 8L does not modify

@@ -443,3 +443,7 @@ or protected runtime changes unexpectedly.
 - no non-repudiation
 - no backend/API/database
 - no production deployment
+
+Phase 8O Final Acceptance Pack now exists at
+`docs/PHASE8O_FINAL_ACCEPTANCE_PACK.md`. Phase 8O consumes this runbook
+as the final acceptance reference, and final acceptance is not approval.

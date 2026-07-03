@@ -488,6 +488,10 @@ Phase 8N Signature Runbook / Incident Review Pack now exists at
 Phase 8N references key roles and lifecycle labels only as governance
 labels, and `key_management_runtime_status` remains `not_implemented`.
 
+Phase 8O Final Acceptance Pack now exists at
+[`PHASE8O_FINAL_ACCEPTANCE_PACK.md`](PHASE8O_FINAL_ACCEPTANCE_PACK.md).
+Phase 8O does not implement key management runtime.
+
 ### Major-phase checkpoint policy
 
 Phase 8K is part of `feature/phase8-signature-governance-completion`. Phase

@@ -228,6 +228,17 @@ Phase 8A Durable Audit Store Design is the next recommended phase.
   Phase 8L/8M local prototypes; no signing/verifier/key-management runtime,
   no wrapper/primitive/vault changes). See
   `docs/PHASE8N_SIGNATURE_RUNBOOK_INCIDENT_REVIEW_PACK.md`.
+- Phase 8O — Phase 8 Final Acceptance Pack — **complete / done**
+  (docs/tests-only final acceptance checkpoint; closes
+  `feature/phase8-signature-governance-completion` locally by defining the
+  final scenario matrix, final acceptance report shape, major Phase 8 PR
+  readiness checklist, and full-suite requirement; no new signing model, no
+  new verifier model, no key-management runtime, and no
+  wrapper/primitive/vault changes). See
+  `docs/PHASE8O_FINAL_ACCEPTANCE_PACK.md`.
+
+Phase 8O Phase 8 Final Acceptance Pack is the final local checkpoint for
+the major Phase 8 branch.
 
 Phase 8A is docs/tests-task only. It changes no Phase 7D wrapper behavior,
 executes no primitive, performs no vault read/write, and adds no
@@ -356,7 +367,21 @@ and adds no backend/API/database. `durable_audit_store_status` is now
 `enabled`, and `phase7d_runtime_readiness` remains
 `implemented_manual_gate`.
 
-Phase 8O Phase 8 Final Acceptance Pack is the next recommended phase.
+Phase 8O closes `feature/phase8-signature-governance-completion` locally
+as the final Phase 8 acceptance checkpoint. It is docs/tests-only, adds
+no runtime code, changes no Phase 8L/8M/8G/8H/8E/7D behavior, executes no
+primitive, performs no vault read/write, and adds no backend/API/database.
+`durable_audit_store_status` is now `phase8_final_acceptance_pack`,
+`signing_implementation_status` remains `prototype_local_only`,
+`signature_runtime_status` remains `local_prototype`,
+`signature_verifier_runtime_status` remains `local_prototype`,
+`key_management_runtime_status` remains `not_implemented`,
+`runbook_runtime_status` remains `docs_only`,
+`phase8_major_branch_status` is `ready_for_pr_after_full_suite`,
+`major_phase_branch_workflow` is `enabled`, and
+`phase7d_runtime_readiness` remains `implemented_manual_gate`.
+
+open one major Phase 8 PR after full suite passes.
 
 ## 2. Phase 4A — local read-only UI mock
 
