@@ -143,7 +143,10 @@ compatibility matrix. A verified export remains not approval.
 Phase 8I finalizes the detached signature design for future signing over
 this verifier's output in
 [`PHASE8I_DETACHED_SIGNATURE_DESIGN_FINALIZATION.md`](PHASE8I_DETACHED_SIGNATURE_DESIGN_FINALIZATION.md).
-Phase 8I does not modify this verifier's behavior.
+Phase 8I does not modify this verifier's behavior. Phase 8J's future
+verifier design now exists in
+[`PHASE8J_DETACHED_SIGNATURE_VERIFIER_DESIGN.md`](PHASE8J_DETACHED_SIGNATURE_VERIFIER_DESIGN.md)
+and does not modify this verifier's behavior.
 
 ### Known limitations
 

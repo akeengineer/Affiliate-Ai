@@ -440,3 +440,20 @@ and no Phase 7D wrapper behavior change; it performs no primitive
 execution and no vault read/write. `phase7d_runtime_readiness` remains
 `implemented_manual_gate`. Phase 8J (Detached Signature Verifier Design) is
 the next recommended phase.
+
+## 18. Phase 8J detached signature verifier design
+
+Phase 8J designs the detached signature verifier flow documented in
+`docs/PHASE8J_DETACHED_SIGNATURE_VERIFIER_DESIGN.md`. The detached
+signature verifier design now exists: `durable_audit_store_status` is now
+`detached_signature_verifier_design`, `signing_implementation_status`
+remains `design_only`, `signature_runtime_status` remains
+`not_implemented`, and `signature_verifier_runtime_status` is
+`not_implemented`. `major_phase_branch_workflow` is `enabled`. Phase 8J
+adds no signature verifier implementation, no signing implementation, no
+key generation, and no database/backend/API; it makes no Phase 8G/8H
+verifier behavior change, no Phase 8E export behavior change, and no
+Phase 7D wrapper behavior change; it performs no primitive execution and
+no vault read/write. `phase7d_runtime_readiness` remains
+`implemented_manual_gate`. Phase 8K (Key Management Design) is the next
+recommended phase.

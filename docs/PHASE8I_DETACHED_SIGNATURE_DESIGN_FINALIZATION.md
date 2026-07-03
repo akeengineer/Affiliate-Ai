@@ -410,6 +410,10 @@ Phase 8I does not:
 ### Future implementation path
 
 - Phase 8J: Detached Signature Verifier Design
+  ([`PHASE8J_DETACHED_SIGNATURE_VERIFIER_DESIGN.md`](PHASE8J_DETACHED_SIGNATURE_VERIFIER_DESIGN.md)
+  now exists; it designs verifier-side interpretation only, does not
+  implement verifier runtime, and a verified signature remains not
+  approval)
 - Phase 8K: Local Detached Signature Prototype, still local-only and no
   approval integration
 - Phase 8L: Key Management Design
