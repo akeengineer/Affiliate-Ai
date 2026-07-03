@@ -478,6 +478,11 @@ It uses an env-var prototype key only and does not implement key
 management runtime; `key_management_runtime_status` remains
 `not_implemented`. An active/prototype key is not approval.
 
+Phase 8M Detached Signature Verifier Prototype now exists at
+[`PHASE8M_DETACHED_SIGNATURE_VERIFIER_PROTOTYPE.md`](PHASE8M_DETACHED_SIGNATURE_VERIFIER_PROTOTYPE.md).
+Phase 8M does not implement key management runtime;
+`key_management_runtime_status` remains `not_implemented`.
+
 ### Major-phase checkpoint policy
 
 Phase 8K is part of `feature/phase8-signature-governance-completion`. Phase

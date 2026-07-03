@@ -451,6 +451,10 @@ Phase 8L Local Detached Signature Prototype now exists at
 Phase 8L does not implement the signature verifier;
 `signature_verifier_runtime_status` remains `not_implemented`.
 
+Phase 8M now implements a local-only narrow verifier prototype at
+[`PHASE8M_DETACHED_SIGNATURE_VERIFIER_PROTOTYPE.md`](PHASE8M_DETACHED_SIGNATURE_VERIFIER_PROTOTYPE.md).
+Enterprise verification remains not implemented.
+
 ### Major-phase checkpoint policy
 
 Phase 8J is part of `feature/phase8-signature-governance-completion`. Phase

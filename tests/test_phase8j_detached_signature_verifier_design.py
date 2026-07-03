@@ -513,6 +513,8 @@ def test_phase8j_no_signing_key_or_cert_files_added() -> None:
     sanctioned_signature_scripts = {
         "build_phase8l_detached_signature.py",
         "run_phase8l_detached_signature.sh",
+        "verify_phase8m_detached_signature.py",
+        "run_phase8m_detached_signature_verifier.sh",
     }
     sign_hits = [p for p in scripts_dir.glob("*sign*") if p.name not in sanctioned_signature_scripts]
     assert not sign_hits, f"Phase 8J must not add signing scripts: {sign_hits}"

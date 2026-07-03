@@ -489,3 +489,20 @@ primitive execution and writes only under
 `tmp/phase8l-detached-signature`. `phase7d_runtime_readiness` remains
 `implemented_manual_gate`. Phase 8M (Detached Signature Verifier
 Prototype) is the next recommended phase.
+
+## 21. Phase 8M detached signature verifier prototype
+
+Phase 8M implements a local detached signature verifier prototype
+documented in `docs/PHASE8M_DETACHED_SIGNATURE_VERIFIER_PROTOTYPE.md`. A
+local detached signature verifier prototype now exists:
+`durable_audit_store_status` is now `detached_signature_verifier_prototype`,
+`signing_implementation_status` is `prototype_local_only`,
+`signature_runtime_status` is `local_prototype`,
+`signature_verifier_runtime_status` is `local_prototype`, and
+`key_management_runtime_status` is `not_implemented`.
+`major_phase_branch_workflow` is `enabled`. Phase 8M adds no
+backend/API/database and no wrapper behavior change; it performs no
+primitive execution and writes only under
+`tmp/phase8m-detached-signature-verifier`. `phase7d_runtime_readiness`
+remains `implemented_manual_gate`. Phase 8N (Signature Runbook / Incident
+Review Pack) is the next recommended phase.

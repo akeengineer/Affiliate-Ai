@@ -123,6 +123,11 @@ remains `not_implemented`.
 Phase 8J is design-only. Phase 8L does not implement a signature verifier.
 `signature_verifier_runtime_status` remains `not_implemented`.
 
+Phase 8M Detached Signature Verifier Prototype now exists at
+`docs/PHASE8M_DETACHED_SIGNATURE_VERIFIER_PROTOTYPE.md`. Phase 8M consumes
+Phase 8L descriptor/envelope outputs and does not modify Phase 8L
+outputs. A verified signature remains not approval.
+
 ### Phase 8E export boundary
 
 Phase 8L consumes the Phase 8E export manifest. Phase 8L does not modify
