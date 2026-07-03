@@ -703,3 +703,10 @@ Phase 9C local operator registry prototype now exists at
 validation subset of this schema and a deterministic local registry. Registry
 presence is not authentication and is not approval; valid actor metadata is not
 approval.
+
+### Phase 9D actor attribution
+
+Phase 9D actor attribution report prototype now exists at
+`docs/PHASE9D_ACTOR_ATTRIBUTION_IN_AUDIT_REPORTS.md`. Phase 9D uses these actor
+metadata fields for local report attribution. Attribution validity is not
+approval.

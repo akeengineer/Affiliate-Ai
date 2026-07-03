@@ -603,3 +603,25 @@ registry presence is not approval, and valid actor metadata is not approval;
 approval remains the Phase 7D selected-gate manual boundary.
 `phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 9D (Actor
 Attribution in Audit/Reports) is the next recommended phase.
+
+## 27. Phase 9D actor attribution in audit/reports
+
+Phase 9D adds the local actor attribution report prototype documented in
+`docs/PHASE9D_ACTOR_ATTRIBUTION_IN_AUDIT_REPORTS.md`. A local-only,
+metadata-only attribution report prototype now exists:
+`scripts/dev/build_phase9d_actor_attribution_report.py` consumes a Phase 9C
+`operator-registry.json` and a local evidence/report reference file and
+`scripts/dev/run_phase9d_actor_attribution_report.sh` wraps it; both write only
+under `tmp/phase9d-actor-attribution/`. `actor_attribution_status` is now
+`local_report_prototype`, `actor_metadata_runtime_status` remains
+`local_registry_prototype`, `local_operator_registry_status` remains
+`prototype_local_only`, `identity_runtime_status` remains `not_implemented`,
+`rbac_runtime_status` remains `not_implemented`, `authentication_runtime_status`
+remains `not_implemented`, and `key_management_runtime_status` remains
+`not_implemented`. Phase 9D is standard-library only: it adds no
+backend/API/database, makes no wrapper behavior change, executes no primitive,
+and performs no vault read/write. Actor attribution is not authentication, actor
+attribution is not approval, and the attributed report is evidence only;
+approval remains the Phase 7D selected-gate manual boundary.
+`phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 9E (RBAC
+Design) is the next recommended phase.

@@ -404,3 +404,11 @@ Phase 9C local operator registry prototype now exists at
 `docs/PHASE9C_LOCAL_OPERATOR_REGISTRY_PROTOTYPE.md`. Phase 9C may support future
 actor attribution for final acceptance but does not modify Phase 8O runtime.
 Final acceptance remains not approval, and registry presence is not approval.
+
+## Phase 9D actor attribution
+
+Phase 9D actor attribution report prototype now exists at
+`docs/PHASE9D_ACTOR_ATTRIBUTION_IN_AUDIT_REPORTS.md`. Phase 9D can attribute
+future final acceptance evidence references to registry actors but does not
+modify Phase 8O runtime. Final acceptance remains not approval, and actor
+attribution is not approval.

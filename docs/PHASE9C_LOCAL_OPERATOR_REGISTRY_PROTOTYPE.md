@@ -322,3 +322,11 @@ All outputs are written under `tmp/phase9c-local-operator-registry/`:
 - no key custody
 - no strong non-repudiation
 - no production deployment
+
+### Phase 9D actor attribution
+
+Phase 9D actor attribution report prototype now exists at
+`docs/PHASE9D_ACTOR_ATTRIBUTION_IN_AUDIT_REPORTS.md`. Phase 9D consumes this
+registry output for local actor attribution of audit/report evidence. Phase 9D
+does not modify this registry runtime; actor attribution is not authentication
+and is not approval.

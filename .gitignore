@@ -95,3 +95,5 @@ tmp/phase8m-detached-signature-verifier/
 tmp/phase8m-test-input/
 tmp/phase9c-local-operator-registry/
 tmp/phase9c-test-input/
+tmp/phase9d-actor-attribution/
+tmp/phase9d-test-input/
