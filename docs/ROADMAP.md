@@ -644,10 +644,22 @@ authentication, RBAC advisory context is not enforcement, and approval remains
 the Phase 7D selected-gate manual boundary while preserving the read-only and
 manual-approved guardrails established through Phase 5 and Phase 7D.
 
-Phase 10E — Derived Actor-Attributed Export Pack Prototype is the next
-recommended phase. It should remain local-only, preserve Phase 8 append-only
-source artifacts unchanged, and continue to avoid production auth/RBAC/key/
-backend runtime.
+Phase 10E — Export Sidecar Design/Prototype is the next recommended phase. It
+should remain local-only, preserve Phase 8 append-only source artifacts
+unchanged, and continue to avoid production auth/RBAC/key/backend runtime.
+Earlier wording may refer to a "Derived Actor-Attributed Export Pack
+Prototype", but the canonical Phase 10E artifact is
+`docs/PHASE10E_EXPORT_SIDECAR_DESIGN_PROTOTYPE.md`.
+
+Phase 10E is now implemented as a local-only derived export sidecar prototype
+documented in `docs/PHASE10E_EXPORT_SIDECAR_DESIGN_PROTOTYPE.md`. It reads one
+local manifest, hashes present export/context files, treats safe missing
+references as warnings, rejects unsafe paths, secrets, approval flags, and
+execution intent, writes deterministic JSON/Markdown only under
+`tmp/phase10e-export-sidecar/`, preserves Phase 8/9/10C/10D/7D source/runtime
+artifacts unchanged, and keeps approval at the Phase 7D selected-gate manual
+boundary. Export sidecar is not approval, verified export is not approval, and
+signed export is not approval.
 
 ## 2. Phase 4A — local read-only UI mock
 

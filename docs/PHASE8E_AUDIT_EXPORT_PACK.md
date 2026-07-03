@@ -164,6 +164,13 @@ Phase 10D derived actor-attributed audit report prototype now exists at
 may reference audit export pack outputs as evidence context only and does not
 modify Phase 8E runtime.
 
+### Phase 10E export sidecar design/prototype
+
+Phase 10E export sidecar design/prototype now exists at
+`docs/PHASE10E_EXPORT_SIDECAR_DESIGN_PROTOTYPE.md`. Phase 10E may reference
+audit export pack outputs as evidence context only and does not modify Phase
+8E runtime.
+
 ### Known limitations
 
 - local tmp export only

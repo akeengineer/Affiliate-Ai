@@ -668,3 +668,10 @@ Phase 10D derived actor-attributed audit report prototype now exists at
 `docs/PHASE10D_DERIVED_ACTOR_ATTRIBUTED_AUDIT_REPORT_PROTOTYPE.md`. Phase 10D
 implements a derived actor-attributed report only, not audit store actor-field
 mutation, and does not modify source audit artifacts.
+
+### Phase 10E export sidecar design/prototype
+
+Phase 10E export sidecar design/prototype now exists at
+`docs/PHASE10E_EXPORT_SIDECAR_DESIGN_PROTOTYPE.md`. Phase 10E is a derived
+sidecar only, not audit store mutation, and does not modify source audit
+artifacts.

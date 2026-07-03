@@ -359,3 +359,11 @@ Phase 10D derived actor-attributed audit report prototype now exists at
 may consume local evidence bundle output as context only, does not modify Phase
 10C runtime behavior, and keeps approval at the Phase 7D selected-gate manual
 boundary.
+
+### Phase 10E export sidecar design/prototype
+
+Phase 10E export sidecar design/prototype now exists at
+`docs/PHASE10E_EXPORT_SIDECAR_DESIGN_PROTOTYPE.md`. Phase 10E may consume
+local evidence bundle output as context only, does not modify Phase 10C
+runtime behavior, and keeps approval at the Phase 7D selected-gate manual
+boundary.

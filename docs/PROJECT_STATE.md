@@ -797,4 +797,39 @@ external APIs, and no autopublish. Derived actor-attributed audit report is not
 approval, audit actor attribution is not authentication, audit actor
 attribution is not approval, RBAC advisory context is not enforcement, and
 approval remains the Phase 7D selected-gate manual boundary. Phase 10E
-(Derived Actor-Attributed Export Pack Prototype) is the next recommended phase.
+(Export Sidecar Design/Prototype) is the next recommended phase.
+
+## 35. Phase 10E export sidecar design/prototype
+
+Phase 10E adds the local-only derived export sidecar prototype documented in
+`docs/PHASE10E_EXPORT_SIDECAR_DESIGN_PROTOTYPE.md`. `phase10e_status` is
+`success`, `governed_runtime_integration_status` is now
+`local_evidence_bundle_actor_report_and_export_sidecar_prototypes`,
+`integration_runtime_status` is now `local_export_sidecar_prototype`,
+`export_sidecar_status` is `prototype_local_only`,
+`local_evidence_bundle_status` remains `prototype_local_only`,
+`actor_attributed_audit_report_status` remains `prototype_local_only`,
+`rbac_enforcement_status` remains `not_implemented`,
+`identity_runtime_status` remains `not_implemented`,
+`authentication_runtime_status` remains `not_implemented`,
+`backend_api_database_status` remains `not_implemented`, and
+`key_management_runtime_status` remains `not_implemented`.
+
+Phase 10E is standard-library only:
+`scripts/dev/build_phase10e_export_sidecar.py` reads one local manifest, hashes
+present export/context files, extracts safe summary fields from optional JSON
+context files, treats safe missing files as warnings, rejects unsafe paths,
+secret-like metadata, approval flags, and execution intent, and writes
+deterministic JSON/Markdown only under `tmp/phase10e-export-sidecar/`. It
+makes no export mutation, no re-signing, no wrapper behavior change, no
+primitive execution, and no vault read/write. The existing Phase 8 export,
+integrity, signature, and final-acceptance artifacts, the Phase 9
+registry/attribution/RBAC artifacts, the Phase 10C evidence bundle runtime,
+the Phase 10D actor-attributed report runtime, and the Phase 7D wrapper remain
+unchanged.
+
+Current architecture remains local-first: no database, no FastAPI, no UI, no
+external APIs, and no autopublish. Export sidecar is not approval, export
+sidecar validity is not approval, verified export is not approval, signed
+export is not approval, RBAC advisory context is not enforcement, and approval
+remains the Phase 7D selected-gate manual boundary.

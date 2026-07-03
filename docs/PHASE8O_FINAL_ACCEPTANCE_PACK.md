@@ -461,3 +461,10 @@ Phase 10D derived actor-attributed audit report prototype now exists at
 `docs/PHASE10D_DERIVED_ACTOR_ATTRIBUTED_AUDIT_REPORT_PROTOTYPE.md`. Phase 10D
 may reference final acceptance evidence as local evidence context only. Final
 acceptance remains not approval and Phase 10D does not modify Phase 8O runtime.
+
+## Phase 10E export sidecar design/prototype
+
+Phase 10E export sidecar design/prototype now exists at
+`docs/PHASE10E_EXPORT_SIDECAR_DESIGN_PROTOTYPE.md`. Phase 10E may reference
+final acceptance evidence as local evidence context only. Final acceptance
+remains not approval and Phase 10E does not modify Phase 8O runtime.

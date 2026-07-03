@@ -611,3 +611,11 @@ Phase 10D derived actor-attributed audit report prototype now exists at
 implements a local derived report prototype aligned with governed readiness and
 does not implement authentication, RBAC enforcement, backend/API/database, or
 key management runtime.
+
+### Phase 10E export sidecar design/prototype
+
+Phase 10E export sidecar design/prototype now exists at
+`docs/PHASE10E_EXPORT_SIDECAR_DESIGN_PROTOTYPE.md`. Phase 10E implements a
+local derived sidecar prototype aligned with governed readiness and does not
+implement authentication, RBAC enforcement, backend/API/database, or key
+management runtime.

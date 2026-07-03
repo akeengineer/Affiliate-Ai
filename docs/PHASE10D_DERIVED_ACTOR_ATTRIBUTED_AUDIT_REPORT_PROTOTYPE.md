@@ -319,3 +319,9 @@ Reviewer action is guidance only and is not approval.
 - no wrapper execution
 - no primitive execution
 
+### Phase 10E follow-on
+
+Phase 10E local-only derived export sidecar now exists at
+`docs/PHASE10E_EXPORT_SIDECAR_DESIGN_PROTOTYPE.md`. Phase 10E may consume the
+Phase 10D report as context only and does not change Phase 10D runtime
+behavior.

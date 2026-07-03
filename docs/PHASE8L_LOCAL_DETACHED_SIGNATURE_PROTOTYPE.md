@@ -177,3 +177,10 @@ protected runtime changes occur.
 - no non-repudiation
 - no backend/API/database
 - no production deployment
+
+### Phase 10E export sidecar design/prototype
+
+Phase 10E export sidecar design/prototype now exists at
+`docs/PHASE10E_EXPORT_SIDECAR_DESIGN_PROTOTYPE.md`. Phase 10E may reference
+detached signature artifacts as evidence context only, does not re-sign
+exports, and does not modify Phase 8L runtime.

@@ -326,3 +326,11 @@ Phase 10D derived actor-attributed audit report prototype now exists at
 may reference actor attribution reports as evidence context only. Audit actor
 attribution remains not authentication or approval and Phase 10D does not
 modify Phase 9D runtime.
+
+### Phase 10E export sidecar design/prototype
+
+Phase 10E export sidecar design/prototype now exists at
+`docs/PHASE10E_EXPORT_SIDECAR_DESIGN_PROTOTYPE.md`. Phase 10E may reference
+actor attribution reports as evidence context only. Audit actor attribution
+remains not authentication or approval and Phase 10E does not modify Phase 9D
+runtime.
