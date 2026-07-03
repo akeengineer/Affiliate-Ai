@@ -191,6 +191,54 @@ Phase 8A Durable Audit Store Design is the next recommended phase.
   signature failure taxonomy, and a signing event audit trail model;
   implements no signing, no verification, and no key management). See
   `docs/PHASE8I_DETACHED_SIGNATURE_DESIGN_FINALIZATION.md`.
+- Phase 8J — Detached Signature Verifier Design — **complete / done**
+  (docs/tests design-only; designs the verifier-side envelope/descriptor/
+  hash/key/revocation/rotation/status/failure-taxonomy/reviewer-action/
+  report-schema interpretation for a future detached signature verifier;
+  implements no verifier runtime). See
+  `docs/PHASE8J_DETACHED_SIGNATURE_VERIFIER_DESIGN.md`.
+- Phase 8K — Key Management Design — **complete / done** (docs/tests
+  design-only; designs key governance roles, a key metadata model, key
+  custody options considered, key lifecycle/rotation/revocation/
+  retirement/compromise policy, a key access control model, a key audit
+  trail model, a signer-to-key binding model, a key policy version model,
+  and a failure taxonomy mapping; implements no key management runtime,
+  no key generation, and no signing). See
+  `docs/PHASE8K_KEY_MANAGEMENT_DESIGN.md`.
+- Phase 8L — Local Detached Signature Prototype — **complete / done**
+  (local-only prototype; produces a signed payload descriptor, a detached
+  signature envelope, an HMAC-SHA256 prototype signature, and a Markdown
+  summary under tmp/phase8l-detached-signature/; env-var prototype key
+  only, no committed keys, no key generation, no KMS/Secrets Manager, no
+  signature verifier runtime, and no wrapper/primitive/vault changes). See
+  `docs/PHASE8L_LOCAL_DETACHED_SIGNATURE_PROTOTYPE.md`.
+- Phase 8M — Detached Signature Verifier Prototype — **complete / done**
+  (local-only verifier prototype over Phase 8L outputs; recomputes signed
+  payload hash, verifies HMAC-SHA256 prototype signature when the env-var
+  prototype key is provided, validates descriptor/envelope schema, writes
+  a deterministic verification report under
+  tmp/phase8m-detached-signature-verifier/; no signing, no key generation,
+  no KMS/Secrets Manager, no key management runtime, no
+  wrapper/primitive/vault changes). See
+  `docs/PHASE8M_DETACHED_SIGNATURE_VERIFIER_PROTOTYPE.md`.
+- Phase 8N — Signature Runbook / Incident Review Pack — **complete / done**
+  (docs/tests/runbook-pack only; checkpoint-only within `feature/phase8-signature-governance-completion`; adds the operator safe-demo
+  procedure, reviewer incident review procedure, evidence preservation
+  checklist, escalation matrix, and incident-to-action matrix for the existing
+  Phase 8L/8M local prototypes; no signing/verifier/key-management runtime,
+  no wrapper/primitive/vault changes). See
+  `docs/PHASE8N_SIGNATURE_RUNBOOK_INCIDENT_REVIEW_PACK.md`.
+- Phase 8O — Phase 8 Final Acceptance Pack — **complete / done**
+  (docs/tests-only final acceptance checkpoint; closes
+  `feature/phase8-signature-governance-completion` locally by defining the
+  final scenario matrix, final acceptance report shape, major Phase 8 PR
+  readiness checklist, and full-suite requirement; no new signing model, no
+  new verifier model, no key-management runtime, and no
+  wrapper/primitive/vault changes). See
+  `docs/PHASE8O_FINAL_ACCEPTANCE_PACK.md`.
+
+Phase 8O Phase 8 Final Acceptance Pack is the final local checkpoint for
+the major Phase 8 branch.
 
 Phase 8A is docs/tests-task only. It changes no Phase 7D wrapper behavior,
 executes no primitive, performs no vault read/write, and adds no
@@ -255,8 +303,85 @@ primitive, performs no vault read/write, and adds no backend/API/database.
 `signature_runtime_status` is `not_implemented`, and
 `phase7d_runtime_readiness` remains `implemented_manual_gate`.
 
-Phase 8J (Detached Signature Verifier Design) is the next recommended
-phase; it is not implemented in Phase 8I.
+Phase 8J is docs/tests design-only. It implements no signature verifier,
+no signing, no key generation, no private key handling, and no
+encryption; it changes no Phase 8G/8H verifier runtime behavior, no Phase
+8E export behavior, and no Phase 7D wrapper behavior, executes no
+primitive, performs no vault read/write, and adds no backend/API/database.
+`durable_audit_store_status` is now `detached_signature_verifier_design`,
+`signature_verifier_runtime_status` is `not_implemented`,
+`major_phase_branch_workflow` is `enabled`, and `phase7d_runtime_readiness`
+remains `implemented_manual_gate`.
+
+Phase 8K is docs/tests design-only. It implements no key management
+runtime, no key generation, no signing, no signature verification, and no
+encryption; it changes no Phase 8G/8H verifier runtime behavior, no Phase
+8E export behavior, and no Phase 7D wrapper behavior, executes no
+primitive, performs no vault read/write, and adds no backend/API/database.
+`durable_audit_store_status` is now `key_management_design`,
+`key_management_runtime_status` is `not_implemented`,
+`major_phase_branch_workflow` is `enabled`, and `phase7d_runtime_readiness`
+remains `implemented_manual_gate`.
+
+Phase 8L adds a local-only detached signature prototype. It commits no
+private/public/certificate keys, generates no keys, implements no
+KMS/Secrets Manager/backend/API/database, implements no signature
+verifier runtime, changes no Phase 8G/8H verifier runtime behavior, no
+Phase 8E export behavior, and no Phase 7D wrapper behavior, executes no
+primitive, performs no vault read/write, and writes only under
+tmp/phase8l-detached-signature. `durable_audit_store_status` is now
+`local_detached_signature_prototype`, `signing_implementation_status` is
+`prototype_local_only`, `signature_runtime_status` is `local_prototype`,
+`signature_verifier_runtime_status` and `key_management_runtime_status`
+remain `not_implemented`, `major_phase_branch_workflow` is `enabled`, and
+`phase7d_runtime_readiness` remains `implemented_manual_gate`.
+
+Phase 8M adds a local-only detached signature verifier prototype over
+Phase 8L outputs. It signs nothing, commits no keys, generates no keys,
+implements no KMS/Secrets Manager/backend/API/database, implements no
+key management runtime, changes no Phase 8L signing runtime behavior, no
+Phase 8G/8H verifier runtime behavior, no Phase 8E export behavior, and
+no Phase 7D wrapper behavior, executes no primitive, performs no vault
+read/write, and writes only under tmp/phase8m-detached-signature-verifier.
+`durable_audit_store_status` is now `detached_signature_verifier_prototype`,
+`signature_verifier_runtime_status` is now `local_prototype`,
+`signing_implementation_status` remains `prototype_local_only`,
+`signature_runtime_status` remains `local_prototype`,
+`key_management_runtime_status` remains `not_implemented`,
+`major_phase_branch_workflow` is `enabled`, and `phase7d_runtime_readiness`
+remains `implemented_manual_gate`.
+
+Phase 8N adds the signature runbook / incident review pack for the
+existing Phase 8L and Phase 8M local prototypes. It is docs/tests/
+runbook-pack only, is checkpoint-only within
+`feature/phase8-signature-governance-completion`, adds no signing,
+verifier, or key-management runtime, changes no Phase 8L/8M/8G/8H/8E/7D
+runtime behavior, executes no primitive, performs no vault read/write,
+and adds no backend/API/database. `durable_audit_store_status` is now
+`signature_runbook_incident_review_pack`,
+`signing_implementation_status` remains `prototype_local_only`,
+`signature_runtime_status` remains `local_prototype`,
+`signature_verifier_runtime_status` remains `local_prototype`,
+`key_management_runtime_status` remains `not_implemented`,
+`runbook_runtime_status` is `docs_only`, `major_phase_branch_workflow` is
+`enabled`, and `phase7d_runtime_readiness` remains
+`implemented_manual_gate`.
+
+Phase 8O closes `feature/phase8-signature-governance-completion` locally
+as the final Phase 8 acceptance checkpoint. It is docs/tests-only, adds
+no runtime code, changes no Phase 8L/8M/8G/8H/8E/7D behavior, executes no
+primitive, performs no vault read/write, and adds no backend/API/database.
+`durable_audit_store_status` is now `phase8_final_acceptance_pack`,
+`signing_implementation_status` remains `prototype_local_only`,
+`signature_runtime_status` remains `local_prototype`,
+`signature_verifier_runtime_status` remains `local_prototype`,
+`key_management_runtime_status` remains `not_implemented`,
+`runbook_runtime_status` remains `docs_only`,
+`phase8_major_branch_status` is `ready_for_pr_after_full_suite`,
+`major_phase_branch_workflow` is `enabled`, and
+`phase7d_runtime_readiness` remains `implemented_manual_gate`.
+
+open one major Phase 8 PR after full suite passes.
 
 ## 2. Phase 4A — local read-only UI mock
 

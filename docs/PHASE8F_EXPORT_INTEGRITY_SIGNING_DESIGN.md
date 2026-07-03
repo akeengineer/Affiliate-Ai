@@ -355,6 +355,18 @@ policy, and a signature failure taxonomy. Phase 8I refines the signature
 envelope/payload/key-lifecycle/failure-taxonomy shape this design
 introduced; it remains design-only and implements no signing or keys.
 
+### Phase 8K key management design
+
+Phase 8K extends key governance from this earlier signing design, in
+`docs/PHASE8K_KEY_MANAGEMENT_DESIGN.md`: key governance roles, a key
+metadata model, key custody options considered, key lifecycle/rotation/
+revocation/retirement/compromise policy, a key access control model, a
+key audit trail model, and a signer-to-key binding model. Phase 8K
+refines the key lifecycle/custody/rotation/revocation/signer-to-key
+binding governance this design and Phase 8I introduced; it does not
+implement KMS, Secrets Manager, or key generation, and it remains
+design-only.
+
 ### Known limitations
 
 - design only

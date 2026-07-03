@@ -212,6 +212,9 @@ signing in
 [`PHASE8I_DETACHED_SIGNATURE_DESIGN_FINALIZATION.md`](PHASE8I_DETACHED_SIGNATURE_DESIGN_FINALIZATION.md).
 Phase 8I does not modify this hardened verifier's runtime. A verified
 signature, once implemented in a future phase, remains not approval.
+Phase 8J's future verifier design now exists in
+[`PHASE8J_DETACHED_SIGNATURE_VERIFIER_DESIGN.md`](PHASE8J_DETACHED_SIGNATURE_VERIFIER_DESIGN.md)
+and does not modify this hardened verifier's runtime.
 
 ### Known limitations
 

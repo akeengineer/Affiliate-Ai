@@ -269,7 +269,20 @@ def test_phase8f_protected_runtime_files_unchanged() -> None:
 def test_phase8f_no_runtime_signing_or_key_files_added() -> None:
     scripts_dir = REPO_ROOT / "scripts/dev"
     assert not any(scripts_dir.glob("*phase8f*")), "Phase 8F must not add runtime scripts"
-    for pattern in ("*sign*", "*.pem", "*.key", "*.crt", "*.pub", "*.p12", "*.pfx"):
+
+    sanctioned_signing_runtime = {
+        "build_phase8l_detached_signature.py",
+        "run_phase8l_detached_signature.sh",
+        "run_phase8m_detached_signature_verifier.sh",
+        "verify_phase8m_detached_signature.py",
+    }
+    observed_signing_runtime = {path.name for path in scripts_dir.glob("*sign*")}
+    assert observed_signing_runtime == sanctioned_signing_runtime, (
+        "Phase 8F design-only guard must allow only the sanctioned "
+        "Phase 8L/8M local prototype signing/verifier runtime files"
+    )
+
+    for pattern in ("*.pem", "*.key", "*.crt", "*.pub", "*.p12", "*.pfx"):
         assert not any(scripts_dir.glob(pattern)), f"Phase 8F must not add signing/key/cert files matching {pattern}"
 
     for path in REPO_ROOT.rglob("*"):
