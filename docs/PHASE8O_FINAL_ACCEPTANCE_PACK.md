@@ -433,3 +433,10 @@ not approval.
 Phase 9G Phase 9 acceptance pack now exists at
 `docs/PHASE9G_PHASE9_ACCEPTANCE_PACK.md`. Phase 9 extends acceptance evidence
 with identity/RBAC governance but does not modify Phase 8O runtime.
+
+## Phase 10A governed runtime integration readiness
+
+Phase 10A governed runtime integration readiness design now exists at
+`docs/PHASE10A_GOVERNED_RUNTIME_INTEGRATION_READINESS_DESIGN.md`. Phase 10A may
+reference Phase 8 final acceptance evidence conceptually but does not modify
+Phase 8O runtime.

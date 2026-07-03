@@ -449,3 +449,11 @@ Phase 10 should not immediately implement production auth/RBAC. It should first
 decide whether to harden the local identity/RBAC prototypes, connect actor
 attribution into audit store outputs, or design production authentication
 integration.
+
+### Phase 10A governed runtime integration readiness
+
+Phase 10A governed runtime integration readiness design now exists at
+`docs/PHASE10A_GOVERNED_RUNTIME_INTEGRATION_READINESS_DESIGN.md`. Phase 10A
+begins governed runtime integration readiness after Phase 9, may reference
+Phase 8 and Phase 9 evidence/advisory outputs conceptually, and does not
+implement integration runtime.

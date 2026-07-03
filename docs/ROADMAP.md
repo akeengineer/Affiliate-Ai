@@ -545,8 +545,35 @@ vault read/write, and adds no backend/API/database. `phase9g_status` is
 9 acceptance pack, RBAC allow decisions, and RBAC advisory reports are all
 **not approval**; approval remains the Phase 7D selected-gate manual boundary.
 
-Phase 10 — Governed Runtime Integration Readiness is the next recommended
-phase.
+## 1g. Phase 10 — governed runtime integration readiness
+
+- Phase 10A — Governed Runtime Integration Readiness Design — **complete / current**
+  (docs/tests design-only; defines the governed integration readiness model,
+  evidence source model, actor context model, advisory RBAC context model,
+  signature context model, approval boundary model, future input/output
+  contracts, evidence/actor/RBAC/signature binding models, compatibility and
+  safety checks, reviewer action mapping, and a failure taxonomy for future
+  local-first integration; implements no integration runtime, no
+  authentication, no RBAC enforcement, no backend/API/database, and no key
+  management runtime). See
+  `docs/PHASE10A_GOVERNED_RUNTIME_INTEGRATION_READINESS_DESIGN.md`.
+
+Phase 10A is docs/tests design-only. It changes no Phase 9C/9D/9F runtime, no
+Phase 8 runtime, and no Phase 7D wrapper behavior, executes no primitive,
+performs no vault read/write, and adds no backend/API/database.
+`governed_runtime_integration_status` is `design_only`,
+`integration_runtime_status`, `rbac_enforcement_status`,
+`authentication_runtime_status`, `backend_api_database_status`, and
+`key_management_runtime_status` are `not_implemented`,
+`phase10_branch_workflow` is `enabled`, and `phase7d_runtime_readiness`
+remains `implemented_manual_gate`. Governed integration readiness is not
+runtime integration, integration design is not approval, and approval remains
+the Phase 7D selected-gate manual boundary.
+
+Phase 10B — Actor Attribution Integration Plan for Audit Store is the next
+recommended phase. It should remain docs/tests design-only, preserve the
+read-only and manual-approved guardrails already established through Phase 5
+and Phase 7D, and continue to avoid production auth/RBAC/key/backend runtime.
 
 ## 2. Phase 4A — local read-only UI mock
 

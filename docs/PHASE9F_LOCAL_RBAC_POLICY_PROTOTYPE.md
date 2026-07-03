@@ -413,3 +413,10 @@ Rules:
 Phase 9G Phase 9 acceptance pack now exists at
 `docs/PHASE9G_PHASE9_ACCEPTANCE_PACK.md`. Phase 9G validates this local RBAC
 policy prototype as local advisory only. Phase 9F remains not enforcement.
+
+### Phase 10A governed runtime integration readiness
+
+Phase 10A governed runtime integration readiness design now exists at
+`docs/PHASE10A_GOVERNED_RUNTIME_INTEGRATION_READINESS_DESIGN.md`. Phase 10A may
+reference advisory RBAC outputs conceptually but does not modify Phase 9F
+runtime.

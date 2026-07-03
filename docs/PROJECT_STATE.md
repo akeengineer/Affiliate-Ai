@@ -690,3 +690,22 @@ pack, RBAC allow decisions, and RBAC advisory reports are all **not
 approval**; approval remains the Phase 7D selected-gate manual boundary.
 `phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 10
 (Governed Runtime Integration Readiness) is the next recommended phase.
+
+## 31. Phase 10A governed runtime integration readiness design
+
+Phase 10A adds the governed runtime integration readiness design documented in
+`docs/PHASE10A_GOVERNED_RUNTIME_INTEGRATION_READINESS_DESIGN.md`.
+`phase10a_status` is `success`, `governed_runtime_integration_status` is
+`design_only`, `integration_runtime_status` is `not_implemented`,
+`rbac_enforcement_status` remains `not_implemented`,
+`authentication_runtime_status` remains `not_implemented`,
+`backend_api_database_status` is `not_implemented`,
+`key_management_runtime_status` remains `not_implemented`, and
+`phase10_branch_workflow` is `enabled`. Phase 10A is docs/tests design-only:
+it adds no runtime scripts, no shell runner, no wrapper behavior change, no
+primitive execution, and no vault read/write. The existing Phase 7D wrapper,
+Phase 8 evidence/signature artifacts, and Phase 9 identity/registry/
+attribution/RBAC artifacts remain unchanged. Governed runtime integration
+readiness is not runtime integration, integration design is not approval, and
+approval remains the Phase 7D selected-gate manual boundary. Phase 10B (Actor
+Attribution Integration Plan for Audit Store) is the next recommended phase.
