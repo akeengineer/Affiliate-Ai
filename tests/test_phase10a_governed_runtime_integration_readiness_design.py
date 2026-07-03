@@ -71,7 +71,7 @@ def test_phase10a_required_files_exist() -> None:
 
 def test_phase10a_no_runtime_script_or_runner() -> None:
     dev = REPO_ROOT / "scripts/dev"
-    for pattern in ("*phase10a*.py", "*phase10a*.sh", "*phase10*.py", "*phase10*.sh"):
+    for pattern in ("*phase10a*.py", "*phase10a*.sh"):
         matches = sorted(str(path.relative_to(REPO_ROOT)) for path in dev.glob(pattern))
         assert matches == [], f"unexpected Phase 10 runtime file: {matches}"
 
@@ -532,8 +532,8 @@ def test_phase10a_no_implementation_files_added() -> None:
 
     scripts = REPO_ROOT / "scripts"
     forbidden_patterns = (
-        "**/*phase10*.py",
-        "**/*phase10*.sh",
+        "**/*phase10a*.py",
+        "**/*phase10a*.sh",
         "**/*integration*runtime*",
         "**/*auth*.py",
         "**/*rbac*enforcement*",

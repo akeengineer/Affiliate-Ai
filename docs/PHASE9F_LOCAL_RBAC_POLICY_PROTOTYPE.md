@@ -420,3 +420,10 @@ Phase 10A governed runtime integration readiness design now exists at
 `docs/PHASE10A_GOVERNED_RUNTIME_INTEGRATION_READINESS_DESIGN.md`. Phase 10A may
 reference advisory RBAC outputs conceptually but does not modify Phase 9F
 runtime.
+
+### Phase 10C local evidence bundle with actor/RBAC context
+
+Phase 10C local evidence bundle with actor/RBAC context now exists at
+`docs/PHASE10C_LOCAL_EVIDENCE_BUNDLE_ACTOR_RBAC_CONTEXT.md`. Phase 10C may
+reference advisory RBAC reports as evidence context only. RBAC advisory context
+remains not enforcement and does not modify Phase 9F runtime.

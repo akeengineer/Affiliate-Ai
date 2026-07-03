@@ -570,7 +570,7 @@ remains `implemented_manual_gate`. Governed integration readiness is not
 runtime integration, integration design is not approval, and approval remains
 the Phase 7D selected-gate manual boundary.
 
-- Phase 10B — Actor Attribution Integration Plan for Audit Store — **complete / current**
+- Phase 10B — Actor Attribution Integration Plan for Audit Store — **complete**
   (docs/tests design-only; narrows Phase 10A toward future audit-store actor
   attribution by defining an audit actor context model, future audit actor field
   model, source binding models, append-only and hash-chain compatibility rules,
@@ -593,11 +593,33 @@ is not runtime integration, audit actor attribution is not authentication,
 audit actor attribution is not approval, and approval remains the Phase 7D
 selected-gate manual boundary.
 
-Phase 10C — Local Evidence Bundle with Actor/RBAC Context is the next
-recommended phase. It should remain docs/tests design-only or explicitly
-local-only, preserve the read-only and manual-approved guardrails already
-established through Phase 5 and Phase 7D, and continue to avoid production
-auth/RBAC/key/backend runtime.
+- Phase 10C — Local Evidence Bundle with Actor/RBAC Context — **complete / current**
+  (local-only derived evidence bundle runtime prototype; standard library only;
+  reads one local manifest, validates safe evidence/context references, hashes
+  present files, treats safe missing files as warnings, rejects unsafe paths,
+  secrets, approval flags, and execution intent, and emits deterministic JSON +
+  Markdown only under `tmp/phase10c-local-evidence-bundle/`; preserves Phase 8,
+  Phase 9, and Phase 7D source artifacts unchanged). See
+  `docs/PHASE10C_LOCAL_EVIDENCE_BUNDLE_ACTOR_RBAC_CONTEXT.md`.
+
+Phase 10C is explicitly local-only. It changes no Phase 8B/8C/8D/8E/8G/8L/8M/8O
+runtime, no Phase 9C/9D/9F runtime, and no Phase 7D wrapper behavior, executes
+no primitive, performs no vault read/write, and adds no backend/API/database.
+`governed_runtime_integration_status` and `integration_runtime_status` are now
+`local_evidence_bundle_prototype`, `local_evidence_bundle_status` is
+`prototype_local_only`, `audit_actor_attribution_integration_status` remains
+`design_only`, `rbac_enforcement_status`, `authentication_runtime_status`,
+`backend_api_database_status`, and `key_management_runtime_status` remain
+`not_implemented`, and `phase10_branch_workflow` remains `enabled`. Local
+evidence bundle is not approval, evidence bundle validity is not approval, and
+approval remains the Phase 7D selected-gate manual boundary while preserving
+the read-only and manual-approved guardrails established through Phase 5 and
+Phase 7D.
+
+Phase 10D — Derived Actor-Attributed Audit Report Prototype is the next
+recommended phase. It should remain local-only, preserve Phase 8 append-only
+source artifacts unchanged, and continue to avoid production auth/RBAC/key/
+backend runtime.
 
 ## 2. Phase 4A — local read-only UI mock
 

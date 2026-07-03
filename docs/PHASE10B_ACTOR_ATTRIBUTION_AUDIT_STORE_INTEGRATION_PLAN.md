@@ -654,3 +654,10 @@ Phase 10B does not:
 - no backend/API/database
 - no production deployment
 - local prototype context only
+
+### Phase 10C local evidence bundle with actor/RBAC context
+
+Phase 10C local evidence bundle with actor/RBAC context now exists at
+`docs/PHASE10C_LOCAL_EVIDENCE_BUNDLE_ACTOR_RBAC_CONTEXT.md`. Phase 10C
+implements a local derived evidence bundle only, not audit store actor
+attribution runtime, and does not mutate source audit artifacts.

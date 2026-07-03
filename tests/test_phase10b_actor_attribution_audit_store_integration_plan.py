@@ -73,7 +73,7 @@ def test_phase10b_required_files_exist() -> None:
 
 def test_phase10b_no_runtime_script_or_runner() -> None:
     dev = REPO_ROOT / "scripts/dev"
-    for pattern in ("*phase10b*.py", "*phase10b*.sh", "*phase10*.py", "*phase10*.sh"):
+    for pattern in ("*phase10b*.py", "*phase10b*.sh"):
         matches = sorted(str(path.relative_to(REPO_ROOT)) for path in dev.glob(pattern))
         assert matches == [], f"unexpected Phase 10 runtime file: {matches}"
 

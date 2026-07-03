@@ -731,3 +731,34 @@ integration plan is not runtime integration, audit actor attribution is not
 authentication, audit actor attribution is not approval, and approval remains
 the Phase 7D selected-gate manual boundary. Phase 10C (Local Evidence Bundle
 with Actor/RBAC Context) is the next recommended phase.
+
+## 33. Phase 10C local evidence bundle with actor/RBAC context
+
+Phase 10C adds the local-only derived evidence bundle runtime prototype
+documented in `docs/PHASE10C_LOCAL_EVIDENCE_BUNDLE_ACTOR_RBAC_CONTEXT.md`.
+`phase10c_status` is `success`, `governed_runtime_integration_status` is now
+`local_evidence_bundle_prototype`, `integration_runtime_status` is now
+`local_evidence_bundle_prototype`, `local_evidence_bundle_status` is
+`prototype_local_only`, `audit_actor_attribution_integration_status` remains
+`design_only`, `rbac_enforcement_status` remains `not_implemented`,
+`identity_runtime_status` remains `not_implemented`,
+`authentication_runtime_status` remains `not_implemented`,
+`backend_api_database_status` remains `not_implemented`,
+and `key_management_runtime_status` remains `not_implemented`.
+
+Phase 10C is standard-library only: `scripts/dev/build_phase10c_local_evidence_bundle.py`
+reads one local manifest, validates safe evidence/context references, hashes
+present files, treats safe missing files as warnings, rejects unsafe paths,
+secret-like metadata, approval flags, and execution intent, and writes
+deterministic JSON/Markdown only under
+`tmp/phase10c-local-evidence-bundle/`. It makes no audit store runtime change,
+no wrapper behavior change, no primitive execution, and no vault read/write.
+The existing Phase 8 audit/export/signature/final-acceptance artifacts, Phase 9
+registry/attribution/RBAC artifacts, and Phase 7D wrapper remain unchanged.
+
+Current architecture remains local-first: no database, no FastAPI, no UI, no
+external APIs, and no autopublish. Local evidence bundle is not approval,
+evidence bundle validity is not approval, actor context is not authentication,
+RBAC advisory context is not enforcement, and approval remains the Phase 7D
+selected-gate manual boundary. Phase 10D (Derived Actor-Attributed Audit Report
+Prototype) is the next recommended phase.

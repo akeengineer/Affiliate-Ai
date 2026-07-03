@@ -595,3 +595,11 @@ Phase 10B actor attribution audit store integration plan now exists at
 `docs/PHASE10B_ACTOR_ATTRIBUTION_AUDIT_STORE_INTEGRATION_PLAN.md`. Phase 10B
 narrows governed integration readiness toward audit actor attribution and does
 not implement runtime integration.
+
+### Phase 10C local evidence bundle with actor/RBAC context
+
+Phase 10C local evidence bundle with actor/RBAC context now exists at
+`docs/PHASE10C_LOCAL_EVIDENCE_BUNDLE_ACTOR_RBAC_CONTEXT.md`. Phase 10C
+implements a local evidence bundle prototype aligned with governed readiness and
+does not implement authentication, RBAC enforcement, backend/API/database, or
+key management runtime.

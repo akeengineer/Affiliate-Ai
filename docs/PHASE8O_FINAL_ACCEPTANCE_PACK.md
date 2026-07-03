@@ -447,3 +447,10 @@ Phase 10B actor attribution audit store integration plan now exists at
 `docs/PHASE10B_ACTOR_ATTRIBUTION_AUDIT_STORE_INTEGRATION_PLAN.md`. Phase 10B
 may reference final acceptance evidence conceptually but does not modify Phase
 8O runtime.
+
+## Phase 10C local evidence bundle with actor/RBAC context
+
+Phase 10C local evidence bundle with actor/RBAC context now exists at
+`docs/PHASE10C_LOCAL_EVIDENCE_BUNDLE_ACTOR_RBAC_CONTEXT.md`. Phase 10C may
+reference final acceptance evidence as local evidence context only. Final
+acceptance remains not approval and Phase 10C does not modify Phase 8O runtime.
