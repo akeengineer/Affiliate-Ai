@@ -677,3 +677,10 @@ Phase 9E does not:
 - no strong non-repudiation
 - no backend/API/database
 - no production deployment
+
+### Phase 9F local RBAC policy prototype
+
+Phase 9F local RBAC policy prototype now exists at
+`docs/PHASE9F_LOCAL_RBAC_POLICY_PROTOTYPE.md`. Phase 9F implements a local
+advisory subset of this design. Phase 9F does not implement enforcement; RBAC
+allow decisions and RBAC eligibility remain not approval.

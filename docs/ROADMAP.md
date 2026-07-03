@@ -498,7 +498,33 @@ vault read/write, and adds no backend/API/database. `rbac_design_status` is
 RBAC enforcement, RBAC eligibility is not approval, and an RBAC decision is not
 product approval; approval remains the Phase 7D selected-gate manual boundary.
 
-Phase 9F Local RBAC Policy Prototype is the next recommended phase.
+- Phase 9F — Local RBAC Policy Prototype — **complete / current**
+  (local-only, advisory-only prototype; adds
+  `scripts/dev/evaluate_phase9f_local_rbac_policy.py` and
+  `scripts/dev/run_phase9f_local_rbac_policy.sh` that evaluate a local
+  subject/resource/action request against a local RBAC policy JSON — with
+  optional advisory context from a Phase 9C registry and/or a Phase 9D
+  attribution report — and write a deterministic advisory decision report only
+  under `tmp/phase9f-local-rbac-policy/`; standard library only, no network, no
+  database, no RBAC enforcement, no authentication, no login/session/user
+  store, no backend/API/database, and no key management runtime). See
+  `docs/PHASE9F_LOCAL_RBAC_POLICY_PROTOTYPE.md`.
+
+Phase 9F is a local advisory-only prototype. It changes no Phase 9C/9D runtime,
+no Phase 7D wrapper behavior, and no Phase 8 runtime, executes no primitive,
+performs no vault read/write, and adds no backend/API/database.
+`rbac_policy_status` is `local_advisory_prototype`, `rbac_runtime_status` is
+`local_advisory_prototype`, `rbac_enforcement_status` remains `not_implemented`,
+`actor_attribution_status` remains `local_report_prototype`,
+`actor_metadata_runtime_status` remains `local_registry_prototype`,
+`identity_runtime_status` and `authentication_runtime_status` remain
+`not_implemented`, `phase9_branch_workflow` is `enabled`, and
+`phase7d_runtime_readiness` remains `implemented_manual_gate`. The local RBAC
+policy prototype is not enforcement, an RBAC allow decision is not approval, and
+RBAC eligibility is not approval; approval remains the Phase 7D selected-gate
+manual boundary.
+
+Phase 9G Phase 9 Acceptance Pack is the next recommended phase.
 
 ## 2. Phase 4A — local read-only UI mock
 

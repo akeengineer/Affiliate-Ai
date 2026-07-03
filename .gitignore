@@ -97,3 +97,5 @@ tmp/phase9c-local-operator-registry/
 tmp/phase9c-test-input/
 tmp/phase9d-actor-attribution/
 tmp/phase9d-test-input/
+tmp/phase9f-local-rbac-policy/
+tmp/phase9f-test-input/

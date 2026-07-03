@@ -540,7 +540,10 @@ def test_phase9a_protected_runtime_files_exist_and_are_unchanged() -> None:
 
 def test_phase9a_no_implementation_files_added() -> None:
     dev = REPO_ROOT / "scripts/dev"
-    for pattern in ("*phase9a*", "*identity*", "*rbac*", "*auth*", "*login*", "*oauth*", "*oidc*", "*saml*"):
+    # Phase 9A itself is design-only. "*rbac*" is intentionally not forbidden
+    # here: Phase 9F is the explicitly authorized local advisory RBAC policy
+    # prototype phase and legitimately owns rbac-named scripts.
+    for pattern in ("*phase9a*", "*identity*", "*auth*", "*login*", "*oauth*", "*oidc*", "*saml*"):
         matches = sorted(p.name for p in dev.glob(pattern))
         assert matches == [], f"unexpected Phase 9A implementation files ({pattern}): {matches}"
     assert not (REPO_ROOT / "package.json").exists()

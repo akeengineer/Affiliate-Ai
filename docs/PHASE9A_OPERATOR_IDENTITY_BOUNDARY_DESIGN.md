@@ -768,3 +768,10 @@ runtime. Actor attribution is not authentication and is not approval.
 Phase 9E RBAC design now exists at `docs/PHASE9E_RBAC_DESIGN.md`. Phase 9E
 preserves this identity boundary and does not implement an authentication
 runtime. RBAC design is not enforcement and RBAC eligibility is not approval.
+
+### Phase 9F local RBAC policy prototype
+
+Phase 9F local RBAC policy prototype now exists at
+`docs/PHASE9F_LOCAL_RBAC_POLICY_PROTOTYPE.md`. Phase 9F preserves this identity
+boundary and does not implement authentication. The local RBAC policy prototype
+is not enforcement, and RBAC eligibility is not approval.

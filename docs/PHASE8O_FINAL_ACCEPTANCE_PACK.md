@@ -419,3 +419,11 @@ Phase 9E RBAC design now exists at `docs/PHASE9E_RBAC_DESIGN.md`. Phase 9E defin
 conceptual permission boundaries for final acceptance review but does not modify
 Phase 8O runtime. Final acceptance remains not approval, and an RBAC decision is
 not product approval.
+
+## Phase 9F local RBAC policy prototype
+
+Phase 9F local RBAC policy prototype now exists at
+`docs/PHASE9F_LOCAL_RBAC_POLICY_PROTOTYPE.md`. Phase 9F can evaluate advisory
+eligibility for final acceptance review actions but does not modify Phase 8O
+runtime. Final acceptance remains not approval, and an RBAC advisory decision is
+not approval.

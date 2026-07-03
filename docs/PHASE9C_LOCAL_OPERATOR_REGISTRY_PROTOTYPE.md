@@ -336,3 +336,10 @@ and is not approval.
 Phase 9E RBAC design now exists at `docs/PHASE9E_RBAC_DESIGN.md`. Phase 9E uses
 these registry records as a future RBAC subject source. Phase 9E does not modify
 this registry runtime; registry presence remains not authentication or approval.
+
+### Phase 9F local RBAC policy prototype
+
+Phase 9F local RBAC policy prototype now exists at
+`docs/PHASE9F_LOCAL_RBAC_POLICY_PROTOTYPE.md`. Phase 9F may consume this
+registry as optional advisory subject context. Phase 9F does not modify this
+registry runtime; registry presence remains not authentication or approval.

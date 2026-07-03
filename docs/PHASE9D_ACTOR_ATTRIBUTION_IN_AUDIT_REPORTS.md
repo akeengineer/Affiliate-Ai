@@ -284,3 +284,10 @@ Phase 9E RBAC design now exists at `docs/PHASE9E_RBAC_DESIGN.md`. Phase 9E uses
 this attribution report as future subject/evidence context for RBAC decisions.
 Phase 9E does not modify this attribution runtime; RBAC design is not enforcement
 and RBAC eligibility is not approval.
+
+### Phase 9F local RBAC policy prototype
+
+Phase 9F local RBAC policy prototype now exists at
+`docs/PHASE9F_LOCAL_RBAC_POLICY_PROTOTYPE.md`. Phase 9F may consume this
+attribution report as optional advisory context. Phase 9F does not modify this
+attribution runtime; actor attribution remains not authentication or approval.

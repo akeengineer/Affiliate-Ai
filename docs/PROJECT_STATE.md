@@ -645,3 +645,28 @@ enforcement, RBAC eligibility is not approval, and an RBAC decision is not
 product approval; approval remains the Phase 7D selected-gate manual boundary.
 `phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 9F (Local
 RBAC Policy Prototype) is the next recommended phase.
+
+## 29. Phase 9F local RBAC policy prototype
+
+Phase 9F adds the local advisory RBAC policy prototype documented in
+`docs/PHASE9F_LOCAL_RBAC_POLICY_PROTOTYPE.md`. A local-only, advisory-only
+policy evaluation prototype now exists:
+`scripts/dev/evaluate_phase9f_local_rbac_policy.py` evaluates a local
+subject/resource/action request against a local RBAC policy JSON (with optional
+Phase 9C registry and Phase 9D attribution advisory context) and
+`scripts/dev/run_phase9f_local_rbac_policy.sh` wraps it; both write only under
+`tmp/phase9f-local-rbac-policy/`. `rbac_policy_status` is now
+`local_advisory_prototype`, `rbac_runtime_status` is `local_advisory_prototype`,
+`rbac_enforcement_status` remains `not_implemented`, `actor_attribution_status`
+remains `local_report_prototype`, `actor_metadata_runtime_status` remains
+`local_registry_prototype`, `local_operator_registry_status` remains
+`prototype_local_only`, `identity_runtime_status` remains `not_implemented`,
+`authentication_runtime_status` remains `not_implemented`, and
+`key_management_runtime_status` remains `not_implemented`. Phase 9F is
+standard-library only: it adds no backend/API/database, makes no wrapper
+behavior change, executes no primitive, and performs no vault read/write. The
+local RBAC policy prototype is not enforcement, an RBAC allow decision is not
+approval, and RBAC eligibility is not approval; approval remains the Phase 7D
+selected-gate manual boundary. `phase7d_runtime_readiness` remains
+`implemented_manual_gate`. Phase 9G (Phase 9 Acceptance Pack) is the next
+recommended phase.
