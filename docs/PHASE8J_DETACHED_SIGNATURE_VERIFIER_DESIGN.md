@@ -483,3 +483,12 @@ must pass before moving to Phase 8K.
 - no non-repudiation
 - no backend/API/database
 - no production deployment
+
+## Phase 9A operator identity boundary
+
+Phase 9A operator identity boundary now exists at
+`docs/PHASE9A_OPERATOR_IDENTITY_BOUNDARY_DESIGN.md`. Phase 9A clarifies signer
+and reviewer identity interpretation for future verifier work, mapping
+`signer_id` and reviewer fields to future actor fields. Signer identity is not
+approval and is not non-repudiation without future stronger assurance; verified
+signature remains not approval.

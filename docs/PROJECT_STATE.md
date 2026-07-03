@@ -545,3 +545,22 @@ execution; it performs no vault write and introduces no new runtime. The
 existing Phase 8L signing prototype, Phase 8M verifier prototype, and
 Phase 8N runbook remain unchanged. `phase7d_runtime_readiness` remains
 `implemented_manual_gate`.
+
+## 24. Phase 9A operator identity boundary design
+
+Phase 9A adds the operator identity boundary design documented in
+`docs/PHASE9A_OPERATOR_IDENTITY_BOUNDARY_DESIGN.md`. The operator identity
+boundary design now exists and opens the Phase 9 identity/RBAC/audit-attribution
+stage. `identity_boundary_status` is `design_only`, `identity_runtime_status`
+is `not_implemented`, `rbac_runtime_status` is `not_implemented`,
+`authentication_runtime_status` is `not_implemented`,
+`operator_identity_assurance_status` is `unauthenticated_or_operator_declared`,
+and `key_management_runtime_status` remains `not_implemented`. Phase 9A is
+docs/tests design-only: it adds no backend/API/database, makes no wrapper
+behavior change, executes no primitive, and performs no vault read/write. The
+existing Phase 7D wrapper and Phase 8L/8M/8N/8O prototypes and packs remain
+unchanged. Operator identity, authenticated identity, reviewer identity, signer
+identity, actor attribution, RBAC eligibility, identity assurance, and key
+ownership are all **not approval**; approval remains the Phase 7D selected-gate
+manual boundary. `phase7d_runtime_readiness` remains `implemented_manual_gate`.
+Phase 9B (Actor Metadata Schema Design) is the next recommended phase.

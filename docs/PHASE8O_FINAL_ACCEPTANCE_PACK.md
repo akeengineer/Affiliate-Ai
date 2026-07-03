@@ -381,3 +381,11 @@ Phase 8O does not:
 - no production deployment
 - no marketplace integration
 - no autopublish
+
+## Phase 9A operator identity boundary
+
+Phase 9A begins the identity/RBAC stage after Phase 8 and is documented in
+`docs/PHASE9A_OPERATOR_IDENTITY_BOUNDARY_DESIGN.md`. Phase 9A designs how
+operator, reviewer, signer, and actor identity should be attributed in future
+audit/report outputs. Final acceptance remains not approval, and Phase 9A does
+not modify this final acceptance pack runtime.

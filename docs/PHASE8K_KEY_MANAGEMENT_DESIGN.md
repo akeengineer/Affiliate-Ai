@@ -513,3 +513,12 @@ tests must pass before moving to Phase 8L.
 - no non-repudiation
 - no backend/API/database
 - no production deployment
+
+## Phase 9A operator identity boundary
+
+Phase 9A operator identity boundary now exists at
+`docs/PHASE9A_OPERATOR_IDENTITY_BOUNDARY_DESIGN.md`. Phase 9A clarifies how the
+key governance roles (`key_owner`, `key_custodian`, `security_owner`,
+`system_owner`, `emergency_revocation_authority`) are attributed as governance
+labels only. It does not implement key runtime; key ownership is not runtime
+permission and is not approval.

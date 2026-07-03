@@ -383,6 +383,33 @@ primitive, performs no vault read/write, and adds no backend/API/database.
 
 open one major Phase 8 PR after full suite passes.
 
+## 1f. Phase 9 — operator identity / RBAC / audit attribution
+
+- Phase 9A — Operator Identity Boundary Design — **complete / current**
+  (docs/tests design-only; opens the Phase 9 identity/RBAC stage by defining the
+  operator identity boundary, the actor identity model, operator/reviewer/
+  signer/actor identity interpretation, identity assurance levels, an identity
+  evidence model, identity-to-action attribution, approval/signature/reviewer/
+  key-role attribution boundaries, future RBAC/authentication-provider/session/
+  audit-actor fields, privacy and PII minimization, non-repudiation limitations,
+  and a migration path; implements no authentication, RBAC, login, session,
+  backend/API/database, or key management runtime). See
+  `docs/PHASE9A_OPERATOR_IDENTITY_BOUNDARY_DESIGN.md`.
+
+Phase 9A is docs/tests design-only. It changes no Phase 7D wrapper behavior and
+no Phase 8 runtime, executes no primitive, performs no vault read/write, and
+adds no backend/API/database. `identity_boundary_status` is `design_only`,
+`identity_runtime_status`, `rbac_runtime_status`, and
+`authentication_runtime_status` are `not_implemented`,
+`operator_identity_assurance_status` is `unauthenticated_or_operator_declared`,
+`phase9_branch_workflow` is `enabled`, and `phase7d_runtime_readiness` remains
+`implemented_manual_gate`. Operator identity, authenticated identity, reviewer
+identity, signer identity, actor attribution, RBAC eligibility, identity
+assurance, and key ownership are all **not approval**; approval remains the
+Phase 7D selected-gate manual boundary.
+
+Phase 9B Actor Metadata Schema Design is the next recommended phase.
+
 ## 2. Phase 4A — local read-only UI mock
 
 - A static or local-only view rendered over existing tmp/vault artifacts.
