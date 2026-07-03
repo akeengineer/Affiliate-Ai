@@ -722,3 +722,9 @@ runtime permission, and RBAC eligibility is not approval.
 Phase 9F local RBAC policy prototype now exists at
 `docs/PHASE9F_LOCAL_RBAC_POLICY_PROTOTYPE.md`. Phase 9F maps request subjects to
 these actor metadata fields. Schema validity remains not approval.
+
+### Phase 9G Phase 9 acceptance pack
+
+Phase 9G Phase 9 acceptance pack now exists at
+`docs/PHASE9G_PHASE9_ACCEPTANCE_PACK.md`. Phase 9G validates that schema
+validity remains not approval.

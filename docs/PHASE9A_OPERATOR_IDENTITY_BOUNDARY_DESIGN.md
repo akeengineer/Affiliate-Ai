@@ -775,3 +775,9 @@ Phase 9F local RBAC policy prototype now exists at
 `docs/PHASE9F_LOCAL_RBAC_POLICY_PROTOTYPE.md`. Phase 9F preserves this identity
 boundary and does not implement authentication. The local RBAC policy prototype
 is not enforcement, and RBAC eligibility is not approval.
+
+### Phase 9G Phase 9 acceptance pack
+
+Phase 9G Phase 9 acceptance pack now exists at
+`docs/PHASE9G_PHASE9_ACCEPTANCE_PACK.md`. Phase 9G validates that identity
+remains not approval.

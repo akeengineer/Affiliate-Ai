@@ -427,3 +427,9 @@ Phase 9F local RBAC policy prototype now exists at
 eligibility for final acceptance review actions but does not modify Phase 8O
 runtime. Final acceptance remains not approval, and an RBAC advisory decision is
 not approval.
+
+## Phase 9G Phase 9 acceptance pack
+
+Phase 9G Phase 9 acceptance pack now exists at
+`docs/PHASE9G_PHASE9_ACCEPTANCE_PACK.md`. Phase 9 extends acceptance evidence
+with identity/RBAC governance but does not modify Phase 8O runtime.

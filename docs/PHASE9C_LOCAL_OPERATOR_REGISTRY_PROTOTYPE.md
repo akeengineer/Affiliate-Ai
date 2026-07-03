@@ -343,3 +343,9 @@ Phase 9F local RBAC policy prototype now exists at
 `docs/PHASE9F_LOCAL_RBAC_POLICY_PROTOTYPE.md`. Phase 9F may consume this
 registry as optional advisory subject context. Phase 9F does not modify this
 registry runtime; registry presence remains not authentication or approval.
+
+### Phase 9G Phase 9 acceptance pack
+
+Phase 9G Phase 9 acceptance pack now exists at
+`docs/PHASE9G_PHASE9_ACCEPTANCE_PACK.md`. Phase 9G validates that registry
+presence remains not authentication or approval.

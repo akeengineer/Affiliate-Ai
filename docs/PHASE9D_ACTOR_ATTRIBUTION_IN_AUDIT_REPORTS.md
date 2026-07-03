@@ -291,3 +291,9 @@ Phase 9F local RBAC policy prototype now exists at
 `docs/PHASE9F_LOCAL_RBAC_POLICY_PROTOTYPE.md`. Phase 9F may consume this
 attribution report as optional advisory context. Phase 9F does not modify this
 attribution runtime; actor attribution remains not authentication or approval.
+
+### Phase 9G Phase 9 acceptance pack
+
+Phase 9G Phase 9 acceptance pack now exists at
+`docs/PHASE9G_PHASE9_ACCEPTANCE_PACK.md`. Phase 9G validates that actor
+attribution remains evidence only.

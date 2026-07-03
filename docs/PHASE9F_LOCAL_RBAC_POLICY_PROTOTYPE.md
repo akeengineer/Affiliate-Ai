@@ -407,3 +407,9 @@ Rules:
 - no strong non-repudiation
 - no backend/API/database
 - no production deployment
+
+### Phase 9G Phase 9 acceptance pack
+
+Phase 9G Phase 9 acceptance pack now exists at
+`docs/PHASE9G_PHASE9_ACCEPTANCE_PACK.md`. Phase 9G validates this local RBAC
+policy prototype as local advisory only. Phase 9F remains not enforcement.

@@ -524,7 +524,29 @@ policy prototype is not enforcement, an RBAC allow decision is not approval, and
 RBAC eligibility is not approval; approval remains the Phase 7D selected-gate
 manual boundary.
 
-Phase 9G Phase 9 Acceptance Pack is the next recommended phase.
+- Phase 9G — Phase 9 Acceptance Pack — **complete / current** (docs/tests
+  acceptance pack only; closes Phase 9 by summarizing Phase 9A–9F, defining
+  nine safe local-only demo scenarios, acceptance/full-suite-readiness/PR-
+  readiness/merge-readiness checklists, and runtime-safety/identity/actor-
+  metadata/registry/attribution/RBAC-advisory/approval-boundary/protected-
+  runtime/artifact-safety checklists; adds no runtime scripts, no shell
+  runners, and no new runtime behavior). See
+  `docs/PHASE9G_PHASE9_ACCEPTANCE_PACK.md`.
+
+Phase 9G is docs/tests only. It changes no Phase 9C/9D/9F runtime, no Phase 7D
+wrapper behavior, and no Phase 8 runtime, executes no primitive, performs no
+vault read/write, and adds no backend/API/database. `phase9g_status` is
+`success`, `rbac_policy_status` and `rbac_runtime_status` remain
+`local_advisory_prototype`, `rbac_enforcement_status`,
+`identity_runtime_status`, and `authentication_runtime_status` remain
+`not_implemented`, `phase9_branch_workflow` is `enabled`, and
+`phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 9
+(9A–9G) is now **complete pending full-suite verification and PR**. The Phase
+9 acceptance pack, RBAC allow decisions, and RBAC advisory reports are all
+**not approval**; approval remains the Phase 7D selected-gate manual boundary.
+
+Phase 10 — Governed Runtime Integration Readiness is the next recommended
+phase.
 
 ## 2. Phase 4A — local read-only UI mock
 

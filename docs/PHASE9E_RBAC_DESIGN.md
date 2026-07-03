@@ -684,3 +684,9 @@ Phase 9F local RBAC policy prototype now exists at
 `docs/PHASE9F_LOCAL_RBAC_POLICY_PROTOTYPE.md`. Phase 9F implements a local
 advisory subset of this design. Phase 9F does not implement enforcement; RBAC
 allow decisions and RBAC eligibility remain not approval.
+
+### Phase 9G Phase 9 acceptance pack
+
+Phase 9G Phase 9 acceptance pack now exists at
+`docs/PHASE9G_PHASE9_ACCEPTANCE_PACK.md`. Phase 9G closes RBAC design/advisory
+prototype acceptance for Phase 9.
