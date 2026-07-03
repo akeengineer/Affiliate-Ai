@@ -389,3 +389,11 @@ Phase 9A begins the identity/RBAC stage after Phase 8 and is documented in
 operator, reviewer, signer, and actor identity should be attributed in future
 audit/report outputs. Final acceptance remains not approval, and Phase 9A does
 not modify this final acceptance pack runtime.
+
+## Phase 9B actor metadata schema
+
+Phase 9B actor metadata schema design now exists at
+`docs/PHASE9B_ACTOR_METADATA_SCHEMA_DESIGN.md`. Phase 9B prepares future final
+acceptance actor attribution by mapping final acceptance review to a
+reviewer/actor `actor_metadata` record. Phase 9B does not modify this final
+acceptance pack runtime, and final acceptance remains not approval.

@@ -453,3 +453,9 @@ Phase 9A operator identity boundary now exists at
 reviewer/operator identity interpretation for future audit attribution but does
 not modify this runbook runtime; reviewer identity and reviewer action remain
 guidance only and are not approval.
+
+Phase 9B actor metadata schema design now exists at
+`docs/PHASE9B_ACTOR_METADATA_SCHEMA_DESIGN.md`. Phase 9B prepares future reviewer
+action attribution by mapping reviewer action to a reviewer `actor_metadata`
+record. Phase 9B does not modify this runbook runtime; reviewer action remains
+guidance only and is not approval.

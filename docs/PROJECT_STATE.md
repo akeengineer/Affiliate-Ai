@@ -564,3 +564,21 @@ identity, actor attribution, RBAC eligibility, identity assurance, and key
 ownership are all **not approval**; approval remains the Phase 7D selected-gate
 manual boundary. `phase7d_runtime_readiness` remains `implemented_manual_gate`.
 Phase 9B (Actor Metadata Schema Design) is the next recommended phase.
+
+## 25. Phase 9B actor metadata schema design
+
+Phase 9B adds the actor metadata schema design documented in
+`docs/PHASE9B_ACTOR_METADATA_SCHEMA_DESIGN.md`. The actor metadata schema
+contract now exists as a design-only conceptual `actor_metadata` object.
+`actor_metadata_schema_status` is `design_only`, `actor_metadata_runtime_status`
+is `not_implemented`, `identity_runtime_status` remains `not_implemented`,
+`rbac_runtime_status` remains `not_implemented`, `authentication_runtime_status`
+remains `not_implemented`, and `key_management_runtime_status` remains
+`not_implemented`. Phase 9B is docs/tests design-only: it adds no
+backend/API/database, makes no wrapper behavior change, executes no primitive,
+and performs no vault read/write. The existing Phase 7D wrapper and Phase 8/9A
+artifacts remain unchanged. Actor metadata, actor attribution, identity
+assurance, RBAC eligibility, and schema validity are all **not approval**;
+approval remains the Phase 7D selected-gate manual boundary.
+`phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 9C (Local
+Operator Registry Prototype) is the next recommended phase.

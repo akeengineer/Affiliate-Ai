@@ -739,3 +739,11 @@ Phase 9A does not:
 - no strong non-repudiation.
 - no backend/API/database.
 - no production deployment.
+
+### Phase 9B actor metadata schema
+
+Phase 9B actor metadata schema design now exists at
+`docs/PHASE9B_ACTOR_METADATA_SCHEMA_DESIGN.md`. Phase 9B defines the actor
+metadata schema contract based on this Phase 9A identity boundary. Phase 9B does
+not implement runtime identity or a registry; actor metadata remains attribution
+only and is not approval.

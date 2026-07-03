@@ -492,3 +492,10 @@ and reviewer identity interpretation for future verifier work, mapping
 `signer_id` and reviewer fields to future actor fields. Signer identity is not
 approval and is not non-repudiation without future stronger assurance; verified
 signature remains not approval.
+
+Phase 9B actor metadata schema design now exists at
+`docs/PHASE9B_ACTOR_METADATA_SCHEMA_DESIGN.md`. Phase 9B prepares signer/reviewer
+actor metadata compatibility for future verifier work, mapping Phase 8L
+`signer_id` and Phase 8M reviewer/signer metadata to future `actor_metadata`.
+Signer metadata is not approval and is not non-repudiation; verified signature
+remains not approval.

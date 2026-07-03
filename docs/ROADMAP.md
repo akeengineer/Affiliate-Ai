@@ -408,7 +408,29 @@ identity, signer identity, actor attribution, RBAC eligibility, identity
 assurance, and key ownership are all **not approval**; approval remains the
 Phase 7D selected-gate manual boundary.
 
-Phase 9B Actor Metadata Schema Design is the next recommended phase.
+- Phase 9B — Actor Metadata Schema Design — **complete / current**
+  (docs/tests design-only; translates the Phase 9A identity boundary into a
+  concrete conceptual `actor_metadata` schema contract — top-level object,
+  normalized `actor_id`, `actor_type`/role/`identity_assurance`/`identity_source`
+  enums, `action_scope`, session/attestation/evidence-reference models, schema
+  versioning, compatibility with Phase 9A/7D/8L/8M/8N/8O, privacy/PII and secret
+  handling constraints, a validation failure taxonomy, and future validation/
+  registry/audit boundaries; implements no schema validator, actor registry,
+  authentication, RBAC, session, backend/API/database, or key management
+  runtime). See `docs/PHASE9B_ACTOR_METADATA_SCHEMA_DESIGN.md`.
+
+Phase 9B is docs/tests design-only. It changes no Phase 7D wrapper behavior and
+no Phase 8 runtime, executes no primitive, performs no vault read/write, and
+adds no backend/API/database. `actor_metadata_schema_status` is `design_only`,
+`actor_metadata_runtime_status` is `not_implemented`, `identity_runtime_status`,
+`rbac_runtime_status`, and `authentication_runtime_status` remain
+`not_implemented`, `phase9_branch_workflow` is `enabled`, and
+`phase7d_runtime_readiness` remains `implemented_manual_gate`. Actor metadata,
+actor attribution, identity assurance, RBAC eligibility, and schema validity are
+all **not approval**; approval remains the Phase 7D selected-gate manual
+boundary.
+
+Phase 9C Local Operator Registry Prototype is the next recommended phase.
 
 ## 2. Phase 4A — local read-only UI mock
 

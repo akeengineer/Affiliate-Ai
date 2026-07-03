@@ -522,3 +522,10 @@ key governance roles (`key_owner`, `key_custodian`, `security_owner`,
 `system_owner`, `emergency_revocation_authority`) are attributed as governance
 labels only. It does not implement key runtime; key ownership is not runtime
 permission and is not approval.
+
+Phase 9B actor metadata schema design now exists at
+`docs/PHASE9B_ACTOR_METADATA_SCHEMA_DESIGN.md`. Phase 9B prepares key governance
+actor profiles (`key_owner`, `key_custodian`, `security_owner`, `system_owner`,
+`emergency_revocation_authority`) as governance-only labels. It does not
+implement key runtime; key role label is not runtime permission and is not
+approval.
