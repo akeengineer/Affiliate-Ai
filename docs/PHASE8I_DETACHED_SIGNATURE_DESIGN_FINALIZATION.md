@@ -422,6 +422,11 @@ Phase 8I does not:
 
 None of the above are implemented in Phase 8I.
 
+Phase 8K Key Management Design now exists at
+`docs/PHASE8K_KEY_MANAGEMENT_DESIGN.md`; it refines key lifecycle,
+custody, rotation, revocation, and signer-to-key binding governance, and
+it remains design-only.
+
 ### Known limitations
 
 - design only

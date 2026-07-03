@@ -197,6 +197,14 @@ Phase 8A Durable Audit Store Design is the next recommended phase.
   report-schema interpretation for a future detached signature verifier;
   implements no verifier runtime). See
   `docs/PHASE8J_DETACHED_SIGNATURE_VERIFIER_DESIGN.md`.
+- Phase 8K — Key Management Design — **complete / done** (docs/tests
+  design-only; designs key governance roles, a key metadata model, key
+  custody options considered, key lifecycle/rotation/revocation/
+  retirement/compromise policy, a key access control model, a key audit
+  trail model, a signer-to-key binding model, a key policy version model,
+  and a failure taxonomy mapping; implements no key management runtime,
+  no key generation, and no signing). See
+  `docs/PHASE8K_KEY_MANAGEMENT_DESIGN.md`.
 
 Phase 8A is docs/tests-task only. It changes no Phase 7D wrapper behavior,
 executes no primitive, performs no vault read/write, and adds no
@@ -271,8 +279,18 @@ primitive, performs no vault read/write, and adds no backend/API/database.
 `major_phase_branch_workflow` is `enabled`, and `phase7d_runtime_readiness`
 remains `implemented_manual_gate`.
 
-Phase 8K (Key Management Design) is the next recommended phase; it is not
-implemented in Phase 8J.
+Phase 8K is docs/tests design-only. It implements no key management
+runtime, no key generation, no signing, no signature verification, and no
+encryption; it changes no Phase 8G/8H verifier runtime behavior, no Phase
+8E export behavior, and no Phase 7D wrapper behavior, executes no
+primitive, performs no vault read/write, and adds no backend/API/database.
+`durable_audit_store_status` is now `key_management_design`,
+`key_management_runtime_status` is `not_implemented`,
+`major_phase_branch_workflow` is `enabled`, and `phase7d_runtime_readiness`
+remains `implemented_manual_gate`.
+
+Phase 8L (Local Detached Signature Prototype) is the next recommended
+phase; it is not implemented in Phase 8K.
 
 ## 2. Phase 4A — local read-only UI mock
 

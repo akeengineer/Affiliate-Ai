@@ -435,6 +435,10 @@ Phase 8J does not:
 ### Future implementation path
 
 - Phase 8K: Key Management Design
+  ([`PHASE8K_KEY_MANAGEMENT_DESIGN.md`](PHASE8K_KEY_MANAGEMENT_DESIGN.md)
+  now exists; it designs key management governance for verifier-side
+  interpretation, does not implement key runtime, and key metadata is not
+  approval)
 - Phase 8L: Local Detached Signature Prototype
 - Phase 8M: Detached Signature Verifier Prototype
 - Phase 8N: Signature Runbook / Incident Review Pack

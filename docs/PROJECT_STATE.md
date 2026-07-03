@@ -457,3 +457,19 @@ Phase 7D wrapper behavior change; it performs no primitive execution and
 no vault read/write. `phase7d_runtime_readiness` remains
 `implemented_manual_gate`. Phase 8K (Key Management Design) is the next
 recommended phase.
+
+## 19. Phase 8K key management design
+
+Phase 8K designs key management governance documented in
+`docs/PHASE8K_KEY_MANAGEMENT_DESIGN.md`. The key management design now
+exists: `durable_audit_store_status` is now `key_management_design`,
+`signing_implementation_status` remains `design_only`,
+`signature_runtime_status` remains `not_implemented`,
+`signature_verifier_runtime_status` remains `not_implemented`, and
+`key_management_runtime_status` is `not_implemented`.
+`major_phase_branch_workflow` is `enabled`. Phase 8K adds no key
+management implementation, no key generation, no signing implementation,
+and no database/backend/API; it makes no Phase 7D wrapper behavior
+change; it performs no primitive execution and no vault read/write.
+`phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 8L
+(Local Detached Signature Prototype) is the next recommended phase.
