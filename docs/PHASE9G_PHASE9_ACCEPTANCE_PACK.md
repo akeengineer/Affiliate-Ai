@@ -450,6 +450,13 @@ decide whether to harden the local identity/RBAC prototypes, connect actor
 attribution into audit store outputs, or design production authentication
 integration.
 
+### Phase 10F phase 10 acceptance pack
+
+Phase 10F phase 10 acceptance pack now exists at
+`docs/PHASE10F_PHASE10_ACCEPTANCE_PACK.md`. Phase 10F closes Phase 10 with
+acceptance evidence only, confirms full-suite and PR/merge readiness, and does
+not modify Phase 9 runtime behavior.
+
 ### Phase 10A governed runtime integration readiness
 
 Phase 10A governed runtime integration readiness design now exists at

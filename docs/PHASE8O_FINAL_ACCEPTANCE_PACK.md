@@ -468,3 +468,10 @@ Phase 10E export sidecar design/prototype now exists at
 `docs/PHASE10E_EXPORT_SIDECAR_DESIGN_PROTOTYPE.md`. Phase 10E may reference
 final acceptance evidence as local evidence context only. Final acceptance
 remains not approval and Phase 10E does not modify Phase 8O runtime.
+
+## Phase 10F phase 10 acceptance pack
+
+Phase 10F phase 10 acceptance pack now exists at
+`docs/PHASE10F_PHASE10_ACCEPTANCE_PACK.md`. Phase 10F closes Phase 10 with
+acceptance evidence only, final acceptance remains not approval, and Phase 10F
+does not modify Phase 8O runtime.

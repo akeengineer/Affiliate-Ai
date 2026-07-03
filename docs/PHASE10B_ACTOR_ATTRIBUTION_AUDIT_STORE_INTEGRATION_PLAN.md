@@ -675,3 +675,9 @@ Phase 10E export sidecar design/prototype now exists at
 `docs/PHASE10E_EXPORT_SIDECAR_DESIGN_PROTOTYPE.md`. Phase 10E is a derived
 sidecar only, not audit store mutation, and does not modify source audit
 artifacts.
+
+### Phase 10F phase 10 acceptance pack
+
+Phase 10F phase 10 acceptance pack now exists at
+`docs/PHASE10F_PHASE10_ACCEPTANCE_PACK.md`. Phase 10F closes Phase 10 with
+acceptance evidence only and does not expand the Phase 10B design-only scope.

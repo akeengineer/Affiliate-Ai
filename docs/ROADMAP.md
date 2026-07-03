@@ -661,6 +661,14 @@ artifacts unchanged, and keeps approval at the Phase 7D selected-gate manual
 boundary. Export sidecar is not approval, verified export is not approval, and
 signed export is not approval.
 
+Phase 10F is now implemented as the docs/tests-only acceptance layer for Phase
+10 and is documented in `docs/PHASE10F_PHASE10_ACCEPTANCE_PACK.md`. Phase 10F
+closes Phase 10, adds acceptance evidence only, adds no runtime, does not
+modify Phase 10C/10D/10E runtime behavior, and prepares Phase 10 for
+full-suite verification, PR review, and merge. Immediate next step: Complete
+Phase 10 PR readiness. Strategic next major phase: Phase 11 — Production
+Boundary and Hardening Readiness.
+
 ## 2. Phase 4A — local read-only UI mock
 
 - A static or local-only view rendered over existing tmp/vault artifacts.

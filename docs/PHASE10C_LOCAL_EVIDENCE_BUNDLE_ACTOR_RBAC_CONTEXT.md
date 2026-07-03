@@ -367,3 +367,9 @@ Phase 10E export sidecar design/prototype now exists at
 local evidence bundle output as context only, does not modify Phase 10C
 runtime behavior, and keeps approval at the Phase 7D selected-gate manual
 boundary.
+
+### Phase 10F phase 10 acceptance pack
+
+Phase 10F phase 10 acceptance pack now exists at
+`docs/PHASE10F_PHASE10_ACCEPTANCE_PACK.md`. Phase 10F closes Phase 10 with
+acceptance evidence only and does not modify Phase 10C runtime behavior.

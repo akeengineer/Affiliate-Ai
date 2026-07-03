@@ -833,3 +833,28 @@ external APIs, and no autopublish. Export sidecar is not approval, export
 sidecar validity is not approval, verified export is not approval, signed
 export is not approval, RBAC advisory context is not enforcement, and approval
 remains the Phase 7D selected-gate manual boundary.
+
+## 36. Phase 10F phase 10 acceptance pack
+
+Phase 10F adds the Phase 10 acceptance pack documented in
+`docs/PHASE10F_PHASE10_ACCEPTANCE_PACK.md`. `phase10f_status` is `success`.
+Phase 10F is docs/tests only and closes Phase 10 without adding runtime.
+
+Phase 10F summarizes Phase 10A–10E, defines safe demo scenarios, acceptance
+criteria, full-suite readiness, PR readiness, merge readiness, runtime safety,
+governed integration boundaries, artifact safety, known limitations, and the
+recommended immediate next step. Phase 10F adds acceptance evidence only,
+prepares Phase 10 for full-suite verification, PR review, and merge, and does
+not modify the Phase 10E export sidecar runtime, the Phase 10D actor-attributed
+report runtime, the Phase 10C evidence bundle runtime, any Phase 9 runtime, any
+Phase 8 runtime, or the Phase 7D wrapper.
+
+Current architecture remains local-first: no database, no FastAPI, no UI, no
+external APIs, and no autopublish. Phase 10 acceptance pack is not approval.
+PR readiness is not approval. Merge readiness is not approval. CI green is not
+approval. Approval remains the Phase 7D selected-gate manual boundary.
+
+Immediate next step = Phase 10 PR/merge readiness.
+
+Strategic next major phase = Phase 11 Production Boundary and Hardening
+Readiness.

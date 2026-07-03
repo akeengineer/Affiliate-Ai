@@ -389,3 +389,10 @@ execution intent. Safe missing references produce warnings and exit 0.
 - no RBAC enforcement
 - no backend/API/database
 - no export mutation
+
+### Phase 10F phase 10 acceptance pack
+
+Phase 10F phase 10 acceptance pack now exists at
+`docs/PHASE10F_PHASE10_ACCEPTANCE_PACK.md`. Phase 10F closes Phase 10 with
+acceptance evidence only, adds no runtime, and does not modify Phase 10E
+runtime behavior.

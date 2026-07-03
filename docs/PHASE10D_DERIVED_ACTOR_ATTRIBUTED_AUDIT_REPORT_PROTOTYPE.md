@@ -325,3 +325,9 @@ Phase 10E local-only derived export sidecar now exists at
 `docs/PHASE10E_EXPORT_SIDECAR_DESIGN_PROTOTYPE.md`. Phase 10E may consume the
 Phase 10D report as context only and does not change Phase 10D runtime
 behavior.
+
+### Phase 10F phase 10 acceptance pack
+
+Phase 10F phase 10 acceptance pack now exists at
+`docs/PHASE10F_PHASE10_ACCEPTANCE_PACK.md`. Phase 10F closes Phase 10 with
+acceptance evidence only and does not change Phase 10D runtime behavior.

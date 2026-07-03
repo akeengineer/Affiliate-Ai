@@ -619,3 +619,10 @@ Phase 10E export sidecar design/prototype now exists at
 local derived sidecar prototype aligned with governed readiness and does not
 implement authentication, RBAC enforcement, backend/API/database, or key
 management runtime.
+
+### Phase 10F phase 10 acceptance pack
+
+Phase 10F phase 10 acceptance pack now exists at
+`docs/PHASE10F_PHASE10_ACCEPTANCE_PACK.md`. Phase 10F closes Phase 10 with
+acceptance evidence only and does not expand governed runtime integration into
+new runtime behavior.
