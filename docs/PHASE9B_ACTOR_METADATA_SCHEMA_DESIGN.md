@@ -710,3 +710,9 @@ Phase 9D actor attribution report prototype now exists at
 `docs/PHASE9D_ACTOR_ATTRIBUTION_IN_AUDIT_REPORTS.md`. Phase 9D uses these actor
 metadata fields for local report attribution. Attribution validity is not
 approval.
+
+### Phase 9E RBAC design
+
+Phase 9E RBAC design now exists at `docs/PHASE9E_RBAC_DESIGN.md`. Phase 9E maps
+RBAC subjects and roles to these actor metadata fields. Role label remains not
+runtime permission, and RBAC eligibility is not approval.

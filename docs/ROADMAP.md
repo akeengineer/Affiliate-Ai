@@ -476,7 +476,29 @@ Actor attribution is not authentication, actor attribution is not approval, and
 the attributed report is evidence only; approval remains the Phase 7D
 selected-gate manual boundary.
 
-Phase 9E RBAC Design is the next recommended phase.
+- Phase 9E — RBAC Design — **complete / current**
+  (docs/tests design-only; designs the role-based access control boundary —
+  subject/role/permission/resource/action/decision/obligation/denial/audit-event
+  models, policy versioning, a policy evaluation lifecycle design, role-to-actor
+  metadata mapping, governance role mapping, and conceptual permission
+  boundaries for product-workflow, signature/export, and registry/attribution
+  resources; implements no RBAC runtime, policy engine, permission enforcement,
+  authentication, session, backend/API/database, or key management runtime). See
+  `docs/PHASE9E_RBAC_DESIGN.md`.
+
+Phase 9E is docs/tests design-only. It changes no Phase 9C/9D runtime, no Phase
+7D wrapper behavior, and no Phase 8 runtime, executes no primitive, performs no
+vault read/write, and adds no backend/API/database. `rbac_design_status` is
+`design_only`, `rbac_runtime_status` remains `not_implemented`,
+`actor_attribution_status` remains `local_report_prototype`,
+`actor_metadata_runtime_status` remains `local_registry_prototype`,
+`identity_runtime_status` and `authentication_runtime_status` remain
+`not_implemented`, `phase9_branch_workflow` is `enabled`, and
+`phase7d_runtime_readiness` remains `implemented_manual_gate`. RBAC design is not
+RBAC enforcement, RBAC eligibility is not approval, and an RBAC decision is not
+product approval; approval remains the Phase 7D selected-gate manual boundary.
+
+Phase 9F Local RBAC Policy Prototype is the next recommended phase.
 
 ## 2. Phase 4A — local read-only UI mock
 

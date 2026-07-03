@@ -330,3 +330,9 @@ Phase 9D actor attribution report prototype now exists at
 registry output for local actor attribution of audit/report evidence. Phase 9D
 does not modify this registry runtime; actor attribution is not authentication
 and is not approval.
+
+### Phase 9E RBAC design
+
+Phase 9E RBAC design now exists at `docs/PHASE9E_RBAC_DESIGN.md`. Phase 9E uses
+these registry records as a future RBAC subject source. Phase 9E does not modify
+this registry runtime; registry presence remains not authentication or approval.

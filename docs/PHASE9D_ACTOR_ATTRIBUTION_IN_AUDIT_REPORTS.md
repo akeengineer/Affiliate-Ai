@@ -277,3 +277,10 @@ Rules:
 - no key custody
 - no strong non-repudiation
 - no production deployment
+
+### Phase 9E RBAC design
+
+Phase 9E RBAC design now exists at `docs/PHASE9E_RBAC_DESIGN.md`. Phase 9E uses
+this attribution report as future subject/evidence context for RBAC decisions.
+Phase 9E does not modify this attribution runtime; RBAC design is not enforcement
+and RBAC eligibility is not approval.

@@ -762,3 +762,9 @@ Phase 9D actor attribution report prototype now exists at
 `docs/PHASE9D_ACTOR_ATTRIBUTION_IN_AUDIT_REPORTS.md`. Phase 9D remains
 unauthenticated/operator-declared and does not implement an authentication
 runtime. Actor attribution is not authentication and is not approval.
+
+### Phase 9E RBAC design
+
+Phase 9E RBAC design now exists at `docs/PHASE9E_RBAC_DESIGN.md`. Phase 9E
+preserves this identity boundary and does not implement an authentication
+runtime. RBAC design is not enforcement and RBAC eligibility is not approval.

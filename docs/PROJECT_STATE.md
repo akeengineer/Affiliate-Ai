@@ -625,3 +625,23 @@ attribution is not approval, and the attributed report is evidence only;
 approval remains the Phase 7D selected-gate manual boundary.
 `phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 9E (RBAC
 Design) is the next recommended phase.
+
+## 28. Phase 9E RBAC design
+
+Phase 9E adds the RBAC boundary design documented in
+`docs/PHASE9E_RBAC_DESIGN.md`. The role-based access control boundary is now
+designed as a conceptual model (subjects, roles, permissions, resources,
+actions, decisions, obligations, denials, audit events, policy versioning, and a
+policy evaluation lifecycle). `rbac_design_status` is `design_only`,
+`rbac_runtime_status` remains `not_implemented`, `actor_attribution_status`
+remains `local_report_prototype`, `actor_metadata_runtime_status` remains
+`local_registry_prototype`, `local_operator_registry_status` remains
+`prototype_local_only`, `identity_runtime_status` remains `not_implemented`,
+`authentication_runtime_status` remains `not_implemented`, and
+`key_management_runtime_status` remains `not_implemented`. Phase 9E is docs/tests
+design-only: it adds no backend/API/database, makes no wrapper behavior change,
+executes no primitive, and performs no vault read/write. RBAC design is not RBAC
+enforcement, RBAC eligibility is not approval, and an RBAC decision is not
+product approval; approval remains the Phase 7D selected-gate manual boundary.
+`phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 9F (Local
+RBAC Policy Prototype) is the next recommended phase.

@@ -412,3 +412,10 @@ Phase 9D actor attribution report prototype now exists at
 future final acceptance evidence references to registry actors but does not
 modify Phase 8O runtime. Final acceptance remains not approval, and actor
 attribution is not approval.
+
+## Phase 9E RBAC design
+
+Phase 9E RBAC design now exists at `docs/PHASE9E_RBAC_DESIGN.md`. Phase 9E defines
+conceptual permission boundaries for final acceptance review but does not modify
+Phase 8O runtime. Final acceptance remains not approval, and an RBAC decision is
+not product approval.
