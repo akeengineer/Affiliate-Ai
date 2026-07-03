@@ -422,6 +422,10 @@ Phase 8I does not:
 
 None of the above are implemented in Phase 8I.
 
+Phase 8L now implements a local prototype detached signature output at
+[`PHASE8L_LOCAL_DETACHED_SIGNATURE_PROTOTYPE.md`](PHASE8L_LOCAL_DETACHED_SIGNATURE_PROTOTYPE.md);
+it remains local-only and is not production signing.
+
 Phase 8K Key Management Design now exists at
 `docs/PHASE8K_KEY_MANAGEMENT_DESIGN.md`; it refines key lifecycle,
 custody, rotation, revocation, and signer-to-key binding governance, and

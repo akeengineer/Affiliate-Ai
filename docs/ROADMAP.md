@@ -205,6 +205,13 @@ Phase 8A Durable Audit Store Design is the next recommended phase.
   and a failure taxonomy mapping; implements no key management runtime,
   no key generation, and no signing). See
   `docs/PHASE8K_KEY_MANAGEMENT_DESIGN.md`.
+- Phase 8L — Local Detached Signature Prototype — **complete / done**
+  (local-only prototype; produces a signed payload descriptor, a detached
+  signature envelope, an HMAC-SHA256 prototype signature, and a Markdown
+  summary under tmp/phase8l-detached-signature/; env-var prototype key
+  only, no committed keys, no key generation, no KMS/Secrets Manager, no
+  signature verifier runtime, and no wrapper/primitive/vault changes). See
+  `docs/PHASE8L_LOCAL_DETACHED_SIGNATURE_PROTOTYPE.md`.
 
 Phase 8A is docs/tests-task only. It changes no Phase 7D wrapper behavior,
 executes no primitive, performs no vault read/write, and adds no
@@ -289,8 +296,21 @@ primitive, performs no vault read/write, and adds no backend/API/database.
 `major_phase_branch_workflow` is `enabled`, and `phase7d_runtime_readiness`
 remains `implemented_manual_gate`.
 
-Phase 8L (Local Detached Signature Prototype) is the next recommended
-phase; it is not implemented in Phase 8K.
+Phase 8L adds a local-only detached signature prototype. It commits no
+private/public/certificate keys, generates no keys, implements no
+KMS/Secrets Manager/backend/API/database, implements no signature
+verifier runtime, changes no Phase 8G/8H verifier runtime behavior, no
+Phase 8E export behavior, and no Phase 7D wrapper behavior, executes no
+primitive, performs no vault read/write, and writes only under
+tmp/phase8l-detached-signature. `durable_audit_store_status` is now
+`local_detached_signature_prototype`, `signing_implementation_status` is
+`prototype_local_only`, `signature_runtime_status` is `local_prototype`,
+`signature_verifier_runtime_status` and `key_management_runtime_status`
+remain `not_implemented`, `major_phase_branch_workflow` is `enabled`, and
+`phase7d_runtime_readiness` remains `implemented_manual_gate`.
+
+Phase 8M (Detached Signature Verifier Prototype) is the next recommended
+phase; it is not implemented in Phase 8L.
 
 ## 2. Phase 4A — local read-only UI mock
 

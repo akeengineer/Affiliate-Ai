@@ -473,3 +473,19 @@ and no database/backend/API; it makes no Phase 7D wrapper behavior
 change; it performs no primitive execution and no vault read/write.
 `phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 8L
 (Local Detached Signature Prototype) is the next recommended phase.
+
+## 20. Phase 8L local detached signature prototype
+
+Phase 8L implements a local detached signature prototype documented in
+`docs/PHASE8L_LOCAL_DETACHED_SIGNATURE_PROTOTYPE.md`. A local detached
+signature prototype now exists: `durable_audit_store_status` is now
+`local_detached_signature_prototype`, `signing_implementation_status` is
+`prototype_local_only`, `signature_runtime_status` is `local_prototype`,
+`signature_verifier_runtime_status` is `not_implemented`, and
+`key_management_runtime_status` is `not_implemented`.
+`major_phase_branch_workflow` is `enabled`. Phase 8L adds no
+backend/API/database and no wrapper behavior change; it performs no
+primitive execution and writes only under
+`tmp/phase8l-detached-signature`. `phase7d_runtime_readiness` remains
+`implemented_manual_gate`. Phase 8M (Detached Signature Verifier
+Prototype) is the next recommended phase.

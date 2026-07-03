@@ -472,6 +472,12 @@ Phase 8K does not:
 
 None of the above are implemented in Phase 8K.
 
+Phase 8L Local Detached Signature Prototype now exists at
+[`PHASE8L_LOCAL_DETACHED_SIGNATURE_PROTOTYPE.md`](PHASE8L_LOCAL_DETACHED_SIGNATURE_PROTOTYPE.md).
+It uses an env-var prototype key only and does not implement key
+management runtime; `key_management_runtime_status` remains
+`not_implemented`. An active/prototype key is not approval.
+
 ### Major-phase checkpoint policy
 
 Phase 8K is part of `feature/phase8-signature-governance-completion`. Phase

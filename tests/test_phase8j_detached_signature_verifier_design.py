@@ -508,8 +508,16 @@ def test_phase8j_protected_runtime_files_unchanged() -> None:
 
 def test_phase8j_no_signing_key_or_cert_files_added() -> None:
     scripts_dir = REPO_ROOT / "scripts/dev"
-    for pattern in ("*sign*", "*.pem", "*.key", "*.crt", "*.pub", "*.p12", "*.pfx"):
-        assert not any(scripts_dir.glob(pattern)), f"Phase 8J must not add signing/key/cert files matching {pattern}"
+    # Phase 8L adds a sanctioned local-only detached signature prototype runtime
+    # whose filenames legitimately contain "signature"; whitelist exactly those.
+    sanctioned_signature_scripts = {
+        "build_phase8l_detached_signature.py",
+        "run_phase8l_detached_signature.sh",
+    }
+    sign_hits = [p for p in scripts_dir.glob("*sign*") if p.name not in sanctioned_signature_scripts]
+    assert not sign_hits, f"Phase 8J must not add signing scripts: {sign_hits}"
+    for pattern in ("*.pem", "*.key", "*.crt", "*.pub", "*.p12", "*.pfx"):
+        assert not any(scripts_dir.glob(pattern)), f"Phase 8J must not add key/cert files matching {pattern}"
 
     for path in REPO_ROOT.rglob("*"):
         if not path.is_file():
