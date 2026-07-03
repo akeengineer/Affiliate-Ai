@@ -221,6 +221,13 @@ Phase 8A Durable Audit Store Design is the next recommended phase.
   no KMS/Secrets Manager, no key management runtime, no
   wrapper/primitive/vault changes). See
   `docs/PHASE8M_DETACHED_SIGNATURE_VERIFIER_PROTOTYPE.md`.
+- Phase 8N — Signature Runbook / Incident Review Pack — **complete / done**
+  (docs/tests/runbook-pack only; checkpoint-only within `feature/phase8-signature-governance-completion`; adds the operator safe-demo
+  procedure, reviewer incident review procedure, evidence preservation
+  checklist, escalation matrix, and incident-to-action matrix for the existing
+  Phase 8L/8M local prototypes; no signing/verifier/key-management runtime,
+  no wrapper/primitive/vault changes). See
+  `docs/PHASE8N_SIGNATURE_RUNBOOK_INCIDENT_REVIEW_PACK.md`.
 
 Phase 8A is docs/tests-task only. It changes no Phase 7D wrapper behavior,
 executes no primitive, performs no vault read/write, and adds no
@@ -333,8 +340,23 @@ read/write, and writes only under tmp/phase8m-detached-signature-verifier.
 `major_phase_branch_workflow` is `enabled`, and `phase7d_runtime_readiness`
 remains `implemented_manual_gate`.
 
-Phase 8N (Signature Runbook / Incident Review Pack) is the next
-recommended phase; it is not implemented in Phase 8M.
+Phase 8N adds the signature runbook / incident review pack for the
+existing Phase 8L and Phase 8M local prototypes. It is docs/tests/
+runbook-pack only, is checkpoint-only within
+`feature/phase8-signature-governance-completion`, adds no signing,
+verifier, or key-management runtime, changes no Phase 8L/8M/8G/8H/8E/7D
+runtime behavior, executes no primitive, performs no vault read/write,
+and adds no backend/API/database. `durable_audit_store_status` is now
+`signature_runbook_incident_review_pack`,
+`signing_implementation_status` remains `prototype_local_only`,
+`signature_runtime_status` remains `local_prototype`,
+`signature_verifier_runtime_status` remains `local_prototype`,
+`key_management_runtime_status` remains `not_implemented`,
+`runbook_runtime_status` is `docs_only`, `major_phase_branch_workflow` is
+`enabled`, and `phase7d_runtime_readiness` remains
+`implemented_manual_gate`.
+
+Phase 8O Phase 8 Final Acceptance Pack is the next recommended phase.
 
 ## 2. Phase 4A — local read-only UI mock
 

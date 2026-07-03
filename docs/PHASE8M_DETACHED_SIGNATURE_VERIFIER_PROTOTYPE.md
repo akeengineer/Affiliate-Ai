@@ -186,6 +186,11 @@ Approval remains the Phase 7D selected-gate manual boundary. Phase 8M
 does not call the Phase 7D wrapper, does not call primitives, does not
 write the vault, and does not trigger the next gate.
 
+Phase 8N Signature Runbook / Incident Review Pack now exists at
+`docs/PHASE8N_SIGNATURE_RUNBOOK_INCIDENT_REVIEW_PACK.md`. Phase 8N
+documents procedures for verifier outcomes, does not modify verifier
+runtime, and incident review remains not approval.
+
 ### Major-phase checkpoint policy
 
 Phase 8M is part of `feature/phase8-signature-governance-completion`.

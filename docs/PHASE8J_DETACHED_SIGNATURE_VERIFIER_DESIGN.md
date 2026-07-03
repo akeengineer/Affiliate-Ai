@@ -455,6 +455,11 @@ Phase 8M now implements a local-only narrow verifier prototype at
 [`PHASE8M_DETACHED_SIGNATURE_VERIFIER_PROTOTYPE.md`](PHASE8M_DETACHED_SIGNATURE_VERIFIER_PROTOTYPE.md).
 Enterprise verification remains not implemented.
 
+Phase 8N Signature Runbook / Incident Review Pack now exists at
+[`PHASE8N_SIGNATURE_RUNBOOK_INCIDENT_REVIEW_PACK.md`](PHASE8N_SIGNATURE_RUNBOOK_INCIDENT_REVIEW_PACK.md).
+Phase 8N turns verifier interpretation into operator/reviewer procedures
+and remains runbook-only.
+
 ### Major-phase checkpoint policy
 
 Phase 8J is part of `feature/phase8-signature-governance-completion`. Phase

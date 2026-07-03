@@ -128,6 +128,11 @@ Phase 8M Detached Signature Verifier Prototype now exists at
 Phase 8L descriptor/envelope outputs and does not modify Phase 8L
 outputs. A verified signature remains not approval.
 
+Phase 8N Signature Runbook / Incident Review Pack now exists at
+`docs/PHASE8N_SIGNATURE_RUNBOOK_INCIDENT_REVIEW_PACK.md`. Phase 8N
+documents procedures for signing output states and safe-demo review, and
+does not modify signing runtime.
+
 ### Phase 8E export boundary
 
 Phase 8L consumes the Phase 8E export manifest. Phase 8L does not modify

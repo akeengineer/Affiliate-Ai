@@ -483,6 +483,11 @@ Phase 8M Detached Signature Verifier Prototype now exists at
 Phase 8M does not implement key management runtime;
 `key_management_runtime_status` remains `not_implemented`.
 
+Phase 8N Signature Runbook / Incident Review Pack now exists at
+[`PHASE8N_SIGNATURE_RUNBOOK_INCIDENT_REVIEW_PACK.md`](PHASE8N_SIGNATURE_RUNBOOK_INCIDENT_REVIEW_PACK.md).
+Phase 8N references key roles and lifecycle labels only as governance
+labels, and `key_management_runtime_status` remains `not_implemented`.
+
 ### Major-phase checkpoint policy
 
 Phase 8K is part of `feature/phase8-signature-governance-completion`. Phase
