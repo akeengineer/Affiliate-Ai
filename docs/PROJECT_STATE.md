@@ -582,3 +582,24 @@ assurance, RBAC eligibility, and schema validity are all **not approval**;
 approval remains the Phase 7D selected-gate manual boundary.
 `phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 9C (Local
 Operator Registry Prototype) is the next recommended phase.
+
+## 26. Phase 9C local operator registry prototype
+
+Phase 9C adds the local operator registry prototype documented in
+`docs/PHASE9C_LOCAL_OPERATOR_REGISTRY_PROTOTYPE.md`. A local-only, metadata-only
+registry prototype now exists:
+`scripts/dev/manage_phase9c_local_operator_registry.py` validates a local subset
+of the Phase 9B conceptual `actor_metadata` schema and
+`scripts/dev/run_phase9c_local_operator_registry.sh` wraps it; both write only
+under `tmp/phase9c-local-operator-registry/`. `actor_metadata_runtime_status` is
+now `local_registry_prototype`, `local_operator_registry_status` is
+`prototype_local_only`, `identity_runtime_status` remains `not_implemented`,
+`rbac_runtime_status` remains `not_implemented`, `authentication_runtime_status`
+remains `not_implemented`, and `key_management_runtime_status` remains
+`not_implemented`. Phase 9C is standard-library only: it adds no
+backend/API/database, makes no wrapper behavior change, executes no primitive,
+and performs no vault read/write. Local operator registry is not authentication,
+registry presence is not approval, and valid actor metadata is not approval;
+approval remains the Phase 7D selected-gate manual boundary.
+`phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 9D (Actor
+Attribution in Audit/Reports) is the next recommended phase.

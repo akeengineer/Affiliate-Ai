@@ -747,3 +747,11 @@ Phase 9B actor metadata schema design now exists at
 metadata schema contract based on this Phase 9A identity boundary. Phase 9B does
 not implement runtime identity or a registry; actor metadata remains attribution
 only and is not approval.
+
+### Phase 9C local operator registry
+
+Phase 9C local operator registry prototype now exists at
+`docs/PHASE9C_LOCAL_OPERATOR_REGISTRY_PROTOTYPE.md`. Phase 9C remains
+unauthenticated/operator-declared and does not implement an authentication
+runtime. Registry presence is not authentication and is not approval; approval
+remains the Phase 7D selected-gate manual boundary.

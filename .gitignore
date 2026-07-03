@@ -93,3 +93,5 @@ tmp/phase8l-detached-signature/
 tmp/phase8l-test-input/
 tmp/phase8m-detached-signature-verifier/
 tmp/phase8m-test-input/
+tmp/phase9c-local-operator-registry/
+tmp/phase9c-test-input/

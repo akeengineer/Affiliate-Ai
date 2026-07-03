@@ -569,13 +569,12 @@ def test_phase9b_protected_runtime_files_exist_and_are_unchanged() -> None:
 
 def test_phase9b_no_implementation_files_added() -> None:
     dev = REPO_ROOT / "scripts/dev"
+    # Phase 9B itself is design-only. Patterns are Phase-9B-specific and
+    # security-runtime-specific; later phases (e.g. the Phase 9C local operator
+    # registry) may legitimately add registry/actor/schema-named scripts, so
+    # those generic names are intentionally not forbidden here.
     for pattern in (
         "*phase9b*",
-        "*actor*",
-        "*identity*",
-        "*registry*",
-        "*validator*",
-        "*schema*",
         "*rbac*",
         "*auth*",
         "*login*",

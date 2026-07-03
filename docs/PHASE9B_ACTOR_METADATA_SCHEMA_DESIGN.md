@@ -695,3 +695,11 @@ Phase 9B does not:
 - no strong non-repudiation.
 - no backend/API/database.
 - no production deployment.
+
+### Phase 9C local operator registry
+
+Phase 9C local operator registry prototype now exists at
+`docs/PHASE9C_LOCAL_OPERATOR_REGISTRY_PROTOTYPE.md`. Phase 9C implements a local
+validation subset of this schema and a deterministic local registry. Registry
+presence is not authentication and is not approval; valid actor metadata is not
+approval.
