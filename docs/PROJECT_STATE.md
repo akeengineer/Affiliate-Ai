@@ -545,3 +545,148 @@ execution; it performs no vault write and introduces no new runtime. The
 existing Phase 8L signing prototype, Phase 8M verifier prototype, and
 Phase 8N runbook remain unchanged. `phase7d_runtime_readiness` remains
 `implemented_manual_gate`.
+
+## 24. Phase 9A operator identity boundary design
+
+Phase 9A adds the operator identity boundary design documented in
+`docs/PHASE9A_OPERATOR_IDENTITY_BOUNDARY_DESIGN.md`. The operator identity
+boundary design now exists and opens the Phase 9 identity/RBAC/audit-attribution
+stage. `identity_boundary_status` is `design_only`, `identity_runtime_status`
+is `not_implemented`, `rbac_runtime_status` is `not_implemented`,
+`authentication_runtime_status` is `not_implemented`,
+`operator_identity_assurance_status` is `unauthenticated_or_operator_declared`,
+and `key_management_runtime_status` remains `not_implemented`. Phase 9A is
+docs/tests design-only: it adds no backend/API/database, makes no wrapper
+behavior change, executes no primitive, and performs no vault read/write. The
+existing Phase 7D wrapper and Phase 8L/8M/8N/8O prototypes and packs remain
+unchanged. Operator identity, authenticated identity, reviewer identity, signer
+identity, actor attribution, RBAC eligibility, identity assurance, and key
+ownership are all **not approval**; approval remains the Phase 7D selected-gate
+manual boundary. `phase7d_runtime_readiness` remains `implemented_manual_gate`.
+Phase 9B (Actor Metadata Schema Design) is the next recommended phase.
+
+## 25. Phase 9B actor metadata schema design
+
+Phase 9B adds the actor metadata schema design documented in
+`docs/PHASE9B_ACTOR_METADATA_SCHEMA_DESIGN.md`. The actor metadata schema
+contract now exists as a design-only conceptual `actor_metadata` object.
+`actor_metadata_schema_status` is `design_only`, `actor_metadata_runtime_status`
+is `not_implemented`, `identity_runtime_status` remains `not_implemented`,
+`rbac_runtime_status` remains `not_implemented`, `authentication_runtime_status`
+remains `not_implemented`, and `key_management_runtime_status` remains
+`not_implemented`. Phase 9B is docs/tests design-only: it adds no
+backend/API/database, makes no wrapper behavior change, executes no primitive,
+and performs no vault read/write. The existing Phase 7D wrapper and Phase 8/9A
+artifacts remain unchanged. Actor metadata, actor attribution, identity
+assurance, RBAC eligibility, and schema validity are all **not approval**;
+approval remains the Phase 7D selected-gate manual boundary.
+`phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 9C (Local
+Operator Registry Prototype) is the next recommended phase.
+
+## 26. Phase 9C local operator registry prototype
+
+Phase 9C adds the local operator registry prototype documented in
+`docs/PHASE9C_LOCAL_OPERATOR_REGISTRY_PROTOTYPE.md`. A local-only, metadata-only
+registry prototype now exists:
+`scripts/dev/manage_phase9c_local_operator_registry.py` validates a local subset
+of the Phase 9B conceptual `actor_metadata` schema and
+`scripts/dev/run_phase9c_local_operator_registry.sh` wraps it; both write only
+under `tmp/phase9c-local-operator-registry/`. `actor_metadata_runtime_status` is
+now `local_registry_prototype`, `local_operator_registry_status` is
+`prototype_local_only`, `identity_runtime_status` remains `not_implemented`,
+`rbac_runtime_status` remains `not_implemented`, `authentication_runtime_status`
+remains `not_implemented`, and `key_management_runtime_status` remains
+`not_implemented`. Phase 9C is standard-library only: it adds no
+backend/API/database, makes no wrapper behavior change, executes no primitive,
+and performs no vault read/write. Local operator registry is not authentication,
+registry presence is not approval, and valid actor metadata is not approval;
+approval remains the Phase 7D selected-gate manual boundary.
+`phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 9D (Actor
+Attribution in Audit/Reports) is the next recommended phase.
+
+## 27. Phase 9D actor attribution in audit/reports
+
+Phase 9D adds the local actor attribution report prototype documented in
+`docs/PHASE9D_ACTOR_ATTRIBUTION_IN_AUDIT_REPORTS.md`. A local-only,
+metadata-only attribution report prototype now exists:
+`scripts/dev/build_phase9d_actor_attribution_report.py` consumes a Phase 9C
+`operator-registry.json` and a local evidence/report reference file and
+`scripts/dev/run_phase9d_actor_attribution_report.sh` wraps it; both write only
+under `tmp/phase9d-actor-attribution/`. `actor_attribution_status` is now
+`local_report_prototype`, `actor_metadata_runtime_status` remains
+`local_registry_prototype`, `local_operator_registry_status` remains
+`prototype_local_only`, `identity_runtime_status` remains `not_implemented`,
+`rbac_runtime_status` remains `not_implemented`, `authentication_runtime_status`
+remains `not_implemented`, and `key_management_runtime_status` remains
+`not_implemented`. Phase 9D is standard-library only: it adds no
+backend/API/database, makes no wrapper behavior change, executes no primitive,
+and performs no vault read/write. Actor attribution is not authentication, actor
+attribution is not approval, and the attributed report is evidence only;
+approval remains the Phase 7D selected-gate manual boundary.
+`phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 9E (RBAC
+Design) is the next recommended phase.
+
+## 28. Phase 9E RBAC design
+
+Phase 9E adds the RBAC boundary design documented in
+`docs/PHASE9E_RBAC_DESIGN.md`. The role-based access control boundary is now
+designed as a conceptual model (subjects, roles, permissions, resources,
+actions, decisions, obligations, denials, audit events, policy versioning, and a
+policy evaluation lifecycle). `rbac_design_status` is `design_only`,
+`rbac_runtime_status` remains `not_implemented`, `actor_attribution_status`
+remains `local_report_prototype`, `actor_metadata_runtime_status` remains
+`local_registry_prototype`, `local_operator_registry_status` remains
+`prototype_local_only`, `identity_runtime_status` remains `not_implemented`,
+`authentication_runtime_status` remains `not_implemented`, and
+`key_management_runtime_status` remains `not_implemented`. Phase 9E is docs/tests
+design-only: it adds no backend/API/database, makes no wrapper behavior change,
+executes no primitive, and performs no vault read/write. RBAC design is not RBAC
+enforcement, RBAC eligibility is not approval, and an RBAC decision is not
+product approval; approval remains the Phase 7D selected-gate manual boundary.
+`phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 9F (Local
+RBAC Policy Prototype) is the next recommended phase.
+
+## 29. Phase 9F local RBAC policy prototype
+
+Phase 9F adds the local advisory RBAC policy prototype documented in
+`docs/PHASE9F_LOCAL_RBAC_POLICY_PROTOTYPE.md`. A local-only, advisory-only
+policy evaluation prototype now exists:
+`scripts/dev/evaluate_phase9f_local_rbac_policy.py` evaluates a local
+subject/resource/action request against a local RBAC policy JSON (with optional
+Phase 9C registry and Phase 9D attribution advisory context) and
+`scripts/dev/run_phase9f_local_rbac_policy.sh` wraps it; both write only under
+`tmp/phase9f-local-rbac-policy/`. `rbac_policy_status` is now
+`local_advisory_prototype`, `rbac_runtime_status` is `local_advisory_prototype`,
+`rbac_enforcement_status` remains `not_implemented`, `actor_attribution_status`
+remains `local_report_prototype`, `actor_metadata_runtime_status` remains
+`local_registry_prototype`, `local_operator_registry_status` remains
+`prototype_local_only`, `identity_runtime_status` remains `not_implemented`,
+`authentication_runtime_status` remains `not_implemented`, and
+`key_management_runtime_status` remains `not_implemented`. Phase 9F is
+standard-library only: it adds no backend/API/database, makes no wrapper
+behavior change, executes no primitive, and performs no vault read/write. The
+local RBAC policy prototype is not enforcement, an RBAC allow decision is not
+approval, and RBAC eligibility is not approval; approval remains the Phase 7D
+selected-gate manual boundary. `phase7d_runtime_readiness` remains
+`implemented_manual_gate`. Phase 9G (Phase 9 Acceptance Pack) is the next
+recommended phase.
+
+## 30. Phase 9G Phase 9 acceptance pack
+
+Phase 9G adds the Phase 9 acceptance pack documented in
+`docs/PHASE9G_PHASE9_ACCEPTANCE_PACK.md`. `phase9g_status` is `success`.
+`rbac_policy_status` remains `local_advisory_prototype`, `rbac_runtime_status`
+remains `local_advisory_prototype`, `rbac_enforcement_status` remains
+`not_implemented`, `actor_attribution_status` remains
+`local_report_prototype`, `actor_metadata_runtime_status` remains
+`local_registry_prototype`, `local_operator_registry_status` remains
+`prototype_local_only`, `identity_runtime_status` remains `not_implemented`,
+`authentication_runtime_status` remains `not_implemented`, and
+`key_management_runtime_status` remains `not_implemented`. Phase 9G is
+docs/tests only: it adds no runtime scripts, no shell runner, no
+backend/API/database, no wrapper behavior change, and no primitive execution.
+Full suite is required before opening the Phase 9 PR. The Phase 9 acceptance
+pack, RBAC allow decisions, and RBAC advisory reports are all **not
+approval**; approval remains the Phase 7D selected-gate manual boundary.
+`phase7d_runtime_readiness` remains `implemented_manual_gate`. Phase 10
+(Governed Runtime Integration Readiness) is the next recommended phase.

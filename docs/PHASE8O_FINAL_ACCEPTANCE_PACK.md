@@ -381,3 +381,55 @@ Phase 8O does not:
 - no production deployment
 - no marketplace integration
 - no autopublish
+
+## Phase 9A operator identity boundary
+
+Phase 9A begins the identity/RBAC stage after Phase 8 and is documented in
+`docs/PHASE9A_OPERATOR_IDENTITY_BOUNDARY_DESIGN.md`. Phase 9A designs how
+operator, reviewer, signer, and actor identity should be attributed in future
+audit/report outputs. Final acceptance remains not approval, and Phase 9A does
+not modify this final acceptance pack runtime.
+
+## Phase 9B actor metadata schema
+
+Phase 9B actor metadata schema design now exists at
+`docs/PHASE9B_ACTOR_METADATA_SCHEMA_DESIGN.md`. Phase 9B prepares future final
+acceptance actor attribution by mapping final acceptance review to a
+reviewer/actor `actor_metadata` record. Phase 9B does not modify this final
+acceptance pack runtime, and final acceptance remains not approval.
+
+## Phase 9C local operator registry
+
+Phase 9C local operator registry prototype now exists at
+`docs/PHASE9C_LOCAL_OPERATOR_REGISTRY_PROTOTYPE.md`. Phase 9C may support future
+actor attribution for final acceptance but does not modify Phase 8O runtime.
+Final acceptance remains not approval, and registry presence is not approval.
+
+## Phase 9D actor attribution
+
+Phase 9D actor attribution report prototype now exists at
+`docs/PHASE9D_ACTOR_ATTRIBUTION_IN_AUDIT_REPORTS.md`. Phase 9D can attribute
+future final acceptance evidence references to registry actors but does not
+modify Phase 8O runtime. Final acceptance remains not approval, and actor
+attribution is not approval.
+
+## Phase 9E RBAC design
+
+Phase 9E RBAC design now exists at `docs/PHASE9E_RBAC_DESIGN.md`. Phase 9E defines
+conceptual permission boundaries for final acceptance review but does not modify
+Phase 8O runtime. Final acceptance remains not approval, and an RBAC decision is
+not product approval.
+
+## Phase 9F local RBAC policy prototype
+
+Phase 9F local RBAC policy prototype now exists at
+`docs/PHASE9F_LOCAL_RBAC_POLICY_PROTOTYPE.md`. Phase 9F can evaluate advisory
+eligibility for final acceptance review actions but does not modify Phase 8O
+runtime. Final acceptance remains not approval, and an RBAC advisory decision is
+not approval.
+
+## Phase 9G Phase 9 acceptance pack
+
+Phase 9G Phase 9 acceptance pack now exists at
+`docs/PHASE9G_PHASE9_ACCEPTANCE_PACK.md`. Phase 9 extends acceptance evidence
+with identity/RBAC governance but does not modify Phase 8O runtime.

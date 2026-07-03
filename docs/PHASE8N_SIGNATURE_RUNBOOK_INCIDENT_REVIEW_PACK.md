@@ -447,3 +447,15 @@ or protected runtime changes unexpectedly.
 Phase 8O Final Acceptance Pack now exists at
 `docs/PHASE8O_FINAL_ACCEPTANCE_PACK.md`. Phase 8O consumes this runbook
 as the final acceptance reference, and final acceptance is not approval.
+
+Phase 9A operator identity boundary now exists at
+`docs/PHASE9A_OPERATOR_IDENTITY_BOUNDARY_DESIGN.md`. Phase 9A designs
+reviewer/operator identity interpretation for future audit attribution but does
+not modify this runbook runtime; reviewer identity and reviewer action remain
+guidance only and are not approval.
+
+Phase 9B actor metadata schema design now exists at
+`docs/PHASE9B_ACTOR_METADATA_SCHEMA_DESIGN.md`. Phase 9B prepares future reviewer
+action attribution by mapping reviewer action to a reviewer `actor_metadata`
+record. Phase 9B does not modify this runbook runtime; reviewer action remains
+guidance only and is not approval.
