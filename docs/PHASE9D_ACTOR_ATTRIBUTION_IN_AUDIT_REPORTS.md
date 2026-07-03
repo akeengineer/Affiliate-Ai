@@ -318,3 +318,11 @@ Phase 10C local evidence bundle with actor/RBAC context now exists at
 `docs/PHASE10C_LOCAL_EVIDENCE_BUNDLE_ACTOR_RBAC_CONTEXT.md`. Phase 10C may
 reference actor attribution reports as evidence context only. Actor attribution
 remains not approval and Phase 10C does not modify Phase 9D runtime.
+
+### Phase 10D derived actor-attributed audit report prototype
+
+Phase 10D derived actor-attributed audit report prototype now exists at
+`docs/PHASE10D_DERIVED_ACTOR_ATTRIBUTED_AUDIT_REPORT_PROTOTYPE.md`. Phase 10D
+may reference actor attribution reports as evidence context only. Audit actor
+attribution remains not authentication or approval and Phase 10D does not
+modify Phase 9D runtime.

@@ -603,3 +603,11 @@ Phase 10C local evidence bundle with actor/RBAC context now exists at
 implements a local evidence bundle prototype aligned with governed readiness and
 does not implement authentication, RBAC enforcement, backend/API/database, or
 key management runtime.
+
+### Phase 10D derived actor-attributed audit report prototype
+
+Phase 10D derived actor-attributed audit report prototype now exists at
+`docs/PHASE10D_DERIVED_ACTOR_ATTRIBUTED_AUDIT_REPORT_PROTOTYPE.md`. Phase 10D
+implements a local derived report prototype aligned with governed readiness and
+does not implement authentication, RBAC enforcement, backend/API/database, or
+key management runtime.

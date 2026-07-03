@@ -454,3 +454,10 @@ Phase 10C local evidence bundle with actor/RBAC context now exists at
 `docs/PHASE10C_LOCAL_EVIDENCE_BUNDLE_ACTOR_RBAC_CONTEXT.md`. Phase 10C may
 reference final acceptance evidence as local evidence context only. Final
 acceptance remains not approval and Phase 10C does not modify Phase 8O runtime.
+
+## Phase 10D derived actor-attributed audit report prototype
+
+Phase 10D derived actor-attributed audit report prototype now exists at
+`docs/PHASE10D_DERIVED_ACTOR_ATTRIBUTED_AUDIT_REPORT_PROTOTYPE.md`. Phase 10D
+may reference final acceptance evidence as local evidence context only. Final
+acceptance remains not approval and Phase 10D does not modify Phase 8O runtime.

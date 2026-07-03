@@ -157,6 +157,13 @@ Phase 10B actor attribution audit store integration plan now exists at
 plans future actor attribution sidecars for audit export packs but does not
 modify Phase 8E runtime.
 
+### Phase 10D derived actor-attributed audit report prototype
+
+Phase 10D derived actor-attributed audit report prototype now exists at
+`docs/PHASE10D_DERIVED_ACTOR_ATTRIBUTED_AUDIT_REPORT_PROTOTYPE.md`. Phase 10D
+may reference audit export pack outputs as evidence context only and does not
+modify Phase 8E runtime.
+
 ### Known limitations
 
 - local tmp export only

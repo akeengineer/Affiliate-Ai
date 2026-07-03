@@ -616,7 +616,35 @@ approval remains the Phase 7D selected-gate manual boundary while preserving
 the read-only and manual-approved guardrails established through Phase 5 and
 Phase 7D.
 
-Phase 10D — Derived Actor-Attributed Audit Report Prototype is the next
+- Phase 10D — Derived Actor-Attributed Audit Report Prototype — **complete / current**
+  (local-only derived actor-attributed audit report prototype; standard library
+  only; reads one local manifest, hashes present audit evidence/context files,
+  extracts safe summary fields from optional actor/RBAC/evidence-bundle JSON,
+  treats safe missing references as warnings, rejects unsafe paths, secrets,
+  approval flags, and execution intent, and writes deterministic JSON +
+  Markdown only under `tmp/phase10d-actor-attributed-audit-report/`; preserves
+  Phase 8, Phase 9, Phase 10C, and Phase 7D source/runtime artifacts
+  unchanged). See
+  `docs/PHASE10D_DERIVED_ACTOR_ATTRIBUTED_AUDIT_REPORT_PROTOTYPE.md`.
+
+Phase 10D is explicitly local-only. It changes no Phase 8B/8C/8D/8E/8G/8L/8M/8O
+runtime, no Phase 9C/9D/9F runtime, no Phase 10C runtime, and no Phase 7D
+wrapper behavior, executes no primitive, performs no vault read/write, and adds
+no backend/API/database. `audit_actor_attribution_integration_status` is now
+`derived_report_prototype`, `governed_runtime_integration_status` is now
+`local_evidence_bundle_and_actor_report_prototypes`,
+`integration_runtime_status` is now `local_derived_report_prototype`,
+`local_evidence_bundle_status` remains `prototype_local_only`,
+`actor_attributed_audit_report_status` is `prototype_local_only`,
+`rbac_enforcement_status`, `authentication_runtime_status`,
+`backend_api_database_status`, and `key_management_runtime_status` remain
+`not_implemented`, and `phase10_branch_workflow` remains `enabled`. Derived
+actor-attributed audit report is not approval, audit actor attribution is not
+authentication, RBAC advisory context is not enforcement, and approval remains
+the Phase 7D selected-gate manual boundary while preserving the read-only and
+manual-approved guardrails established through Phase 5 and Phase 7D.
+
+Phase 10E — Derived Actor-Attributed Export Pack Prototype is the next
 recommended phase. It should remain local-only, preserve Phase 8 append-only
 source artifacts unchanged, and continue to avoid production auth/RBAC/key/
 backend runtime.

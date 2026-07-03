@@ -762,3 +762,39 @@ evidence bundle validity is not approval, actor context is not authentication,
 RBAC advisory context is not enforcement, and approval remains the Phase 7D
 selected-gate manual boundary. Phase 10D (Derived Actor-Attributed Audit Report
 Prototype) is the next recommended phase.
+
+## 34. Phase 10D derived actor-attributed audit report prototype
+
+Phase 10D adds the local-only derived actor-attributed audit report prototype
+documented in `docs/PHASE10D_DERIVED_ACTOR_ATTRIBUTED_AUDIT_REPORT_PROTOTYPE.md`.
+`phase10d_status` is `success`,
+`audit_actor_attribution_integration_status` is now `derived_report_prototype`,
+`governed_runtime_integration_status` is now
+`local_evidence_bundle_and_actor_report_prototypes`,
+`integration_runtime_status` is now `local_derived_report_prototype`,
+`local_evidence_bundle_status` remains `prototype_local_only`,
+`actor_attributed_audit_report_status` is `prototype_local_only`,
+`rbac_enforcement_status` remains `not_implemented`,
+`identity_runtime_status` remains `not_implemented`,
+`authentication_runtime_status` remains `not_implemented`,
+`backend_api_database_status` remains `not_implemented`,
+and `key_management_runtime_status` remains `not_implemented`.
+
+Phase 10D is standard-library only:
+`scripts/dev/build_phase10d_actor_attributed_audit_report.py` reads one local
+manifest, hashes present audit evidence/context files, extracts safe summary
+fields from optional actor/RBAC/evidence-bundle JSON, treats safe missing files
+as warnings, rejects unsafe paths, secret-like metadata, approval flags, and
+execution intent, and writes deterministic JSON/Markdown only under
+`tmp/phase10d-actor-attributed-audit-report/`. It makes no audit store runtime
+change, no wrapper behavior change, no primitive execution, and no vault
+read/write. The existing Phase 8 audit/export/signature/final-acceptance
+artifacts, Phase 9 registry/attribution/RBAC artifacts, the Phase 10C evidence
+bundle runtime, and the Phase 7D wrapper remain unchanged.
+
+Current architecture remains local-first: no database, no FastAPI, no UI, no
+external APIs, and no autopublish. Derived actor-attributed audit report is not
+approval, audit actor attribution is not authentication, audit actor
+attribution is not approval, RBAC advisory context is not enforcement, and
+approval remains the Phase 7D selected-gate manual boundary. Phase 10E
+(Derived Actor-Attributed Export Pack Prototype) is the next recommended phase.

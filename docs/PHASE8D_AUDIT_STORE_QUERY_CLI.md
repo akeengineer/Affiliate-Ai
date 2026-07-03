@@ -131,3 +131,10 @@ Phase 8F does not modify Phase 8D query behavior.
 - an export pack now exists in Phase 8E
 - an integrity/signing design now exists in Phase 8F
 - no automatic remediation
+
+### Phase 10D derived actor-attributed audit report prototype
+
+Phase 10D derived actor-attributed audit report prototype now exists at
+`docs/PHASE10D_DERIVED_ACTOR_ATTRIBUTED_AUDIT_REPORT_PROTOTYPE.md`. Phase 10D
+may reference audit query outputs as evidence context only and does not modify
+Phase 8D runtime.

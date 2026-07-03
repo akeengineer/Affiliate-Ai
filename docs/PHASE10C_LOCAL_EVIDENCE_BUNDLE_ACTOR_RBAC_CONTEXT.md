@@ -351,3 +351,11 @@ Reviewer action is guidance only and is not approval.
 - no audit store mutation
 - no wrapper execution
 - no primitive execution
+
+### Phase 10D derived actor-attributed audit report prototype
+
+Phase 10D derived actor-attributed audit report prototype now exists at
+`docs/PHASE10D_DERIVED_ACTOR_ATTRIBUTED_AUDIT_REPORT_PROTOTYPE.md`. Phase 10D
+may consume local evidence bundle output as context only, does not modify Phase
+10C runtime behavior, and keeps approval at the Phase 7D selected-gate manual
+boundary.
