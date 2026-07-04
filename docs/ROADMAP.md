@@ -765,3 +765,15 @@ approved.
 - secrets management
 - backup strategy
 - production boundary review
+
+## 7. Phase 11C — CI Gate and Protected Boundary Enforcement Design
+
+- docs/tests-only CI gate model and protected boundary enforcement design.
+- defines future CI gate categories, protected boundary checks, gate-to-threat
+  mapping, gate-to-control mapping, and promotion-blocking criteria.
+- Phase 11C defines CI gate and protected boundary enforcement design.
+- Phase 11C does not implement CI/CD runtime.
+- Phase 11C does not implement production runtime.
+- Phase 11C does not approve production promotion.
+- Approval remains the Phase 7D selected-gate manual boundary.
+- Recommended next major subphase = Phase 11D CI Gate Runtime Prototype.
