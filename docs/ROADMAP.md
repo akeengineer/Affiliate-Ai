@@ -669,6 +669,37 @@ full-suite verification, PR review, and merge. Immediate next step: Complete
 Phase 10 PR readiness. Strategic next major phase: Phase 11 — Production
 Boundary and Hardening Readiness.
 
+## 1h. Phase 11 — production boundary and hardening readiness
+
+- Phase 11A — Production Boundary and Hardening Readiness Definition —
+  **complete / current**
+  (docs/tests design-only; defines the production boundary, local-only
+  prototype inventory, governed production candidate criteria, hardening
+  requirements, CI gate model, observability model, secrets/key custody design,
+  backup/recovery posture, and controlled promotion path; implements no
+  production runtime, no authentication runtime, no RBAC enforcement, no
+  backend/API/database, no production signing, no verifier runtime, and no key
+  custody runtime). See
+  `docs/PHASE11A_PRODUCTION_BOUNDARY_AND_HARDENING_READINESS.md`.
+
+Phase 11A defines production boundary and hardening readiness. Phase 11A does
+not implement production runtime. Phase 11A does not approve production
+promotion. Local-only prototypes remain local-only until governed promotion is
+explicitly approved. RBAC advisory context remains not enforcement. Approval
+remains the Phase 7D selected-gate manual boundary. Phase 10 acceptance
+remains readiness, not approval. `production_boundary_status` and
+`hardening_readiness_status` are `design_only`,
+`governed_production_candidate_status` is `defined_not_approved`,
+`production_runtime_status` is `out_of_scope`,
+`observability_runtime_status`, `secrets_key_custody_runtime_status`,
+`backup_recovery_runtime_status`, `authentication_runtime_status`,
+`rbac_enforcement_status`, `key_management_runtime_status`, and
+`backend_api_database_status` are `not_implemented`, and
+`phase11_branch_workflow` is `enabled`. Production authentication, RBAC
+enforcement, key custody, backend/API/database, production signing, verifier
+runtime, and production policy engine remain out of scope unless explicitly
+approved.
+
 ## 2. Phase 4A — local read-only UI mock
 
 - A static or local-only view rendered over existing tmp/vault artifacts.
@@ -706,3 +737,4 @@ Boundary and Hardening Readiness.
 - observability
 - secrets management
 - backup strategy
+- production boundary review
