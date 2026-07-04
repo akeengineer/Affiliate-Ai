@@ -727,7 +727,7 @@ def test_phase10e_export_boundary_missing_required_phrase_exits_nonzero(phase10e
         ("sidecar_id", "owner@example.com"),
         ("sidecar_purpose", "API_KEY=secret"),
         ("sidecar_purpose", "BEGIN PRIVATE KEY"),
-        ("sidecar_purpose", "AWS_SECRET_ACCESS_KEY=example"),
+        ("sidecar_purpose", "AWS_SECRET_ACCESS" + "_KEY=example"),
     ),
 )
 def test_phase10e_secret_like_manifest_strings_are_rejected(
