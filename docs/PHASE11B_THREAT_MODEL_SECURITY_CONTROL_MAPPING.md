@@ -434,3 +434,14 @@ Recommended next major subphase = Phase 11C Security Control Review Readiness.
 Phase 11C should stay planning-first, preserve all local-only boundaries, and
 avoid implementing production runtime unless explicitly approved in a later
 phase.
+
+## Phase 11C Pointer
+
+Phase 11C uses the Phase 11B threat model and control mapping as inputs to
+define the CI gate model and protected boundary enforcement criteria. See
+`docs/PHASE11C_CI_GATE_PROTECTED_BOUNDARY_ENFORCEMENT_DESIGN.md`.
+
+Phase 11C defines CI gate and protected boundary enforcement design. Phase 11C
+does not implement CI/CD runtime. Phase 11C does not implement production
+runtime. Phase 11C does not approve production promotion. Approval remains the
+Phase 7D selected-gate manual boundary.

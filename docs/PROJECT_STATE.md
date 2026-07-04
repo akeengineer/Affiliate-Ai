@@ -903,3 +903,19 @@ enforcement. Phase 10 acceptance remains readiness, not approval. Approval
 remains the Phase 7D selected-gate manual boundary.
 
 Recommended next major subphase = Phase 11C Security Control Review Readiness.
+
+Phase 11C adds the CI gate and protected boundary enforcement design documented
+in `docs/PHASE11C_CI_GATE_PROTECTED_BOUNDARY_ENFORCEMENT_DESIGN.md`.
+`phase11c_status` is `success`. `ci_gate_enforcement_status` is `design_only`.
+Phase 11C is docs/tests only and adds no runtime.
+
+Phase 11C defines CI gate and protected boundary enforcement design. Phase 11C
+does not implement CI/CD runtime. Phase 11C does not implement production
+runtime. Phase 11C does not approve production promotion. Phase 11B defines
+threat model and security control mapping. Phase 11A defines production boundary
+and hardening readiness. Local-only prototypes remain local-only until governed
+promotion is explicitly approved. RBAC advisory context remains not enforcement.
+Phase 10 acceptance remains readiness, not approval. Approval remains the Phase
+7D selected-gate manual boundary.
+
+Recommended next major subphase = Phase 11D CI Gate Runtime Prototype.
