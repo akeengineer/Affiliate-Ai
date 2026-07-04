@@ -162,3 +162,10 @@ and does not modify this verifier's behavior.
 - no automatic remediation
 - a hardened schema/taxonomy/reviewer-action layer now exists in Phase 8H
 - a finalized detached signature design now exists in Phase 8I
+
+### Phase 10E export sidecar design/prototype
+
+Phase 10E export sidecar design/prototype now exists at
+`docs/PHASE10E_EXPORT_SIDECAR_DESIGN_PROTOTYPE.md`. Phase 10E may reference
+export integrity reports as evidence context only. Verified export remains not
+approval and Phase 10E does not modify Phase 8G runtime.

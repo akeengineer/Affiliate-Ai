@@ -433,3 +433,45 @@ not approval.
 Phase 9G Phase 9 acceptance pack now exists at
 `docs/PHASE9G_PHASE9_ACCEPTANCE_PACK.md`. Phase 9 extends acceptance evidence
 with identity/RBAC governance but does not modify Phase 8O runtime.
+
+## Phase 10A governed runtime integration readiness
+
+Phase 10A governed runtime integration readiness design now exists at
+`docs/PHASE10A_GOVERNED_RUNTIME_INTEGRATION_READINESS_DESIGN.md`. Phase 10A may
+reference Phase 8 final acceptance evidence conceptually but does not modify
+Phase 8O runtime.
+
+## Phase 10B actor attribution audit store integration plan
+
+Phase 10B actor attribution audit store integration plan now exists at
+`docs/PHASE10B_ACTOR_ATTRIBUTION_AUDIT_STORE_INTEGRATION_PLAN.md`. Phase 10B
+may reference final acceptance evidence conceptually but does not modify Phase
+8O runtime.
+
+## Phase 10C local evidence bundle with actor/RBAC context
+
+Phase 10C local evidence bundle with actor/RBAC context now exists at
+`docs/PHASE10C_LOCAL_EVIDENCE_BUNDLE_ACTOR_RBAC_CONTEXT.md`. Phase 10C may
+reference final acceptance evidence as local evidence context only. Final
+acceptance remains not approval and Phase 10C does not modify Phase 8O runtime.
+
+## Phase 10D derived actor-attributed audit report prototype
+
+Phase 10D derived actor-attributed audit report prototype now exists at
+`docs/PHASE10D_DERIVED_ACTOR_ATTRIBUTED_AUDIT_REPORT_PROTOTYPE.md`. Phase 10D
+may reference final acceptance evidence as local evidence context only. Final
+acceptance remains not approval and Phase 10D does not modify Phase 8O runtime.
+
+## Phase 10E export sidecar design/prototype
+
+Phase 10E export sidecar design/prototype now exists at
+`docs/PHASE10E_EXPORT_SIDECAR_DESIGN_PROTOTYPE.md`. Phase 10E may reference
+final acceptance evidence as local evidence context only. Final acceptance
+remains not approval and Phase 10E does not modify Phase 8O runtime.
+
+## Phase 10F phase 10 acceptance pack
+
+Phase 10F phase 10 acceptance pack now exists at
+`docs/PHASE10F_PHASE10_ACCEPTANCE_PACK.md`. Phase 10F closes Phase 10 with
+acceptance evidence only, final acceptance remains not approval, and Phase 10F
+does not modify Phase 8O runtime.

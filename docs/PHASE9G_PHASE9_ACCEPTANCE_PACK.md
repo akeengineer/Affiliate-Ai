@@ -449,3 +449,32 @@ Phase 10 should not immediately implement production auth/RBAC. It should first
 decide whether to harden the local identity/RBAC prototypes, connect actor
 attribution into audit store outputs, or design production authentication
 integration.
+
+### Phase 10F phase 10 acceptance pack
+
+Phase 10F phase 10 acceptance pack now exists at
+`docs/PHASE10F_PHASE10_ACCEPTANCE_PACK.md`. Phase 10F closes Phase 10 with
+acceptance evidence only, confirms full-suite and PR/merge readiness, and does
+not modify Phase 9 runtime behavior.
+
+### Phase 10A governed runtime integration readiness
+
+Phase 10A governed runtime integration readiness design now exists at
+`docs/PHASE10A_GOVERNED_RUNTIME_INTEGRATION_READINESS_DESIGN.md`. Phase 10A
+begins governed runtime integration readiness after Phase 9, may reference
+Phase 8 and Phase 9 evidence/advisory outputs conceptually, and does not
+implement integration runtime.
+
+### Phase 10B actor attribution audit store integration plan
+
+Phase 10B actor attribution audit store integration plan now exists at
+`docs/PHASE10B_ACTOR_ATTRIBUTION_AUDIT_STORE_INTEGRATION_PLAN.md`. Phase 10B
+plans audit store actor attribution using Phase 9 context but does not modify
+Phase 9 runtime.
+
+### Phase 10C local evidence bundle with actor/RBAC context
+
+Phase 10C local evidence bundle with actor/RBAC context now exists at
+`docs/PHASE10C_LOCAL_EVIDENCE_BUNDLE_ACTOR_RBAC_CONTEXT.md`. Phase 10C may
+reference Phase 9 acceptance and advisory evidence context but does not modify
+Phase 9 runtime.

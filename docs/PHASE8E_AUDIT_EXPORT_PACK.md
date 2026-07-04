@@ -150,6 +150,27 @@ manifest in
 [`PHASE8H_EXPORT_INTEGRITY_VERIFIER_HARDENING.md`](PHASE8H_EXPORT_INTEGRITY_VERIFIER_HARDENING.md).
 Phase 8H does not modify Phase 8E export behavior.
 
+### Phase 10B actor attribution audit store integration plan
+
+Phase 10B actor attribution audit store integration plan now exists at
+`docs/PHASE10B_ACTOR_ATTRIBUTION_AUDIT_STORE_INTEGRATION_PLAN.md`. Phase 10B
+plans future actor attribution sidecars for audit export packs but does not
+modify Phase 8E runtime.
+
+### Phase 10D derived actor-attributed audit report prototype
+
+Phase 10D derived actor-attributed audit report prototype now exists at
+`docs/PHASE10D_DERIVED_ACTOR_ATTRIBUTED_AUDIT_REPORT_PROTOTYPE.md`. Phase 10D
+may reference audit export pack outputs as evidence context only and does not
+modify Phase 8E runtime.
+
+### Phase 10E export sidecar design/prototype
+
+Phase 10E export sidecar design/prototype now exists at
+`docs/PHASE10E_EXPORT_SIDECAR_DESIGN_PROTOTYPE.md`. Phase 10E may reference
+audit export pack outputs as evidence context only and does not modify Phase
+8E runtime.
+
 ### Known limitations
 
 - local tmp export only

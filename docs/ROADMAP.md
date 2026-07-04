@@ -545,8 +545,129 @@ vault read/write, and adds no backend/API/database. `phase9g_status` is
 9 acceptance pack, RBAC allow decisions, and RBAC advisory reports are all
 **not approval**; approval remains the Phase 7D selected-gate manual boundary.
 
-Phase 10 — Governed Runtime Integration Readiness is the next recommended
-phase.
+## 1g. Phase 10 — governed runtime integration readiness
+
+- Phase 10A — Governed Runtime Integration Readiness Design — **complete / current**
+  (docs/tests design-only; defines the governed integration readiness model,
+  evidence source model, actor context model, advisory RBAC context model,
+  signature context model, approval boundary model, future input/output
+  contracts, evidence/actor/RBAC/signature binding models, compatibility and
+  safety checks, reviewer action mapping, and a failure taxonomy for future
+  local-first integration; implements no integration runtime, no
+  authentication, no RBAC enforcement, no backend/API/database, and no key
+  management runtime). See
+  `docs/PHASE10A_GOVERNED_RUNTIME_INTEGRATION_READINESS_DESIGN.md`.
+
+Phase 10A is docs/tests design-only. It changes no Phase 9C/9D/9F runtime, no
+Phase 8 runtime, and no Phase 7D wrapper behavior, executes no primitive,
+performs no vault read/write, and adds no backend/API/database.
+`governed_runtime_integration_status` is `design_only`,
+`integration_runtime_status`, `rbac_enforcement_status`,
+`authentication_runtime_status`, `backend_api_database_status`, and
+`key_management_runtime_status` are `not_implemented`,
+`phase10_branch_workflow` is `enabled`, and `phase7d_runtime_readiness`
+remains `implemented_manual_gate`. Governed integration readiness is not
+runtime integration, integration design is not approval, and approval remains
+the Phase 7D selected-gate manual boundary.
+
+- Phase 10B — Actor Attribution Integration Plan for Audit Store — **complete**
+  (docs/tests design-only; narrows Phase 10A toward future audit-store actor
+  attribution by defining an audit actor context model, future audit actor field
+  model, source binding models, append-only and hash-chain compatibility rules,
+  future audit report/export contracts, migration and privacy rules, and an
+  audit actor integration failure taxonomy; implements no audit store runtime
+  change, no integration runtime, no authentication, no RBAC enforcement, and
+  no backend/API/database). See
+  `docs/PHASE10B_ACTOR_ATTRIBUTION_AUDIT_STORE_INTEGRATION_PLAN.md`.
+
+Phase 10B is docs/tests design-only. It changes no Phase 8B/8C/8D/8E/8G/8M
+runtime, no Phase 9C/9D/9F runtime, and no Phase 7D wrapper behavior, executes
+no primitive, performs no vault read/write, and adds no backend/API/database.
+`audit_actor_attribution_integration_status` is `design_only`,
+`governed_runtime_integration_status` remains `design_only`,
+`integration_runtime_status`, `rbac_enforcement_status`,
+`authentication_runtime_status`, `backend_api_database_status`, and
+`key_management_runtime_status` remain `not_implemented`, and
+`phase10_branch_workflow` remains `enabled`. Actor attribution integration plan
+is not runtime integration, audit actor attribution is not authentication,
+audit actor attribution is not approval, and approval remains the Phase 7D
+selected-gate manual boundary.
+
+- Phase 10C — Local Evidence Bundle with Actor/RBAC Context — **complete / current**
+  (local-only derived evidence bundle runtime prototype; standard library only;
+  reads one local manifest, validates safe evidence/context references, hashes
+  present files, treats safe missing files as warnings, rejects unsafe paths,
+  secrets, approval flags, and execution intent, and emits deterministic JSON +
+  Markdown only under `tmp/phase10c-local-evidence-bundle/`; preserves Phase 8,
+  Phase 9, and Phase 7D source artifacts unchanged). See
+  `docs/PHASE10C_LOCAL_EVIDENCE_BUNDLE_ACTOR_RBAC_CONTEXT.md`.
+
+Phase 10C is explicitly local-only. It changes no Phase 8B/8C/8D/8E/8G/8L/8M/8O
+runtime, no Phase 9C/9D/9F runtime, and no Phase 7D wrapper behavior, executes
+no primitive, performs no vault read/write, and adds no backend/API/database.
+`governed_runtime_integration_status` and `integration_runtime_status` are now
+`local_evidence_bundle_prototype`, `local_evidence_bundle_status` is
+`prototype_local_only`, `audit_actor_attribution_integration_status` remains
+`design_only`, `rbac_enforcement_status`, `authentication_runtime_status`,
+`backend_api_database_status`, and `key_management_runtime_status` remain
+`not_implemented`, and `phase10_branch_workflow` remains `enabled`. Local
+evidence bundle is not approval, evidence bundle validity is not approval, and
+approval remains the Phase 7D selected-gate manual boundary while preserving
+the read-only and manual-approved guardrails established through Phase 5 and
+Phase 7D.
+
+- Phase 10D — Derived Actor-Attributed Audit Report Prototype — **complete / current**
+  (local-only derived actor-attributed audit report prototype; standard library
+  only; reads one local manifest, hashes present audit evidence/context files,
+  extracts safe summary fields from optional actor/RBAC/evidence-bundle JSON,
+  treats safe missing references as warnings, rejects unsafe paths, secrets,
+  approval flags, and execution intent, and writes deterministic JSON +
+  Markdown only under `tmp/phase10d-actor-attributed-audit-report/`; preserves
+  Phase 8, Phase 9, Phase 10C, and Phase 7D source/runtime artifacts
+  unchanged). See
+  `docs/PHASE10D_DERIVED_ACTOR_ATTRIBUTED_AUDIT_REPORT_PROTOTYPE.md`.
+
+Phase 10D is explicitly local-only. It changes no Phase 8B/8C/8D/8E/8G/8L/8M/8O
+runtime, no Phase 9C/9D/9F runtime, no Phase 10C runtime, and no Phase 7D
+wrapper behavior, executes no primitive, performs no vault read/write, and adds
+no backend/API/database. `audit_actor_attribution_integration_status` is now
+`derived_report_prototype`, `governed_runtime_integration_status` is now
+`local_evidence_bundle_and_actor_report_prototypes`,
+`integration_runtime_status` is now `local_derived_report_prototype`,
+`local_evidence_bundle_status` remains `prototype_local_only`,
+`actor_attributed_audit_report_status` is `prototype_local_only`,
+`rbac_enforcement_status`, `authentication_runtime_status`,
+`backend_api_database_status`, and `key_management_runtime_status` remain
+`not_implemented`, and `phase10_branch_workflow` remains `enabled`. Derived
+actor-attributed audit report is not approval, audit actor attribution is not
+authentication, RBAC advisory context is not enforcement, and approval remains
+the Phase 7D selected-gate manual boundary while preserving the read-only and
+manual-approved guardrails established through Phase 5 and Phase 7D.
+
+Phase 10E — Export Sidecar Design/Prototype is the next recommended phase. It
+should remain local-only, preserve Phase 8 append-only source artifacts
+unchanged, and continue to avoid production auth/RBAC/key/backend runtime.
+Earlier wording may refer to a "Derived Actor-Attributed Export Pack
+Prototype", but the canonical Phase 10E artifact is
+`docs/PHASE10E_EXPORT_SIDECAR_DESIGN_PROTOTYPE.md`.
+
+Phase 10E is now implemented as a local-only derived export sidecar prototype
+documented in `docs/PHASE10E_EXPORT_SIDECAR_DESIGN_PROTOTYPE.md`. It reads one
+local manifest, hashes present export/context files, treats safe missing
+references as warnings, rejects unsafe paths, secrets, approval flags, and
+execution intent, writes deterministic JSON/Markdown only under
+`tmp/phase10e-export-sidecar/`, preserves Phase 8/9/10C/10D/7D source/runtime
+artifacts unchanged, and keeps approval at the Phase 7D selected-gate manual
+boundary. Export sidecar is not approval, verified export is not approval, and
+signed export is not approval.
+
+Phase 10F is now implemented as the docs/tests-only acceptance layer for Phase
+10 and is documented in `docs/PHASE10F_PHASE10_ACCEPTANCE_PACK.md`. Phase 10F
+closes Phase 10, adds acceptance evidence only, adds no runtime, does not
+modify Phase 10C/10D/10E runtime behavior, and prepares Phase 10 for
+full-suite verification, PR review, and merge. Immediate next step: Complete
+Phase 10 PR readiness. Strategic next major phase: Phase 11 — Production
+Boundary and Hardening Readiness.
 
 ## 2. Phase 4A — local read-only UI mock
 

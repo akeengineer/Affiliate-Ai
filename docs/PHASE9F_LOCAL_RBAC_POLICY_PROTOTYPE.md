@@ -413,3 +413,31 @@ Rules:
 Phase 9G Phase 9 acceptance pack now exists at
 `docs/PHASE9G_PHASE9_ACCEPTANCE_PACK.md`. Phase 9G validates this local RBAC
 policy prototype as local advisory only. Phase 9F remains not enforcement.
+
+### Phase 10A governed runtime integration readiness
+
+Phase 10A governed runtime integration readiness design now exists at
+`docs/PHASE10A_GOVERNED_RUNTIME_INTEGRATION_READINESS_DESIGN.md`. Phase 10A may
+reference advisory RBAC outputs conceptually but does not modify Phase 9F
+runtime.
+
+### Phase 10C local evidence bundle with actor/RBAC context
+
+Phase 10C local evidence bundle with actor/RBAC context now exists at
+`docs/PHASE10C_LOCAL_EVIDENCE_BUNDLE_ACTOR_RBAC_CONTEXT.md`. Phase 10C may
+reference advisory RBAC reports as evidence context only. RBAC advisory context
+remains not enforcement and does not modify Phase 9F runtime.
+
+### Phase 10D derived actor-attributed audit report prototype
+
+Phase 10D derived actor-attributed audit report prototype now exists at
+`docs/PHASE10D_DERIVED_ACTOR_ATTRIBUTED_AUDIT_REPORT_PROTOTYPE.md`. Phase 10D
+may reference advisory RBAC reports as evidence context only. RBAC advisory
+context remains not enforcement and Phase 10D does not modify Phase 9F runtime.
+
+### Phase 10E export sidecar design/prototype
+
+Phase 10E export sidecar design/prototype now exists at
+`docs/PHASE10E_EXPORT_SIDECAR_DESIGN_PROTOTYPE.md`. Phase 10E may reference
+advisory RBAC reports as evidence context only. RBAC advisory context remains
+not enforcement and Phase 10E does not modify Phase 9F runtime.

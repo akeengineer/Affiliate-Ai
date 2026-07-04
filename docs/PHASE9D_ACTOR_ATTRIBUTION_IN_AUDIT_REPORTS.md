@@ -297,3 +297,40 @@ attribution runtime; actor attribution remains not authentication or approval.
 Phase 9G Phase 9 acceptance pack now exists at
 `docs/PHASE9G_PHASE9_ACCEPTANCE_PACK.md`. Phase 9G validates that actor
 attribution remains evidence only.
+
+### Phase 10A governed runtime integration readiness
+
+Phase 10A governed runtime integration readiness design now exists at
+`docs/PHASE10A_GOVERNED_RUNTIME_INTEGRATION_READINESS_DESIGN.md`. Phase 10A may
+reference actor attribution outputs conceptually but does not modify Phase 9D
+runtime.
+
+### Phase 10B actor attribution audit store integration plan
+
+Phase 10B actor attribution audit store integration plan now exists at
+`docs/PHASE10B_ACTOR_ATTRIBUTION_AUDIT_STORE_INTEGRATION_PLAN.md`. Phase 10B
+plans future audit store integration of actor attribution but does not modify
+Phase 9D runtime.
+
+### Phase 10C local evidence bundle with actor/RBAC context
+
+Phase 10C local evidence bundle with actor/RBAC context now exists at
+`docs/PHASE10C_LOCAL_EVIDENCE_BUNDLE_ACTOR_RBAC_CONTEXT.md`. Phase 10C may
+reference actor attribution reports as evidence context only. Actor attribution
+remains not approval and Phase 10C does not modify Phase 9D runtime.
+
+### Phase 10D derived actor-attributed audit report prototype
+
+Phase 10D derived actor-attributed audit report prototype now exists at
+`docs/PHASE10D_DERIVED_ACTOR_ATTRIBUTED_AUDIT_REPORT_PROTOTYPE.md`. Phase 10D
+may reference actor attribution reports as evidence context only. Audit actor
+attribution remains not authentication or approval and Phase 10D does not
+modify Phase 9D runtime.
+
+### Phase 10E export sidecar design/prototype
+
+Phase 10E export sidecar design/prototype now exists at
+`docs/PHASE10E_EXPORT_SIDECAR_DESIGN_PROTOTYPE.md`. Phase 10E may reference
+actor attribution reports as evidence context only. Audit actor attribution
+remains not authentication or approval and Phase 10E does not modify Phase 9D
+runtime.

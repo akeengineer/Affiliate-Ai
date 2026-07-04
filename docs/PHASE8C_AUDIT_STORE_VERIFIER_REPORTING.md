@@ -131,6 +131,20 @@ alongside Phase 8B/8D evidence in
 packages the verification report and evidence read-only; it does not modify
 Phase 8C verifier behavior.
 
+### Phase 10B actor attribution audit store integration plan
+
+Phase 10B actor attribution audit store integration plan now exists at
+`docs/PHASE10B_ACTOR_ATTRIBUTION_AUDIT_STORE_INTEGRATION_PLAN.md`. Phase 10B
+plans future actor-attributed audit reports but does not modify Phase 8C
+runtime.
+
+### Phase 10D derived actor-attributed audit report prototype
+
+Phase 10D derived actor-attributed audit report prototype now exists at
+`docs/PHASE10D_DERIVED_ACTOR_ATTRIBUTED_AUDIT_REPORT_PROTOTYPE.md`. Phase 10D
+may reference audit store verifier reports as evidence context only and does not
+modify Phase 8C runtime.
+
 ### Known limitations
 
 - local tmp report only
