@@ -700,6 +700,33 @@ enforcement, key custody, backend/API/database, production signing, verifier
 runtime, and production policy engine remain out of scope unless explicitly
 approved.
 
+- Phase 11B — Threat Model and Security Control Mapping —
+  **complete / current**
+  (docs/tests design-only; defines threat modeling scope, assets and security
+  objectives, trust boundaries, threat actors, abuse cases, threat categories,
+  security control objectives, a control mapping matrix, residual risks, and
+  explicit approval/control requirements; implements no production runtime, no
+  authentication runtime, no RBAC enforcement, no backend/API/database, no
+  production signing, no verifier runtime, and no key custody runtime). See
+  `docs/PHASE11B_THREAT_MODEL_SECURITY_CONTROL_MAPPING.md`.
+
+Phase 11B defines threat model and security control mapping. Phase 11B does
+not implement production runtime. Phase 11B does not approve production
+promotion. Phase 11A defines production boundary and hardening readiness.
+Local-only prototypes remain local-only until governed promotion is explicitly
+approved. RBAC advisory context remains not enforcement. Approval remains the
+Phase 7D selected-gate manual boundary. Phase 10 acceptance remains readiness,
+not approval. `threat_model_status` and `security_control_mapping_status` are
+`design_only`, `production_runtime_status` is `out_of_scope`,
+`observability_runtime_status`, `secrets_key_custody_runtime_status`,
+`backup_recovery_runtime_status`, `authentication_runtime_status`,
+`rbac_enforcement_status`, `key_management_runtime_status`, and
+`backend_api_database_status` are `not_implemented`, and
+`phase11_branch_workflow` is `enabled`. Production authentication, RBAC
+enforcement, key custody, backend/API/database, production signing, verifier
+runtime, and production policy engine remain out of scope unless explicitly
+approved.
+
 ## 2. Phase 4A — local read-only UI mock
 
 - A static or local-only view rendered over existing tmp/vault artifacts.

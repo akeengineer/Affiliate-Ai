@@ -310,8 +310,11 @@ review package without implementing runtime.
 
 ### Recommended Next Major Subphase
 
-Recommended next major subphase = Phase 11B Production Boundary Review Pack.
+Recommended next major subphase = Phase 11B Threat Model and Security Control Mapping.
 
+Phase 11B is now documented in
+`docs/PHASE11B_THREAT_MODEL_SECURITY_CONTROL_MAPPING.md` as the next
+docs/tests-only governed threat-model and security control mapping layer.
 Phase 11B should stay planning-first, preserve all local-only boundaries, and
 avoid implementing production runtime unless explicitly approved in a later
 phase.
