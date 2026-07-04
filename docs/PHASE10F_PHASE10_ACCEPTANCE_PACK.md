@@ -582,3 +582,10 @@ Phase 11 is planning/hardening-first, not implementation-first.
 
 Phase 11 begins with production-boundary design, not premature production
 runtime.
+
+Phase 11A now exists at
+`docs/PHASE11A_PRODUCTION_BOUNDARY_AND_HARDENING_READINESS.md` as the first
+docs/tests-only Phase 11 subphase. Phase 11A defines production boundary and
+hardening readiness, does not implement production runtime, does not approve
+production promotion, and preserves approval at the Phase 7D selected-gate
+manual boundary.

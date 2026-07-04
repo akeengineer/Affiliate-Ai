@@ -858,3 +858,25 @@ Immediate next step = Phase 10 PR/merge readiness.
 
 Strategic next major phase = Phase 11 Production Boundary and Hardening
 Readiness.
+
+## 37. Phase 11A production boundary and hardening readiness
+
+Phase 11A adds the production boundary and hardening readiness definition
+documented in `docs/PHASE11A_PRODUCTION_BOUNDARY_AND_HARDENING_READINESS.md`.
+`phase11a_status` is `success`. Phase 11A is docs/tests only and adds no
+runtime.
+
+Phase 11A defines the production boundary, local-only prototype inventory,
+governed production candidate criteria, hardening requirements, CI gate model,
+observability model, secrets/key custody design, backup/recovery posture, and
+controlled promotion path. Phase 11A defines production boundary and hardening
+readiness. Phase 11A does not implement production runtime. Phase 11A does not
+approve production promotion.
+
+Current architecture remains local-first: no database, no FastAPI, no UI, no
+external APIs, and no autopublish. Local-only prototypes remain local-only
+until governed promotion is explicitly approved. RBAC advisory context remains
+not enforcement. Phase 10 acceptance remains readiness, not approval. Approval
+remains the Phase 7D selected-gate manual boundary.
+
+Recommended next major subphase = Phase 11B Production Boundary Review Pack.
