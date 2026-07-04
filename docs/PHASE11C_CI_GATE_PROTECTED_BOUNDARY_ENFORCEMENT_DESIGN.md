@@ -288,17 +288,19 @@ Operator can demonstrate Phase 11C by:
 
 ## 21. Recommended Next Step
 
-Implement Phase 11D — CI Gate Runtime Prototype (local-only, not production CI).
+Implement Phase 11D — Observability and Audit Retention Readiness.
 
-Phase 11D should implement a local-only gate runner that executes the designed
-gates against local artifacts and produces gate evidence reports under `tmp/`.
+Phase 11D should define the future observability model, audit retention
+expectations, evidence lifecycle, incident traceability, and operational
+telemetry required for governed promotion readiness.
 
-Phase 11D must not add production CI/CD, deployment pipeline, cloud
-infrastructure, or production enforcement.
+Phase 11D must remain docs/tests-only and must not add observability runtime,
+audit storage runtime, production runtime, production CI/CD, deployment
+pipeline, cloud infrastructure, or production enforcement.
 
 ## 22. Recommended Next Major Subphase
 
-Phase 11D — CI Gate Runtime Prototype
+Phase 11D — Observability and Audit Retention Readiness
 
-Phase 11D should be approved separately and should remain local-only until
-governed promotion to production CI is explicitly approved in a later phase.
+Phase 11D should be approved separately and should remain docs/tests-only until
+a later explicitly approved phase authorizes runtime implementation.

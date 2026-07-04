@@ -727,6 +727,43 @@ enforcement, key custody, backend/API/database, production signing, verifier
 runtime, and production policy engine remain out of scope unless explicitly
 approved.
 
+- Phase 11C — CI Gate and Protected Boundary Enforcement Design —
+  **complete / current**
+  (docs/tests design-only; defines future CI gate categories, protected
+  boundary checks, gate-to-threat mapping, gate-to-control mapping, and
+  promotion-blocking criteria; implements no CI/CD runtime, no production
+  runtime, no deployment manifest, and no GitHub Actions workflow). See
+  `docs/PHASE11C_CI_GATE_PROTECTED_BOUNDARY_ENFORCEMENT_DESIGN.md`.
+
+Phase 11C defines CI gate and protected boundary enforcement design. Phase 11C
+does not implement CI/CD runtime. Phase 11C does not implement production
+runtime. Phase 11C does not approve production promotion. Phase 11B defines
+threat model and security control mapping. Phase 11A defines production
+boundary and hardening readiness. Local-only prototypes remain local-only until
+governed promotion is explicitly approved. RBAC advisory context remains not
+enforcement. Approval remains the Phase 7D selected-gate manual boundary.
+Phase 10 acceptance remains readiness, not approval.
+
+- Phase 11D — Observability and Audit Retention Readiness —
+  **complete / current**
+  (docs/tests design-only; defines the future observability model, audit
+  retention expectations, evidence lifecycle, incident traceability,
+  operational telemetry requirements, and audit-readiness controls; implements
+  no observability runtime, no audit storage runtime, no production runtime,
+  no deployment manifest, and no GitHub Actions workflow). See
+  `docs/PHASE11D_OBSERVABILITY_AND_AUDIT_RETENTION_READINESS.md`.
+
+Phase 11D defines observability and audit retention readiness. Phase 11D does
+not implement observability runtime. Phase 11D does not implement audit
+storage runtime. Phase 11D does not implement production runtime. Phase 11D
+does not approve production promotion. Phase 11C defines CI gate and protected
+boundary enforcement design. Phase 11B defines threat model and security
+control mapping. Phase 11A defines production boundary and hardening
+readiness. Local-only prototypes remain local-only until governed promotion is
+explicitly approved. RBAC advisory context remains not enforcement. Approval
+remains the Phase 7D selected-gate manual boundary. Phase 10 acceptance
+remains readiness, not approval.
+
 ## 2. Phase 4A — local read-only UI mock
 
 - A static or local-only view rendered over existing tmp/vault artifacts.
@@ -776,4 +813,4 @@ approved.
 - Phase 11C does not implement production runtime.
 - Phase 11C does not approve production promotion.
 - Approval remains the Phase 7D selected-gate manual boundary.
-- Recommended next major subphase = Phase 11D CI Gate Runtime Prototype.
+- Recommended next major subphase = Phase 11D Observability and Audit Retention Readiness.

@@ -904,6 +904,8 @@ remains the Phase 7D selected-gate manual boundary.
 
 Recommended next major subphase = Phase 11C Security Control Review Readiness.
 
+## 39. Phase 11C CI gate and protected boundary enforcement design
+
 Phase 11C adds the CI gate and protected boundary enforcement design documented
 in `docs/PHASE11C_CI_GATE_PROTECTED_BOUNDARY_ENFORCEMENT_DESIGN.md`.
 `phase11c_status` is `success`. `ci_gate_enforcement_status` is `design_only`.
@@ -918,4 +920,25 @@ promotion is explicitly approved. RBAC advisory context remains not enforcement.
 Phase 10 acceptance remains readiness, not approval. Approval remains the Phase
 7D selected-gate manual boundary.
 
-Recommended next major subphase = Phase 11D CI Gate Runtime Prototype.
+Recommended next major subphase = Phase 11D Observability and Audit Retention Readiness.
+
+## 40. Phase 11D observability and audit retention readiness
+
+Phase 11D adds the observability and audit retention readiness document
+documented in `docs/PHASE11D_OBSERVABILITY_AND_AUDIT_RETENTION_READINESS.md`.
+`phase11d_status` is `success`. `observability_readiness_status` is
+`design_only`. `audit_retention_readiness_status` is `design_only`. Phase 11D
+is docs/tests only and adds no runtime.
+
+Phase 11D defines observability and audit retention readiness. Phase 11D does
+not implement observability runtime. Phase 11D does not implement audit storage
+runtime. Phase 11D does not implement production runtime. Phase 11D does not
+approve production promotion. Phase 11C defines CI gate and protected boundary
+enforcement design. Phase 11B defines threat model and security control
+mapping. Phase 11A defines production boundary and hardening readiness.
+Local-only prototypes remain local-only until governed promotion is explicitly
+approved. RBAC advisory context remains not enforcement. Phase 10 acceptance
+remains readiness, not approval. Approval remains the Phase 7D selected-gate
+manual boundary.
+
+Recommended next major subphase = Phase 11E Secrets, Key Custody, and Recovery Governance Readiness.
