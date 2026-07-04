@@ -879,4 +879,27 @@ until governed promotion is explicitly approved. RBAC advisory context remains
 not enforcement. Phase 10 acceptance remains readiness, not approval. Approval
 remains the Phase 7D selected-gate manual boundary.
 
-Recommended next major subphase = Phase 11B Production Boundary Review Pack.
+Recommended next major subphase = Phase 11B Threat Model and Security Control Mapping.
+
+## 38. Phase 11B threat model and security control mapping
+
+Phase 11B adds the governed threat-model and security control mapping document
+documented in `docs/PHASE11B_THREAT_MODEL_SECURITY_CONTROL_MAPPING.md`.
+`phase11b_status` is `success`. Phase 11B is docs/tests only and adds no
+runtime.
+
+Phase 11B defines the threat modeling scope, assets and security objectives,
+trust boundaries, threat actors, abuse cases, threat categories, security
+control objectives, control mapping matrix, residual risks, and explicit
+approval/control requirements. Phase 11B defines threat model and security
+control mapping. Phase 11B does not implement production runtime. Phase 11B
+does not approve production promotion.
+
+Current architecture remains local-first: no database, no FastAPI, no UI, no
+external APIs, and no autopublish. Phase 11A defines production boundary and
+hardening readiness. Local-only prototypes remain local-only until governed
+promotion is explicitly approved. RBAC advisory context remains not
+enforcement. Phase 10 acceptance remains readiness, not approval. Approval
+remains the Phase 7D selected-gate manual boundary.
+
+Recommended next major subphase = Phase 11C Security Control Review Readiness.
