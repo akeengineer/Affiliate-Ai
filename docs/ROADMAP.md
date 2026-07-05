@@ -812,6 +812,28 @@ promotion is explicitly approved. RBAC advisory context remains not
 enforcement. Approval remains the Phase 7D selected-gate manual boundary.
 Phase 10 acceptance remains readiness, not approval.
 
+- Phase 11G — Phase 11 Acceptance Pack —
+  **complete / current**
+  (docs/tests acceptance-pack only; summarizes and verifies the Phase 11A–11F
+  readiness chain, confirms cross-phase non-goals and manual-boundary
+  preservation, and prepares Phase 11 for PR/merge completion; implements no
+  production runtime, no production promotion approval, no deployment manifest,
+  and no GitHub Actions workflow). See
+  `docs/PHASE11G_PHASE11_ACCEPTANCE_PACK.md`.
+
+Phase 11G is the Phase 11 acceptance pack. Phase 11G does not implement
+production runtime. Phase 11G does not approve production promotion. Phase
+11A defines production boundary and hardening readiness. Phase 11B defines
+threat model and security control mapping. Phase 11C defines CI gate and
+protected boundary enforcement design. Phase 11D defines observability and
+audit retention readiness. Phase 11E defines secrets, signing, and key
+custody architecture readiness. Phase 11F defines backup, recovery, and
+promotion runbook readiness. Local-only prototypes remain local-only until
+governed promotion is explicitly approved. RBAC advisory context remains not
+enforcement. Approval remains the Phase 7D selected-gate manual boundary.
+Phase 10 acceptance remains readiness, not approval. Phase 11 acceptance
+remains readiness, not approval.
+
 ## 2. Phase 4A — local read-only UI mock
 
 - A static or local-only view rendered over existing tmp/vault artifacts.

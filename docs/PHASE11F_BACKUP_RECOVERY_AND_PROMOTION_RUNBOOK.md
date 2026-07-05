@@ -527,15 +527,14 @@ Operator can safely demonstrate Phase 11F by:
 
 ## 32. Recommended Next Step
 
-Implement Phase 11G — Governed Promotion Evidence Review Readiness.
+Implement Phase 11G — Phase 11 Acceptance Pack.
 
-Phase 11G should define how future operators review a complete promotion
-evidence package, document exception handling, and record final governed
-promotion decisions without adding runtime.
+Phase 11G should define the final Phase 11 acceptance/readiness pack over
+Phase 11A through Phase 11F without adding runtime.
 
 ## 33. Recommended Next Major Subphase
 
-Phase 11G — Governed Promotion Evidence Review Readiness
+Phase 11G — Phase 11 Acceptance Pack
 
 Phase 11G should be approved separately and should remain docs/tests-only until
 a later explicitly approved phase authorizes runtime implementation.
