@@ -513,15 +513,16 @@ Operator can safely demonstrate Phase 11D by:
 
 ## 32. Recommended Next Step
 
-Implement Phase 11E — Secrets, Key Custody, and Recovery Governance Readiness.
+Implement Phase 11E — Secrets, Signing, and Key Custody Architecture.
 
 Phase 11E should define the remaining governed readiness model for secrets
-handling, key custody, restore validation ownership, recovery governance, and
-promotion-time recovery evidence without adding production runtime.
+handling, signing boundaries, verifier separation, key custody, rotation,
+revocation, emergency response, evidence requirements, and approval boundaries
+without adding production runtime.
 
 ## 33. Recommended Next Major Subphase
 
-Phase 11E — Secrets, Key Custody, and Recovery Governance Readiness
+Phase 11E — Secrets, Signing, and Key Custody Architecture
 
 Phase 11E should be approved separately and should remain docs/tests-only until
 a later explicitly approved phase authorizes runtime implementation.

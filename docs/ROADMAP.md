@@ -764,6 +764,29 @@ explicitly approved. RBAC advisory context remains not enforcement. Approval
 remains the Phase 7D selected-gate manual boundary. Phase 10 acceptance
 remains readiness, not approval.
 
+- Phase 11E — Secrets, Signing, and Key Custody Architecture —
+  **complete / current**
+  (docs/tests design-only; defines the future secrets classification model,
+  signing boundaries, verifier separation model, key custody requirements,
+  rotation/revocation/emergency response readiness, and evidence/approval
+  boundaries; implements no secrets runtime, no signing runtime, no verifier
+  runtime, no key material, no production runtime, no deployment manifest, and
+  no GitHub Actions workflow). See
+  `docs/PHASE11E_SECRETS_SIGNING_AND_KEY_CUSTODY_ARCHITECTURE.md`.
+
+Phase 11E defines secrets, signing, and key custody architecture readiness.
+Phase 11E does not implement secrets runtime. Phase 11E does not implement
+signing runtime. Phase 11E does not implement verifier runtime. Phase 11E does
+not add key material. Phase 11E does not implement production runtime. Phase
+11E does not approve production promotion. Phase 11D defines observability and
+audit retention readiness. Phase 11C defines CI gate and protected boundary
+enforcement design. Phase 11B defines threat model and security control
+mapping. Phase 11A defines production boundary and hardening readiness.
+Local-only prototypes remain local-only until governed promotion is explicitly
+approved. RBAC advisory context remains not enforcement. Approval remains the
+Phase 7D selected-gate manual boundary. Phase 10 acceptance remains readiness,
+not approval.
+
 ## 2. Phase 4A — local read-only UI mock
 
 - A static or local-only view rendered over existing tmp/vault artifacts.
@@ -813,4 +836,4 @@ remains readiness, not approval.
 - Phase 11C does not implement production runtime.
 - Phase 11C does not approve production promotion.
 - Approval remains the Phase 7D selected-gate manual boundary.
-- Recommended next major subphase = Phase 11D Observability and Audit Retention Readiness.
+- Recommended next major subphase = Phase 11E Secrets, Signing, and Key Custody Architecture.
