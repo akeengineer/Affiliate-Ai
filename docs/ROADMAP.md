@@ -787,6 +787,31 @@ approved. RBAC advisory context remains not enforcement. Approval remains the
 Phase 7D selected-gate manual boundary. Phase 10 acceptance remains readiness,
 not approval.
 
+- Phase 11F — Backup, Recovery, and Promotion Runbook —
+  **complete / current**
+  (docs/tests design-only; defines the future backup object classification,
+  recovery object classification, RPO/RTO placeholder model, restore
+  validation expectations, rollback criteria, controlled promotion runbook,
+  and promotion evidence package; implements no backup runtime, no restore
+  runtime, no deployment runtime, no production promotion automation, no
+  production runtime, no deployment manifest, and no GitHub Actions
+  workflow). See
+  `docs/PHASE11F_BACKUP_RECOVERY_AND_PROMOTION_RUNBOOK.md`.
+
+Phase 11F defines backup, recovery, and promotion runbook readiness. Phase
+11F does not implement backup runtime. Phase 11F does not implement restore
+runtime. Phase 11F does not implement deployment runtime. Phase 11F does not
+implement production promotion automation. Phase 11F does not implement
+production runtime. Phase 11F does not approve production promotion. Phase
+11E defines secrets, signing, and key custody architecture readiness. Phase
+11D defines observability and audit retention readiness. Phase 11C defines CI
+gate and protected boundary enforcement design. Phase 11B defines threat
+model and security control mapping. Phase 11A defines production boundary and
+hardening readiness. Local-only prototypes remain local-only until governed
+promotion is explicitly approved. RBAC advisory context remains not
+enforcement. Approval remains the Phase 7D selected-gate manual boundary.
+Phase 10 acceptance remains readiness, not approval.
+
 ## 2. Phase 4A — local read-only UI mock
 
 - A static or local-only view rendered over existing tmp/vault artifacts.

@@ -535,14 +535,14 @@ Operator can safely demonstrate Phase 11E by:
 
 ## 32. Recommended Next Step
 
-Implement Phase 11F — Backup, Recovery, and Key Escrow Readiness.
+Implement Phase 11F — Backup, Recovery, and Promotion Runbook.
 
-Phase 11F should define the future backup, recovery, escrow, and restore
-governance model for secrets- and key-adjacent evidence without adding runtime.
+Phase 11F should define the future backup, recovery, restore validation,
+rollback, and promotion evidence governance model without adding runtime.
 
 ## 33. Recommended Next Major Subphase
 
-Phase 11F — Backup, Recovery, and Key Escrow Readiness
+Phase 11F — Backup, Recovery, and Promotion Runbook
 
 Phase 11F should be approved separately and should remain docs/tests-only until
 a later explicitly approved phase authorizes runtime implementation.
