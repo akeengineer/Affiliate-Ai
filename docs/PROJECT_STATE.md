@@ -966,4 +966,29 @@ approved. RBAC advisory context remains not enforcement. Phase 10 acceptance
 remains readiness, not approval. Approval remains the Phase 7D selected-gate
 manual boundary.
 
-Recommended next major subphase = Phase 11F Backup, Recovery, and Key Escrow Readiness.
+Recommended next major subphase = Phase 11F Backup, Recovery, and Promotion Runbook.
+
+## 42. Phase 11F backup, recovery, and promotion runbook
+
+Phase 11F adds the backup, recovery, and promotion runbook document documented
+in `docs/PHASE11F_BACKUP_RECOVERY_AND_PROMOTION_RUNBOOK.md`.
+`phase11f_status` is `success`. `backup_readiness_status` is `design_only`.
+`recovery_readiness_status` is `design_only`.
+`promotion_runbook_readiness_status` is `design_only`. Phase 11F is docs/tests
+only and adds no runtime.
+
+Phase 11F defines backup, recovery, and promotion runbook readiness. Phase
+11F does not implement backup runtime. Phase 11F does not implement restore
+runtime. Phase 11F does not implement deployment runtime. Phase 11F does not
+implement production promotion automation. Phase 11F does not implement
+production runtime. Phase 11F does not approve production promotion. Phase
+11E defines secrets, signing, and key custody architecture readiness. Phase
+11D defines observability and audit retention readiness. Phase 11C defines CI
+gate and protected boundary enforcement design. Phase 11B defines threat
+model and security control mapping. Phase 11A defines production boundary and
+hardening readiness. Local-only prototypes remain local-only until governed
+promotion is explicitly approved. RBAC advisory context remains not
+enforcement. Phase 10 acceptance remains readiness, not approval. Approval
+remains the Phase 7D selected-gate manual boundary.
+
+Recommended next major subphase = Phase 11G Governed Promotion Evidence Review Readiness.
