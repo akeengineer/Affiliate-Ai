@@ -1013,3 +1013,27 @@ Phase 10 acceptance remains readiness, not approval. Phase 11 acceptance
 remains readiness, not approval.
 
 Recommended next major subphase = Phase 12 Governed Production Candidate Implementation Planning.
+
+## 44. Phase 12A governed production candidate implementation plan
+
+Phase 12A adds the governed production candidate implementation plan
+documented in
+`docs/PHASE12A_GOVERNED_PRODUCTION_CANDIDATE_IMPLEMENTATION_PLAN.md`.
+`phase12a_status` is `success`. `governed_production_candidate_status` is
+`planning_only`. Phase 12A is docs/tests only and adds no runtime.
+
+Phase 12A defines governed production candidate implementation planning. Phase
+12A does not implement production runtime. Phase 12A does not approve
+production promotion. Phase 12A does not implement authentication runtime.
+Phase 12A does not implement RBAC enforcement. Phase 12A does not implement
+key custody runtime. Phase 12A does not implement backend/API/database. Phase
+12A does not implement production signing. Phase 12A does not implement
+verifier runtime. Phase 12A does not implement production policy engine. Phase
+12A does not implement deployment runtime. Phase 12A does not implement
+production promotion automation. Phase 11 acceptance remains readiness, not
+approval. Phase 10 acceptance remains readiness, not approval. Local-only
+prototypes remain local-only until governed promotion is explicitly approved.
+RBAC advisory context remains not enforcement. Approval remains the Phase 7D
+selected-gate manual boundary.
+
+Recommended next major subphase = Phase 12B Governed Production Candidate Boundary Approval Preparation.
