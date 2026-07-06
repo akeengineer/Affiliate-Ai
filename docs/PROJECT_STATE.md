@@ -1184,3 +1184,7 @@ manual boundary, and introduces no runtime implementation, implementation
 approval, or production promotion approval.
 
 Recommended next major subphase = Phase 12G Phase 12 Acceptance Pack.
+
+Superseding Phase 12G completion note: Recommended next major subphase = Phase
+13. Phase 12G is complete and remains the final Phase 12 acceptance/readiness
+pack rather than the next pending subphase.

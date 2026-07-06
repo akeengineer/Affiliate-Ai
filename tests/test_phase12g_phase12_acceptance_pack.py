@@ -297,6 +297,9 @@ def test_phase12g_pointer_docs_record_final_acceptance_layer() -> None:
         (
             "phase 12g records the final phase 12 acceptance/readiness layer",
             "introduces no runtime implementation, implementation approval, or production promotion approval",
+            "superseding phase 12g completion note",
+            "recommended next major subphase = phase 13",
+            "phase 12g is complete and remains the final phase 12 acceptance/readiness pack rather than the next pending subphase",
         ),
         label="project state pointer token",
     )
