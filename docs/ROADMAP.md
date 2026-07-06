@@ -913,6 +913,35 @@ local-only until governed promotion is explicitly approved. RBAC advisory
 context remains not enforcement. Approval remains the Phase 7D selected-gate
 manual boundary.
 
+- Phase 12D — Explicit Runtime Implementation Approval Gate —
+  **planned / current**
+  (docs/tests gate-only layer; evaluates explicit implementation approval
+  readiness, required evidence, reviewer responsibilities, denied/deferred
+  outcomes, fail-closed gate behavior, and implementation authorization
+  records for future runtime domains; implements no production runtime, no
+  authentication runtime, no backend/API/database, no deployment runtime, no
+  production promotion automation, no deployment manifest, and no GitHub
+  Actions workflow). See
+  `docs/PHASE12D_EXPLICIT_RUNTIME_IMPLEMENTATION_APPROVAL_GATE.md`.
+
+Phase 12D defines the explicit runtime implementation approval gate. Phase
+12D does not implement production runtime. Phase 12D does not approve
+production promotion. Phase 12D does not bypass the Phase 7D selected-gate
+manual boundary. Phase 12D does not implement authentication runtime. Phase
+12D does not implement RBAC enforcement. Phase 12D does not implement key
+custody runtime. Phase 12D does not implement backend/API/database. Phase 12D
+does not implement production signing. Phase 12D does not implement verifier
+runtime. Phase 12D does not implement production policy engine. Phase 12D
+does not implement deployment runtime. Phase 12D does not implement
+production promotion automation. Phase 12C defines implementation approval
+evidence package requirements. Phase 12B defines runtime boundary approval and
+implementation scope. Phase 12A defines governed production candidate
+implementation planning. Phase 11 acceptance remains readiness, not approval.
+Phase 10 acceptance remains readiness, not approval. Local-only prototypes
+remain local-only until governed promotion is explicitly approved. RBAC
+advisory context remains not enforcement. Approval remains the Phase 7D
+selected-gate manual boundary.
+
 ## 2. Phase 4A — local read-only UI mock
 
 - A static or local-only view rendered over existing tmp/vault artifacts.

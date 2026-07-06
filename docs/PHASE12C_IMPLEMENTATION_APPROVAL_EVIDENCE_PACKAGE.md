@@ -574,4 +574,11 @@ Complete Phase 12C PR readiness
 
 Phase 12D — Explicit Runtime Implementation Approval Gate
 
-Phase 12D should review the Phase 12C implementation approval evidence package and define the explicit runtime implementation approval gate. Phase 12D should not implement production runtime, grant production promotion approval, or bypass the Phase 7D selected-gate manual boundary unless explicitly approved in a later phase.
+Phase 12D now exists at
+`docs/PHASE12D_EXPLICIT_RUNTIME_IMPLEMENTATION_APPROVAL_GATE.md`.
+
+Phase 12D should review the Phase 12C implementation approval evidence
+package and define the explicit runtime implementation approval gate. Phase
+12D should not implement production runtime, grant production promotion
+approval, or bypass the Phase 7D selected-gate manual boundary unless
+explicitly approved in a later phase.
