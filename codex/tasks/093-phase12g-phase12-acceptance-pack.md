@@ -108,6 +108,8 @@ git status --short
 
 Expected Task 2 intermediate state:
 
+- Expected Task 2 intermediate result: 3 failed, 9 passed.
+
 - the focused test still fails
 - remaining failures are limited to deferred matrix checks
 - remaining failures are limited to pointer-doc-reference checks
