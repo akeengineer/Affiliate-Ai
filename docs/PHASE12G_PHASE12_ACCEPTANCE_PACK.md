@@ -179,7 +179,6 @@ Runtime implementation target selection remains deferred unless explicitly appro
 
 - Missing Phase 12 chain evidence blocks acceptance/readiness confirmation.
 - Ambiguous runtime or promotion wording blocks acceptance/readiness confirmation.
-- Pointer updates remain deferred to the later scoped task.
 - Dense matrices remain deferred to the later scoped task.
 
 ## 22. Residual Risk Handling
@@ -194,7 +193,7 @@ Runtime implementation target selection remains deferred unless explicitly appro
 - The Phase 12G document preserves the canonical boundary wording.
 - The Phase 12A through Phase 12F relationship chain is named exactly.
 - Boundary-first exclusions remain explicit and test-verifiable.
-- Later tasks may add matrices and pointer updates without weakening preserved wording.
+- Later tasks may add matrices without weakening preserved wording.
 
 ## 24. Safe Demo Scenarios
 
@@ -216,4 +215,4 @@ Add the matrix sections and verification tables without changing the preserved b
 
 ## 27. Recommended Next Major Subphase
 
-Proceed to the next scoped Phase 12G completion task for matrices, pointer updates, and guard completion only after shell review passes.
+Proceed to the next scoped Phase 12G completion task for matrices and guard completion only after shell review passes.
