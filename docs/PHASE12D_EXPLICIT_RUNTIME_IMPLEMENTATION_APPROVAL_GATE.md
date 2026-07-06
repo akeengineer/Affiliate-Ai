@@ -543,3 +543,5 @@ Complete Phase 12D PR readiness
 Phase 12E — Approved Runtime Domain Implementation Preparation
 
 Phase 12E should prepare the first explicitly approved runtime domain for implementation in a later controlled phase. Phase 12E should not implement production runtime, approve production promotion, or bypass the Phase 7D selected-gate manual boundary unless explicitly approved. Phase 12E should translate the Phase 12D gate outcome into implementation preparation artifacts, runtime boundary constraints, required controls, test strategy, rollback expectations, and operator approval checkpoints.
+
+Phase 12E is now documented in `docs/PHASE12E_APPROVED_RUNTIME_DOMAIN_IMPLEMENTATION_PREPARATION.md`.
