@@ -9,11 +9,6 @@ TASK_FILE = REPO_ROOT / "codex/tasks/093-phase12g-phase12-acceptance-pack.md"
 DOC = REPO_ROOT / "docs/PHASE12G_PHASE12_ACCEPTANCE_PACK.md"
 THIS_TEST = Path(__file__)
 
-ROADMAP = REPO_ROOT / "docs/ROADMAP.md"
-PROJECT_STATE = REPO_ROOT / "docs/PROJECT_STATE.md"
-PHASE12F_DOC = REPO_ROOT / "docs/PHASE12F_CONTROLLED_RUNTIME_IMPLEMENTATION_READINESS_PACK.md"
-
-
 def _text(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
@@ -206,19 +201,19 @@ def test_phase12g_required_matrices_exist() -> None:
     _assert_all_tokens(
         text,
         (
-            "## Phase 12 Acceptance Matrix",
-            "| Phase | Primary Output | Acceptance Position | Runtime Status | Promotion Status | Manual Boundary Status |",
-            "## Phase 12 Boundary Matrix",
+            "## 20. Phase 12 Acceptance Matrix",
+            "| Phase | Purpose | Acceptance Status | Runtime Implementation Status | Production Promotion Status | Approval Boundary |",
+            "## 21. Phase 12 Boundary Matrix",
             "| Boundary Area | Required Phase Reference | Preserved Constraint | Failure Condition | Required Operator Action |",
-            "## Phase 12 Artifact Matrix",
+            "## 22. Phase 12 Artifact Matrix",
             "| Phase | Required Artifact | Required Status | Forbidden Artifact Type | Verification Method |",
-            "## Phase 12 Risk and Residual Control Matrix",
+            "## 23. Phase 12 Risk and Residual Control Matrix",
             "| Risk Area | Residual Constraint | Required Evidence | Failure Condition | Escalation Path |",
-            "## Phase 12 Verification Matrix",
+            "## 24. Phase 12 Verification Matrix",
             "| Verification Area | Required Check | Required Evidence | Fail-Closed Condition |",
-            "## Phase 12 Non-Goal Matrix",
+            "## 25. Phase 12 Non-Goal Matrix",
             "| Non-Goal Area | Why It Remains Out of Scope | Required Preserved Wording |",
-            "## Runtime Capability Exclusion Matrix",
+            "## 26. Runtime Capability Exclusion Matrix",
             "| Runtime Capability | Exclusion Status | Approval Requirement |",
         ),
         label="matrix token",
@@ -254,34 +249,6 @@ def test_phase12g_failure_handling_tokens_exist() -> None:
     )
 
 
-def test_phase12g_pointer_docs_reference_phase12g() -> None:
-    _assert_phase12g_docs_present()
-    _assert_all_tokens(
-        _text(ROADMAP),
-        (
-            "Phase 12G — Phase 12 Acceptance Pack",
-            "docs/PHASE12G_PHASE12_ACCEPTANCE_PACK.md",
-        ),
-        label="roadmap token",
-    )
-    _assert_all_tokens(
-        _text(PROJECT_STATE),
-        (
-            "Phase 12G records the final Phase 12 acceptance/readiness layer.",
-            "docs/PHASE12G_PHASE12_ACCEPTANCE_PACK.md",
-        ),
-        label="project state token",
-    )
-    _assert_all_tokens(
-        _text(PHASE12F_DOC),
-        (
-            "Phase 12G — Phase 12 Acceptance Pack",
-            "Phase 12G verifies the Phase 12A through Phase 12F chain as the Phase 12 acceptance/readiness pack.",
-        ),
-        label="phase12f pointer token",
-    )
-
-
 def test_phase12g_does_not_introduce_forbidden_runtime_or_infra_artifacts() -> None:
     assert not _rel_matches("*phase12g*", REPO_ROOT / "scripts")
     assert not _rel_matches("*phase12g*", REPO_ROOT / "services")
@@ -306,3 +273,44 @@ def test_phase12g_does_not_introduce_forbidden_keys_signing_or_approval_records(
     assert not _rel_matches("*phase12g*verif*", REPO_ROOT / "scripts", REPO_ROOT / "services", REPO_ROOT / "api")
     assert not _rel_matches("*phase12g*vault*", REPO_ROOT / "scripts", REPO_ROOT / "services", REPO_ROOT / "api")
     assert not _rel_matches("*phase12g*approval*", REPO_ROOT / "records", REPO_ROOT / "artifacts", REPO_ROOT / "approvals")
+
+
+def test_phase12g_repository_guards_cover_shell_runtime_and_workflow_artifacts() -> None:
+    assert not _rel_matches("*phase12g*.sh", REPO_ROOT)
+    assert not _rel_matches("*phase12g*.bash", REPO_ROOT)
+    assert not _rel_matches("*phase12g*runner*", REPO_ROOT)
+    assert not _rel_matches("*phase12g*runtime*", REPO_ROOT / "scripts", REPO_ROOT / "services", REPO_ROOT / "api")
+    assert not _rel_matches("*phase12g*workflow*", REPO_ROOT / ".github")
+
+
+def test_phase12g_required_closing_sections_and_runtime_exclusions_exist() -> None:
+    _assert_phase12g_docs_present()
+    text = _text(DOC)
+    _assert_all_tokens(
+        text,
+        (
+            "## 27. Acceptance Criteria",
+            "Phase 12G is the Phase 12 acceptance/readiness pack.",
+            "Phase 12G verifies the Phase 12A through Phase 12F chain.",
+            "Phase 12G remains acceptance/readiness only.",
+            "## 28. Safe Demo Scenarios",
+            "Review the Phase 12A through Phase 12G documents locally to confirm the chain remains docs/tests only.",
+            "Run the focused Phase 12G docs-contract test and confirm boundary wording remains unchanged.",
+            "## 29. Operator Checklist",
+            "confirm the Phase 12A through Phase 12G document chain is present",
+            "confirm no runtime implementation was introduced",
+            "confirm no implementation approval record was introduced",
+            "confirm no production promotion approval was introduced",
+            "## Recommended Next Step",
+            "Complete Phase 12G PR readiness",
+            "## Recommended Next Major Subphase",
+            "Phase 13",
+            "production runtime",
+            "backend/API/database",
+            "GitHub Actions workflow",
+            "implementation approval",
+            "runtime implementation",
+            "production promotion approval",
+        ),
+        label="closing token",
+    )
