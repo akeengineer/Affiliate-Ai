@@ -885,6 +885,34 @@ local-only until governed promotion is explicitly approved. RBAC advisory
 context remains not enforcement. Approval remains the Phase 7D selected-gate
 manual boundary.
 
+- Phase 12C — Implementation Approval Evidence Package —
+  **planned / current**
+  (docs/tests evidence-package-only layer; defines required evidence classes,
+  approval request contents, reviewer and operator expectations, blocking
+  conditions, traceability and attestation rules, and approval-evidence
+  matrices for future runtime domains; implements no production runtime, no
+  authentication runtime, no backend/API/database, no deployment runtime, no
+  production promotion automation, no deployment manifest, and no GitHub
+  Actions workflow). See
+  `docs/PHASE12C_IMPLEMENTATION_APPROVAL_EVIDENCE_PACKAGE.md`.
+
+Phase 12C defines implementation approval evidence package requirements. Phase
+12C does not implement production runtime. Phase 12C does not approve
+production promotion. Phase 12C does not grant implementation approval. Phase
+12C does not implement authentication runtime. Phase 12C does not implement
+RBAC enforcement. Phase 12C does not implement key custody runtime. Phase 12C
+does not implement backend/API/database. Phase 12C does not implement
+production signing. Phase 12C does not implement verifier runtime. Phase 12C
+does not implement production policy engine. Phase 12C does not implement
+deployment runtime. Phase 12C does not implement production promotion
+automation. Phase 12B defines runtime boundary approval and implementation
+scope. Phase 12A defines governed production candidate implementation
+planning. Phase 11 acceptance remains readiness, not approval. Phase 10
+acceptance remains readiness, not approval. Local-only prototypes remain
+local-only until governed promotion is explicitly approved. RBAC advisory
+context remains not enforcement. Approval remains the Phase 7D selected-gate
+manual boundary.
+
 ## 2. Phase 4A — local read-only UI mock
 
 - A static or local-only view rendered over existing tmp/vault artifacts.

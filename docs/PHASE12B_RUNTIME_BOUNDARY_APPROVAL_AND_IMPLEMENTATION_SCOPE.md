@@ -489,9 +489,13 @@ Complete Phase 12B PR readiness
 
 ## 35. Recommended Next Major Subphase
 
-Phase 12C — Explicit Runtime Domain Approval Pack
+Phase 12C — Implementation Approval Evidence Package
 
-Phase 12C should remain docs/tests-only unless explicit approval expands scope.
-It should package one or more candidate runtime domains into explicit approval
-packs with reviewer assignments, evidence inventories, and blocking conditions
-before any runtime implementation subphase is considered.
+Phase 12C now exists at
+`docs/PHASE12C_IMPLEMENTATION_APPROVAL_EVIDENCE_PACKAGE.md`.
+
+Phase 12C should remain docs/tests-only unless explicit approval expands
+scope. It should define implementation approval evidence package requirements,
+approval request contents, reviewer expectations, blocking conditions, and
+evidence-to-domain mappings before any runtime implementation subphase is
+considered.
