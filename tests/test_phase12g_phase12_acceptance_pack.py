@@ -278,28 +278,35 @@ def test_phase12g_failure_handling_tokens_exist() -> None:
 
 
 def test_phase12g_pointer_docs_record_final_acceptance_layer() -> None:
-    roadmap = _text(ROADMAP_DOC)
     roadmap_low = _flat(ROADMAP_DOC)
-    project_state = _text(PROJECT_STATE_DOC)
     project_state_low = _flat(PROJECT_STATE_DOC)
     phase12f_low = _flat(PHASE12F_DOC)
 
-    assert (
-        "Phase 12G — Phase 12 Acceptance Pack — **complete / done**" in roadmap
+    _assert_all_tokens(
+        roadmap_low,
+        (
+            "phase 12g",
+            "phase 12 acceptance pack",
+            "complete / done",
+            "verifies the full phase 12a through phase 12f chain",
+        ),
+        label="roadmap pointer token",
     )
-    assert (
-        "verifies the full phase 12a through phase 12f chain" in roadmap_low
+    _assert_all_tokens(
+        project_state_low,
+        (
+            "phase 12g records the final phase 12 acceptance/readiness layer",
+            "introduces no runtime implementation, implementation approval, or production promotion approval",
+        ),
+        label="project state pointer token",
     )
-    assert (
-        "Phase 12G records the final Phase 12 acceptance/readiness layer." in project_state
-    )
-    assert (
-        "introduces no runtime implementation, implementation approval, or production promotion approval."
-        in project_state_low
-    )
-    assert (
-        "phase 12g verifies the phase 12a through phase 12f chain as the phase 12 acceptance/readiness pack."
-        in phase12f_low
+    _assert_all_tokens(
+        phase12f_low,
+        (
+            "phase 12g verifies the phase 12a through phase 12f chain",
+            "phase 12 acceptance/readiness pack",
+        ),
+        label="phase12f pointer token",
     )
 
 
