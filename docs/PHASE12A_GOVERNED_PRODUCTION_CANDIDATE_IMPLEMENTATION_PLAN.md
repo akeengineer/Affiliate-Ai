@@ -439,12 +439,16 @@ Complete Phase 12A PR readiness
 
 ## 34. Recommended Next Major Subphase
 
-Phase 12B — Governed Production Candidate Boundary Approval Preparation
+Phase 12B — Runtime Boundary Approval and Implementation Scope
+
+Phase 12B now exists at
+`docs/PHASE12B_RUNTIME_BOUNDARY_APPROVAL_AND_IMPLEMENTATION_SCOPE.md`.
 
 Phase 12B should remain docs/tests-only unless explicit approval expands
-scope. It should refine candidate domain evidence packages, proposed control
-ownership, and approval gate inputs before any runtime implementation subphase
-is considered.
+scope. It should define runtime boundary approval scope, implementation scope
+classifications, candidate and deferred runtime domain inventories, and
+approval evidence expectations before any runtime implementation subphase is
+considered.
 
 ## Phase 11 Output to Phase 12 Candidate Mapping
 

@@ -858,6 +858,33 @@ prototypes remain local-only until governed promotion is explicitly approved.
 RBAC advisory context remains not enforcement. Approval remains the Phase 7D
 selected-gate manual boundary.
 
+- Phase 12B — Runtime Boundary Approval and Implementation Scope —
+  **planned / current**
+  (docs/tests runtime-boundary-approval-only layer; classifies future runtime
+  domains as proposed, deferred, or out of scope; defines approval gates,
+  required evidence, candidate-domain and deferred-domain matrices, and
+  implementation-readiness constraints; implements no production runtime, no
+  authentication runtime, no backend/API/database, no deployment runtime, no
+  production promotion automation, no deployment manifest, and no GitHub
+  Actions workflow). See
+  `docs/PHASE12B_RUNTIME_BOUNDARY_APPROVAL_AND_IMPLEMENTATION_SCOPE.md`.
+
+Phase 12B defines runtime boundary approval and implementation scope. Phase
+12B does not implement production runtime. Phase 12B does not approve
+production promotion. Phase 12B does not grant implementation approval. Phase
+12B does not implement authentication runtime. Phase 12B does not implement
+RBAC enforcement. Phase 12B does not implement key custody runtime. Phase 12B
+does not implement backend/API/database. Phase 12B does not implement
+production signing. Phase 12B does not implement verifier runtime. Phase 12B
+does not implement production policy engine. Phase 12B does not implement
+deployment runtime. Phase 12B does not implement production promotion
+automation. Phase 12A defines governed production candidate implementation
+planning. Phase 11 acceptance remains readiness, not approval. Phase 10
+acceptance remains readiness, not approval. Local-only prototypes remain
+local-only until governed promotion is explicitly approved. RBAC advisory
+context remains not enforcement. Approval remains the Phase 7D selected-gate
+manual boundary.
+
 ## 2. Phase 4A — local read-only UI mock
 
 - A static or local-only view rendered over existing tmp/vault artifacts.

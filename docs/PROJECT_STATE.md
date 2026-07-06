@@ -1036,4 +1036,30 @@ prototypes remain local-only until governed promotion is explicitly approved.
 RBAC advisory context remains not enforcement. Approval remains the Phase 7D
 selected-gate manual boundary.
 
-Recommended next major subphase = Phase 12B Governed Production Candidate Boundary Approval Preparation.
+Recommended next major subphase = Phase 12B Runtime Boundary Approval and Implementation Scope.
+
+## 45. Phase 12B runtime boundary approval and implementation scope
+
+Phase 12B adds the runtime boundary approval and implementation scope document
+documented in
+`docs/PHASE12B_RUNTIME_BOUNDARY_APPROVAL_AND_IMPLEMENTATION_SCOPE.md`.
+`phase12b_status` is `success`. `runtime_boundary_approval_scope_status` is
+`docs_only`. Phase 12B is docs/tests only and adds no runtime.
+
+Phase 12B defines runtime boundary approval and implementation scope. Phase
+12B does not implement production runtime. Phase 12B does not approve
+production promotion. Phase 12B does not grant implementation approval. Phase
+12B does not implement authentication runtime. Phase 12B does not implement
+RBAC enforcement. Phase 12B does not implement key custody runtime. Phase 12B
+does not implement backend/API/database. Phase 12B does not implement
+production signing. Phase 12B does not implement verifier runtime. Phase 12B
+does not implement production policy engine. Phase 12B does not implement
+deployment runtime. Phase 12B does not implement production promotion
+automation. Phase 12A defines governed production candidate implementation
+planning. Phase 11 acceptance remains readiness, not approval. Phase 10
+acceptance remains readiness, not approval. Local-only prototypes remain
+local-only until governed promotion is explicitly approved. RBAC advisory
+context remains not enforcement. Approval remains the Phase 7D selected-gate
+manual boundary.
+
+Recommended next major subphase = Phase 12C Explicit Runtime Domain Approval Pack.
