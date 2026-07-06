@@ -121,6 +121,31 @@ def test_phase12g_task_file_preserves_core_boundary_wording() -> None:
     )
 
 
+def test_phase12g_task_file_reflects_completed_task3_state() -> None:
+    _assert_phase12g_docs_present()
+    text = _text(TASK_FILE)
+    _assert_all_tokens(
+        text,
+        (
+            "Phase 12G acceptance pack document exists with required canonical boundary wording.",
+            "Required matrix sections for acceptance, boundaries, artifacts, residual risk, verification, non-goals, and runtime capability exclusion exist.",
+            "Pointer-file updates remain deferred to Task 4.",
+            "Expected completed Task 3 result: PASS.",
+            "the focused test passes",
+        ),
+        label="task3 state token",
+    )
+    for token in (
+        "dense acceptance matrices in this task step",
+        "Later work may add matrices",
+        "Expected Task 2 intermediate result: 3 failed, 9 passed.",
+        "the focused test still fails",
+        "remaining failures are limited to deferred matrix checks",
+        "remaining failures are limited to pointer-doc-reference checks",
+    ):
+        assert token not in text, f"stale task3 wording still present: {token}"
+
+
 def test_phase12g_required_sections_exist() -> None:
     _assert_phase12g_docs_present()
     low = _flat(DOC)

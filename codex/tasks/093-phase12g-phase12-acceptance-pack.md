@@ -61,7 +61,6 @@ Phase 12G must not add:
 - runtime target invention
 - selected-gate bypass
 - pointer-file updates in this task step
-- dense acceptance matrices in this task step
 
 ## Boundary Preservation
 
@@ -88,14 +87,15 @@ Phase 12G must not add:
 ## Acceptance Criteria
 
 - Phase 12G task file exists with success status.
-- Phase 12G document shell exists with required canonical boundary wording.
+- Phase 12G acceptance pack document exists with required canonical boundary wording.
 - Relationship coverage references Phase 12A through Phase 12F exactly.
 - Phase 12 acceptance remains readiness, not approval.
 - Required acceptance summary sections for Phase 12A through Phase 12F exist.
 - Required exclusion sections for runtime, promotion, implementation approval, runtime-domain status, manual boundary preservation, local-only prototypes, RBAC advisory context, and runtime implementation target exist.
+- Required matrix sections for acceptance, boundaries, artifacts, residual risk, verification, non-goals, and runtime capability exclusion exist.
 - Failure handling and escalation language preserves fail-closed boundary behavior.
 - Acceptance criteria, safe demo scenarios, operator checklist, recommended next step, and recommended next major subphase sections exist.
-- Later work may add matrices and additive pointer updates without changing the preserved boundary wording.
+- Pointer-file updates remain deferred to Task 4.
 - No runtime, infra, signing, verifier, vault, approval-record, or key/cert artifacts are introduced by Phase 12G.
 
 ## Verification
@@ -106,13 +106,12 @@ git diff --check
 git status --short
 ```
 
-Expected Task 2 intermediate state:
+Expected completed Task 3 state:
 
-- Expected Task 2 intermediate result: 3 failed, 9 passed.
+- Expected completed Task 3 result: PASS.
 
-- the focused test still fails
-- remaining failures are limited to deferred matrix checks
-- remaining failures are limited to pointer-doc-reference checks
+- the focused test passes
+- pointer-file updates remain deferred to Task 4
 
 ## Final Status
 
