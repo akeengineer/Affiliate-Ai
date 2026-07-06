@@ -50,6 +50,32 @@ def test_phase12g_required_files_exist() -> None:
         assert path.is_file(), f"missing Phase 12G file: {path}"
 
 
+def test_phase12g_only_introduces_expected_phase_files() -> None:
+    matches = sorted(
+        str(path.relative_to(REPO_ROOT))
+        for path in REPO_ROOT.rglob("*phase12g*")
+        if path.is_file()
+        and ".git" not in path.relative_to(REPO_ROOT).parts
+        and "__pycache__" not in path.relative_to(REPO_ROOT).parts
+    )
+    assert matches == [
+        "codex/tasks/093-phase12g-phase12-acceptance-pack.md",
+        "tests/test_phase12g_phase12_acceptance_pack.py",
+    ]
+
+
+def test_phase12g_only_introduces_expected_planning_doc() -> None:
+    matches = sorted(
+        str(path.relative_to(REPO_ROOT))
+        for path in REPO_ROOT.rglob("*PHASE12G*")
+        if path.is_file()
+        and "__pycache__" not in path.relative_to(REPO_ROOT).parts
+    )
+    assert matches == [
+        "docs/PHASE12G_PHASE12_ACCEPTANCE_PACK.md",
+    ]
+
+
 def test_phase12g_required_canonical_wording_exists() -> None:
     _assert_phase12g_docs_present()
     text = _text(DOC)
