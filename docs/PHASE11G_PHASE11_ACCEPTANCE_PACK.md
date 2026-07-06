@@ -314,3 +314,5 @@ Phase 12 — Governed Production Candidate Implementation Planning
 Phase 12 should not immediately implement production authentication, RBAC enforcement, key custody, backend/API/database, production signing, verifier runtime, production policy engine, deployment runtime, or production promotion automation unless explicitly approved.
 
 Phase 12 should first translate the Phase 11 readiness outputs into an explicitly approved production candidate implementation plan, including scoped runtime boundaries, implementation sequence, security controls, CI enforcement candidates, observability implementation candidates, backup/recovery implementation candidates, secrets/key custody implementation candidates, rollback strategy, and approval gates.
+
+Phase 12A now provides that governed production candidate implementation plan in `docs/PHASE12A_GOVERNED_PRODUCTION_CANDIDATE_IMPLEMENTATION_PLAN.md`.

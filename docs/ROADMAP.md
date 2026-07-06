@@ -834,6 +834,30 @@ enforcement. Approval remains the Phase 7D selected-gate manual boundary.
 Phase 10 acceptance remains readiness, not approval. Phase 11 acceptance
 remains readiness, not approval.
 
+- Phase 12A — Governed Production Candidate Implementation Plan —
+  **planned / current**
+  (docs/tests planning-only layer; translates the Phase 11 readiness chain into
+  candidate runtime domains, implementation sequencing, approval gates,
+  evidence requirements, rollback strategy, and promotion constraints; implements
+  no production runtime, no authentication runtime, no backend/API/database, no
+  deployment runtime, no production promotion automation, no deployment
+  manifest, and no GitHub Actions workflow). See
+  `docs/PHASE12A_GOVERNED_PRODUCTION_CANDIDATE_IMPLEMENTATION_PLAN.md`.
+
+Phase 12A defines governed production candidate implementation planning. Phase
+12A does not implement production runtime. Phase 12A does not approve
+production promotion. Phase 12A does not implement authentication runtime.
+Phase 12A does not implement RBAC enforcement. Phase 12A does not implement
+key custody runtime. Phase 12A does not implement backend/API/database. Phase
+12A does not implement production signing. Phase 12A does not implement
+verifier runtime. Phase 12A does not implement production policy engine. Phase
+12A does not implement deployment runtime. Phase 12A does not implement
+production promotion automation. Phase 11 acceptance remains readiness, not
+approval. Phase 10 acceptance remains readiness, not approval. Local-only
+prototypes remain local-only until governed promotion is explicitly approved.
+RBAC advisory context remains not enforcement. Approval remains the Phase 7D
+selected-gate manual boundary.
+
 ## 2. Phase 4A — local read-only UI mock
 
 - A static or local-only view rendered over existing tmp/vault artifacts.
