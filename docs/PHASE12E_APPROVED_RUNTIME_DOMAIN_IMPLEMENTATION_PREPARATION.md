@@ -594,3 +594,5 @@ Complete Phase 12E PR readiness
 Phase 12F — Controlled Runtime Implementation Readiness Pack
 
 Phase 12F should convert the Phase 12E preparation artifacts into a controlled runtime implementation readiness pack for a later explicitly approved implementation phase. Phase 12F should not implement production runtime, approve production promotion, or bypass the Phase 7D selected-gate manual boundary unless explicitly approved. Phase 12F should verify implementation scope, required controls, test strategy, rollback expectations, observability requirements, evidence requirements, and operator approval checkpoints before any runtime code is introduced.
+
+Phase 12F is now documented in `docs/PHASE12F_CONTROLLED_RUNTIME_IMPLEMENTATION_READINESS_PACK.md`.
