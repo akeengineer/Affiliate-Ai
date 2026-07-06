@@ -984,6 +984,10 @@ selected-gate manual boundary.
   CI/CD runtime, no production promotion automation, no deployment manifest,
   and no GitHub Actions workflow). See
   `docs/PHASE12F_CONTROLLED_RUNTIME_IMPLEMENTATION_READINESS_PACK.md`.
+- Phase 12G — Phase 12 Acceptance Pack — **complete / done**
+  (docs/tests-only acceptance/readiness pack; verifies the full Phase 12A
+  through Phase 12F chain and introduces no runtime implementation or
+  approval). See `docs/PHASE12G_PHASE12_ACCEPTANCE_PACK.md`.
 
 Phase 12F defines controlled runtime implementation readiness. Phase 12F does
 not implement production runtime. Phase 12F does not approve production

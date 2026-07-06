@@ -7,6 +7,9 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 
 TASK_FILE = REPO_ROOT / "codex/tasks/093-phase12g-phase12-acceptance-pack.md"
 DOC = REPO_ROOT / "docs/PHASE12G_PHASE12_ACCEPTANCE_PACK.md"
+ROADMAP_DOC = REPO_ROOT / "docs/ROADMAP.md"
+PROJECT_STATE_DOC = REPO_ROOT / "docs/PROJECT_STATE.md"
+PHASE12F_DOC = REPO_ROOT / "docs/PHASE12F_CONTROLLED_RUNTIME_IMPLEMENTATION_READINESS_PACK.md"
 THIS_TEST = Path(__file__)
 
 def _text(path: Path) -> str:
@@ -271,6 +274,32 @@ def test_phase12g_failure_handling_tokens_exist() -> None:
             "implementation approval record",
         ),
         label="failure-handling token",
+    )
+
+
+def test_phase12g_pointer_docs_record_final_acceptance_layer() -> None:
+    roadmap = _text(ROADMAP_DOC)
+    roadmap_low = _flat(ROADMAP_DOC)
+    project_state = _text(PROJECT_STATE_DOC)
+    project_state_low = _flat(PROJECT_STATE_DOC)
+    phase12f_low = _flat(PHASE12F_DOC)
+
+    assert (
+        "Phase 12G — Phase 12 Acceptance Pack — **complete / done**" in roadmap
+    )
+    assert (
+        "verifies the full phase 12a through phase 12f chain" in roadmap_low
+    )
+    assert (
+        "Phase 12G records the final Phase 12 acceptance/readiness layer." in project_state
+    )
+    assert (
+        "introduces no runtime implementation, implementation approval, or production promotion approval."
+        in project_state_low
+    )
+    assert (
+        "phase 12g verifies the phase 12a through phase 12f chain as the phase 12 acceptance/readiness pack."
+        in phase12f_low
     )
 
 
