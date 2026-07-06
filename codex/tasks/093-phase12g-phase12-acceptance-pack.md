@@ -45,10 +45,7 @@ Phase 12G does not select or invent an approved runtime implementation target.
 - Create `codex/tasks/093-phase12g-phase12-acceptance-pack.md`
 - Create `docs/PHASE12G_PHASE12_ACCEPTANCE_PACK.md`
 - Validate `tests/test_phase12g_phase12_acceptance_pack.py`
-- Allow later additive pointer updates only in:
-- `docs/ROADMAP.md`
-- `docs/PROJECT_STATE.md`
-- `docs/PHASE12F_CONTROLLED_RUNTIME_IMPLEMENTATION_READINESS_PACK.md`
+- Reserve later additive pointer updates for separately scoped work in `docs/ROADMAP.md`, `docs/PROJECT_STATE.md`, and `docs/PHASE12F_CONTROLLED_RUNTIME_IMPLEMENTATION_READINESS_PACK.md`
 
 Phase 12G is acceptance/readiness documentation only.
 
@@ -108,6 +105,12 @@ Phase 12G must not add:
 git diff --check
 git status --short
 ```
+
+Expected Task 2 intermediate state:
+
+- the focused test still fails
+- remaining failures are limited to deferred matrix checks
+- remaining failures are limited to pointer-doc-reference checks
 
 ## Final Status
 

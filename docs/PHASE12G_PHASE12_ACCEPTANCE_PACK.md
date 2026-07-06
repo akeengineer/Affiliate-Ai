@@ -28,7 +28,7 @@ Phase 12G does not select or invent an approved runtime implementation target.
 ## 2. Phase 12 Acceptance Position
 
 - Phase 12 is accepted as a planning/readiness chain only.
-- Phase 12 does not grant production approval.
+- Phase 12 does not grant production promotion approval.
 - Phase 12 does not grant implementation approval.
 - Phase 12 does not select an approved runtime implementation target.
 - Phase 12 does not approve production promotion.
@@ -158,7 +158,7 @@ Runtime implementation target selection remains deferred unless explicitly appro
 
 - fail-closed missing Phase 12A through Phase 12F chain evidence
 - fail-closed missing phase boundary wording
-- fail-closed missing acceptance matrix coverage
+- fail-closed missing acceptance matrix coverage once the deferred matrix sections are added
 - fail-closed ambiguous runtime capability claim
 - fail-closed ambiguous production promotion language
 - fail-closed ambiguous implementation approval language
@@ -179,13 +179,14 @@ Runtime implementation target selection remains deferred unless explicitly appro
 
 - Missing Phase 12 chain evidence blocks acceptance/readiness confirmation.
 - Ambiguous runtime or promotion wording blocks acceptance/readiness confirmation.
-- Dense matrices remain deferred to the later scoped task.
+- Dense matrices remain deferred until the later scoped completion task.
 
 ## 22. Residual Risk Handling
 
 - Preserve fail-closed review when required evidence is missing.
 - Preserve manual operator review before any later approval claim.
 - Preserve readiness-only wording across all Phase 12 acceptance references.
+- Apply matrix-specific fail-closed checks after the deferred matrix sections are added.
 
 ## 23. Acceptance Criteria
 
