@@ -472,6 +472,6 @@ Complete Phase 13 PR readiness
 
 ## Recommended Next Major Subphase
 
-Phase 14 — Selected Runtime Domain Implementation Plan
+Phase 14 — Selected Runtime Domain Implementation Plan Blocked State
 
-Phase 14 should create a selected runtime domain implementation plan only after Phase 13 records explicit operator approval for one runtime domain. Phase 14 should not implement production runtime by default, approve production promotion, or bypass the Phase 7D selected-gate manual boundary unless explicitly approved. If Phase 13 does not record explicit operator approval for one runtime domain, Phase 14 must remain blocked.
+Phase 14 should document the blocked selected runtime domain implementation planning state if Phase 13 does not record explicit operator approval for exactly one runtime domain. Phase 14 should not select or infer a runtime domain. Phase 14 should not auto-select a runtime domain. Phase 14 should not grant implementation approval. Phase 14 should not implement production runtime. Phase 14 should not approve production promotion. Phase 14 should not bypass the Phase 7D selected-gate manual boundary. Phase 14 should remain blocked.

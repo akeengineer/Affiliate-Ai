@@ -996,6 +996,16 @@ selected-gate manual boundary.
   promotion approval, backend/API/database, deployment runtime, CI/CD runtime,
   or GitHub Actions workflow). See
   `docs/PHASE13_EXPLICIT_IMPLEMENTATION_APPROVAL_RECORD_AND_RUNTIME_DOMAIN_SELECTION.md`.
+- Phase 14 — Selected Runtime Domain Implementation Plan Blocked State —
+  **complete / done**
+  (docs/tests-only blocked planning layer; documents the blocked selected
+  runtime domain implementation planning state because Phase 13 did not record
+  explicit operator approval for exactly one runtime domain, does not select
+  or infer a runtime domain, does not grant implementation approval, and
+  introduces no runtime implementation, production promotion approval,
+  backend/API/database, deployment runtime, CI/CD runtime, or GitHub Actions
+  workflow). See
+  `docs/PHASE14_SELECTED_RUNTIME_DOMAIN_IMPLEMENTATION_PLAN_BLOCKED.md`.
 
 Phase 12F defines controlled runtime implementation readiness. Phase 12F does
 not implement production runtime. Phase 12F does not approve production
@@ -1025,6 +1035,15 @@ auto-select a runtime domain. Phase 13 does not infer implementation approval
 from Phase 12 acceptance. Phase 13 does not infer production promotion
 approval from implementation approval. Phase 13 treats missing or ambiguous
 approval as fail-closed.
+
+Phase 14 documents the blocked selected runtime domain implementation planning
+state. Phase 14 is blocked because Phase 13 did not record explicit operator
+approval for exactly one runtime domain. Phase 14 does not select or infer a
+runtime domain. Phase 14 does not auto-select a runtime domain. Phase 14 does
+not grant implementation approval. Phase 14 does not implement production
+runtime. Phase 14 does not approve production promotion. Phase 14 does not
+bypass the Phase 7D selected-gate manual boundary. Phase 14 treats missing or
+ambiguous runtime domain approval as fail-closed.
 
 ## 2. Phase 4A — local read-only UI mock
 

@@ -1230,5 +1230,48 @@ not enforcement. Phase 11 acceptance remains readiness, not approval. Phase
 10 acceptance remains readiness, not approval. Approval remains the Phase 7D
 selected-gate manual boundary.
 
-Recommended next major subphase = Phase 14 Selected Runtime Domain
-Implementation Plan.
+Superseding Phase 13 completion note: Recommended next major subphase = Phase
+14 Selected Runtime Domain Implementation Plan Blocked State. Phase 13 is
+complete and remains the explicit approval-record layer rather than the next
+pending subphase.
+
+## 51. Phase 14 selected runtime domain implementation plan blocked state
+
+Phase 14 adds the selected runtime domain implementation plan blocked state
+document documented in
+`docs/PHASE14_SELECTED_RUNTIME_DOMAIN_IMPLEMENTATION_PLAN_BLOCKED.md`.
+`phase14_status` is `blocked_planning_only`.
+`runtime_domain_selection_status` is `not_selected`.
+`implementation_approval_status` is `not_granted`.
+`production_promotion_status` is `not_approved`.
+`approval_record_status` is `pending_explicit_operator_approval`.
+Phase 14 is docs/tests only and adds no runtime.
+
+Phase 14 documents the blocked selected runtime domain implementation planning
+state. Phase 14 is blocked because Phase 13 did not record explicit operator
+approval for exactly one runtime domain. Phase 14 does not select or infer a
+runtime domain. Phase 14 does not auto-select a runtime domain. Phase 14 does
+not grant implementation approval. Phase 14 does not implement production
+runtime. Phase 14 does not approve production promotion. Phase 14 does not
+bypass the Phase 7D selected-gate manual boundary. Phase 14 treats missing or
+ambiguous runtime domain approval as fail-closed.
+
+Phase 13 defines the explicit implementation approval record and runtime
+domain selection process. Phase 13 does not implement production runtime by
+default. Phase 13 does not approve production promotion. Phase 13 does not
+auto-select a runtime domain. Phase 13 does not infer implementation approval
+from Phase 12 acceptance. Phase 12G is the Phase 12 acceptance/readiness
+pack. Phase 12G does not grant implementation approval. Phase 12G does not
+approve production promotion. Phase 12 acceptance does not equal
+implementation approval. Phase 12 acceptance does not equal production
+promotion approval. Approved Runtime Domain remains pending explicit Phase
+12D approval.
+
+Current architecture remains local-first: no database, no FastAPI, no UI, no
+external APIs, and no autopublish. Approval remains the Phase 7D
+selected-gate manual boundary. Production authentication, RBAC enforcement,
+key custody, backend/API/database, production signing, verifier runtime, and
+production policy engine remain out of scope unless explicitly approved.
+
+Recommended next major subphase = Phase 15 Explicit Single Runtime Domain
+Approval.
