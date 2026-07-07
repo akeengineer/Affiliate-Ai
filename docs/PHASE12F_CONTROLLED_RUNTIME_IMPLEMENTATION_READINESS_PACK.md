@@ -85,6 +85,9 @@ Phase 12B defines runtime boundary approval and implementation scope.
 
 Phase 12A defines governed production candidate implementation planning.
 
+Phase 12G verifies the Phase 12A through Phase 12F chain as the Phase 12
+acceptance/readiness pack.
+
 Phase 12F consumes the Phase 12E preparation artifacts only as readiness inputs
 for a later implementation phase. It does not convert readiness into runtime
 implementation approval, deployment approval, or production promotion approval.

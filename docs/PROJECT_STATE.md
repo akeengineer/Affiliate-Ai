@@ -1178,4 +1178,13 @@ remain local-only until governed promotion is explicitly approved. RBAC
 advisory context remains not enforcement. Approval remains the Phase 7D
 selected-gate manual boundary.
 
+Phase 12G records the final Phase 12 acceptance/readiness layer. It verifies
+the Phase 12A through Phase 12F chain, preserves the Phase 7D selected-gate
+manual boundary, and introduces no runtime implementation, implementation
+approval, or production promotion approval.
+
 Recommended next major subphase = Phase 12G Phase 12 Acceptance Pack.
+
+Superseding Phase 12G completion note: Recommended next major subphase = Phase
+13. Phase 12G is complete and remains the final Phase 12 acceptance/readiness
+pack rather than the next pending subphase.
