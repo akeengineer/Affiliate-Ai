@@ -408,9 +408,10 @@ def test_phase13_recommended_next_step_and_next_major_subphase_exist() -> None:
             "- sync main",
             "- delete feature branch",
             "## Recommended Next Major Subphase",
-            "Phase 14 — Selected Runtime Domain Implementation Plan",
-            "Phase 14 should create a selected runtime domain implementation plan only after Phase 13 records explicit operator approval for one runtime domain.",
-            "If Phase 13 does not record explicit operator approval for one runtime domain, Phase 14 must remain blocked.",
+            "Phase 14 — Selected Runtime Domain Implementation Plan Blocked State",
+            "Phase 14 should document the blocked selected runtime domain implementation planning state if Phase 13 does not record explicit operator approval for exactly one runtime domain.",
+            "Phase 14 should not select or infer a runtime domain.",
+            "Phase 14 should remain blocked.",
         ),
         label="next-step token",
     )
@@ -426,4 +427,3 @@ def test_phase13_forbidden_runtime_artifacts_are_absent() -> None:
     assert not _rel_matches("*phase13*", REPO_ROOT / "infra")
     assert not _rel_matches("*phase13*", REPO_ROOT / "keys")
     assert not _rel_matches("*phase13*", REPO_ROOT / "certs")
-
