@@ -1007,7 +1007,7 @@ selected-gate manual boundary.
   workflow). See
   `docs/PHASE14_SELECTED_RUNTIME_DOMAIN_IMPLEMENTATION_PLAN_BLOCKED.md`.
 - Track 1A — Backend/API/Database Runtime Selection Record —
-  **complete / current**
+  **complete / done**
   (docs/tests-only runtime-domain-selection layer; explicitly selects
   backend/API/database runtime as the first runtime domain for a usable
   product slice, exits the governance-only loop, starts Implementation Track 1,
@@ -1016,6 +1016,15 @@ selected-gate manual boundary.
   approval, backend/API/database code, deployment runtime, or GitHub Actions
   workflow). See
   `docs/TRACK1A_BACKEND_API_DATABASE_RUNTIME_SELECTION_RECORD.md`.
+- Track 1B — Backend/API/Database Product Slice Plan —
+  **complete / current**
+  (docs/tests-only product-slice-planning layer; defines the first usable local
+  backend/API/database product slice plan, continues Implementation Track 1,
+  preserves the Phase 7D selected-gate manual boundary, and introduces no
+  runtime implementation, production promotion approval, production deployment
+  approval, backend/API/database implementation files, deployment runtime, or
+  GitHub Actions workflow). See
+  `docs/TRACK1B_BACKEND_API_DATABASE_PRODUCT_SLICE_PLAN.md`.
 
 Phase 12F defines controlled runtime implementation readiness. Phase 12F does
 not implement production runtime. Phase 12F does not approve production
@@ -1066,6 +1075,20 @@ Track 1A does not approve production promotion.
 Track 1A does not approve production deployment.
 
 Track 1A preserves the Phase 7D selected-gate manual boundary.
+
+Track 1B defines the backend/API/database product slice implementation plan for the first usable local product slice.
+
+Track 1B continues Implementation Track 1 — Backend/API/Database Usable Product Slice.
+
+Track 1B does not implement runtime code.
+
+Track 1B does not add backend/API/database implementation files.
+
+Track 1B does not approve production promotion.
+
+Track 1B does not approve production deployment.
+
+Track 1B preserves the Phase 7D selected-gate manual boundary.
 
 ## 2. Phase 4A — local read-only UI mock
 

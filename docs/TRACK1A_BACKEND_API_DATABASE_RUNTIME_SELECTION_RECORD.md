@@ -310,3 +310,19 @@ Complete Track 1A PR readiness
 Track 1B — Backend/API/Database Product Slice Plan
 
 Track 1B should define the backend/API/database product slice implementation plan for the first usable local product slice. Track 1B should identify the local backend service, database/storage approach, product entities, API endpoints, validation rules, tests, local run commands, and demo acceptance flow. Track 1B should not implement production authentication, RBAC enforcement, production signing, verifier runtime, key custody runtime, production deployment, or production promotion unless explicitly approved in a later track.
+
+Track 1B defines the backend/API/database product slice implementation plan for the first usable local product slice.
+
+Track 1B continues Implementation Track 1 — Backend/API/Database Usable Product Slice.
+
+Track 1B does not implement runtime code.
+
+Track 1B does not add backend/API/database implementation files.
+
+Track 1B does not approve production promotion.
+
+Track 1B does not approve production deployment.
+
+Track 1B preserves the Phase 7D selected-gate manual boundary.
+
+Track 1C is the first approved point for local backend/API skeleton implementation, if Track 1B is accepted.
