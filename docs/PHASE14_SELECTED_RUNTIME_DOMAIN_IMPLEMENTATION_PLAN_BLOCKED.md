@@ -38,6 +38,21 @@ Phase 14 does not bypass the Phase 7D selected-gate manual boundary.
 
 Phase 14 treats missing or ambiguous runtime domain approval as fail-closed.
 
+Track 1A later records the first explicit selected runtime domain after the
+Phase 14 blocked state.
+
+Track 1A selects backend/API/database runtime as the first runtime domain for a usable product slice.
+
+Track 1A exits the governance-only loop and starts Implementation Track 1.
+
+Track 1A does not implement runtime code.
+
+Track 1A does not approve production promotion.
+
+Track 1A does not approve production deployment.
+
+Track 1A preserves the Phase 7D selected-gate manual boundary.
+
 ## 2. Phase 14 Blocked Position
 
 Phase 14 is blocked selected-runtime-domain implementation planning documentation only.
