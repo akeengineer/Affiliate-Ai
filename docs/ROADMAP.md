@@ -988,6 +988,14 @@ selected-gate manual boundary.
   (docs/tests-only acceptance/readiness pack; verifies the full Phase 12A
   through Phase 12F chain and introduces no runtime implementation or
   approval). See `docs/PHASE12G_PHASE12_ACCEPTANCE_PACK.md`.
+- Phase 13 — Explicit Implementation Approval Record and Runtime Domain
+  Selection — **complete / done**
+  (docs/tests-only approval-record layer; defines the explicit implementation
+  approval record and runtime domain selection process, preserves the default
+  fail-closed state, and introduces no runtime implementation, production
+  promotion approval, backend/API/database, deployment runtime, CI/CD runtime,
+  or GitHub Actions workflow). See
+  `docs/PHASE13_EXPLICIT_IMPLEMENTATION_APPROVAL_RECORD_AND_RUNTIME_DOMAIN_SELECTION.md`.
 
 Phase 12F defines controlled runtime implementation readiness. Phase 12F does
 not implement production runtime. Phase 12F does not approve production
@@ -1008,6 +1016,15 @@ Phase 10 acceptance remains readiness, not approval. Local-only prototypes
 remain local-only until governed promotion is explicitly approved. RBAC
 advisory context remains not enforcement. Approval remains the Phase 7D
 selected-gate manual boundary.
+
+Phase 13 defines the explicit implementation approval record and runtime
+domain selection process. Phase 13 does not implement production runtime by
+default. Phase 13 does not approve production promotion. Phase 13 does not
+bypass the Phase 7D selected-gate manual boundary. Phase 13 does not
+auto-select a runtime domain. Phase 13 does not infer implementation approval
+from Phase 12 acceptance. Phase 13 does not infer production promotion
+approval from implementation approval. Phase 13 treats missing or ambiguous
+approval as fail-closed.
 
 ## 2. Phase 4A — local read-only UI mock
 

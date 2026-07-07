@@ -1188,3 +1188,47 @@ Recommended next major subphase = Phase 12G Phase 12 Acceptance Pack.
 Superseding Phase 12G completion note: Recommended next major subphase = Phase
 13. Phase 12G is complete and remains the final Phase 12 acceptance/readiness
 pack rather than the next pending subphase.
+
+## 50. Phase 13 explicit implementation approval record and runtime domain selection
+
+Phase 13 adds the explicit implementation approval record and runtime domain
+selection document documented in
+`docs/PHASE13_EXPLICIT_IMPLEMENTATION_APPROVAL_RECORD_AND_RUNTIME_DOMAIN_SELECTION.md`.
+`phase13_status` is `success`.
+`runtime_domain_selection_status` is `not_selected`.
+`implementation_approval_status` is `not_granted`.
+`production_promotion_status` is `not_approved`.
+`approval_record_status` is `pending_explicit_operator_approval`.
+Phase 13 is docs/tests only and adds no runtime.
+
+Phase 13 defines the explicit implementation approval record and runtime
+domain selection process. Phase 13 does not implement production runtime by
+default. Phase 13 does not approve production promotion. Phase 13 does not
+bypass the Phase 7D selected-gate manual boundary. Phase 13 does not
+auto-select a runtime domain. Phase 13 does not infer implementation approval
+from Phase 12 acceptance. Phase 13 does not infer production promotion
+approval from implementation approval. Phase 13 treats missing or ambiguous
+approval as fail-closed.
+
+Phase 12G is the Phase 12 acceptance/readiness pack. Phase 12G does not grant
+implementation approval. Phase 12G does not approve production promotion.
+Phase 12G does not select or invent an approved runtime implementation target.
+Phase 12 acceptance does not equal implementation approval. Phase 12
+acceptance does not equal production promotion approval. Approved Runtime
+Domain remains pending explicit Phase 12D approval. Phase 12F defines
+controlled runtime implementation readiness. Phase 12E defines approved
+runtime domain implementation preparation. Phase 12D defines the explicit
+runtime implementation approval gate. Phase 12C defines implementation
+approval evidence package requirements. Phase 12B defines runtime boundary
+approval and implementation scope. Phase 12A defines governed production
+candidate implementation planning.
+
+Current architecture remains local-first: no database, no FastAPI, no UI, no
+external APIs, and no autopublish. Local-only prototypes remain local-only
+until governed promotion is explicitly approved. RBAC advisory context remains
+not enforcement. Phase 11 acceptance remains readiness, not approval. Phase
+10 acceptance remains readiness, not approval. Approval remains the Phase 7D
+selected-gate manual boundary.
+
+Recommended next major subphase = Phase 14 Selected Runtime Domain
+Implementation Plan.
