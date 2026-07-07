@@ -307,3 +307,5 @@ Complete Phase 12G PR readiness
 Phase 13 — Explicit Implementation Approval Record and Runtime Domain Selection
 
 Phase 13 should not implement production runtime by default. Phase 13 should create an explicit implementation approval record and select one approved runtime domain only if the operator explicitly approves that decision. Phase 13 should preserve the Phase 7D selected-gate manual boundary, keep production promotion excluded, and treat any missing or ambiguous approval as fail-closed.
+
+Phase 13 defines the explicit implementation approval record and runtime domain selection process.
