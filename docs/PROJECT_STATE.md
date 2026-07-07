@@ -1275,3 +1275,30 @@ production policy engine remain out of scope unless explicitly approved.
 
 Recommended next major subphase = Phase 15 Explicit Single Runtime Domain
 Approval.
+
+## 52. Track 1A backend/api/database runtime selection record
+
+Track 1A adds the backend/API/database runtime selection record documented in
+`docs/TRACK1A_BACKEND_API_DATABASE_RUNTIME_SELECTION_RECORD.md`.
+`track1a_status` is `success`.
+`selected_runtime_domain` is `backend/API/database runtime`.
+`implementation_track_status` is `implementation_track_1_started`.
+`production_promotion_status` is `not_approved`.
+`production_deployment_status` is `not_approved`.
+Phase 7D manual boundary status remains preserved. Track 1A is docs/tests
+only and adds no runtime.
+
+Track 1A selects backend/API/database runtime as the first runtime domain for a usable product slice.
+Track 1A exits the governance-only loop and starts Implementation Track 1.
+Track 1A does not implement runtime code.
+Track 1A does not approve production promotion.
+Track 1A does not approve production deployment.
+Track 1A preserves the Phase 7D selected-gate manual boundary.
+
+Production authentication, RBAC enforcement, production signing, verifier
+runtime, and key custody runtime remain deferred. Current architecture
+remains local-first: no production runtime, no production deployment, and no
+production promotion approval is added by Track 1A.
+
+Recommended next major subphase = Track 1B Backend/API/Database Product Slice
+Plan.

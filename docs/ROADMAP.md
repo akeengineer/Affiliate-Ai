@@ -1006,6 +1006,16 @@ selected-gate manual boundary.
   backend/API/database, deployment runtime, CI/CD runtime, or GitHub Actions
   workflow). See
   `docs/PHASE14_SELECTED_RUNTIME_DOMAIN_IMPLEMENTATION_PLAN_BLOCKED.md`.
+- Track 1A — Backend/API/Database Runtime Selection Record —
+  **complete / current**
+  (docs/tests-only runtime-domain-selection layer; explicitly selects
+  backend/API/database runtime as the first runtime domain for a usable
+  product slice, exits the governance-only loop, starts Implementation Track 1,
+  preserves the Phase 7D selected-gate manual boundary, and introduces no
+  runtime implementation, production promotion approval, production deployment
+  approval, backend/API/database code, deployment runtime, or GitHub Actions
+  workflow). See
+  `docs/TRACK1A_BACKEND_API_DATABASE_RUNTIME_SELECTION_RECORD.md`.
 
 Phase 12F defines controlled runtime implementation readiness. Phase 12F does
 not implement production runtime. Phase 12F does not approve production
@@ -1044,6 +1054,18 @@ not grant implementation approval. Phase 14 does not implement production
 runtime. Phase 14 does not approve production promotion. Phase 14 does not
 bypass the Phase 7D selected-gate manual boundary. Phase 14 treats missing or
 ambiguous runtime domain approval as fail-closed.
+
+Track 1A selects backend/API/database runtime as the first runtime domain for a usable product slice.
+
+Track 1A exits the governance-only loop and starts Implementation Track 1.
+
+Track 1A does not implement runtime code.
+
+Track 1A does not approve production promotion.
+
+Track 1A does not approve production deployment.
+
+Track 1A preserves the Phase 7D selected-gate manual boundary.
 
 ## 2. Phase 4A — local read-only UI mock
 
