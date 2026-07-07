@@ -500,3 +500,23 @@ Complete Track 1B PR readiness
 Track 1C — Local Backend/API Skeleton
 
 Track 1C should implement the local backend/API skeleton for the first usable local product slice. Track 1C should add only local runtime code required for service startup, configuration loading, GET /health, GET /version, and GET /runtime/status. Track 1C should not implement production authentication, RBAC enforcement, production signing, verifier runtime, key custody runtime, production deployment, cloud infrastructure, or production promotion unless explicitly approved in a later track.
+
+Track 1C implements the local backend/API skeleton for the first usable local product slice.
+
+Track 1C is the first runtime implementation step in Implementation Track 1.
+
+Track 1C implements local service startup, local configuration loading, GET /health, GET /version, and GET /runtime/status.
+
+Track 1C does not implement database/storage runtime.
+
+Track 1C does not implement Product or AffiliateOffer CRUD.
+
+Track 1C does not implement insight generation.
+
+Track 1C does not approve production promotion.
+
+Track 1C does not approve production deployment.
+
+Track 1C preserves the Phase 7D selected-gate manual boundary.
+
+Track 1D is the first approved point for database/storage runtime implementation, if Track 1C is accepted.

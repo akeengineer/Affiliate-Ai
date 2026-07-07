@@ -1017,7 +1017,7 @@ selected-gate manual boundary.
   workflow). See
   `docs/TRACK1A_BACKEND_API_DATABASE_RUNTIME_SELECTION_RECORD.md`.
 - Track 1B — Backend/API/Database Product Slice Plan —
-  **complete / current**
+  **complete / done**
   (docs/tests-only product-slice-planning layer; defines the first usable local
   backend/API/database product slice plan, continues Implementation Track 1,
   preserves the Phase 7D selected-gate manual boundary, and introduces no
@@ -1025,6 +1025,14 @@ selected-gate manual boundary.
   approval, backend/API/database implementation files, deployment runtime, or
   GitHub Actions workflow). See
   `docs/TRACK1B_BACKEND_API_DATABASE_PRODUCT_SLICE_PLAN.md`.
+- Track 1C — Local Backend/API Skeleton —
+  **complete / current**
+  (local-only backend/API skeleton layer; implements the first local runtime
+  step in Implementation Track 1 with service startup, local configuration
+  loading, GET /health, GET /version, and GET /runtime/status, preserves the
+  Phase 7D selected-gate manual boundary, and introduces no database/storage
+  runtime, CRUD runtime, insight generation, deployment runtime, or GitHub
+  Actions workflow). See `docs/TRACK1C_LOCAL_BACKEND_API_SKELETON.md`.
 
 Phase 12F defines controlled runtime implementation readiness. Phase 12F does
 not implement production runtime. Phase 12F does not approve production
@@ -1089,6 +1097,24 @@ Track 1B does not approve production promotion.
 Track 1B does not approve production deployment.
 
 Track 1B preserves the Phase 7D selected-gate manual boundary.
+
+Track 1C implements the local backend/API skeleton for the first usable local product slice.
+
+Track 1C is the first runtime implementation step in Implementation Track 1.
+
+Track 1C implements local service startup, local configuration loading, GET /health, GET /version, and GET /runtime/status.
+
+Track 1C does not implement database/storage runtime.
+
+Track 1C does not implement Product or AffiliateOffer CRUD.
+
+Track 1C does not implement insight generation.
+
+Track 1C does not approve production promotion.
+
+Track 1C does not approve production deployment.
+
+Track 1C preserves the Phase 7D selected-gate manual boundary.
 
 ## 2. Phase 4A — local read-only UI mock
 
