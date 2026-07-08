@@ -1359,3 +1359,36 @@ runtime, and key custody runtime remain deferred. Current architecture
 remains local-only and storage-free in Track 1C.
 
 Recommended next major subphase = Track 1D Database/Storage Runtime.
+
+## 55. Track 1D local database/storage runtime
+
+Track 1D adds the local database/storage runtime documented in
+`docs/TRACK1D_DATABASE_STORAGE_RUNTIME.md`.
+`track1d_status` is `success`.
+`runtime_mode` remains `local-only`.
+`implementation_track_status` remains `implementation_track_1_started`.
+`storage_runtime` is `SQLite local-first MVP`.
+`database_storage_runtime_status` is `implemented_in_track1d`.
+`production_promotion_status` remains `not_approved`.
+`production_deployment_status` remains `not_approved`.
+Phase 7D manual boundary status remains preserved.
+
+Track 1D implements the local database/storage runtime for the first usable local product slice.
+Track 1D uses SQLite for local-first MVP storage.
+Track 1D continues Implementation Track 1 — Backend/API/Database Usable Product Slice.
+Track 1D is an explicit local product-slice runtime exception to the earlier Phase 1 Obsidian-only/no-database constraint.
+The Track 1D exception is limited to SQLite local-first MVP storage for Implementation Track 1.
+The Track 1D exception does not approve production database runtime.
+The Track 1D exception does not approve production promotion.
+The Track 1D exception does not approve production deployment.
+Track 1D does not implement Product or AffiliateOffer full CRUD API.
+Track 1D does not implement insight generation.
+Track 1D does not implement recommendation runtime.
+Track 1D preserves the Phase 7D selected-gate manual boundary.
+
+Current architecture still preserves the historical local-first guardrails and
+their no database wording for the broader Phase 1 workflow. Track 1D is a
+narrow post-Track-1A exception limited to local SQLite product-slice storage
+only.
+
+Recommended next major subphase = Track 1E Product Core API.

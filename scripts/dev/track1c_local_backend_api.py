@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import importlib.util
 import json
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 
@@ -25,7 +27,33 @@ def _version_payload(config: Any) -> dict[str, str]:
     }
 
 
+def _track1d_storage_status() -> dict[str, str]:
+    module_path = Path(__file__).with_name("track1d_local_storage.py")
+    if not module_path.is_file():
+        return {
+            "database_storage_runtime_status": "not implemented in Track 1C",
+            "storage_runtime": "unavailable",
+        }
+
+    spec = importlib.util.spec_from_file_location("track1d_local_storage_for_track1c", module_path)
+    if spec is None or spec.loader is None:
+        return {
+            "database_storage_runtime_status": "not implemented in Track 1C",
+            "storage_runtime": "unavailable",
+        }
+
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    config = module.load_local_storage_config()
+    status = module.get_storage_status(config)
+    return {
+        "database_storage_runtime_status": str(status["database_storage_runtime_status"]),
+        "storage_runtime": str(status["storage_runtime"]),
+    }
+
+
 def _runtime_status_payload(config: Any) -> dict[str, str]:
+    storage_status = _track1d_storage_status()
     return {
         "selected_runtime_domain": config.selected_runtime_domain,
         "runtime_mode": config.runtime_mode,
@@ -37,9 +65,10 @@ def _runtime_status_payload(config: Any) -> dict[str, str]:
         "verifier_runtime_status": "deferred",
         "key_custody_runtime_status": "deferred",
         "phase_7d_boundary_status": "preserved",
-        "database_storage_runtime_status": "not implemented in Track 1C",
-        "product_crud_status": "not implemented in Track 1C",
-        "insight_generation_status": "not implemented in Track 1C",
+        "database_storage_runtime_status": storage_status["database_storage_runtime_status"],
+        "storage_runtime": storage_status["storage_runtime"],
+        "product_crud_status": "not implemented in Track 1D",
+        "insight_generation_status": "not implemented in Track 1D",
     }
 
 

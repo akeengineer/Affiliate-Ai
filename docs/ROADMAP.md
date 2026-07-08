@@ -1116,6 +1116,33 @@ Track 1C does not approve production deployment.
 
 Track 1C preserves the Phase 7D selected-gate manual boundary.
 
+Track 1D — Database/Storage Runtime — see
+`docs/TRACK1D_DATABASE_STORAGE_RUNTIME.md`.
+
+Track 1D implements the local database/storage runtime for the first usable local product slice.
+
+Track 1D uses SQLite for local-first MVP storage.
+
+Track 1D continues Implementation Track 1 — Backend/API/Database Usable Product Slice.
+
+Track 1D is an explicit local product-slice runtime exception to the earlier Phase 1 Obsidian-only/no-database constraint.
+
+The Track 1D exception is limited to SQLite local-first MVP storage for Implementation Track 1.
+
+The Track 1D exception does not approve production database runtime.
+
+The Track 1D exception does not approve production promotion.
+
+The Track 1D exception does not approve production deployment.
+
+Track 1D does not implement Product or AffiliateOffer full CRUD API.
+
+Track 1D does not implement insight generation.
+
+Track 1D does not implement recommendation runtime.
+
+Track 1D preserves the Phase 7D selected-gate manual boundary.
+
 ## 2. Phase 4A — local read-only UI mock
 
 - A static or local-only view rendered over existing tmp/vault artifacts.
