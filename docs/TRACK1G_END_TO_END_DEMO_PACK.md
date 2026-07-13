@@ -329,6 +329,14 @@ Track 1H — MVP Acceptance Pack
 
 Track 1H is the first approved point for MVP Acceptance Pack implementation, if Track 1G is accepted.
 
+Track 1H creates the MVP Acceptance Pack for the first usable local product slice.
+
+Track 1H closes Implementation Track 1 — Backend/API/Database Usable Product Slice.
+
+Track 1H accepts the local product slice as usable for local/demo operation only.
+
+See `docs/TRACK1H_MVP_ACCEPTANCE_PACK.md`.
+
 ## 31. Recommended Next Major Subphase
 
-Track 1H — MVP Acceptance Pack
+Implementation Track 2 — Local Product Intelligence Expansion, after Track 1H is merged.
