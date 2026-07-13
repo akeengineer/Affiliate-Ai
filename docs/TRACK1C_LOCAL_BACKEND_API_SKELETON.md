@@ -366,3 +366,7 @@ Complete Track 1C PR readiness
 Track 1D — Database/Storage Runtime
 
 Track 1D should implement the first approved database/storage runtime for the first usable local product slice. Track 1D should add only the local storage runtime needed to initialize and access local product-slice persistence. Track 1D should not implement production authentication, RBAC enforcement, production signing, verifier runtime, key custody runtime, production deployment, cloud infrastructure, or production promotion unless explicitly approved in a later track.
+
+Track 1D is now documented separately in `docs/TRACK1D_DATABASE_STORAGE_RUNTIME.md`
+as the narrow post-Track-1A SQLite local-first MVP storage exception for
+Implementation Track 1.
