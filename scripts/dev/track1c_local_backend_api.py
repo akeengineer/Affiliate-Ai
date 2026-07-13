@@ -90,8 +90,11 @@ def _runtime_status_payload(config: Any) -> dict[str, str]:
         "affiliate_offer_endpoint_status": "implemented in Track 1E",
         "minimal_operator_flow_status": "implemented in Track 1F",
         "operator_surface_status": "implemented in Track 1F",
-        "insight_generation_status": "not implemented in Track 1F",
-        "recommendation_runtime_status": "not implemented in Track 1F",
+        "end_to_end_demo_pack_status": "implemented in Track 1G",
+        "demo_workflow_status": "implemented in Track 1G",
+        "production_demo_deployment_status": "not approved",
+        "insight_generation_status": "not implemented in Track 1G",
+        "recommendation_runtime_status": "not implemented in Track 1G",
     }
 
 
