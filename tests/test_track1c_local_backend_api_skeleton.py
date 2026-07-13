@@ -263,9 +263,10 @@ def test_track1c_runtime_status_endpoint_returns_required_boundary_contract() ->
         "verifier_runtime_status": "deferred",
         "key_custody_runtime_status": "deferred",
         "phase_7d_boundary_status": "preserved",
-        "database_storage_runtime_status": "not implemented in Track 1C",
-        "product_crud_status": "not implemented in Track 1C",
-        "insight_generation_status": "not implemented in Track 1C",
+        "database_storage_runtime_status": "implemented in Track 1D as SQLite local-first MVP",
+        "storage_runtime": "SQLite local-first MVP",
+        "product_crud_status": "not implemented in Track 1D",
+        "insight_generation_status": "not implemented in Track 1D",
     }
 
 
@@ -330,4 +331,3 @@ def test_track1c_no_database_or_deployment_or_production_runtime_files_are_intro
     ]
     for path in forbidden_files:
         assert not path.exists(), f"unexpected Track 1C forbidden runtime file: {path}"
-
