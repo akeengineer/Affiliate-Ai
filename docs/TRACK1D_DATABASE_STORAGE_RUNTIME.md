@@ -430,6 +430,10 @@ Track 1E should build the first approved Product Core API behavior on top of
 the Track 1D SQLite storage and repository foundation without widening into
 production runtime scope.
 
+Track 1E is now documented separately in `docs/TRACK1E_PRODUCT_CORE_API.md` as
+the first approved Product Core API layer and the approved deterministic local
+schema evolution point for the Track 1D SQLite local-first MVP storage.
+
 ## 26. Recommended Next Major Subphase
 
 Track 1E — Product Core API

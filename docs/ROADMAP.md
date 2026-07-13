@@ -1143,6 +1143,30 @@ Track 1D does not implement recommendation runtime.
 
 Track 1D preserves the Phase 7D selected-gate manual boundary.
 
+Track 1E — Product Core API — see `docs/TRACK1E_PRODUCT_CORE_API.md`.
+
+Track 1E implements the Product Core API for the first usable local product slice.
+
+Track 1E evolves the Track 1D SQLite local-first schema only within the local product-slice runtime boundary.
+
+Track 1E schema evolution does not approve production database runtime.
+
+Track 1E schema evolution does not approve PostgreSQL or Aurora runtime.
+
+Track 1E schema evolution remains limited to SQLite local-first MVP storage.
+
+Track 1E continues to use the Track 1D repository/data access boundary.
+
+Track 1E does not implement insight generation.
+
+Track 1E does not implement recommendation runtime.
+
+Track 1E does not approve production promotion.
+
+Track 1E does not approve production deployment.
+
+Track 1E preserves the Phase 7D selected-gate manual boundary.
+
 ## 2. Phase 4A — local read-only UI mock
 
 - A static or local-only view rendered over existing tmp/vault artifacts.

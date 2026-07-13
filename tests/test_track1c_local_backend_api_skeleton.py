@@ -265,8 +265,12 @@ def test_track1c_runtime_status_endpoint_returns_required_boundary_contract() ->
         "phase_7d_boundary_status": "preserved",
         "database_storage_runtime_status": "implemented in Track 1D as SQLite local-first MVP",
         "storage_runtime": "SQLite local-first MVP",
-        "product_crud_status": "not implemented in Track 1D",
-        "insight_generation_status": "not implemented in Track 1D",
+        "product_crud_status": "implemented in Track 1E",
+        "product_core_api_status": "implemented in Track 1E",
+        "product_endpoint_status": "implemented in Track 1E",
+        "affiliate_offer_endpoint_status": "implemented in Track 1E",
+        "insight_generation_status": "not implemented in Track 1E",
+        "recommendation_runtime_status": "not implemented in Track 1E",
     }
 
 
