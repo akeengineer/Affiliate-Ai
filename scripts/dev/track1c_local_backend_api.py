@@ -3,11 +3,26 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import sys
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+
+from track1e_product_core_api import (
+    error_response,
+    handle_affiliate_offer_create,
+    handle_affiliate_offer_list,
+    handle_product_create,
+    handle_product_get,
+    handle_product_list,
+    handle_product_patch,
+)
 
 
 def _health_payload(config: Any) -> dict[str, str]:
@@ -67,13 +82,31 @@ def _runtime_status_payload(config: Any) -> dict[str, str]:
         "phase_7d_boundary_status": "preserved",
         "database_storage_runtime_status": storage_status["database_storage_runtime_status"],
         "storage_runtime": storage_status["storage_runtime"],
-        "product_crud_status": "not implemented in Track 1D",
-        "insight_generation_status": "not implemented in Track 1D",
+        "product_crud_status": "implemented in Track 1E",
+        "product_core_api_status": "implemented in Track 1E",
+        "product_endpoint_status": "implemented in Track 1E",
+        "affiliate_offer_endpoint_status": "implemented in Track 1E",
+        "insight_generation_status": "not implemented in Track 1E",
+        "recommendation_runtime_status": "not implemented in Track 1E",
     }
 
 
 def _json_bytes(payload: dict[str, Any]) -> bytes:
     return (json.dumps(payload, separators=(",", ":"), ensure_ascii=True) + "\n").encode("utf-8")
+
+
+def _product_id_from_path(path: str) -> str | None:
+    prefix = "/products/"
+    if not path.startswith(prefix):
+        return None
+    product_id = path[len(prefix) :]
+    if not product_id or "/" in product_id:
+        return None
+    return product_id
+
+
+def _known_route(path: str) -> bool:
+    return path in {"/health", "/version", "/runtime/status", "/products", "/affiliate-offers"} or _product_id_from_path(path) is not None
 
 
 def create_handler(config: Any) -> type[BaseHTTPRequestHandler]:
@@ -89,21 +122,67 @@ def create_handler(config: Any) -> type[BaseHTTPRequestHandler]:
 
         def do_GET(self) -> None:  # noqa: N802 - stdlib handler naming.
             path = urlparse(self.path).path
-            payload = routes.get(path)
-            if payload is None:
-                self._send_json(
-                    HTTPStatus.NOT_FOUND,
-                    {
-                        "error": "not_found",
-                        "path": path,
-                        "runtime_mode": config.runtime_mode,
-                    },
-                )
+            if path in routes:
+                self._send_json(HTTPStatus.OK, routes[path])
                 return
-            self._send_json(HTTPStatus.OK, payload)
+            if path == "/products":
+                self._send_handler_result(handle_product_list())
+                return
+            if path == "/affiliate-offers":
+                self._send_handler_result(handle_affiliate_offer_list())
+                return
+            product_id = _product_id_from_path(path)
+            if product_id is not None:
+                self._send_handler_result(handle_product_get(product_id))
+                return
+            self._send_handler_result(error_response(404, "not_found", f"Route not found: {path}"))
+
+        def do_POST(self) -> None:  # noqa: N802 - stdlib handler naming.
+            path = urlparse(self.path).path
+            if path == "/products":
+                self._send_handler_result(handle_product_create(self._read_body()))
+                return
+            if path == "/affiliate-offers":
+                self._send_handler_result(handle_affiliate_offer_create(self._read_body()))
+                return
+            if _known_route(path):
+                self._send_handler_result(error_response(405, "method_not_allowed", f"Method POST is not allowed for {path}"))
+                return
+            self._send_handler_result(error_response(404, "not_found", f"Route not found: {path}"))
+
+        def do_PATCH(self) -> None:  # noqa: N802 - stdlib handler naming.
+            path = urlparse(self.path).path
+            product_id = _product_id_from_path(path)
+            if product_id is not None:
+                self._send_handler_result(handle_product_patch(product_id, self._read_body()))
+                return
+            if _known_route(path):
+                self._send_handler_result(error_response(405, "method_not_allowed", f"Method PATCH is not allowed for {path}"))
+                return
+            self._send_handler_result(error_response(404, "not_found", f"Route not found: {path}"))
+
+        def do_DELETE(self) -> None:  # noqa: N802 - stdlib handler naming.
+            path = urlparse(self.path).path
+            if _known_route(path):
+                self._send_handler_result(error_response(405, "method_not_allowed", f"Method DELETE is not allowed for {path}"))
+                return
+            self._send_handler_result(error_response(404, "not_found", f"Route not found: {path}"))
 
         def log_message(self, format: str, *args: object) -> None:  # noqa: A003 - stdlib signature.
             return
+
+        def _read_body(self) -> bytes:
+            try:
+                length = int(self.headers.get("Content-Length", "0"))
+            except ValueError:
+                length = 0
+            if length <= 0:
+                return b""
+            return self.rfile.read(length)
+
+        def _send_handler_result(self, result: tuple[int, dict[str, object]]) -> None:
+            status_code, payload = result
+            self._send_json(HTTPStatus(status_code), payload)
 
         def _send_json(self, status: HTTPStatus, payload: dict[str, Any]) -> None:
             body = _json_bytes(payload)

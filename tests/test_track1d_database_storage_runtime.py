@@ -342,12 +342,12 @@ def test_track1d_required_repository_data_access_smoke_behavior_works(tmp_path: 
     repository = repository_module.Track1DRepository.connect(config.database_path)
     try:
         assert repository.table_names() == list(REQUIRED_TABLES)
-        product = repository.get_product("demo-product-track1d")
-        offers = repository.list_affiliate_offers("demo-product-track1d")
+        product = repository.get_product("demo-product-track1e")
+        offers = repository.list_affiliate_offers()
         assert product is not None
-        assert product["id"] == "demo-product-track1d"
+        assert product["id"] == "demo-product-track1e"
         assert len(offers) == 1
-        assert offers[0]["product_id"] == "demo-product-track1d"
+        assert offers[0]["product_id"] == "demo-product-track1e"
         assert repository.count_rows("products") == 1
         assert repository.count_rows("recommendations") == 1
     finally:
@@ -386,8 +386,12 @@ def test_track1d_runtime_status_endpoint_reports_storage_runtime(tmp_path: Path)
     assert status == 200
     assert payload["database_storage_runtime_status"] == "implemented in Track 1D as SQLite local-first MVP"
     assert payload["storage_runtime"] == "SQLite local-first MVP"
-    assert payload["product_crud_status"] == "not implemented in Track 1D"
-    assert payload["insight_generation_status"] == "not implemented in Track 1D"
+    assert payload["product_crud_status"] == "implemented in Track 1E"
+    assert payload["product_core_api_status"] == "implemented in Track 1E"
+    assert payload["product_endpoint_status"] == "implemented in Track 1E"
+    assert payload["affiliate_offer_endpoint_status"] == "implemented in Track 1E"
+    assert payload["insight_generation_status"] == "not implemented in Track 1E"
+    assert payload["recommendation_runtime_status"] == "not implemented in Track 1E"
 
 
 def test_track1d_product_and_affiliate_offer_full_crud_api_is_not_implemented() -> None:

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import json
 import os
 import sqlite3
 from pathlib import Path
@@ -18,8 +19,35 @@ REQUIRED_TABLES = (
     "recommendations",
 )
 
-DEMO_PRODUCT_ID = "demo-product-track1d"
-DEMO_TIMESTAMP = "2026-07-08T00:00:00Z"
+TRACK1E_PRODUCT_COLUMNS = (
+    "id",
+    "name",
+    "category",
+    "description",
+    "status",
+    "metadata",
+    "created_at",
+    "updated_at",
+)
+TRACK1E_AFFILIATE_OFFER_COLUMNS = (
+    "id",
+    "product_id",
+    "source_id",
+    "title",
+    "offer_url",
+    "price",
+    "currency",
+    "commission_rate",
+    "status",
+    "metadata",
+    "created_at",
+    "updated_at",
+)
+
+DEMO_PRODUCT_ID = "demo-product-track1e"
+DEMO_SOURCE_ID = "demo-source-track1d"
+DEMO_AFFILIATE_OFFER_ID = "demo-affiliate-offer-track1e"
+DEMO_TIMESTAMP = "2026-07-13T00:00:00Z"
 
 
 class LocalStorageConfig:
@@ -61,27 +89,43 @@ def _connect(database_path: Path) -> sqlite3.Connection:
     return connection
 
 
-def _schema_statements() -> tuple[str, ...]:
+def _json_text(value: object) -> str:
+    return json.dumps(value, separators=(",", ":"), ensure_ascii=True)
+
+
+def _table_names(connection: sqlite3.Connection) -> list[str]:
+    rows = connection.execute(
+        """
+        SELECT name
+        FROM sqlite_master
+        WHERE type = 'table' AND name NOT LIKE 'sqlite_%'
+        ORDER BY name
+        """
+    ).fetchall()
+    return [str(row["name"]) for row in rows]
+
+
+def _table_exists(connection: sqlite3.Connection, table_name: str) -> bool:
+    return table_name in set(_table_names(connection))
+
+
+def _table_columns(connection: sqlite3.Connection, table_name: str) -> list[str]:
+    rows = connection.execute(f"PRAGMA table_info({table_name})").fetchall()
+    return [str(row["name"]) for row in rows]
+
+
+def _schema_statements_track1e() -> tuple[str, ...]:
     return (
         """
         CREATE TABLE IF NOT EXISTS products (
             id TEXT PRIMARY KEY,
             name TEXT NOT NULL,
-            marketplace TEXT NOT NULL,
+            category TEXT NOT NULL,
+            description TEXT NOT NULL,
             status TEXT NOT NULL,
+            metadata TEXT NOT NULL,
             created_at TEXT NOT NULL,
             updated_at TEXT NOT NULL
-        )
-        """,
-        """
-        CREATE TABLE IF NOT EXISTS affiliate_offers (
-            id TEXT PRIMARY KEY,
-            product_id TEXT NOT NULL,
-            program_name TEXT NOT NULL,
-            commission_model TEXT NOT NULL,
-            created_at TEXT NOT NULL,
-            updated_at TEXT NOT NULL,
-            FOREIGN KEY(product_id) REFERENCES products(id) ON DELETE CASCADE
         )
         """,
         """
@@ -92,6 +136,24 @@ def _schema_statements() -> tuple[str, ...]:
             source_ref TEXT NOT NULL,
             created_at TEXT NOT NULL,
             FOREIGN KEY(product_id) REFERENCES products(id) ON DELETE CASCADE
+        )
+        """,
+        """
+        CREATE TABLE IF NOT EXISTS affiliate_offers (
+            id TEXT PRIMARY KEY,
+            product_id TEXT NOT NULL,
+            source_id TEXT NOT NULL,
+            title TEXT NOT NULL,
+            offer_url TEXT NOT NULL,
+            price REAL,
+            currency TEXT NOT NULL,
+            commission_rate REAL,
+            status TEXT NOT NULL,
+            metadata TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL,
+            FOREIGN KEY(product_id) REFERENCES products(id) ON DELETE CASCADE,
+            FOREIGN KEY(source_id) REFERENCES sources(id) ON DELETE CASCADE
         )
         """,
         """
@@ -127,16 +189,177 @@ def _schema_statements() -> tuple[str, ...]:
     )
 
 
-def _table_names(connection: sqlite3.Connection) -> list[str]:
-    rows = connection.execute(
+def _ensure_source_for_product(connection: sqlite3.Connection, product_id: str) -> str:
+    row = connection.execute(
         """
-        SELECT name
-        FROM sqlite_master
-        WHERE type = 'table' AND name NOT LIKE 'sqlite_%'
-        ORDER BY name
+        SELECT id
+        FROM sources
+        WHERE product_id = ?
+        ORDER BY id
+        LIMIT 1
+        """,
+        (product_id,),
+    ).fetchone()
+    if row is not None:
+        return str(row["id"])
+
+    source_id = f"migrated-source-{product_id}"
+    connection.execute(
         """
-    ).fetchall()
-    return [str(row["name"]) for row in rows]
+        INSERT INTO sources (id, product_id, source_type, source_ref, created_at)
+        VALUES (?, ?, ?, ?, ?)
+        """,
+        (source_id, product_id, "schema_evolution", "track1d-schema-evolution", DEMO_TIMESTAMP),
+    )
+    return source_id
+
+
+def _rebuild_products_table(connection: sqlite3.Connection) -> None:
+    old_columns = _table_columns(connection, "products")
+    if tuple(old_columns) == TRACK1E_PRODUCT_COLUMNS:
+        return
+
+    connection.execute(
+        """
+        CREATE TABLE products__track1e_new (
+            id TEXT PRIMARY KEY,
+            name TEXT NOT NULL,
+            category TEXT NOT NULL,
+            description TEXT NOT NULL,
+            status TEXT NOT NULL,
+            metadata TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        )
+        """
+    )
+    if old_columns:
+        rows = connection.execute("SELECT * FROM products ORDER BY id").fetchall()
+        for row in rows:
+            mapping = {str(key): row[key] for key in row.keys()}
+            category = str(mapping.get("category") or mapping.get("marketplace") or "uncategorized")
+            description = str(mapping.get("description") or "")
+            status = str(mapping.get("status") or "active")
+            metadata_raw = mapping.get("metadata")
+            metadata = metadata_raw if isinstance(metadata_raw, str) and metadata_raw else _json_text({})
+            connection.execute(
+                """
+                INSERT INTO products__track1e_new (
+                    id, name, category, description, status, metadata, created_at, updated_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    str(mapping["id"]),
+                    str(mapping["name"]),
+                    category,
+                    description,
+                    status,
+                    metadata,
+                    str(mapping["created_at"]),
+                    str(mapping["updated_at"]),
+                ),
+            )
+    connection.execute("DROP TABLE products")
+    connection.execute("ALTER TABLE products__track1e_new RENAME TO products")
+
+
+def _rebuild_affiliate_offers_table(connection: sqlite3.Connection) -> None:
+    old_columns = _table_columns(connection, "affiliate_offers")
+    if tuple(old_columns) == TRACK1E_AFFILIATE_OFFER_COLUMNS:
+        return
+
+    connection.execute(
+        """
+        CREATE TABLE affiliate_offers__track1e_new (
+            id TEXT PRIMARY KEY,
+            product_id TEXT NOT NULL,
+            source_id TEXT NOT NULL,
+            title TEXT NOT NULL,
+            offer_url TEXT NOT NULL,
+            price REAL,
+            currency TEXT NOT NULL,
+            commission_rate REAL,
+            status TEXT NOT NULL,
+            metadata TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL,
+            FOREIGN KEY(product_id) REFERENCES products(id) ON DELETE CASCADE,
+            FOREIGN KEY(source_id) REFERENCES sources(id) ON DELETE CASCADE
+        )
+        """
+    )
+    if old_columns:
+        rows = connection.execute("SELECT * FROM affiliate_offers ORDER BY id").fetchall()
+        for row in rows:
+            mapping = {str(key): row[key] for key in row.keys()}
+            product_id = str(mapping["product_id"])
+            source_id = str(mapping.get("source_id") or _ensure_source_for_product(connection, product_id))
+            title = str(mapping.get("title") or mapping.get("program_name") or "")
+            offer_url = str(mapping.get("offer_url") or f"https://example.invalid/track1d-offer/{mapping['id']}")
+            currency = str(mapping.get("currency") or "")
+            status = str(mapping.get("status") or "active")
+            metadata_raw = mapping.get("metadata")
+            if isinstance(metadata_raw, str) and metadata_raw:
+                metadata = metadata_raw
+            else:
+                legacy_commission_model = mapping.get("commission_model")
+                metadata = _json_text(
+                    {"legacy_commission_model": str(legacy_commission_model)}
+                    if legacy_commission_model not in (None, "")
+                    else {}
+                )
+            connection.execute(
+                """
+                INSERT INTO affiliate_offers__track1e_new (
+                    id, product_id, source_id, title, offer_url, price, currency,
+                    commission_rate, status, metadata, created_at, updated_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    str(mapping["id"]),
+                    product_id,
+                    source_id,
+                    title,
+                    offer_url,
+                    mapping.get("price"),
+                    currency,
+                    mapping.get("commission_rate"),
+                    status,
+                    metadata,
+                    str(mapping["created_at"]),
+                    str(mapping["updated_at"]),
+                ),
+            )
+    connection.execute("DROP TABLE affiliate_offers")
+    connection.execute("ALTER TABLE affiliate_offers__track1e_new RENAME TO affiliate_offers")
+
+
+def _ensure_support_tables(connection: sqlite3.Connection) -> None:
+    for statement in _schema_statements_track1e():
+        table_name = statement.split()[5]
+        if table_name in ("products", "affiliate_offers"):
+            continue
+        connection.execute(statement)
+
+
+def ensure_track1e_schema(config: LocalStorageConfig) -> dict[str, object]:
+    with _connect(config.database_path) as connection:
+        if not _table_exists(connection, "products"):
+            connection.execute(_schema_statements_track1e()[0])
+        else:
+            _rebuild_products_table(connection)
+
+        _ensure_support_tables(connection)
+
+        if not _table_exists(connection, "affiliate_offers"):
+            connection.execute(_schema_statements_track1e()[2])
+        else:
+            _rebuild_affiliate_offers_table(connection)
+
+        connection.commit()
+    status = get_storage_status(config)
+    status["schema_version"] = "track1e"
+    return status
 
 
 def _row_counts(connection: sqlite3.Connection) -> dict[str, int]:
@@ -157,29 +380,37 @@ def _demo_rows() -> dict[str, tuple[tuple[object, ...], ...]]:
         "products": (
             (
                 DEMO_PRODUCT_ID,
-                "Track 1D Demo Product",
-                "local-demo-marketplace",
-                "draft",
-                DEMO_TIMESTAMP,
-                DEMO_TIMESTAMP,
-            ),
-        ),
-        "affiliate_offers": (
-            (
-                "demo-offer-track1d",
-                DEMO_PRODUCT_ID,
-                "Track 1D Demo Program",
-                "flat_rate",
+                "Track 1E Demo Product",
+                "productivity",
+                "",
+                "active",
+                _json_text({}),
                 DEMO_TIMESTAMP,
                 DEMO_TIMESTAMP,
             ),
         ),
         "sources": (
             (
-                "demo-source-track1d",
+                DEMO_SOURCE_ID,
                 DEMO_PRODUCT_ID,
                 "operator_input",
                 "vault/samples/products/smart-desk-pad.md",
+                DEMO_TIMESTAMP,
+            ),
+        ),
+        "affiliate_offers": (
+            (
+                DEMO_AFFILIATE_OFFER_ID,
+                DEMO_PRODUCT_ID,
+                DEMO_SOURCE_ID,
+                "Track 1E Demo Offer",
+                "https://example.com/demo-offer-track1e",
+                19.99,
+                "USD",
+                12.5,
+                "active",
+                _json_text({}),
+                DEMO_TIMESTAMP,
                 DEMO_TIMESTAMP,
             ),
         ),
@@ -197,7 +428,7 @@ def _demo_rows() -> dict[str, tuple[tuple[object, ...], ...]]:
                 "demo-insight-track1d",
                 DEMO_PRODUCT_ID,
                 "product_summary",
-                "Deterministic Track 1D demo insight.",
+                "Deterministic Track 1E demo insight placeholder.",
                 DEMO_TIMESTAMP,
             ),
         ),
@@ -206,7 +437,7 @@ def _demo_rows() -> dict[str, tuple[tuple[object, ...], ...]]:
                 "demo-recommendation-track1d",
                 DEMO_PRODUCT_ID,
                 "review",
-                "Deterministic Track 1D demo recommendation.",
+                "Deterministic Track 1E demo recommendation placeholder.",
                 DEMO_TIMESTAMP,
             ),
         ),
@@ -214,11 +445,7 @@ def _demo_rows() -> dict[str, tuple[tuple[object, ...], ...]]:
 
 
 def init_storage(config: LocalStorageConfig) -> dict[str, object]:
-    with _connect(config.database_path) as connection:
-        for statement in _schema_statements():
-            connection.execute(statement)
-        connection.commit()
-    status = get_storage_status(config)
+    status = ensure_track1e_schema(config)
     status["init_status"] = "completed"
     return status
 
@@ -226,32 +453,24 @@ def init_storage(config: LocalStorageConfig) -> dict[str, object]:
 def reset_storage(config: LocalStorageConfig) -> dict[str, object]:
     if config.database_path.exists():
         config.database_path.unlink()
-    status = init_storage(config)
+    status = ensure_track1e_schema(config)
     status["reset_status"] = "completed"
     return status
 
 
 def seed_demo_data(config: LocalStorageConfig) -> dict[str, object]:
-    init_storage(config)
+    ensure_track1e_schema(config)
     rows = _demo_rows()
     with _connect(config.database_path) as connection:
-        # Clear dependent tables first so seed is deterministic on repeat runs.
-        for table_name in ("recommendations", "insights", "collection_runs", "sources", "affiliate_offers", "products"):
+        for table_name in ("recommendations", "insights", "collection_runs", "affiliate_offers", "sources", "products"):
             connection.execute(f"DELETE FROM {table_name}")
         connection.executemany(
             """
-            INSERT INTO products (id, name, marketplace, status, created_at, updated_at)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO products (
+                id, name, category, description, status, metadata, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             """,
             rows["products"],
-        )
-        connection.executemany(
-            """
-            INSERT INTO affiliate_offers (
-                id, product_id, program_name, commission_model, created_at, updated_at
-            ) VALUES (?, ?, ?, ?, ?, ?)
-            """,
-            rows["affiliate_offers"],
         )
         connection.executemany(
             """
@@ -259,6 +478,15 @@ def seed_demo_data(config: LocalStorageConfig) -> dict[str, object]:
             VALUES (?, ?, ?, ?, ?)
             """,
             rows["sources"],
+        )
+        connection.executemany(
+            """
+            INSERT INTO affiliate_offers (
+                id, product_id, source_id, title, offer_url, price, currency,
+                commission_rate, status, metadata, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            rows["affiliate_offers"],
         )
         connection.executemany(
             """
@@ -289,6 +517,16 @@ def seed_demo_data(config: LocalStorageConfig) -> dict[str, object]:
     return status
 
 
+def _schema_version(connection: sqlite3.Connection) -> str:
+    if not _table_exists(connection, "products") or not _table_exists(connection, "affiliate_offers"):
+        return "track1e"
+    product_columns = tuple(_table_columns(connection, "products"))
+    offer_columns = tuple(_table_columns(connection, "affiliate_offers"))
+    if product_columns == TRACK1E_PRODUCT_COLUMNS and offer_columns == TRACK1E_AFFILIATE_OFFER_COLUMNS:
+        return "track1e"
+    return "track1d"
+
+
 def get_storage_status(config: LocalStorageConfig) -> dict[str, object]:
     if not config.database_path.exists():
         return {
@@ -297,6 +535,7 @@ def get_storage_status(config: LocalStorageConfig) -> dict[str, object]:
             "runtime_mode": config.runtime_mode,
             "database_path": str(config.database_path),
             "schema_initialized": False,
+            "schema_version": "track1e",
             "tables": [],
             "row_counts": {table_name: 0 for table_name in REQUIRED_TABLES},
         }
@@ -309,6 +548,7 @@ def get_storage_status(config: LocalStorageConfig) -> dict[str, object]:
             "runtime_mode": config.runtime_mode,
             "database_path": str(config.database_path),
             "schema_initialized": set(REQUIRED_TABLES).issubset(set(table_names)),
+            "schema_version": _schema_version(connection),
             "tables": table_names,
             "row_counts": _row_counts(connection),
         }
