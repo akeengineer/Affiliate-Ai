@@ -421,3 +421,6 @@ Track 1G is the first approved point for End-to-End Demo Pack implementation, if
 ## 30. Recommended Next Major Subphase
 
 Track 1G — End-to-End Demo Pack
+
+Track 1G is now implemented as the deterministic local demo pack documented in
+`docs/TRACK1G_END_TO_END_DEMO_PACK.md`.

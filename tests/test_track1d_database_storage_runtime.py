@@ -393,8 +393,11 @@ def test_track1d_runtime_status_endpoint_reports_storage_runtime(tmp_path: Path)
     assert payload["minimal_operator_flow_status"] == "implemented in Track 1F"
     assert payload["operator_surface_status"] == "implemented in Track 1F"
     assert payload["production_frontend_deployment_status"] == "not approved"
-    assert payload["insight_generation_status"] == "not implemented in Track 1F"
-    assert payload["recommendation_runtime_status"] == "not implemented in Track 1F"
+    assert payload["end_to_end_demo_pack_status"] == "implemented in Track 1G"
+    assert payload["demo_workflow_status"] == "implemented in Track 1G"
+    assert payload["production_demo_deployment_status"] == "not approved"
+    assert payload["insight_generation_status"] == "not implemented in Track 1G"
+    assert payload["recommendation_runtime_status"] == "not implemented in Track 1G"
 
 
 def test_track1d_product_and_affiliate_offer_full_crud_api_is_not_implemented() -> None:

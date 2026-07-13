@@ -52,6 +52,29 @@ Track 1F provides a local-only operator flow for Product and AffiliateOffer usag
 
 `phase7d_boundary_status` remains `preserved`.
 
+Track 1G implements the end-to-end demo pack for the first usable local product
+slice.
+
+Track 1G continues Implementation Track 1 — Backend/API/Database Usable Product Slice.
+
+Track 1G builds on the Track 1C local backend/API skeleton.
+
+Track 1G builds on the Track 1D SQLite local-first storage runtime.
+
+Track 1G builds on the Track 1E Product Core API.
+
+Track 1G builds on the Track 1F minimal usable UI/operator flow.
+
+Track 1G provides a deterministic local demo workflow.
+
+`track1g_status` is `success`.
+
+`end_to_end_demo_pack_status` is `implemented_in_track1g`.
+
+`demo_workflow_status` is `implemented_in_track1g`.
+
+`production_demo_deployment_status` is `not_approved`.
+
 ## 2. Current operator commands
 
 ```
@@ -1455,3 +1478,34 @@ Product/AffiliateOffer API flow only within the Track 1C/1D local runtime
 boundary and does not widen into production runtime scope.
 
 Recommended next major subphase = Track 1F Minimal Usable UI/operator flow.
+
+## 57. Track 1G end-to-end demo pack
+
+Track 1G adds the End-to-End Demo Pack documented in
+`docs/TRACK1G_END_TO_END_DEMO_PACK.md`.
+`track1g_status` is `success`.
+`runtime_mode` remains `local-only`.
+`storage_runtime` remains `SQLite local-first MVP`.
+`product_core_api_status` remains `implemented_in_track1e`.
+`minimal_operator_flow_status` remains `implemented_in_track1f`.
+`end_to_end_demo_pack_status` is `implemented_in_track1g`.
+`production_demo_deployment_status` is `not_approved`.
+
+Track 1G implements the end-to-end demo pack for the first usable local product slice.
+Track 1G continues Implementation Track 1 — Backend/API/Database Usable Product Slice.
+Track 1G builds on the Track 1C local backend/API skeleton.
+Track 1G builds on the Track 1D SQLite local-first storage runtime.
+Track 1G builds on the Track 1E Product Core API.
+Track 1G builds on the Track 1F minimal usable UI/operator flow.
+Track 1G provides a deterministic local demo workflow.
+Track 1G does not implement production deployment.
+Track 1G does not implement production authentication.
+Track 1G does not implement RBAC enforcement.
+Track 1G does not implement production signing.
+Track 1G does not implement verifier runtime.
+Track 1G does not implement key custody runtime.
+Track 1G does not approve production promotion.
+Track 1G does not approve production deployment.
+Track 1G preserves the Phase 7D selected-gate manual boundary.
+
+Recommended next major subphase = Track 1H MVP Acceptance Pack.

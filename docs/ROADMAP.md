@@ -21,9 +21,13 @@
 - Track 1D — database/storage runtime — **complete / done**
 - Track 1E — Product Core API — **complete / done**
 - Track 1F — Minimal Usable UI / Operator Flow — **complete / done**
+- Track 1G — End-to-End Demo Pack — **complete / done**
 
 Track 1F implements the minimal usable UI/operator flow for the first usable
 local product slice. See `docs/TRACK1F_MINIMAL_USABLE_UI_OPERATOR_FLOW.md`.
+
+Track 1G implements the end-to-end demo pack for the first usable local product
+slice. See `docs/TRACK1G_END_TO_END_DEMO_PACK.md`.
 
 ## 1b. Completed phases (Phase 4-5 UI shell line)
 
