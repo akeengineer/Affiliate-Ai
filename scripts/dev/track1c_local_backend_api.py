@@ -14,6 +14,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
+from track1f_operator_page import render_operator_page
 from track1e_product_core_api import (
     error_response,
     handle_affiliate_offer_create,
@@ -72,6 +73,7 @@ def _runtime_status_payload(config: Any) -> dict[str, str]:
     return {
         "selected_runtime_domain": config.selected_runtime_domain,
         "runtime_mode": config.runtime_mode,
+        "production_frontend_deployment_status": "not approved",
         "production_promotion_status": "not approved",
         "production_deployment_status": "not approved",
         "production_authentication_status": "deferred",
@@ -86,8 +88,10 @@ def _runtime_status_payload(config: Any) -> dict[str, str]:
         "product_core_api_status": "implemented in Track 1E",
         "product_endpoint_status": "implemented in Track 1E",
         "affiliate_offer_endpoint_status": "implemented in Track 1E",
-        "insight_generation_status": "not implemented in Track 1E",
-        "recommendation_runtime_status": "not implemented in Track 1E",
+        "minimal_operator_flow_status": "implemented in Track 1F",
+        "operator_surface_status": "implemented in Track 1F",
+        "insight_generation_status": "not implemented in Track 1F",
+        "recommendation_runtime_status": "not implemented in Track 1F",
     }
 
 
@@ -106,7 +110,7 @@ def _product_id_from_path(path: str) -> str | None:
 
 
 def _known_route(path: str) -> bool:
-    return path in {"/health", "/version", "/runtime/status", "/products", "/affiliate-offers"} or _product_id_from_path(path) is not None
+    return path in {"/health", "/version", "/runtime/status", "/operator", "/products", "/affiliate-offers"} or _product_id_from_path(path) is not None
 
 
 def create_handler(config: Any) -> type[BaseHTTPRequestHandler]:
@@ -124,6 +128,9 @@ def create_handler(config: Any) -> type[BaseHTTPRequestHandler]:
             path = urlparse(self.path).path
             if path in routes:
                 self._send_json(HTTPStatus.OK, routes[path])
+                return
+            if path == "/operator":
+                self._send_html(HTTPStatus.OK, render_operator_page())
                 return
             if path == "/products":
                 self._send_handler_result(handle_product_list())
@@ -186,8 +193,15 @@ def create_handler(config: Any) -> type[BaseHTTPRequestHandler]:
 
         def _send_json(self, status: HTTPStatus, payload: dict[str, Any]) -> None:
             body = _json_bytes(payload)
+            self._send_bytes(status, "application/json; charset=utf-8", body)
+
+        def _send_html(self, status: HTTPStatus, body_text: str) -> None:
+            body = body_text.encode("utf-8")
+            self._send_bytes(status, "text/html; charset=utf-8", body)
+
+        def _send_bytes(self, status: HTTPStatus, content_type: str, body: bytes) -> None:
             self.send_response(status)
-            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Content-Type", content_type)
             self.send_header("Content-Length", str(len(body)))
             self.end_headers()
             self.wfile.write(body)

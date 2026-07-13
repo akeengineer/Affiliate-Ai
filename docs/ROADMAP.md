@@ -13,6 +13,18 @@
   stays human-gated; automation is not added ahead of an approved design.
 - **No autopublish.** Publishing and campaign launch remain out of scope.
 
+## 1a. Implementation Track 1 status
+
+- Track 1A — backend/API/database runtime selection record — **complete / done**
+- Track 1B — backend/API/database product slice plan — **complete / done**
+- Track 1C — local backend/API skeleton — **complete / done**
+- Track 1D — database/storage runtime — **complete / done**
+- Track 1E — Product Core API — **complete / done**
+- Track 1F — Minimal Usable UI / Operator Flow — **complete / done**
+
+Track 1F implements the minimal usable UI/operator flow for the first usable
+local product slice. See `docs/TRACK1F_MINIMAL_USABLE_UI_OPERATOR_FLOW.md`.
+
 ## 1b. Completed phases (Phase 4-5 UI shell line)
 
 The static, read-only UI shell line is **complete**. The sections below capture

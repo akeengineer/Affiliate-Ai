@@ -18,7 +18,39 @@ release freeze.
   branches, pull requests, and squash merges.
 - **No database.** No relational/NoSQL store; files only.
 - **No FastAPI.** No web service layer.
-- **No UI.** Operator interaction is CLI text only.
+- **Minimal local operator UI exists.** Track 1F adds a local-only
+  `/operator` page on top of the Track 1E Product Core API.
+
+## 1a. Implementation Track 1 runtime state
+
+Track 1F implements the minimal usable UI/operator flow for the first usable
+local product slice.
+
+Track 1F continues Implementation Track 1 — Backend/API/Database Usable Product Slice.
+
+Track 1F builds on the Track 1C local backend/API skeleton.
+
+Track 1F builds on the Track 1D SQLite local-first storage runtime.
+
+Track 1F builds on the Track 1E Product Core API.
+
+Track 1F provides a local-only operator flow for Product and AffiliateOffer usage.
+
+`track1f_status` is `success`.
+
+`minimal_operator_flow_status` is `implemented_in_track1f`.
+
+`operator_surface_status` is `implemented_in_track1f`.
+
+`product_core_api_status` is `implemented_in_track1e`.
+
+`production_frontend_deployment_status` is `not_approved`.
+
+`runtime_mode` is `local-only`.
+
+`storage_runtime` is `SQLite local-first MVP`.
+
+`phase7d_boundary_status` remains `preserved`.
 
 ## 2. Current operator commands
 

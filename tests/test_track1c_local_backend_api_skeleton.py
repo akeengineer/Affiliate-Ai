@@ -255,6 +255,7 @@ def test_track1c_runtime_status_endpoint_returns_required_boundary_contract() ->
     assert payload == {
         "selected_runtime_domain": "backend/API/database runtime",
         "runtime_mode": "local-only",
+        "production_frontend_deployment_status": "not approved",
         "production_promotion_status": "not approved",
         "production_deployment_status": "not approved",
         "production_authentication_status": "deferred",
@@ -269,8 +270,10 @@ def test_track1c_runtime_status_endpoint_returns_required_boundary_contract() ->
         "product_core_api_status": "implemented in Track 1E",
         "product_endpoint_status": "implemented in Track 1E",
         "affiliate_offer_endpoint_status": "implemented in Track 1E",
-        "insight_generation_status": "not implemented in Track 1E",
-        "recommendation_runtime_status": "not implemented in Track 1E",
+        "minimal_operator_flow_status": "implemented in Track 1F",
+        "operator_surface_status": "implemented in Track 1F",
+        "insight_generation_status": "not implemented in Track 1F",
+        "recommendation_runtime_status": "not implemented in Track 1F",
     }
 
 
