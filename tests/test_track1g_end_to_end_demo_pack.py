@@ -254,6 +254,10 @@ def test_track1g_demo_runner_produces_deterministic_summary(tmp_path: Path) -> N
 def test_track1g_demo_runner_wrapper_outputs_json(tmp_path: Path) -> None:
     database_path = tmp_path / "track1g-wrapper.sqlite3"
     output_path = tmp_path / "wrapper-summary.json"
+    wrapper_text = _text(TRACK1G_WRAPPER)
+
+    assert "PYTHON_BIN" in wrapper_text
+    assert 'command -v python3' in wrapper_text
 
     result = subprocess.run(
         [
