@@ -295,14 +295,15 @@ def test_track1f_operator_route_returns_html_surface(tmp_path: Path) -> None:
     _assert_all_tokens(
         body,
         (
-            "Track 1F provides a local-only operator flow for Product and AffiliateOffer usage.",
-            "Runtime Status",
-            "Add Product",
-            "Product List",
-            "Add Affiliate Offer",
-            "Affiliate Offer List",
-            "Result Panel",
-            "Error Panel",
+            "ตัวจัดการ Affiliate Product",
+            "โหมด Local เท่านั้น",
+            "สถานะระบบ",
+            "เพิ่มสินค้า",
+            "รายการสินค้า",
+            "เพิ่ม Affiliate Offer",
+            "รายการ Affiliate Offer",
+            "ผลลัพธ์ล่าสุด",
+            "ข้อผิดพลาดล่าสุด",
         ),
         label="operator page content",
     )

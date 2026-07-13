@@ -67,8 +67,8 @@ def _runtime_status() -> dict[str, object]:
 
 def _verify_operator_surface() -> str:
     html = render_operator_page()
-    required = "Track 1F provides a local-only operator flow"
-    if required not in html:
+    required_tokens = ("ตัวจัดการ Affiliate Product", "โหมด Local เท่านั้น")
+    if not all(token in html for token in required_tokens):
         raise RuntimeError("Track 1F operator surface is unavailable.")
     return "available"
 

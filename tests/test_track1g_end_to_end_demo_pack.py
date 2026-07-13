@@ -324,7 +324,8 @@ def test_track1g_health_version_and_operator_still_work(tmp_path: Path) -> None:
     assert version_payload["track"] == "Track 1C"
     assert operator_status == 200
     assert content_type.startswith("text/html")
-    assert "Track 1F provides a local-only operator flow" in operator_body
+    assert "ตัวจัดการ Affiliate Product" in operator_body
+    assert "โหมด Local เท่านั้น" in operator_body
 
 
 def test_track1g_existing_product_and_affiliate_offer_api_still_work(tmp_path: Path) -> None:
