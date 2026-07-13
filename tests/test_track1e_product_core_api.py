@@ -469,8 +469,11 @@ def test_track1e_runtime_status_reports_product_core_api_implemented(tmp_path: P
     assert payload["product_core_api_status"] == "implemented in Track 1E"
     assert payload["product_endpoint_status"] == "implemented in Track 1E"
     assert payload["affiliate_offer_endpoint_status"] == "implemented in Track 1E"
-    assert payload["insight_generation_status"] == "not implemented in Track 1E"
-    assert payload["recommendation_runtime_status"] == "not implemented in Track 1E"
+    assert payload["minimal_operator_flow_status"] == "implemented in Track 1F"
+    assert payload["operator_surface_status"] == "implemented in Track 1F"
+    assert payload["production_frontend_deployment_status"] == "not approved"
+    assert payload["insight_generation_status"] == "not implemented in Track 1F"
+    assert payload["recommendation_runtime_status"] == "not implemented in Track 1F"
 
 
 def test_post_products_creates_valid_product(tmp_path: Path) -> None:

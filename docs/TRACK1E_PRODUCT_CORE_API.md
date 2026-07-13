@@ -458,3 +458,6 @@ Track 1F is the first approved point for Minimal Usable UI/operator flow impleme
 ## 28. Recommended Next Major Subphase
 
 Track 1F — Minimal Usable UI/operator flow
+
+Track 1F is now implemented as the local-only operator surface documented in
+`docs/TRACK1F_MINIMAL_USABLE_UI_OPERATOR_FLOW.md`.
