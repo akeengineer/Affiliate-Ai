@@ -75,6 +75,36 @@ Track 1G provides a deterministic local demo workflow.
 
 `production_demo_deployment_status` is `not_approved`.
 
+Track 1H creates the MVP Acceptance Pack for the first usable local product
+slice.
+
+Track 1H closes Implementation Track 1 — Backend/API/Database Usable Product Slice.
+
+Track 1H accepts the local product slice as usable for local/demo operation only.
+
+Track 1H does not implement runtime code.
+
+Track 1H does not add new API endpoints.
+
+Track 1H does not add UI features.
+
+Track 1H does not approve production promotion.
+
+Track 1H does not approve production deployment.
+
+Track 1H preserves the Phase 7D selected-gate manual boundary.
+
+`track1h_status` is `success`.
+
+`mvp_acceptance_status` is `accepted_for_local_demo_operation_only`.
+
+`production_promotion_status` is `not_approved`.
+
+`production_deployment_status` is `not_approved`.
+
+Recommended next major track: Implementation Track 2 — Local Product
+Intelligence Expansion, after Track 1H is merged.
+
 ## 2. Current operator commands
 
 ```

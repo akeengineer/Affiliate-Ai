@@ -22,12 +22,22 @@
 - Track 1E — Product Core API — **complete / done**
 - Track 1F — Minimal Usable UI / Operator Flow — **complete / done**
 - Track 1G — End-to-End Demo Pack — **complete / done**
+- Track 1H — MVP Acceptance Pack — **complete / done**
 
 Track 1F implements the minimal usable UI/operator flow for the first usable
 local product slice. See `docs/TRACK1F_MINIMAL_USABLE_UI_OPERATOR_FLOW.md`.
 
 Track 1G implements the end-to-end demo pack for the first usable local product
 slice. See `docs/TRACK1G_END_TO_END_DEMO_PACK.md`.
+
+Track 1H creates the MVP Acceptance Pack for the first usable local product
+slice, closes Implementation Track 1 — Backend/API/Database Usable Product
+Slice, and accepts the slice for local/demo operation only. See
+`docs/TRACK1H_MVP_ACCEPTANCE_PACK.md`.
+
+Recommended next major track: Implementation Track 2 — Local Product
+Intelligence Expansion, only after Track 1H is merged and only with explicit
+future approval for any expanded runtime scope.
 
 ## 1b. Completed phases (Phase 4-5 UI shell line)
 
