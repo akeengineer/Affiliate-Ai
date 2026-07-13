@@ -517,6 +517,63 @@ def seed_demo_data(config: LocalStorageConfig) -> dict[str, object]:
     return status
 
 
+def ensure_demo_seed_data(config: LocalStorageConfig) -> dict[str, object]:
+    ensure_track1e_schema(config)
+    rows = _demo_rows()
+    with _connect(config.database_path) as connection:
+        connection.executemany(
+            """
+            INSERT OR IGNORE INTO products (
+                id, name, category, description, status, metadata, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            rows["products"],
+        )
+        connection.executemany(
+            """
+            INSERT OR IGNORE INTO sources (id, product_id, source_type, source_ref, created_at)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+            rows["sources"],
+        )
+        connection.executemany(
+            """
+            INSERT OR IGNORE INTO affiliate_offers (
+                id, product_id, source_id, title, offer_url, price, currency,
+                commission_rate, status, metadata, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            rows["affiliate_offers"],
+        )
+        connection.executemany(
+            """
+            INSERT OR IGNORE INTO collection_runs (id, product_id, status, started_at, created_at)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+            rows["collection_runs"],
+        )
+        connection.executemany(
+            """
+            INSERT OR IGNORE INTO insights (id, product_id, insight_type, summary, created_at)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+            rows["insights"],
+        )
+        connection.executemany(
+            """
+            INSERT OR IGNORE INTO recommendations (
+                id, product_id, recommendation_type, reason, created_at
+            ) VALUES (?, ?, ?, ?, ?)
+            """,
+            rows["recommendations"],
+        )
+        connection.commit()
+    status = get_storage_status(config)
+    status["ensure_demo_seed_status"] = "completed"
+    status["ensured_demo_source_id"] = DEMO_SOURCE_ID
+    return status
+
+
 def _schema_version(connection: sqlite3.Connection) -> str:
     if not _table_exists(connection, "products") or not _table_exists(connection, "affiliate_offers"):
         return "track1e"

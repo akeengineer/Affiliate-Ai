@@ -7,6 +7,7 @@ import sys
 
 from track1c_local_backend_api import create_server
 from track1c_local_backend_config import load_local_backend_config
+from track1d_local_storage import ensure_demo_seed_data, load_local_storage_config
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -23,6 +24,7 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
+        ensure_demo_seed_data(load_local_storage_config())
         config = load_local_backend_config(host_override=args.host, port_override=args.port)
         server = create_server(config)
     except Exception as exc:  # ponytail: keep startup failures as one-line stderr for scripts/tests.

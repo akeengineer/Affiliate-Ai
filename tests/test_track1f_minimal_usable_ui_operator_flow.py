@@ -4,6 +4,8 @@ import importlib.util
 import json
 import os
 import socket
+import subprocess
+import sys
 import threading
 import urllib.error
 import urllib.request
@@ -21,6 +23,7 @@ TRACK1F_HELPER_MODULE = REPO_ROOT / "scripts/dev/track1f_operator_page.py"
 TRACK1D_STORAGE_MODULE = REPO_ROOT / "scripts/dev/track1d_local_storage.py"
 TRACK1C_API_MODULE = REPO_ROOT / "scripts/dev/track1c_local_backend_api.py"
 TRACK1C_CONFIG_MODULE = REPO_ROOT / "scripts/dev/track1c_local_backend_config.py"
+TRACK1C_RUNNER_SCRIPT = REPO_ROOT / "scripts/dev/run_track1c_local_backend.py"
 
 ROADMAP = REPO_ROOT / "docs/ROADMAP.md"
 PROJECT_STATE = REPO_ROOT / "docs/PROJECT_STATE.md"
@@ -457,6 +460,58 @@ def test_track1f_existing_affiliate_offer_api_still_works(tmp_path: Path) -> Non
     assert payload["source_id"] == "demo-source-track1d"
     assert list_status == 200
     assert list_payload["count"] >= 1
+
+
+def test_track1f_runner_startup_prepares_demo_source_for_operator_flow(tmp_path: Path) -> None:
+    database_path = tmp_path / "track1f-runner-startup.sqlite3"
+    env = {
+        **os.environ,
+        "AFFILIATE_STORAGE_PATH": str(database_path),
+        "PYTHONUNBUFFERED": "1",
+    }
+    process = subprocess.Popen(
+        [
+            sys.executable,
+            str(TRACK1C_RUNNER_SCRIPT),
+            "--host",
+            "127.0.0.1",
+            "--port",
+            "0",
+        ],
+        cwd=REPO_ROOT,
+        env=env,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    try:
+        assert process.stdout is not None
+        startup_line = process.stdout.readline().strip()
+        assert startup_line, process.stderr.read() if process.stderr else "missing startup output"
+        startup_payload = json.loads(startup_line)
+        base_url = f"http://127.0.0.1:{startup_payload['port']}"
+
+        status, payload = _request_json(
+            f"{base_url}/affiliate-offers",
+            method="POST",
+            data={
+                "product_id": "demo-product-track1e",
+                "source_id": "demo-source-track1d",
+                "offer_url": "https://example.com/operator-startup-offer",
+                "title": "Operator Startup Offer",
+            },
+        )
+    finally:
+        process.terminate()
+        try:
+            process.wait(timeout=5)
+        except subprocess.TimeoutExpired:
+            process.kill()
+            process.wait(timeout=5)
+
+    assert status == 200
+    assert payload["product_id"] == "demo-product-track1e"
+    assert payload["source_id"] == "demo-source-track1d"
 
 
 def test_track1f_validation_error_contract_is_preserved(tmp_path: Path) -> None:
