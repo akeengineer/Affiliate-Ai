@@ -20,6 +20,7 @@ Codex may write deterministic scripts that operate on Markdown files, but must n
 - content_draft
 - compliance_result
 - weekly_report
+- nightly_run_log
 
 ## Required frontmatter
 
@@ -274,7 +275,35 @@ updated_at:
 status:
 ```
 
+### `nightly_run_log`
+
+Required frontmatter:
+
+```yaml
+type: nightly_run_log
+run_id:
+pipeline_status:
+resumed:
+successful_stage_count:
+started_at:
+finished_at:
+created_at:
+updated_at:
+status:
+```
+
+Optional frontmatter:
+
+```yaml
+failed_stage:
+```
+
+Rules:
+
+- `pipeline_status` must be one of `completed`, `failed`, or `timed_out`.
+- Run logs may contain product IDs and sanitized errors, but never credentials or tokens.
+
 ## Private data policy
 
-Real business data under `vault/products`, `vault/trends`, `vault/meetings`, `vault/decisions`, `vault/contents`, and `vault/reports` must not be committed to GitHub.
+Real business data under `vault/products`, `vault/trends`, `vault/meetings`, `vault/decisions`, `vault/contents`, `vault/reports`, and `vault/logs` must not be committed to GitHub.
 Only templates and sanitized samples may be committed.
