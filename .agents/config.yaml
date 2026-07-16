@@ -1,0 +1,62 @@
+# 9ake-kiro-agents Configuration
+# Project-specific settings for multi-agent orchestration
+
+project_name: "Affiliate-Ai"
+package_name: "9ake-kiro-agents"
+
+agents:
+  claude:
+    command: "claude"
+    flags:
+      - "-p"
+      - "--dangerously-skip-permissions"
+      - "--output-format"
+      - "json"
+    system_prompt: ".agents/prompts/claude-cli-agent.md"
+    max_turns: 10
+    max_budget_usd: 5.00
+    task_types:
+      - "reasoning"
+      - "design"
+      - "review"
+    fallback_to: "codex"
+
+  codex:
+    command: "codex"
+    flags:
+      - "-q"
+      - "--approval-mode"
+      - "full-auto"
+    system_prompt: ".agents/prompts/codex-cli-agent.md"
+    task_types:
+      - "implementation"
+      - "test"
+      - "refactor"
+    fallback_to: "claude"
+
+dispatch:
+  retry_max: 2
+  retry_backoff_seconds:
+    - 5
+    - 15
+  fallback_enabled: true
+  parallel_max: 2
+  default_timeout_seconds: 300
+
+ssh:
+  host: "god-of-ai"
+  project_path: "/home/ubuntu/Affiliate-Ai"
+  user: "ubuntu"
+
+validation:
+  run_tests: true
+  test_command: "python -m pytest"
+  check_files_exist: true
+
+paths:
+  queue: ".agents/queue"
+  results: ".agents/results"
+  state: ".agents/state"
+  reports: ".agents/reports"
+  prompts: ".agents/prompts"
+  schemas: ".agents/schemas"

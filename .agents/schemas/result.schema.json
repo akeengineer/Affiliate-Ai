@@ -1,0 +1,121 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/akeengineer/9ake-kiro-agents/schemas/result.schema.json",
+  "title": "Agent Result",
+  "description": "Schema for the result returned by Claude-CLI or Codex-CLI agents",
+  "type": "object",
+  "required": [
+    "task_id",
+    "agent",
+    "status",
+    "summary",
+    "completed_at"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "description": "Reference to the task that produced this result",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "agent": {
+      "type": "string",
+      "description": "Which agent executed this task",
+      "enum": [
+        "claude",
+        "codex"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "description": "Execution result status",
+      "enum": [
+        "success",
+        "fail",
+        "partial",
+        "timeout"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "description": "Human-readable summary of what was done"
+    },
+    "files_modified": {
+      "type": "array",
+      "description": "List of files modified during execution",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "files_created": {
+      "type": "array",
+      "description": "List of files created during execution",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "tests_run": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Test command that was run",
+      "default": null
+    },
+    "tests_passed": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Whether tests passed",
+      "default": null
+    },
+    "errors": {
+      "type": "array",
+      "description": "Error messages encountered during execution",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "duration_seconds": {
+      "type": "number",
+      "description": "Total execution time in seconds",
+      "minimum": 0
+    },
+    "attempt": {
+      "type": "integer",
+      "description": "Which attempt this result is from (1 = first try)",
+      "minimum": 1,
+      "default": 1
+    },
+    "is_fallback": {
+      "type": "boolean",
+      "description": "Whether this was executed by the fallback agent",
+      "default": false
+    },
+    "raw_output": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Raw stdout from the agent CLI",
+      "default": null
+    },
+    "next_steps": {
+      "type": "array",
+      "description": "Suggested next actions after this task",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "completed_at": {
+      "type": "string",
+      "description": "ISO 8601 timestamp of result creation",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}
