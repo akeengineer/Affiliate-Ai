@@ -18,6 +18,7 @@ import time
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
+from urllib.parse import quote
 
 import yaml
 
@@ -64,7 +65,12 @@ def scrape_search_page(
     config: dict[str, Any],
     max_products: int,
 ) -> list[dict[str, Any]]:
-    """Scrape product listings from a Shopee search page.
+    """Scrape products by intercepting Shopee's search API responses.
+
+    Shopee's public API returns 403 for direct HTTP requests, so the only
+    reliable path is to drive a real browser and capture the JSON that the
+    search page fetches from ``/api/v4/search/search_items`` in the
+    background.
 
     Args:
         page: Playwright page object.
@@ -76,88 +82,119 @@ def scrape_search_page(
         List of raw product data dicts.
     """
     base_url = config["base_url"]
-    search_url = f"{base_url}/search?keyword={keyword}"
+    search_url = f"{base_url}/search?keyword={quote(keyword)}"
     timeout = config["scraping"]["timeout_seconds"] * 1000
 
-    page.goto(search_url, wait_until="networkidle", timeout=timeout)
-    time.sleep(get_delay(config))
+    captured_items: list[dict[str, Any]] = []
 
-    # Scroll to load lazy content
-    for _ in range(3):
-        page.evaluate("window.scrollBy(0, window.innerHeight)")
-        time.sleep(1)
+    def handle_response(response: Any) -> None:
+        # Shopee search results arrive via .../api/v4/search/search_items
+        if "search_items" not in response.url:
+            return
+        try:
+            payload = response.json()
+        except Exception:
+            return
+        captured_items.extend(_extract_items_from_payload(payload))
+
+    page.on("response", handle_response)
+    try:
+        page.goto(search_url, wait_until="domcontentloaded", timeout=timeout)
+        _wait_for_search_data(page, captured_items, max_products, config)
+    finally:
+        try:
+            page.remove_listener("response", handle_response)
+        except Exception:
+            pass
 
     products: list[dict[str, Any]] = []
-
-    # Extract product cards from Shopee search results
-    product_cards = page.query_selector_all(
-        "[data-sqe='item']"
-    ) or page.query_selector_all(".shopee-search-item-result__item")
-
-    for card in product_cards[:max_products]:
-        try:
-            product = _extract_product_from_card(card, base_url)
-            if product:
-                products.append(product)
-        except Exception:
-            continue  # Skip malformed cards
-
+    seen_urls: set[str] = set()
+    for item in captured_items:
+        product = _extract_product_from_item(item, base_url)
+        if not product:
+            continue
+        if product["product_url"] in seen_urls:
+            continue
+        seen_urls.add(product["product_url"])
+        products.append(product)
+        if len(products) >= max_products:
+            break
     return products
 
 
-def _extract_product_from_card(card: Any, base_url: str) -> dict[str, Any] | None:
-    """Extract product data from a single search result card."""
-    # Product name
-    name_el = card.query_selector("[data-sqe='name']") or card.query_selector(
-        ".ie3A\\+n, .Cve6sh"
-    )
-    if not name_el:
+def _wait_for_search_data(
+    page: Any,
+    captured_items: list[dict[str, Any]],
+    max_products: int,
+    config: dict[str, Any],
+) -> None:
+    """Poll (and scroll) until search results arrive or the timeout elapses."""
+    max_wait = config["scraping"]["timeout_seconds"]
+    deadline = time.monotonic() + max_wait
+    while len(captured_items) < max_products and time.monotonic() < deadline:
+        page.wait_for_timeout(1000)
+        try:
+            page.evaluate("window.scrollBy(0, window.innerHeight)")
+        except Exception:
+            pass
+    # Let any in-flight response finish once data has started arriving.
+    if captured_items:
+        page.wait_for_timeout(1000)
+
+
+def _extract_items_from_payload(payload: Any) -> list[dict[str, Any]]:
+    """Pull the item list out of a Shopee search_items API response."""
+    if not isinstance(payload, dict):
+        return []
+    items = payload.get("items")
+    if not isinstance(items, list):
+        return []
+    return [it for it in items if isinstance(it, dict)]
+
+
+def _extract_product_from_item(
+    item: dict[str, Any], base_url: str
+) -> dict[str, Any] | None:
+    """Convert one intercepted Shopee item into a raw product dict."""
+    basic = item.get("item_basic")
+    if not isinstance(basic, dict):
+        basic = item
+    name = str(basic.get("name") or "").strip()
+    itemid = basic.get("itemid")
+    shopid = basic.get("shopid")
+    if not name or itemid is None or shopid is None:
         return None
-    name = name_el.inner_text().strip()
-    if not name:
-        return None
 
-    # Product link
-    link_el = card.query_selector("a")
-    product_url = ""
-    if link_el:
-        href = link_el.get_attribute("href") or ""
-        product_url = href if href.startswith("http") else f"{base_url}{href}"
-
-    # Price
-    price_el = card.query_selector("[aria-label*='price']") or card.query_selector(
-        ".ZEgDH9, .vioxXd"
+    raw_price = basic.get("price")
+    if raw_price is None:
+        raw_price = basic.get("price_min")
+    # Shopee encodes prices in micro-units (actual price * 100000).
+    price = (
+        round(raw_price / 100000, 2)
+        if isinstance(raw_price, (int, float)) and raw_price
+        else 0.0
     )
-    price_text = price_el.inner_text().strip() if price_el else "0"
-    price = _parse_price(price_text)
 
-    # Sold count
-    sold_el = card.query_selector("[class*='sold']") or card.query_selector(
-        ".r6HknA, .OwmBnn"
-    )
-    sold_text = sold_el.inner_text().strip() if sold_el else "0"
-    sold_count = _parse_sold(sold_text)
+    sold = basic.get("historical_sold")
+    if not sold:
+        sold = basic.get("sold") or 0
 
-    # Rating
-    rating_el = card.query_selector("[aria-label*='rating']") or card.query_selector(
-        ".shopee-rating-stars__stars"
-    )
-    rating = _parse_rating(rating_el)
-
-    # Shop name
-    shop_el = card.query_selector("[data-sqe='shopName']") or card.query_selector(
-        ".zGGwiV"
-    )
-    shop_name = shop_el.inner_text().strip() if shop_el else ""
+    rating = 0.0
+    rating_obj = basic.get("item_rating")
+    if isinstance(rating_obj, dict):
+        try:
+            rating = round(float(rating_obj.get("rating_star") or 0.0), 2)
+        except (TypeError, ValueError):
+            rating = 0.0
 
     return {
         "product_name": name,
-        "product_url": product_url,
+        "product_url": f"{base_url}/product/{shopid}/{itemid}",
         "price": price,
         "currency": "THB",
-        "sold_count": sold_count,
+        "sold_count": int(sold),
         "rating": rating,
-        "shop_name": shop_name,
+        "shop_name": str(basic.get("shop_name") or "").strip(),
         "scraped_at": datetime.now(UTC).isoformat(),
     }
 
@@ -196,18 +233,6 @@ def _parse_sold(text: str) -> int:
         return int(float(digits)) if digits else 0
     except ValueError:
         return 0
-
-
-def _parse_rating(el: Any) -> float:
-    """Parse rating from element."""
-    if not el:
-        return 0.0
-    aria = el.get_attribute("aria-label") or ""
-    digits = "".join(c for c in aria if c.isdigit() or c == ".")
-    try:
-        return float(digits) if digits else 0.0
-    except ValueError:
-        return 0.0
 
 
 def apply_filters(
@@ -306,11 +331,18 @@ def run_scraper(config: dict[str, Any], niche_filter: str | None = None) -> dict
     }
 
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch(
+            headless=True,
+            args=["--disable-blink-features=AutomationControlled"],
+        )
         context = browser.new_context(
             user_agent=get_random_user_agent(config),
             viewport={"width": 1920, "height": 1080},
             locale="th-TH",
+            extra_http_headers={"Accept-Language": "th-TH,th;q=0.9,en;q=0.8"},
+        )
+        context.add_init_script(
+            "Object.defineProperty(navigator, 'webdriver', {get: () => undefined});"
         )
         page = context.new_page()
 
