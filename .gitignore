@@ -106,3 +106,8 @@ tmp/phase10d-test-input/
 tmp/phase10e-export-sidecar/
 tmp/phase10e-test-input/
 tmp/track1g-demo-pack/
+
+# Local runtime artifacts
+/tmp/
+*.sqlite3
+*.db
