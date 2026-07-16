@@ -306,14 +306,14 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--agent",
         required=True,
-        choices=["claude", "codex"],
+        choices=["claude", "codex", "agy"],
         help="Agent to dispatch to",
     )
     parser.add_argument(
         "--type",
         dest="task_type",
         default="implementation",
-        choices=["reasoning", "design", "review", "implementation", "test", "refactor"],
+        choices=["reasoning", "design", "review", "implementation", "test", "refactor", "research", "debug", "investigate"],
         help="Task type",
     )
     parser.add_argument(
@@ -424,11 +424,13 @@ def main(argv: Optional[List[str]] = None) -> int:
             return 1
 
         log(f"Remote execution on: {config.ssh.host}")
-        # Build remote command
+        # Build remote command (activate venv + ensure CLI tools in PATH)
         remote_prompt = args.prompt.replace('"', '\\"')
         remote_cmd = (
+            f"export PATH=/home/ubuntu/.local/bin:/root/.local/bin:$PATH && "
             f"cd {config.ssh.project_path} && "
-            f"python scripts/agents/kiro_dispatch.py "
+            f"source .venv/bin/activate && "
+            f"python3 scripts/agents/kiro_dispatch.py "
             f"--agent {args.agent} --type {args.task_type} "
             f'--prompt "{remote_prompt}" --task-id {task_id} --timeout {args.timeout}'
         )
