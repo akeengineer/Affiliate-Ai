@@ -1,0 +1,58 @@
+# Shopee Scraper Configuration
+# Target: Shopee Thailand (.co.th)
+
+base_url: "https://shopee.co.th"
+
+# Niches/categories to scan
+niches:
+  - name: "gadgets"
+    keywords:
+      - "gadget ไอที"
+      - "อุปกรณ์เสริมคอม"
+      - "smart gadget"
+    category_id: null  # auto-discover from search
+    max_products: 30
+
+  - name: "home-office"
+    keywords:
+      - "อุปกรณ์โฮมออฟฟิศ"
+      - "desk setup"
+      - "เก้าอี้ทำงาน"
+    category_id: null
+    max_products: 30
+
+  - name: "health-beauty"
+    keywords:
+      - "สกินแคร์ขายดี"
+      - "อาหารเสริม"
+      - "เครื่องออกกำลังกาย"
+    category_id: null
+    max_products: 30
+
+# Scraping behavior
+scraping:
+  min_delay_seconds: 2
+  max_delay_seconds: 5
+  max_retries: 3
+  backoff_multiplier: 2
+  timeout_seconds: 30
+  max_concurrent: 1  # sequential only for safety
+
+# User-agent rotation
+user_agents:
+  - "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+  - "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+  - "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+  - "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0"
+  - "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15"
+
+# Output
+output:
+  scraped_json_dir: ".cache/shopee/scraped"
+  candidates_dir: "vault/candidates"
+
+# Filters (minimum thresholds to keep a product)
+filters:
+  min_sold: 100
+  min_rating: 4.0
+  min_rating_count: 50
