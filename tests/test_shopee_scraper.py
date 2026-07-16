@@ -8,6 +8,7 @@ from __future__ import annotations
 import json
 import sys
 from pathlib import Path
+from typing import Any
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -22,6 +23,7 @@ from scraper import (  # noqa: E402
     get_delay,
     get_random_user_agent,
     load_config,
+    run_scraper,
 )
 from to_candidate import (  # noqa: E402
     create_candidate_note,
@@ -122,6 +124,80 @@ def test_apply_filters():
     filtered = apply_filters(products, config)
     assert len(filtered) == 1
     assert filtered[0]["sold_count"] == 500
+
+
+# ---------- Browser interception test ----------
+
+
+def test_run_scraper_intercepts_search_items_response():
+    """The runner extracts products from browser search_items responses."""
+    config = load_config(SAMPLE_CONFIG_PATH)
+    config["niches"] = [
+        {
+            "name": "test-niche",
+            "keywords": ["สินค้า ทดสอบ"],
+            "max_products": 1,
+        }
+    ]
+    config["scraping"]["min_delay_seconds"] = 0
+    config["scraping"]["max_delay_seconds"] = 0
+    config["scraping"]["max_retries"] = 1
+
+    response = MagicMock()
+    response.url = "https://shopee.co.th/api/v4/search/search_items?keyword=test"
+    response.json.return_value = {
+        "items": [
+            {
+                "item_basic": {
+                    "name": "Intercepted Product",
+                    "itemid": 123,
+                    "shopid": 456,
+                    "price": 29900000,
+                    "historical_sold": 500,
+                    "item_rating": {"rating_star": 4.8},
+                    "shop_name": "Intercepted Shop",
+                }
+            }
+        ]
+    }
+
+    handlers: dict[str, Any] = {}
+    page = MagicMock()
+    page.on.side_effect = lambda event, handler: handlers.__setitem__(event, handler)
+    page.goto.side_effect = lambda *args, **kwargs: handlers["response"](response)
+
+    context = MagicMock()
+    context.new_page.return_value = page
+    browser = MagicMock()
+    browser.new_context.return_value = context
+    playwright = MagicMock()
+    playwright.chromium.launch.return_value = browser
+    manager = MagicMock()
+    manager.__enter__.return_value = playwright
+
+    with (
+        patch("playwright.sync_api.sync_playwright", return_value=manager),
+        patch("scraper.time.sleep"),
+    ):
+        results = run_scraper(config)
+
+    products = results["niches"]["test-niche"]
+    assert len(products) == 1
+    assert products[0]["product_name"] == "Intercepted Product"
+    assert products[0]["price"] == 299.0
+    assert products[0]["sold_count"] == 500
+    assert products[0]["rating"] == 4.8
+    assert products[0]["shop_name"] == "Intercepted Shop"
+    assert products[0]["product_url"] == "https://shopee.co.th/product/456/123"
+    encoded_keyword = (
+        "keyword=%E0%B8%AA%E0%B8%B4%E0%B8%99%E0%B8%84%E0%B9%89%E0%B8%B2"
+        "%20%E0%B8%97%E0%B8%94%E0%B8%AA%E0%B8%AD%E0%B8%9A"
+    )
+    assert page.goto.call_args.args[0].endswith(encoded_keyword)
+    playwright.chromium.launch.assert_called_once_with(
+        headless=True,
+        args=["--disable-blink-features=AutomationControlled"],
+    )
 
 
 # ---------- Candidate transformer tests ----------
