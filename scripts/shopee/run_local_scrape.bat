@@ -24,8 +24,9 @@ if exist ".venv\Scripts\activate.bat" (
     )
 )
 
+echo Make sure Chrome is open with --remote-debugging-port=9222 and logged into Shopee
 echo [1/3] Scraping Shopee with local Chrome...
-"%PYTHON%" %PYTHON_ARGS% scripts\shopee\scraper_local.py --config scripts\shopee\config.yaml
+"%PYTHON%" %PYTHON_ARGS% scripts\shopee\scraper_local.py --config scripts\shopee\config.yaml --cdp
 if errorlevel 1 goto :failed
 
 set "LATEST_JSON="

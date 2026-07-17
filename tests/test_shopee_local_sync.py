@@ -36,8 +36,65 @@ def test_local_scraper_dry_run_does_not_read_cookies_or_launch_browser(
     payload = json.loads(capsys.readouterr().out)
     assert payload["status"] == "dry_run_ok"
     assert payload["browser"] == "playwright-chromium"
+    assert payload["cdp"] is True
+    assert payload["cdp_url"] == "http://localhost:9222"
     assert payload["proxy"] is None
     assert payload["output_dir"] == ".cache/shopee/scraped"
+
+
+def test_local_scraper_connects_over_cdp_and_reuses_authenticated_context(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    config = copy.deepcopy(load_config(CONFIG_PATH))
+    config["niches"] = [
+        {"name": "test", "keywords": ["desk lamp"], "max_products": 1}
+    ]
+    config["filters"] = {"min_sold": 0, "min_rating": 0}
+    config["scraping"]["min_delay_seconds"] = 0
+    config["scraping"]["max_delay_seconds"] = 0
+    product = {
+        "product_name": "Desk Lamp",
+        "product_url": "https://shopee.co.th/product/1/2",
+        "price": 299.0,
+        "sold_count": 500,
+        "rating": 4.8,
+        "shop_name": "Test Shop",
+    }
+
+    manager = MagicMock()
+    playwright_runtime = manager.__enter__.return_value
+    browser = playwright_runtime.chromium.connect_over_cdp.return_value
+    context = MagicMock()
+    page = MagicMock()
+    browser.contexts = [context]
+    context.pages = [page]
+
+    sync_api_module = ModuleType("playwright.sync_api")
+    sync_api_module.sync_playwright = lambda: manager  # type: ignore[attr-defined]
+    playwright_module = ModuleType("playwright")
+    playwright_module.sync_api = sync_api_module  # type: ignore[attr-defined]
+    monkeypatch.setitem(sys.modules, "playwright", playwright_module)
+    monkeypatch.setitem(sys.modules, "playwright.sync_api", sync_api_module)
+    load_cookies = MagicMock(side_effect=AssertionError("CDP must reuse Chrome cookies"))
+    monkeypatch.setattr(scraper_local, "load_shopee_cookies", load_cookies)
+    scrape = MagicMock(return_value=[dict(product)])
+    monkeypatch.setattr(scraper_local, "scrape_with_retry", scrape)
+
+    results = scraper_local.run_local_scraper(
+        config,
+        cdp_url="http://localhost:9333",
+    )
+
+    playwright_runtime.chromium.connect_over_cdp.assert_called_once_with(
+        "http://localhost:9333"
+    )
+    playwright_runtime.chromium.launch.assert_not_called()
+    load_cookies.assert_not_called()
+    context.new_page.assert_not_called()
+    scrape.assert_called_once_with(page, "desk lamp", config, 1)
+    context.close.assert_not_called()
+    browser.close.assert_not_called()
+    assert results["niches"]["test"][0]["search_keyword"] == "desk lamp"
 
 
 def test_local_scraper_launches_chrome_without_proxy(
@@ -85,7 +142,7 @@ def test_local_scraper_launches_chrome_without_proxy(
         lambda _page, _keyword, _config, _maximum: [dict(product)],
     )
 
-    results = scraper_local.run_local_scraper(config)
+    results = scraper_local.run_local_scraper(config, cdp=False)
 
     playwright_runtime.chromium.launch.assert_called_once_with(
         channel="chrome", headless=False

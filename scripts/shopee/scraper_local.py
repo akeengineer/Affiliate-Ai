@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Scrape Shopee from an operator's Windows machine with Playwright Chromium.
 
-The local browser uses the operator's residential connection, reads the same
-Shopee config and cookie file as the EC2 scraper, and writes the same JSON
-format for ``to_candidate.py``.
+By default, the scraper connects over CDP to an operator-started Chrome browser
+whose existing context contains the Shopee login session. A standalone launch
+mode remains available and reads the same cookie file as the EC2 scraper. Both
+modes write the same JSON format for ``to_candidate.py``.
 
 Ref: codex/tasks/004-shopee-scraper.md
 """
@@ -71,11 +72,14 @@ def run_local_scraper(
     *,
     niche_filter: str | None = None,
     headless: bool = False,
+    cdp: bool = True,
+    cdp_url: str = "http://localhost:9222",
 ) -> dict[str, Any]:
     """Run the response-intercepting scraper in Playwright Chromium.
 
     No proxy is passed to Chromium: the Windows host's normal residential
-    connection is intentionally used.
+    connection is intentionally used. CDP mode reuses the operator's first
+    browser context and its authenticated Shopee session.
     """
 
     try:
@@ -86,59 +90,75 @@ def run_local_scraper(
         ) from exc
 
     niches = _selected_niches(config, niche_filter)
-    cookies = load_shopee_cookies(config)
     results: dict[str, Any] = {
         "scraped_at": datetime.now(UTC).isoformat(),
         "niches": {},
     }
 
     with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(channel="chrome", headless=headless)
+        browser = None
+        context = None
         try:
-            context = browser.new_context(
-                user_agent=_windows_chrome_user_agent(config),
-                viewport={"width": 1920, "height": 1080},
-                locale="th-TH",
-                extra_http_headers={"Accept-Language": "th-TH,th;q=0.9,en;q=0.8"},
-            )
-            try:
+            if cdp:
+                browser = playwright.chromium.connect_over_cdp(cdp_url)
+                if not browser.contexts:
+                    raise RuntimeError("Connected Chrome has no browser contexts")
+                context = browser.contexts[0]
+                page = context.pages[0] if context.pages else context.new_page()
+            else:
+                cookies = load_shopee_cookies(config)
+                browser = playwright.chromium.launch(
+                    channel="chrome", headless=headless
+                )
+                context = browser.new_context(
+                    user_agent=_windows_chrome_user_agent(config),
+                    viewport={"width": 1920, "height": 1080},
+                    locale="th-TH",
+                    extra_http_headers={
+                        "Accept-Language": "th-TH,th;q=0.9,en;q=0.8"
+                    },
+                )
                 context.add_cookies(cookies)
                 page = context.new_page()
 
-                for niche in niches:
-                    niche_name = str(niche["name"])
-                    max_products = int(niche.get("max_products", 30))
-                    products: list[dict[str, Any]] = []
-                    seen_urls: set[str] = set()
-                    print(f"[INFO] Scraping niche: {niche_name}", file=sys.stderr)
+            for niche in niches:
+                niche_name = str(niche["name"])
+                max_products = int(niche.get("max_products", 30))
+                products: list[dict[str, Any]] = []
+                seen_urls: set[str] = set()
+                print(f"[INFO] Scraping niche: {niche_name}", file=sys.stderr)
 
-                    for keyword in niche.get("keywords", []):
-                        keyword_products = scrape_with_retry(
-                            page,
-                            str(keyword),
-                            config,
-                            max_products,
-                        )
-                        for product in keyword_products:
-                            product_url = str(product.get("product_url", ""))
-                            if not product_url or product_url in seen_urls:
-                                continue
-                            seen_urls.add(product_url)
-                            product["niche"] = niche_name
-                            product["search_keyword"] = str(keyword)
-                            products.append(product)
-                        time.sleep(get_delay(config))
-
-                    filtered = apply_filters(products, config)
-                    results["niches"][niche_name] = filtered
-                    print(
-                        f"[INFO] Found {len(filtered)} products for {niche_name!r}",
-                        file=sys.stderr,
+                for keyword in niche.get("keywords", []):
+                    keyword_products = scrape_with_retry(
+                        page,
+                        str(keyword),
+                        config,
+                        max_products,
                     )
-            finally:
-                context.close()
+                    for product in keyword_products:
+                        product_url = str(product.get("product_url", ""))
+                        if not product_url or product_url in seen_urls:
+                            continue
+                        seen_urls.add(product_url)
+                        product["niche"] = niche_name
+                        product["search_keyword"] = str(keyword)
+                        products.append(product)
+                    time.sleep(get_delay(config))
+
+                filtered = apply_filters(products, config)
+                results["niches"][niche_name] = filtered
+                print(
+                    f"[INFO] Found {len(filtered)} products for {niche_name!r}",
+                    file=sys.stderr,
+                )
         finally:
-            browser.close()
+            if not cdp:
+                try:
+                    if context is not None:
+                        context.close()
+                finally:
+                    if browser is not None:
+                        browser.close()
 
     return results
 
@@ -152,7 +172,18 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--headless",
         action="store_true",
-        help="Hide Chrome while scraping (headed mode is the default).",
+        help="Hide Chrome in standalone mode (headed mode is the default).",
+    )
+    parser.add_argument(
+        "--cdp",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Connect to an existing Chrome over CDP (default: enabled).",
+    )
+    parser.add_argument(
+        "--cdp-url",
+        default="http://localhost:9222",
+        help="Chrome DevTools Protocol endpoint (default: http://localhost:9222).",
     )
     parser.add_argument(
         "--dry-run",
@@ -173,6 +204,8 @@ def main(argv: list[str] | None = None) -> int:
                     {
                         "status": "dry_run_ok",
                         "browser": "playwright-chromium",
+                        "cdp": args.cdp,
+                        "cdp_url": args.cdp_url,
                         "proxy": None,
                         "niches": [niche["name"] for niche in selected],
                         "output_dir": config["output"]["scraped_json_dir"],
@@ -185,6 +218,8 @@ def main(argv: list[str] | None = None) -> int:
             config,
             niche_filter=args.niche,
             headless=args.headless,
+            cdp=args.cdp,
+            cdp_url=args.cdp_url,
         )
         output_path = save_results(results, config)
     except (FileNotFoundError, RuntimeError, ValueError) as exc:
