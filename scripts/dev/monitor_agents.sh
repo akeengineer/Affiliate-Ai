@@ -12,10 +12,10 @@ if [[ "${1:-}" == "--watch" ]]; then
         printf 'error: watch is not installed\n' >&2
         exit 1
     fi
-    exec env FORCE_COLOR=1 watch --color --interval 30 "$SCRIPT_PATH"
+    exec env FORCE_COLOR=1 watch --color --interval 10 "$SCRIPT_PATH"
 elif [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
     printf 'Usage: %s [--watch]\n' "$0"
-    printf '  --watch  Refresh the dashboard every 30 seconds with watch(1).\n'
+    printf '  --watch  Refresh the dashboard every 10 seconds with watch(1).\n'
     exit 0
 elif [[ $# -gt 0 ]]; then
     printf 'error: unknown argument: %s\n' "$1" >&2
@@ -120,6 +120,10 @@ show_agent_processes() {
             *) continue ;;
         esac
         found=1
+        # Skip IDE background servers (not actual task execution)
+        case "$command_line" in
+            *app-server*|*stream-json*|*code_mode_host*|*input-format*) continue ;;
+        esac
 
         process_args=()
         if [[ -r "/proc/$pid/cmdline" ]]; then
@@ -265,8 +269,6 @@ path = Path(sys.argv[1])
 try:
     payload = json.loads(path.read_text(encoding="utf-8"))
 except (OSError, json.JSONDecodeError) as exc:
-    print(f"File: {path.name}")
-    print(f"Result: unreadable ({exc})")
     raise SystemExit(0)
 
 niches = payload.get("niches", {})
@@ -278,9 +280,7 @@ counts = {
 total = sum(counts.values())
 result = payload.get("status") or payload.get("result") or "completed"
 
-print(f"File: {path.name}")
 print(f"Scraped at: {payload.get('scraped_at', 'unknown')}")
-print(f"Result: {result}; {total} products across {len(counts)} niches")
 if counts:
     print("Niches: " + ", ".join(f"{name}={count}" for name, count in sorted(counts.items())))
 PY
