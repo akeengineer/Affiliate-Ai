@@ -12,7 +12,7 @@ if [[ "${1:-}" == "--watch" ]]; then
         printf 'error: watch is not installed\n' >&2
         exit 1
     fi
-    exec env FORCE_COLOR=1 watch --color --interval 10 "$SCRIPT_PATH"
+    exec env FORCE_COLOR=1 watch --color --interval 10 "bash $SCRIPT_PATH"
 elif [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
     printf 'Usage: %s [--watch]\n' "$0"
     printf '  --watch  Refresh the dashboard every 10 seconds with watch(1).\n'
