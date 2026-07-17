@@ -72,6 +72,51 @@ def get_proxy_options(config: dict[str, Any]) -> dict[str, str] | None:
     return {"server": proxy_url}
 
 
+def get_cookies_path(config: dict[str, Any]) -> Path:
+    """Resolve the Shopee cookies file from the configured environment override."""
+    cookies_config = config.get("cookies", {})
+    env_var = str(
+        cookies_config.get("env_var", "SHOPEE_COOKIES_PATH")
+    ).strip()
+    cookies_path = os.getenv(env_var, "").strip() if env_var else ""
+    if not cookies_path:
+        cookies_path = str(
+            cookies_config.get("default_path", ".cookies/shopee.txt")
+        ).strip()
+    return Path(cookies_path).expanduser()
+
+
+def parse_cookie_string(cookie_string: str) -> list[dict[str, str]]:
+    """Convert a semicolon-separated ``document.cookie`` string for Playwright."""
+    cookies: list[dict[str, str]] = []
+    for cookie_pair in cookie_string.split(";"):
+        name, separator, value = cookie_pair.strip().partition("=")
+        name = name.strip()
+        if not separator or not name:
+            continue
+        cookies.append(
+            {
+                "name": name,
+                "value": value.strip(),
+                "domain": ".shopee.co.th",
+                "path": "/",
+            }
+        )
+    return cookies
+
+
+def load_shopee_cookies(config: dict[str, Any]) -> list[dict[str, str]]:
+    """Read and parse Shopee cookies without exposing their values in logs."""
+    cookies_path = get_cookies_path(config)
+    if not cookies_path.is_file():
+        raise FileNotFoundError(f"Shopee cookies file not found: {cookies_path}")
+
+    cookies = parse_cookie_string(cookies_path.read_text(encoding="utf-8").strip())
+    if not cookies:
+        raise ValueError(f"Shopee cookies file contains no valid cookies: {cookies_path}")
+    return cookies
+
+
 def scrape_search_page(
     page: Any,
     keyword: str,
@@ -351,6 +396,8 @@ def run_scraper(config: dict[str, Any], niche_filter: str | None = None) -> dict
         "niches": {},
     }
     scraping_config = config["scraping"]
+    cookies = load_shopee_cookies(config)
+    proxy_options = get_proxy_options(config)
     timeout_ms = scraping_config["timeout_seconds"] * 1000
     max_retries = scraping_config["max_retries"]
     backoff = scraping_config["backoff_multiplier"]
@@ -447,7 +494,8 @@ def run_scraper(config: dict[str, Any], niche_filter: str | None = None) -> dict
 
     with Camoufox(
         headless=True,
-        proxy=get_proxy_options(config),
+        proxy=proxy_options,
+        geoip=bool(proxy_options),
     ) as browser:
         context = browser.new_context(
             user_agent=get_random_user_agent(config),
@@ -459,6 +507,7 @@ def run_scraper(config: dict[str, Any], niche_filter: str | None = None) -> dict
             "Object.defineProperty(navigator, 'webdriver', {get: () => undefined});"
         )
         page = context.new_page()
+        context.add_cookies(cookies)
 
         for niche in niches:
             niche_name = niche["name"]

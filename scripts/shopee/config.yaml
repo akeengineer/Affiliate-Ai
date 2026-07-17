@@ -33,6 +33,11 @@ proxy:
   env_var: "SCRAPER_PROXY_URL"
   default_url: "socks5://127.0.0.1:40000"
 
+# Browser session cookies. SHOPEE_COOKIES_PATH overrides the local default.
+cookies:
+  env_var: "SHOPEE_COOKIES_PATH"
+  default_path: ".cookies/shopee.txt"
+
 # Niches/categories to scan
 niches:
   - name: "gadgets"

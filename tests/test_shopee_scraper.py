@@ -46,6 +46,10 @@ def test_scraper_config_loading():
     assert "base_url" in config
     assert len(config["niches"]) >= 1
     assert len(config["user_agents"]) >= 1
+    assert config["cookies"] == {
+        "env_var": "SHOPEE_COOKIES_PATH",
+        "default_path": ".cookies/shopee.txt",
+    }
 
 
 def test_scraper_config_missing_file(tmp_path: Path):
@@ -92,15 +96,96 @@ def test_scraper_proxy_uses_environment_override(monkeypatch: pytest.MonkeyPatch
     }
 
 
+def test_parse_cookie_string():
+    """Document cookies are converted to Playwright cookie dictionaries."""
+    cookies = scraper_module.parse_cookie_string(
+        "SPC_EC=fake-session; csrftoken=fake=token; empty=; malformed"
+    )
+
+    assert cookies == [
+        {
+            "name": "SPC_EC",
+            "value": "fake-session",
+            "domain": ".shopee.co.th",
+            "path": "/",
+        },
+        {
+            "name": "csrftoken",
+            "value": "fake=token",
+            "domain": ".shopee.co.th",
+            "path": "/",
+        },
+        {
+            "name": "empty",
+            "value": "",
+            "domain": ".shopee.co.th",
+            "path": "/",
+        },
+    ]
+
+
+def test_load_shopee_cookies_uses_default_path(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+):
+    """The configured default cookie path is used when the env var is unset."""
+    cookies_path = tmp_path / "default-cookies.txt"
+    cookies_path.write_text("SPC_EC=fake-default", encoding="utf-8")
+    monkeypatch.delenv("SHOPEE_COOKIES_PATH", raising=False)
+
+    cookies = scraper_module.load_shopee_cookies(
+        {
+            "cookies": {
+                "env_var": "SHOPEE_COOKIES_PATH",
+                "default_path": str(cookies_path),
+            }
+        }
+    )
+
+    assert cookies[0]["name"] == "SPC_EC"
+    assert cookies[0]["value"] == "fake-default"
+
+
+def test_load_shopee_cookies_uses_environment_override(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+):
+    """SHOPEE_COOKIES_PATH overrides the configured default path."""
+    cookies_path = tmp_path / "override-cookies.txt"
+    cookies_path.write_text("csrftoken=fake-override", encoding="utf-8")
+    monkeypatch.setenv("SHOPEE_COOKIES_PATH", str(cookies_path))
+
+    cookies = scraper_module.load_shopee_cookies(
+        {
+            "cookies": {
+                "env_var": "SHOPEE_COOKIES_PATH",
+                "default_path": str(tmp_path / "missing.txt"),
+            }
+        }
+    )
+
+    assert cookies[0]["name"] == "csrftoken"
+    assert cookies[0]["value"] == "fake-override"
+
+
 def test_scraper_launches_camoufox_with_proxy(monkeypatch: pytest.MonkeyPatch):
     """The browser runner passes resolved proxy options to Camoufox."""
     monkeypatch.delenv("SCRAPER_PROXY_URL", raising=False)
     config = load_config(SAMPLE_CONFIG_PATH)
     config["niches"] = []
 
+    cookies = [
+        {
+            "name": "SPC_EC",
+            "value": "fake-session",
+            "domain": ".shopee.co.th",
+            "path": "/",
+        }
+    ]
+
     with (
         patch("camoufox.sync_api.Camoufox") as camoufox,
-        patch("playwright.sync_api.sync_playwright"),
+        patch("scraper.load_shopee_cookies", return_value=cookies),
     ):
         browser = camoufox.return_value.__enter__.return_value
         scraper_module.run_scraper(config)
@@ -108,8 +193,12 @@ def test_scraper_launches_camoufox_with_proxy(monkeypatch: pytest.MonkeyPatch):
     camoufox.assert_called_once_with(
         headless=True,
         proxy={"server": "socks5://127.0.0.1:40000"},
+        geoip=True,
     )
     browser.new_context.assert_called_once()
+    context = browser.new_context.return_value
+    context.new_page.assert_called_once_with()
+    context.add_cookies.assert_called_once_with(cookies)
 
 
 # ---------- Rate limiting tests ----------
@@ -227,6 +316,17 @@ def test_run_scraper_intercepts_search_items_response(
 
     with (
         patch("camoufox.sync_api.Camoufox") as camoufox,
+        patch(
+            "scraper.load_shopee_cookies",
+            return_value=[
+                {
+                    "name": "SPC_EC",
+                    "value": "fake-session",
+                    "domain": ".shopee.co.th",
+                    "path": "/",
+                }
+            ],
+        ),
         patch("scraper.time.sleep"),
     ):
         camoufox.return_value.__enter__.return_value = browser
@@ -248,7 +348,9 @@ def test_run_scraper_intercepts_search_items_response(
     camoufox.assert_called_once_with(
         headless=True,
         proxy={"server": "socks5://127.0.0.1:40000"},
+        geoip=True,
     )
+    context.add_cookies.assert_called_once()
 
 
 # ---------- Candidate transformer tests ----------
