@@ -31,7 +31,7 @@ if [[ ! -f "$MONITOR_TASKS_PATH" ]]; then
     MONITOR_TASKS_PATH="$REPO_ROOT/scripts/dev/monitor_tasks.py"
 fi
 
-if [[ -n "${FORCE_COLOR:-}" || ( -t 1 && -z "${NO_COLOR:-}" ) ]]; then
+if [[ -z "${NO_COLOR:-}" && ( -n "${FORCE_COLOR:-}" || -t 1 ) ]]; then
     RESET=$'\033[0m'
     BOLD=$'\033[1m'
     DIM=$'\033[2m'
@@ -40,6 +40,7 @@ if [[ -n "${FORCE_COLOR:-}" || ( -t 1 && -z "${NO_COLOR:-}" ) ]]; then
     YELLOW=$'\033[33m'
     BLUE=$'\033[34m'
     CYAN=$'\033[36m'
+    WHITE=$'\033[37m'
 else
     RESET=''
     BOLD=''
@@ -49,6 +50,7 @@ else
     YELLOW=''
     BLUE=''
     CYAN=''
+    WHITE=''
 fi
 
 section() {
@@ -115,23 +117,41 @@ command_summary() {
     printf '%s' "${summary_words[*]}"
 }
 
+agent_is_running() {
+    local process_name command_line
+
+    while read -r process_name command_line; do
+        case "$process_name" in
+            codex|claude|agy) ;;
+            *) continue ;;
+        esac
+        case "$command_line" in
+            *app-server*|*stream-json*|*code_mode_host*|*input-format*) continue ;;
+        esac
+        return 0
+    done < <(ps -eo comm=,args= 2>/dev/null)
+
+    return 1
+}
+
 show_agent_processes() {
     local pid runtime process_name command_line task argument quoted_task
     local index exec_index
     local -a process_args
     local found=0
 
-    printf '%s%-8s %-12s %-10s %s%s\n' "$BOLD" 'PID' 'RUNTIME' 'AGENT' 'CURRENT TASK' "$RESET"
+    printf '%s%s%-8s %-12s %-10s %s%s\n' \
+        "$BOLD" "$WHITE" 'PID' 'RUNTIME' 'AGENT' 'CURRENT TASK' "$RESET"
     while read -r pid runtime process_name command_line; do
         case "$process_name" in
             codex|claude|agy) ;;
             *) continue ;;
         esac
-        found=1
         # Skip IDE background servers (not actual task execution)
         case "$command_line" in
             *app-server*|*stream-json*|*code_mode_host*|*input-format*) continue ;;
         esac
+        found=1
 
         process_args=()
         if [[ -r "/proc/$pid/cmdline" ]]; then
@@ -228,7 +248,11 @@ show_recent_commits() {
     while IFS=$'\t' read -r hash commit_date author subject; do
         [[ -n "$hash" ]] || continue
         found=1
-        printf '%s%s%s %s %s — %s\n' "$YELLOW" "$hash" "$RESET" "$commit_date" "$author" "$subject"
+        printf '%s%s%s %s%s%s %s%s%s %s— %s%s\n' \
+            "$YELLOW" "$hash" "$RESET" \
+            "$DIM" "$commit_date" "$RESET" \
+            "$CYAN" "$author" "$RESET" \
+            "$WHITE" "$subject" "$RESET"
     done < <(git -C "$REPO_ROOT" log -5 --date=short --pretty=tformat:'%h%x09%ad%x09%an%x09%s' 2>/dev/null)
 
     if (( found == 0 )); then
@@ -237,17 +261,22 @@ show_recent_commits() {
 }
 
 show_recent_files() {
-    local output
-    output="$({
+    local epoch timestamp filename
+    local found=0
+
+    while IFS=$'\t' read -r epoch timestamp filename; do
+        [[ -n "$filename" ]] || continue
+        found=1
+        printf '%s%s%s %s%s%s\n' \
+            "$DIM" "$timestamp" "$RESET" "$GREEN" "$filename" "$RESET"
+    done < <({
         cd "$REPO_ROOT" || exit 1
         find scripts tests -type f -mmin -10 \
             ! -path '*/__pycache__/*' ! -name '*.pyc' \
             -printf '%T@\t%TY-%Tm-%Td %TH:%TM:%TS\t%p\n' 2>/dev/null
-    } | sort -t $'\t' -k1,1nr | cut -f2-)"
+    } | sort -t $'\t' -k1,1nr)
 
-    if [[ -n "$output" ]]; then
-        printf '%s\n' "$output"
-    else
+    if (( found == 0 )); then
         printf '%sNo files changed in scripts/ or tests/ during the last 10 minutes.%s\n' "$DIM" "$RESET"
     fi
 }
@@ -268,12 +297,13 @@ show_scraper_result() {
         return
     fi
 
-    python3 - "$latest" <<'PY'
+    python3 - "$latest" "$RED" "$GREEN" "$RESET" <<'PY'
 import json
 import sys
 from pathlib import Path
 
 path = Path(sys.argv[1])
+red, green, reset = sys.argv[2:5]
 try:
     payload = json.loads(path.read_text(encoding="utf-8"))
 except (OSError, json.JSONDecodeError) as exc:
@@ -285,12 +315,13 @@ counts = {
     for name, products in niches.items()
     if isinstance(products, list)
 } if isinstance(niches, dict) else {}
-total = sum(counts.values())
-result = payload.get("status") or payload.get("result") or "completed"
-
 print(f"Scraped at: {payload.get('scraped_at', 'unknown')}")
 if counts:
-    print("Niches: " + ", ".join(f"{name}={count}" for name, count in sorted(counts.items())))
+    values = []
+    for name, count in sorted(counts.items()):
+        color = green if count > 0 else red
+        values.append(f"{color}{name}={count}{reset}")
+    print("Niches: " + ", ".join(values))
 PY
 }
 
@@ -300,6 +331,8 @@ show_warp_status() {
     if command -v warp-cli >/dev/null 2>&1; then
         status_output="$(timeout 5 warp-cli --accept-tos status 2>&1)"
         if [[ -n "$status_output" ]]; then
+            status_output="${status_output//Disconnected/${RED}Disconnected${RESET}}"
+            status_output="${status_output//Connected/${GREEN}Connected${RESET}}"
             printf '%s\n' "$status_output"
         else
             printf '%sWARP status returned no output.%s\n' "$YELLOW" "$RESET"
@@ -337,10 +370,17 @@ show_resources() {
     fi
 }
 
-printf '%s%sAffiliate AI — EC2 Agent Monitor%s\n' "$BOLD" "$CYAN" "$RESET"
-printf 'Updated: %s | Host: %s | Branch: %s\n' \
+if agent_is_running; then
+    STATUS_DOT_COLOR="$GREEN"
+else
+    STATUS_DOT_COLOR="$DIM"
+fi
+
+printf '%s●%s %s%sAffiliate AI - EC2 Agent Monitor%s\n' \
+    "$STATUS_DOT_COLOR" "$RESET" "$BOLD" "$CYAN" "$RESET"
+printf '%sUpdated: %s | Host: %s | Branch: %s%s\n' "$DIM" \
     "$(date --iso-8601=seconds)" "$(hostname)" \
-    "$(git -C "$REPO_ROOT" branch --show-current 2>/dev/null || printf 'unknown')"
+    "$(git -C "$REPO_ROOT" branch --show-current 2>/dev/null || printf 'unknown')" "$RESET"
 
 section 'AI Agent Processes'
 show_agent_processes

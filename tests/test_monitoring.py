@@ -145,6 +145,30 @@ def test_task_table_supports_color_output() -> None:
     assert "feature/example" in output
 
 
+def test_task_summary_counts_support_color_and_no_color_precedence() -> None:
+    forced_env = {key: value for key, value in os.environ.items() if key != "NO_COLOR"}
+    forced_env["FORCE_COLOR"] = "1"
+    forced = subprocess.run(
+        [str(MONITOR_TASKS), "--repo-root", str(REPO_ROOT)],
+        check=True,
+        capture_output=True,
+        text=True,
+        env=forced_env,
+    )
+    disabled = subprocess.run(
+        [str(MONITOR_TASKS), "--repo-root", str(REPO_ROOT)],
+        check=True,
+        capture_output=True,
+        text=True,
+        env={**os.environ, "FORCE_COLOR": "1", "NO_COLOR": "1"},
+    )
+
+    assert "\033[32m" in forced.stdout
+    assert "\033[33m" in forced.stdout
+    assert "\033[2m" in forced.stdout
+    assert "\033[" not in disabled.stdout
+
+
 def test_agent_monitor_help_documents_watch_interval() -> None:
     completed = subprocess.run(
         [str(MONITOR_AGENTS), "--help"],
@@ -171,3 +195,26 @@ def test_agent_monitor_source_has_required_sections() -> None:
         assert section in source
     assert 'SCRIPT_PATH="${BASH_SOURCE[0]}"' in source
     assert 'watch --color --interval 10 "bash $SCRIPT_PATH"' in source
+
+
+def test_agent_monitor_force_color_and_no_color_precedence() -> None:
+    forced_env = {key: value for key, value in os.environ.items() if key != "NO_COLOR"}
+    forced_env["FORCE_COLOR"] = "1"
+    forced = subprocess.run(
+        [str(MONITOR_AGENTS)],
+        check=True,
+        capture_output=True,
+        text=True,
+        env=forced_env,
+    )
+    disabled = subprocess.run(
+        [str(MONITOR_AGENTS)],
+        check=True,
+        capture_output=True,
+        text=True,
+        env={**os.environ, "FORCE_COLOR": "1", "NO_COLOR": "1"},
+    )
+
+    assert "\033[1m\033[36mAffiliate AI - EC2 Agent Monitor" in forced.stdout
+    assert "\033[1m\033[37mPID" in forced.stdout
+    assert "\033[" not in disabled.stdout

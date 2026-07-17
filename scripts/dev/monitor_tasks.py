@@ -19,6 +19,11 @@ from typing import Sequence
 STATUS_DONE = "DONE"
 STATUS_IN_PROGRESS = "IN PROGRESS"
 STATUS_PENDING = "PENDING"
+STATUS_COLORS = {
+    STATUS_DONE: "\033[32m",
+    STATUS_IN_PROGRESS: "\033[33m",
+    STATUS_PENDING: "\033[2m",
+}
 DEFAULT_REPO_ROOT = next(
     (
         parent
@@ -203,12 +208,13 @@ def truncate(value: str, width: int) -> str:
 def colorize_status(status: str, enabled: bool) -> str:
     if not enabled:
         return status
-    colors = {
-        STATUS_DONE: "\033[32m",
-        STATUS_IN_PROGRESS: "\033[33m",
-        STATUS_PENDING: "\033[2m",
-    }
-    return f"{colors[status.strip()]}{status}\033[0m"
+    return f"{STATUS_COLORS[status.strip()]}{status}\033[0m"
+
+
+def colorize_count(count: int, status: str, enabled: bool) -> str:
+    if not enabled:
+        return str(count)
+    return f"{STATUS_COLORS[status]}{count}\033[0m"
 
 
 def format_table(states: Sequence[TaskState], color: bool) -> str:
@@ -273,9 +279,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.active_only
         else states
     )
-    color = not args.no_color and (
+    color = not args.no_color and not os.environ.get("NO_COLOR") and (
         bool(os.environ.get("FORCE_COLOR"))
-        or (sys.stdout.isatty() and not os.environ.get("NO_COLOR"))
+        or sys.stdout.isatty()
     )
     print(format_table(visible, color=color))
 
@@ -285,9 +291,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     }
     print(
         "Summary: "
-        f"{counts[STATUS_DONE]} done, "
-        f"{counts[STATUS_IN_PROGRESS]} in progress, "
-        f"{counts[STATUS_PENDING]} pending"
+        f"{colorize_count(counts[STATUS_DONE], STATUS_DONE, color)} done, "
+        f"{colorize_count(counts[STATUS_IN_PROGRESS], STATUS_IN_PROGRESS, color)} in progress, "
+        f"{colorize_count(counts[STATUS_PENDING], STATUS_PENDING, color)} pending"
     )
     return 0
 
