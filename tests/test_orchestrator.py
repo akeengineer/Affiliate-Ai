@@ -29,6 +29,7 @@ def orchestrator_config(tmp_path: Path, **changes: object):
     base = load_config(DEFAULT_CONFIG)
     output_dir = tmp_path / "output"
     values: dict[str, object] = {
+        "scrape_source": "direct",
         "vault_dir": tmp_path / "vault",
         "output_dir": output_dir,
         "state_file": output_dir / "state.json",
@@ -243,11 +244,30 @@ def test_default_config_has_required_limits() -> None:
     config = load_config(DEFAULT_CONFIG)
 
     assert config.cron_schedule == "0 2 * * *"
+    assert config.scrape_source == "local_sync"
     assert config.max_attempts == 3
     assert config.total_timeout_seconds == 7200
     assert tuple(config.stage_timeouts) == STAGES
     assert config.vault_dir == REPO_ROOT / "vault"
     assert config.output_dir == REPO_ROOT / ".cache" / "orchestrator"
+
+
+def test_local_sync_skips_scrape_stage(tmp_path: Path) -> None:
+    calls: list[str] = []
+    config = orchestrator_config(tmp_path, scrape_source="local_sync")
+
+    result = NightlyOrchestrator(
+        config,
+        stage_handlers=handlers_that_record(calls),
+        timestamp=lambda: TIMESTAMP,
+    ).run()
+
+    assert result.ok
+    assert calls == list(STAGES[1:])
+    assert result.completed_stages == STAGES[1:]
+    assert "| scrape | skipped_local_sync | 0 |" in result.log_path.read_text(
+        encoding="utf-8"
+    )
 
 
 def test_cron_setup_installs_daily_0200_job() -> None:

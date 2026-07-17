@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Run the unattended scrape -> analyze -> score -> vote -> report pipeline.
+"""Run the unattended affiliate analyze -> score -> vote -> report pipeline.
 
 Every external command is launched by a shell that first activates the local
 virtual environment.  Stage checkpoints are written before and after each
 attempt, and ``--resume`` restarts at the first stage without a successful
-checkpoint.
+checkpoint. Direct mode prepends a scrape stage; local-sync mode consumes
+candidate notes prepared on the operator's Windows machine.
 
 Ref: codex/tasks/006-orchestrator-scheduler.md
 """
@@ -107,6 +108,7 @@ class OrchestratorConfig:
 
     repo_root: Path
     config_path: Path
+    scrape_source: str
     vault_dir: Path
     output_dir: Path
     state_file: Path
@@ -192,9 +194,14 @@ def load_config(
     if not isinstance(schedule, str) or not schedule.strip():
         raise ConfigError("cron_schedule must be a non-empty crontab expression")
 
+    scrape_source = str(raw.get("scrape_source", "direct")).strip()
+    if scrape_source not in {"direct", "local_sync"}:
+        raise ConfigError("scrape_source must be either 'direct' or 'local_sync'")
+
     return OrchestratorConfig(
         repo_root=root,
         config_path=config_path,
+        scrape_source=scrape_source,
         vault_dir=resolved(paths, "vault_dir"),
         output_dir=resolved(paths, "output_dir"),
         state_file=resolved(paths, "state_file"),
@@ -312,6 +319,14 @@ class NightlyOrchestrator:
         self.events: list[str] = []
         self._run_deadline = 0.0
         self._attempt_deadline = 0.0
+
+    @property
+    def pipeline_stages(self) -> tuple[str, ...]:
+        """Return stages enabled for the configured scrape source."""
+
+        if self.config.scrape_source == "local_sync":
+            return STAGES[1:]
+        return STAGES
 
     def _event(self, message: str) -> None:
         self.events.append(f"{self.timestamp()} — {_clean_error(message, limit=1000)}")
@@ -575,13 +590,15 @@ class NightlyOrchestrator:
             for record in state.get("stages", [])
             if isinstance(record, Mapping)
         }
+        active_stages = self.pipeline_stages
         completed_count = sum(
-            records.get(stage_name, {}).get("status") == "success" for stage_name in STAGES
+            records.get(stage_name, {}).get("status") == "success"
+            for stage_name in active_stages
         )
         failed_stage = next(
             (
                 stage_name
-                for stage_name in STAGES
+                for stage_name in active_stages
                 if records.get(stage_name, {}).get("status") in {"failed", "timed_out"}
             ),
             None,
@@ -614,6 +631,13 @@ class NightlyOrchestrator:
         ]
         for stage_name in STAGES:
             record = records.get(stage_name, {})
+            if stage_name == "scrape" and self.config.scrape_source == "local_sync":
+                record = {
+                    "status": "skipped_local_sync",
+                    "attempts": 0,
+                    "timestamp": "-",
+                    "error": "-",
+                }
             error = _clean_error(record.get("error") or "-").replace("|", "\\|")
             lines.append(
                 f"| {stage_name} | {record.get('status', 'not_run')} | "
@@ -641,18 +665,22 @@ class NightlyOrchestrator:
         self.config.output_dir.mkdir(parents=True, exist_ok=True)
         was_resumed = resume and self.config.state_file.exists()
         state = self.state_store.start(resume=resume, timestamp=self.timestamp())
-        start_index = self.state_store.next_stage_index(STAGES) if resume else 0
+        stages = self.pipeline_stages
+        start_index = self.state_store.next_stage_index(stages) if resume else 0
         self._run_deadline = self.monotonic() + self.config.total_timeout_seconds
         status = "completed"
         failed_stage: str | None = None
 
+        if self.config.scrape_source == "local_sync":
+            self._event("scrape skipped; using candidates synced from the operator machine")
+
         if was_resumed:
-            if start_index < len(STAGES):
-                self._event(f"resume selected stage {STAGES[start_index]}")
+            if start_index < len(stages):
+                self._event(f"resume selected stage {stages[start_index]}")
             else:
                 self._event("resume found every stage already completed")
 
-        for stage_name in STAGES[start_index:]:
+        for stage_name in stages[start_index:]:
             stage_status = self._execute_stage(stage_name)
             if stage_status != "success":
                 status = stage_status
@@ -668,7 +696,7 @@ class NightlyOrchestrator:
         }
         completed = tuple(
             stage_name
-            for stage_name in STAGES
+            for stage_name in stages
             if records.get(stage_name, {}).get("status") == "success"
         )
         return RunResult(

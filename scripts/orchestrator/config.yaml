@@ -3,6 +3,10 @@
 
 cron_schedule: "0 2 * * *"
 
+# Shopee blocks EC2 datacenter IPs. In local_sync mode the operator's Windows
+# scraper uploads JSON and candidate notes before this pipeline starts.
+scrape_source: "local_sync"
+
 vault_dir: "vault"
 output_dir: ".cache/orchestrator"
 state_file: ".cache/orchestrator/state.json"

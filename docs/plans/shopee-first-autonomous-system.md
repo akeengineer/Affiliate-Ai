@@ -10,13 +10,13 @@ User (via Kiro session)
 
 ## Summary
 
-This document defines the complete system design for turning the existing Affiliate Product Intelligence OS into a fully autonomous, Shopee-first affiliate intelligence system that runs unattended overnight on EC2.
+This document defines the complete system design for turning the existing Affiliate Product Intelligence OS into a Shopee-first affiliate intelligence system. In Phase 1, scraping runs on the operator's Windows machine because Shopee blocks EC2 datacenter IPs; the resulting JSON and candidate notes sync to EC2, where the unattended analysis pipeline runs.
 
 ## Constraints & Decisions
 
 | Decision | Choice | Reason |
 |----------|--------|--------|
-| Data source | Shopee scraping (primary) + Affiliate API (when approved) | API pending approval, scraping works now |
+| Data source | Shopee scraping on operator Windows (primary) + Affiliate API (when approved) | Shopee accepts the operator's residential browser connection but blocks EC2 datacenter IPs |
 | AI runtime | Claude CLI + Codex CLI + AGY CLI | Already installed on EC2, subscription covers usage |
 | Orchestrator | Hermes | Already installed, designed for this role |
 | Autonomy level | Full autopilot except publish | User wants overnight automation, no publish in Phase 1 |
@@ -29,6 +29,12 @@ This document defines the complete system design for turning the existing Affili
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
+│ Operator Windows machine (residential IP)                           │
+│ run_local_scrape.bat → Playwright Chromium → JSON + candidate notes │
+└───────────────────────────────┬─────────────────────────────────────┘
+                                │ SCP + remote to_candidate.py
+                                ▼
+┌─────────────────────────────────────────────────────────────────────┐
 │                         EC2 (8GB+ RAM)                              │
 │                                                                      │
 │  ┌──────────┐    ┌──────────────┐    ┌──────────────────────────┐  │
@@ -38,8 +44,8 @@ This document defines the complete system design for turning the existing Affili
 │                         │            │  │Miner│ │Demand│ │Vote│ │  │
 │                         ▼            │  │Agent│ │Agent │ │Chair│ │  │
 │              ┌──────────────────┐    │  └──┬──┘ └──┬──┘ └──┬─┘ │  │
-│              │  Shopee Scraper  │    │     │       │       │    │  │
-│              │  (Playwright)    │    │     ▼       ▼       ▼    │  │
+│              │ Synced candidates│    │     │       │       │    │  │
+│              │ + scraped cache  │    │     ▼       ▼       ▼    │  │
 │              └────────┬─────────┘    │  ┌──────────────────────┐│  │
 │                       │              │  │ Claude/Codex/AGY CLI  ││  │
 │                       ▼              │  │ (AI reasoning layer)  ││  │
@@ -75,13 +81,16 @@ This document defines the complete system design for turning the existing Affili
 ## Nightly Autopilot Flow
 
 ```
+Before 02:00  Operator: run_local_scrape.bat
+  │           Windows Chrome scrape → local candidates → SCP to EC2
+  ▼
 02:00  CRON trigger
   │
   ▼
 02:01  Hermes: start nightly run
   │
   ▼
-02:05  Product Miner (claude): scan Shopee → 20-50 candidates
+02:05  Product Miner (claude): read synced candidates → select 20-50
   │
   ▼
 02:30  Demand + Commission + Virality agents: analyze → signal notes
@@ -109,10 +118,13 @@ This document defines the complete system design for turning the existing Affili
 
 ### Phase 1 — Shopee Scraper + Pipeline Integration (Week 1-2)
 
-Goal: Auto-scrape Shopee product data → feed into existing scoring pipeline.
+Goal: Scrape Shopee through the operator's Windows residential connection, then sync results to EC2 for the existing scoring pipeline. EC2 uses `scrape_source: local_sync` and skips its scrape stage.
 
 Files to create:
 - `scripts/shopee/scraper.py` — Playwright-based Shopee scraper
+- `scripts/shopee/scraper_local.py` — Windows Playwright Chromium scraper (no WARP)
+- `scripts/shopee/sync_to_ec2.py` — SCP JSON and run the candidate transformer on EC2
+- `scripts/shopee/run_local_scrape.bat` — one-click Windows scrape/transform/sync entry point
 - `scripts/shopee/config.yaml` — Niche/keyword/category targets
 - `scripts/shopee/to_candidate.py` — Transform scraped data → product_candidate note
 - `tests/test_shopee_scraper.py` — Integration tests
@@ -120,6 +132,9 @@ Files to create:
 Key behaviors:
 - Scrape product name, price, sold count, rating, category, shop info
 - Rate limiting + random delays + user-agent rotation
+- Read `.cookies/shopee.txt` locally without committing cookie values
+- Intercept `search_items` responses in Windows Chrome without a WARP proxy
+- Sync scraped JSON to EC2 and regenerate candidate notes there
 - Output: Obsidian-compatible product_candidate Markdown notes in vault
 
 ### Phase 2 — Agent AI Runtime (Week 2-3)
