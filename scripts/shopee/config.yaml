@@ -1,6 +1,31 @@
 # Shopee Scraper Configuration
 # Target: Shopee Thailand (.co.th)
 
+# Phase 7 marketplace selection. Lazada and TikTok Shop are disabled
+# configuration skeletons only; they do not make API or scraper requests.
+marketplace:
+  selected: "shopee"
+  adapters:
+    shopee:
+      enabled: true
+      base_url: "https://shopee.co.th"
+      country: "TH"
+      currency: "THB"
+      status: "existing_scraper"
+    lazada:
+      enabled: false
+      base_url: "https://www.lazada.co.th"
+      country: "TH"
+      currency: "THB"
+      status: "skeleton"
+    tiktok_shop:
+      enabled: false
+      base_url: "https://shop.tiktok.com/th"
+      country: "TH"
+      currency: "THB"
+      status: "skeleton"
+
+# Legacy key retained for scripts/shopee/scraper.py compatibility.
 base_url: "https://shopee.co.th"
 
 # Browser proxy. SCRAPER_PROXY_URL overrides the local Cloudflare WARP proxy.
