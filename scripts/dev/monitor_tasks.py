@@ -19,6 +19,14 @@ from typing import Sequence
 STATUS_DONE = "DONE"
 STATUS_IN_PROGRESS = "IN PROGRESS"
 STATUS_PENDING = "PENDING"
+DEFAULT_REPO_ROOT = next(
+    (
+        parent
+        for parent in Path(__file__).resolve().parents
+        if (parent / ".git").exists()
+    ),
+    Path("/home/ubuntu/Affiliate-Ai"),
+)
 
 
 @dataclass(frozen=True)
@@ -234,7 +242,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--repo-root",
         type=Path,
-        default=Path(__file__).resolve().parents[2],
+        default=DEFAULT_REPO_ROOT,
         help="repository root (default: inferred from script path)",
     )
     parser.add_argument(

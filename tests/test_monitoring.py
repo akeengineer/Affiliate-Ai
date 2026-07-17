@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import importlib.util
 import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -116,6 +117,20 @@ def test_task_monitor_cli_outputs_formatted_table() -> None:
     assert "\033[" not in completed.stdout
 
 
+def test_relocated_task_monitor_falls_back_to_project_root(tmp_path: Path) -> None:
+    relocated_script = tmp_path / ".tasks_script.py"
+    shutil.copyfile(MONITOR_TASKS, relocated_script)
+
+    completed = subprocess.run(
+        [sys.executable, str(relocated_script), "--active-only", "--no-color"],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+
+    assert "Summary:" in completed.stdout
+
+
 def test_task_table_supports_color_output() -> None:
     module = load_monitor_tasks()
     state = module.TaskState(
@@ -138,7 +153,7 @@ def test_agent_monitor_help_documents_watch_interval() -> None:
         text=True,
     )
     assert "--watch" in completed.stdout
-    assert "30 seconds" in completed.stdout
+    assert "10 seconds" in completed.stdout
 
 
 def test_agent_monitor_source_has_required_sections() -> None:
@@ -154,4 +169,5 @@ def test_agent_monitor_source_has_required_sections() -> None:
         "Disk and Memory",
     ):
         assert section in source
-    assert "watch --color --interval 30" in source
+    assert 'SCRIPT_PATH="${BASH_SOURCE[0]}"' in source
+    assert 'watch --color --interval 10 "bash $SCRIPT_PATH"' in source

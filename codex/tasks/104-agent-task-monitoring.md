@@ -10,7 +10,7 @@ Add a read-only local dashboard for AI agent processes, task progress, runtime s
 
 ## Scope
 
-- Add `scripts/dev/monitor_agents.sh` with a one-shot dashboard and a 30-second `--watch` mode.
+- Add `scripts/dev/monitor_agents.sh` with a one-shot dashboard and a 10-second `--watch` mode.
 - Show `codex`, `claude`, and `agy` processes without exposing full prompt payloads or secret-bearing arguments.
 - Show active tmux sessions, the five latest Git commits, and files modified under `scripts/` or `tests/` in the last 10 minutes.
 - Summarize the newest JSON result under `.cache/shopee/scraped/` without printing product records.
@@ -34,7 +34,7 @@ Add a read-only local dashboard for AI agent processes, task progress, runtime s
 ## Acceptance criteria
 
 - [x] The shell dashboard includes all requested runtime sections and degrades gracefully when optional tools or outputs are absent.
-- [x] `--watch` delegates to `watch` with a 30-second interval and color support.
+- [x] `--watch` delegates to `watch` with a 10-second interval, color support, and an explicit Bash invocation.
 - [x] Task output is a formatted table with task, status, matching branch, commit evidence, and title.
 - [x] Task state is derived from read-only Git branch/log inspection.
 - [x] Both scripts run successfully from outside the repository working directory.

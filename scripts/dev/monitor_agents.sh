@@ -5,7 +5,7 @@ set -uo pipefail
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd -- "$SCRIPT_DIR/../.." && pwd)"
-SCRIPT_PATH="$SCRIPT_DIR/monitor_agents.sh"
+SCRIPT_PATH="${BASH_SOURCE[0]}"
 
 if [[ "${1:-}" == "--watch" ]]; then
     if ! command -v watch >/dev/null 2>&1; then
@@ -21,6 +21,14 @@ elif [[ $# -gt 0 ]]; then
     printf 'error: unknown argument: %s\n' "$1" >&2
     printf 'Usage: %s [--watch]\n' "$0" >&2
     exit 2
+fi
+
+if [[ ! -d "$REPO_ROOT/codex/tasks" ]]; then
+    REPO_ROOT="/home/ubuntu/Affiliate-Ai"
+fi
+MONITOR_TASKS_PATH="$SCRIPT_DIR/monitor_tasks.py"
+if [[ ! -f "$MONITOR_TASKS_PATH" ]]; then
+    MONITOR_TASKS_PATH="$REPO_ROOT/scripts/dev/monitor_tasks.py"
 fi
 
 if [[ -n "${FORCE_COLOR:-}" || ( -t 1 && -z "${NO_COLOR:-}" ) ]]; then
@@ -338,10 +346,10 @@ section 'AI Agent Processes'
 show_agent_processes
 
 section 'Task Status'
-if [[ -x "$SCRIPT_DIR/monitor_tasks.py" ]]; then
-    "$SCRIPT_DIR/monitor_tasks.py" --repo-root "$REPO_ROOT" --active-only
+if [[ -x "$MONITOR_TASKS_PATH" ]]; then
+    "$MONITOR_TASKS_PATH" --repo-root "$REPO_ROOT" --active-only
 else
-    python3 "$SCRIPT_DIR/monitor_tasks.py" --repo-root "$REPO_ROOT" --active-only
+    python3 "$MONITOR_TASKS_PATH" --repo-root "$REPO_ROOT" --active-only
 fi
 
 section 'tmux Sessions'
