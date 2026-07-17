@@ -111,3 +111,7 @@ tmp/track1g-demo-pack/
 /tmp/
 *.sqlite3
 *.db
+
+# Shopee scraper cache (scraped data not committed)
+.cache/shopee/
+vault/candidates/
