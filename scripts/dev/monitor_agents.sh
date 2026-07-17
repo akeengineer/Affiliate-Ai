@@ -108,19 +108,81 @@ command_summary() {
 }
 
 show_agent_processes() {
-    local pid runtime process_name command_line summary
+    local pid runtime process_name command_line task argument quoted_task
+    local index exec_index
+    local -a process_args
     local found=0
 
-    printf '%s%-8s %-12s %-10s %s%s\n' "$BOLD" 'PID' 'RUNTIME' 'AGENT' 'COMMAND SUMMARY' "$RESET"
+    printf '%s%-8s %-12s %-10s %s%s\n' "$BOLD" 'PID' 'RUNTIME' 'AGENT' 'CURRENT TASK' "$RESET"
     while read -r pid runtime process_name command_line; do
         case "$process_name" in
             codex|claude|agy) ;;
             *) continue ;;
         esac
         found=1
-        summary="$(command_summary "$process_name" "$command_line")"
+
+        process_args=()
+        if [[ -r "/proc/$pid/cmdline" ]]; then
+            while IFS= read -r -d '' argument; do
+                process_args+=("$argument")
+            done < "/proc/$pid/cmdline"
+        fi
+
+        task=''
+        case "$process_name" in
+            codex)
+                exec_index=-1
+                for (( index = 0; index < ${#process_args[@]}; index++ )); do
+                    if [[ "${process_args[index]}" == 'exec' ]]; then
+                        exec_index=$index
+                    elif (( exec_index >= 0 )) && [[ "${process_args[index]}" == '--json' ]] \
+                        && (( index + 1 < ${#process_args[@]} )); then
+                        task="${process_args[index + 1]}"
+                        break
+                    fi
+                done
+
+                if [[ -z "$task" ]] && (( exec_index >= 0 && ${#process_args[@]} > exec_index + 1 )); then
+                    task="${process_args[${#process_args[@]} - 1]}"
+                    [[ "$task" == -* ]] && task=''
+                fi
+
+                if [[ -z "$task" && "$command_line" == *' exec '* ]]; then
+                    if [[ "$command_line" == *' --json '* ]]; then
+                        task="${command_line#* --json }"
+                    else
+                        quoted_task="$(sed -n "s/.*'\\([^']*\\)'.*/\\1/p" <<< "$command_line")"
+                        task="$quoted_task"
+                    fi
+                fi
+                ;;
+            claude)
+                for (( index = 0; index < ${#process_args[@]}; index++ )); do
+                    if [[ "${process_args[index]}" == '-p' ]] \
+                        && (( index + 1 < ${#process_args[@]} )); then
+                        task="${process_args[index + 1]}"
+                        break
+                    fi
+                done
+
+                if [[ -z "$task" && "$command_line" == *' -p '* ]]; then
+                    task="${command_line#* -p }"
+                fi
+                ;;
+        esac
+
+        if [[ "$task" == \'* ]]; then
+            task="${task#\'}"
+            task="${task%%\'*}"
+        fi
+        task="${task//$'\n'/ }"
+        task="${task//$'\r'/ }"
+        task="${task//$'\t'/ }"
+        task="${task:0:100}"
+        [[ -n "$task" ]] || task='(task prompt not found)'
+
         printf '%-8s %-12s %s%-10s%s %s\n' \
-            "$pid" "$runtime" "$CYAN" "$process_name" "$RESET" "$summary"
+            "$pid" "$runtime" "$CYAN" "$process_name" "$RESET" "$task"
     done < <(ps -eo pid=,etime=,comm=,args= 2>/dev/null)
 
     if (( found == 0 )); then
