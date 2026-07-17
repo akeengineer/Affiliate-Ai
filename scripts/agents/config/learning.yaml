@@ -1,0 +1,44 @@
+version: 1
+
+# Values are emphasis multipliers over the fixed formula in SCORING_SPEC.md.
+# The deterministic scorer remains the source of truth; a consumer may
+# normalize these multipliers when evaluating a future scoring experiment.
+weight_bounds:
+  max_change_percent_per_cycle: 10
+  adjustment_step_percent: 2
+  minimum_emphasis: 0.90
+  maximum_emphasis: 1.10
+  fields:
+    demand_score: 1.0
+    trend_velocity_score: 1.0
+    marketplace_rank_score: 1.0
+    commission_score: 1.0
+    content_fit_score: 1.0
+    competition_gap_score: 1.0
+    risk_penalty_inverse: 1.0
+
+# Learning can reprioritize active niches but cannot activate a new niche.
+# Only approval_handler.py may move an allowed niche into active_niches.
+niche_limits:
+  max_active_niches: 5
+  max_priority_change_percent_per_cycle: 10
+  minimum_priority: 0.75
+  maximum_priority: 1.25
+  active_niches:
+    - gadgets
+    - home-office
+    - health-beauty
+  allowed_niches:
+    - gadgets
+    - home-office
+    - health-beauty
+    - kitchen
+    - pets
+    - travel
+
+keyword_limits:
+  max_additions_per_cycle: 5
+  max_keywords_per_niche: 20
+
+outcomes:
+  success_score: 70

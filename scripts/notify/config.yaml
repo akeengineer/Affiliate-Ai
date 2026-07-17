@@ -1,0 +1,26 @@
+version: 1
+
+# Credential values are never stored here. Each setting names the environment
+# variable that the corresponding client loads at runtime.
+channels:
+  line:
+    enabled: true
+    token_env: LINE_NOTIFY_TOKEN
+    api_url: https://notify-api.line.me/api/notify
+    message_limit: 1000
+    timeout_seconds: 10
+    deprecated_since: "2025-03-31"
+
+  telegram:
+    enabled: true
+    token_env: TELEGRAM_BOT_TOKEN
+    chat_id_env: TELEGRAM_CHAT_ID
+    api_base_url: https://api.telegram.org
+    message_limit: 4096
+    timeout_seconds: 10
+
+  discord:
+    enabled: true
+    webhook_url_env: DISCORD_WEBHOOK_URL
+    message_limit: 4096
+    timeout_seconds: 10

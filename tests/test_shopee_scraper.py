@@ -16,6 +16,7 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "scripts" / "shopee"))
 
+import scraper as scraper_module  # noqa: E402
 from scraper import (  # noqa: E402
     _parse_price,
     _parse_sold,
@@ -59,6 +60,56 @@ def test_scraper_config_invalid(tmp_path: Path):
     bad_config.write_text("base_url: x\n", encoding="utf-8")
     with pytest.raises(ValueError, match="Missing config"):
         load_config(bad_config)
+
+
+def test_scraper_proxy_defaults_to_local_warp(monkeypatch: pytest.MonkeyPatch):
+    """Proxy options use the configured local WARP fallback when env is unset."""
+    monkeypatch.delenv("SCRAPER_PROXY_URL", raising=False)
+    config = {
+        "proxy": {
+            "env_var": "SCRAPER_PROXY_URL",
+            "default_url": "socks5://127.0.0.1:40000",
+        }
+    }
+
+    assert scraper_module.get_proxy_options(config) == {
+        "server": "socks5://127.0.0.1:40000"
+    }
+
+
+def test_scraper_proxy_uses_environment_override(monkeypatch: pytest.MonkeyPatch):
+    """SCRAPER_PROXY_URL overrides the configured fallback proxy."""
+    monkeypatch.setenv("SCRAPER_PROXY_URL", "socks5://proxy.example:1080")
+    config = {
+        "proxy": {
+            "env_var": "SCRAPER_PROXY_URL",
+            "default_url": "socks5://127.0.0.1:40000",
+        }
+    }
+
+    assert scraper_module.get_proxy_options(config) == {
+        "server": "socks5://proxy.example:1080"
+    }
+
+
+def test_scraper_launches_camoufox_with_proxy(monkeypatch: pytest.MonkeyPatch):
+    """The browser runner passes resolved proxy options to Camoufox."""
+    monkeypatch.delenv("SCRAPER_PROXY_URL", raising=False)
+    config = load_config(SAMPLE_CONFIG_PATH)
+    config["niches"] = []
+
+    with (
+        patch("camoufox.sync_api.Camoufox") as camoufox,
+        patch("playwright.sync_api.sync_playwright"),
+    ):
+        browser = camoufox.return_value.__enter__.return_value
+        scraper_module.run_scraper(config)
+
+    camoufox.assert_called_once_with(
+        headless=True,
+        proxy={"server": "socks5://127.0.0.1:40000"},
+    )
+    browser.new_context.assert_called_once()
 
 
 # ---------- Rate limiting tests ----------

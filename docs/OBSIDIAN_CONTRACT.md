@@ -20,6 +20,9 @@ Codex may write deterministic scripts that operate on Markdown files, but must n
 - content_draft
 - compliance_result
 - weekly_report
+- idea_proposal
+- learning_log
+- nightly_config
 
 ## Required frontmatter
 
@@ -75,6 +78,10 @@ score_decision:
 confidence_score:
 missing_signal_count:
 last_scored_at:
+actual_performance_score:
+actual_outcome:
+outcome_recorded_at:
+search_keywords:
 ```
 
 Rules:
@@ -274,7 +281,120 @@ updated_at:
 status:
 ```
 
+Optional frontmatter:
+
+```yaml
+discussion_agents:
+idea_count:
+ideas:
+```
+
+Rules:
+
+- Brainstorm ideas are proposals only and do not authorize configuration changes.
+- A `new_niche` or `new_category` idea requires explicit user approval.
+
+### `idea_proposal`
+
+Required frontmatter:
+
+```yaml
+type: idea_proposal
+proposal_id:
+meeting_id:
+idea_type:
+title:
+requires_user_approval:
+approval_status:
+created_at:
+updated_at:
+status:
+```
+
+Optional frontmatter:
+
+```yaml
+product_ids:
+target_niche:
+target_keyword:
+rationale:
+expected_impact:
+proposed_action:
+notification_status:
+notification_results:
+approval_actor:
+decided_at:
+nightly_config_note:
+```
+
+Rules:
+
+- `approval_status` must be one of `pending`, `approved`, or `rejected`.
+- `requires_user_approval` is always `true` for Phase 5 proposals.
+- Only an explicit user approval may activate a `new_niche` or `new_category` proposal.
+
+### `learning_log`
+
+Required frontmatter:
+
+```yaml
+type: learning_log
+learning_id:
+source_record_count:
+changes_applied:
+previous_weight_emphasis:
+updated_weight_emphasis:
+created_at:
+updated_at:
+status:
+```
+
+Optional frontmatter:
+
+```yaml
+source_product_ids:
+weight_changes:
+niche_priority_changes:
+keyword_additions:
+nightly_config_note:
+```
+
+Rules:
+
+- Weight and niche-priority changes are deterministic and capped at ±10% per cycle.
+- Learning logs are append-oriented audit records; a later cycle creates a new note.
+- Learning may reprioritize configured niches but may not activate a new niche.
+
+### `nightly_config`
+
+Required frontmatter:
+
+```yaml
+type: nightly_config
+config_id:
+active_niches:
+search_keywords:
+scoring_weight_emphasis:
+niche_priorities:
+approved_proposal_ids:
+created_at:
+updated_at:
+status:
+```
+
+Optional frontmatter:
+
+```yaml
+approved_ideas:
+```
+
+Rules:
+
+- Runtime state must remain within `scripts/agents/config/learning.yaml` bounds.
+- New niches/categories enter `active_niches` only through an explicitly approved proposal.
+- This note configures research and scoring experiments only; it never authorizes publishing.
+
 ## Private data policy
 
-Real business data under `vault/products`, `vault/trends`, `vault/meetings`, `vault/decisions`, `vault/contents`, and `vault/reports` must not be committed to GitHub.
+Real business data under `vault/products`, `vault/trends`, `vault/meetings`, `vault/decisions`, `vault/contents`, `vault/reports`, `vault/proposals`, `vault/learning`, and `vault/config` must not be committed to GitHub.
 Only templates and sanitized samples may be committed.

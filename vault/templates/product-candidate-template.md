@@ -23,6 +23,10 @@ score_decision:
 confidence_score:
 missing_signal_count:
 last_scored_at:
+actual_performance_score:
+actual_outcome:
+outcome_recorded_at:
+search_keywords: []
 status: draft
 created_at:
 updated_at:
