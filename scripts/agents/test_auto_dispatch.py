@@ -63,7 +63,7 @@ CONFIG_DATA = {
         "parallel_max": 2,
         "default_timeout_seconds": 60,
     },
-    "ssh": {"host": "god-of-ai", "project_path": "/home/ubuntu/Affiliate-Ai", "user": "ubuntu"},
+    "ssh": {"host": "god-of-ai", "project_path": str(PROJECT_ROOT), "user": "ubuntu"},
     "validation": {"run_tests": False, "test_command": "python -m pytest", "check_files_exist": False},
     "paths": {
         "queue": ".agents/queue",

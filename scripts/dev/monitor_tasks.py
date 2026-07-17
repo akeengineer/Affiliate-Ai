@@ -30,7 +30,7 @@ DEFAULT_REPO_ROOT = next(
         for parent in Path(__file__).resolve().parents
         if (parent / ".git").exists()
     ),
-    Path("/home/ubuntu/Affiliate-Ai"),
+    Path.cwd(),
 )
 
 

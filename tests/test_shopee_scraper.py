@@ -180,8 +180,11 @@ def test_apply_filters():
 # ---------- Browser interception test ----------
 
 
-def test_run_scraper_intercepts_search_items_response():
+def test_run_scraper_intercepts_search_items_response(
+    monkeypatch: pytest.MonkeyPatch,
+):
     """The runner extracts products from browser search_items responses."""
+    monkeypatch.delenv("SCRAPER_PROXY_URL", raising=False)
     config = load_config(SAMPLE_CONFIG_PATH)
     config["niches"] = [
         {
@@ -221,15 +224,12 @@ def test_run_scraper_intercepts_search_items_response():
     context.new_page.return_value = page
     browser = MagicMock()
     browser.new_context.return_value = context
-    playwright = MagicMock()
-    playwright.chromium.launch.return_value = browser
-    manager = MagicMock()
-    manager.__enter__.return_value = playwright
 
     with (
-        patch("playwright.sync_api.sync_playwright", return_value=manager),
+        patch("camoufox.sync_api.Camoufox") as camoufox,
         patch("scraper.time.sleep"),
     ):
+        camoufox.return_value.__enter__.return_value = browser
         results = run_scraper(config)
 
     products = results["niches"]["test-niche"]
@@ -245,9 +245,9 @@ def test_run_scraper_intercepts_search_items_response():
         "%20%E0%B8%97%E0%B8%94%E0%B8%AA%E0%B8%AD%E0%B8%9A"
     )
     assert page.goto.call_args.args[0].endswith(encoded_keyword)
-    playwright.chromium.launch.assert_called_once_with(
+    camoufox.assert_called_once_with(
         headless=True,
-        args=["--disable-blink-features=AutomationControlled"],
+        proxy={"server": "socks5://127.0.0.1:40000"},
     )
 
 

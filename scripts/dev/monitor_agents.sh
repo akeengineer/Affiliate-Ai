@@ -12,7 +12,8 @@ if [[ "${1:-}" == "--watch" ]]; then
         printf 'error: watch is not installed\n' >&2
         exit 1
     fi
-    exec watch --color --interval 10 "FORCE_COLOR=1 bash $SCRIPT_PATH"
+    export FORCE_COLOR=1
+    exec watch --color --interval 10 "bash $SCRIPT_PATH"
 elif [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
     printf 'Usage: %s [--watch]\n' "$0"
     printf '  --watch  Refresh the dashboard every 10 seconds with watch(1).\n'
@@ -24,7 +25,11 @@ elif [[ $# -gt 0 ]]; then
 fi
 
 if [[ ! -d "$REPO_ROOT/codex/tasks" ]]; then
-    REPO_ROOT="/home/ubuntu/Affiliate-Ai"
+    REPO_ROOT="$(git -C "$PWD" rev-parse --show-toplevel 2>/dev/null || true)"
+fi
+if [[ ! -d "$REPO_ROOT/codex/tasks" ]]; then
+    printf 'error: unable to locate the Affiliate AI repository root\n' >&2
+    exit 1
 fi
 MONITOR_TASKS_PATH="$SCRIPT_DIR/monitor_tasks.py"
 if [[ ! -f "$MONITOR_TASKS_PATH" ]]; then
