@@ -41,6 +41,7 @@ vault/reports/
 vault/proposals/
 vault/learning/
 vault/config/
+vault/logs/
 vault/.obsidian/workspace.json
 vault/.trash/
 
@@ -117,4 +118,5 @@ tmp/track1g-demo-pack/
 
 # Shopee scraper cache (scraped data not committed)
 .cache/shopee/
+.cache/orchestrator/
 vault/candidates/

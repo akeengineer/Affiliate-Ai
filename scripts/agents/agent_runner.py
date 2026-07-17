@@ -10,9 +10,12 @@ Ref: codex/tasks/005-agent-ai-runtime.md
 """
 from __future__ import annotations
 
+import argparse
+import importlib
 import json
 import re
 import subprocess
+import sys
 from dataclasses import dataclass
 from datetime import UTC, date, datetime
 from pathlib import Path
@@ -578,3 +581,90 @@ def cli_main_error(exc: Exception) -> str:
     """Create a concise stderr-safe message for individual script entrypoints."""
 
     return sanitize_text(str(exc)) or exc.__class__.__name__
+
+
+AGENT_ENTRYPOINTS: dict[str, tuple[str, str, bool]] = {
+    "product_miner": ("scripts.agents.product_miner", "run_product_miner", False),
+    "demand_intel": ("scripts.agents.demand_intel", "run_demand_intel", True),
+    "commission_econ": ("scripts.agents.commission_econ", "run_commission_econ", True),
+    "content_virality": (
+        "scripts.agents.content_virality",
+        "run_content_virality",
+        True,
+    ),
+    "compliance_risk": ("scripts.agents.compliance_risk", "run_compliance_risk", True),
+}
+
+
+def run_named_agent(
+    agent_name: str,
+    vault_root: Path = DEFAULT_VAULT_ROOT,
+    *,
+    product_id: str | None = None,
+) -> Path | list[Path]:
+    """Dispatch one supported analysis agent through the shared runtime CLI."""
+
+    normalized = agent_name.strip().lower().replace("-", "_").replace(" ", "_")
+    normalized = normalized.removesuffix("_agent")
+    aliases = {
+        "demand_intelligence": "demand_intel",
+        "commission_economics": "commission_econ",
+    }
+    normalized = aliases.get(normalized, normalized)
+    try:
+        module_name, function_name, requires_product = AGENT_ENTRYPOINTS[normalized]
+    except KeyError as exc:
+        supported = ", ".join(sorted(AGENT_ENTRYPOINTS))
+        raise ValueError(
+            f"Unknown analysis agent {agent_name!r}; expected one of: {supported}"
+        ) from exc
+    if requires_product and not product_id:
+        raise ValueError(f"Agent {normalized!r} requires --product-id")
+    if not requires_product and product_id:
+        raise ValueError(f"Agent {normalized!r} does not accept --product-id")
+
+    repo_root = str(REPO_ROOT)
+    if repo_root not in sys.path:
+        sys.path.insert(0, repo_root)
+    module = importlib.import_module(module_name)
+    function = getattr(module, function_name)
+    if requires_product:
+        return function(Path(vault_root), str(product_id))
+    return function(Path(vault_root))
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description="Run one approved product analysis agent.")
+    parser.add_argument("--agent", required=True, choices=sorted(AGENT_ENTRYPOINTS))
+    parser.add_argument("--vault-root", type=Path, default=DEFAULT_VAULT_ROOT)
+    parser.add_argument("--product-id")
+    return parser
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = build_parser().parse_args(argv)
+    try:
+        output = run_named_agent(
+            args.agent,
+            args.vault_root,
+            product_id=args.product_id,
+        )
+    except Exception as exc:
+        print(cli_main_error(exc), file=sys.stderr)
+        return 1
+
+    paths = output if isinstance(output, list) else [output]
+    print(
+        json.dumps(
+            {
+                "status": "success",
+                "agent": args.agent,
+                "outputs": [str(path) for path in paths],
+            }
+        )
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

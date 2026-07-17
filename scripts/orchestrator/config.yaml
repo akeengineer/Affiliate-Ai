@@ -1,0 +1,43 @@
+# Nightly orchestrator configuration.
+# Relative paths are resolved from the repository root.
+
+cron_schedule: "0 2 * * *"
+
+vault_dir: "vault"
+output_dir: ".cache/orchestrator"
+state_file: ".cache/orchestrator/state.json"
+logs_dir: "vault/logs"
+candidates_dir: "vault/candidates"
+reports_dir: "vault/reports"
+scraped_json_dir: ".cache/shopee/scraped"
+venv_activate: ".venv/bin/activate"
+scraper_config: "scripts/shopee/config.yaml"
+
+scripts:
+  scraper: "scripts/shopee/scraper.py"
+  transformer: "scripts/shopee/to_candidate.py"
+  agent_runner: "scripts/agents/agent_runner.py"
+  score: "scripts/dev/score_product.py"
+  vote: "scripts/agents/vote_chairman.py"
+  report: "scripts/dev/generate_weekly_report.py"
+
+analysis_agents:
+  - "product_miner"
+  - "demand_intel"
+  - "commission_econ"
+  - "content_virality"
+  - "compliance_risk"
+
+timeouts:
+  total_seconds: 7200
+  scrape: 1800
+  analyze: 3600
+  score: 600
+  vote: 1200
+  report: 600
+
+retry:
+  # Three total attempts per stage (initial attempt plus two retries).
+  max_attempts: 3
+  initial_backoff_seconds: 2
+  backoff_multiplier: 2
