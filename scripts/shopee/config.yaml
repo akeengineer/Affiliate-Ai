@@ -3,6 +3,11 @@
 
 base_url: "https://shopee.co.th"
 
+# Browser proxy. SCRAPER_PROXY_URL overrides the local Cloudflare WARP proxy.
+proxy:
+  env_var: "SCRAPER_PROXY_URL"
+  default_url: "socks5://127.0.0.1:40000"
+
 # Niches/categories to scan
 niches:
   - name: "gadgets"

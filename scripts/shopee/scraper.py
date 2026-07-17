@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Shopee product scraper using Playwright.
+"""Shopee product scraper using Camoufox and Playwright.
 
 Scrapes product data from Shopee Thailand (.co.th) based on configured
 niches and keywords. Outputs JSON files for downstream processing.
@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import random
 import sys
 import time
@@ -57,6 +58,18 @@ def get_delay(config: dict[str, Any]) -> float:
         scraping["min_delay_seconds"],
         scraping["max_delay_seconds"],
     )
+
+
+def get_proxy_options(config: dict[str, Any]) -> dict[str, str] | None:
+    """Build Playwright-compatible proxy options from scraper configuration."""
+    proxy_config = config.get("proxy", {})
+    env_var = str(proxy_config.get("env_var", "SCRAPER_PROXY_URL")).strip()
+    proxy_url = os.getenv(env_var, "").strip()
+    if not proxy_url:
+        proxy_url = str(proxy_config.get("default_url", "")).strip()
+    if not proxy_url:
+        return None
+    return {"server": proxy_url}
 
 
 def scrape_search_page(
@@ -313,9 +326,12 @@ def run_scraper(config: dict[str, Any], niche_filter: str | None = None) -> dict
         Results dict with scraped products per niche.
     """
     try:
-        from playwright.sync_api import sync_playwright
+        from camoufox.sync_api import Camoufox
     except ImportError:
-        print("[ERROR] playwright not installed. Run: pip install playwright && playwright install chromium", file=sys.stderr)
+        print(
+            "[ERROR] camoufox not installed. Run: pip install -r requirements-shopee.txt && camoufox fetch",
+            file=sys.stderr,
+        )
         sys.exit(1)
 
     niches = config["niches"]
@@ -330,11 +346,10 @@ def run_scraper(config: dict[str, Any], niche_filter: str | None = None) -> dict
         "niches": {},
     }
 
-    with sync_playwright() as p:
-        browser = p.chromium.launch(
-            headless=True,
-            args=["--disable-blink-features=AutomationControlled"],
-        )
+    with Camoufox(
+        headless=True,
+        proxy=get_proxy_options(config),
+    ) as browser:
         context = browser.new_context(
             user_agent=get_random_user_agent(config),
             viewport={"width": 1920, "height": 1080},
@@ -353,7 +368,7 @@ def run_scraper(config: dict[str, Any], niche_filter: str | None = None) -> dict
             results["niches"][niche_name] = products
             print(f"[INFO] Found {len(products)} products for '{niche_name}'", file=sys.stderr)
 
-        browser.close()
+        context.close()
 
     return results
 
